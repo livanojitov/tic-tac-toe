@@ -13,19 +13,24 @@
       width: 370px;
       margin: 40px auto 0 auto;
     }
-
     .board button{
       width: 100px;
       height:100px;
       margin: 10px;
       border: 1px solid black;
       display:inline-block;
+      background-image: url(images/field.jpg);
+      background-size:100% 100%;
     }
-
+    button.messi{
+      background-image: url(images/messi.jpg);
+    }
+    button.ronaldo{
+      background-image: url(images/ronaldo.jpg);
+    }
     label{
       font-weight: bold;
     }
-
     .info{
       text-align: center;
     }
@@ -37,9 +42,7 @@
   <div id="app"></div>
 
   <script type="text/babel">
-
     class Board extends React.Component {
-
       nobody = 0
       computer = 1
       user = 2
@@ -52,7 +55,6 @@
       computerPlay(){
         this.play(this.computer, Math.floor(Math.random() * this.state.board.length))
       } 
-
       componentWillMount(){
         this.computerPlay();
       }
@@ -68,25 +70,22 @@
         });
         this.computerPlay();    
       }
-
       render(){
         const board = this.state.board.map((square, ind) => {
             return (<Square 
                       key={ind} 
-                      color={ square == this.computer ? 'red' : ( square == this.user ? 'green' : '')} 
+                      player={ square == this.computer ? 'messi' : ( square == this.user ? 'ronaldo' : 'field')} 
                       disableSquare = {this.gameOver ? true : (square != this.nobody ? true : false) }
                       handleClick = {this.handleClick}
                       id={ind}
                     />
             ) 
         });
-
         return(
           <div className="board">
             <label>The Tic-Tac-Toe game written in React.js</label><br/><br/>
             <a href="https://github.com/livanojitov/tic-tac-toe/blob/master/index.html">Source code</a><br/><br/>
             <label>To start playing click on any square.</label><br/><br/>
-
             {board}
             <br/>
             <br/>
@@ -99,9 +98,7 @@
           </div>
         )
       }
-
       handleClick = (e) => {
-
         this.play(this.user,e.target.id);
  
         if (this.hasUserWon()){
@@ -109,7 +106,6 @@
           this.message = "Game over : You won!";
           return;
         }
-
         if (this.isBoardFull()){
           this.message = "Game over : It's a Tie.";
           this.gameOver = true;
@@ -121,9 +117,7 @@
               this.message = "Game over : You lost!";
               return;
            }
-
            winnerSquare = this.isAboutToWin(this.user);
-
            if (winnerSquare != -1){
               this.play(this.computer, winnerSquare);
            }else{
@@ -134,14 +128,12 @@
                 }
               }
           }
-
           if (this.isBoardFull()){
             this.message = "Game over : It's a Tie.";    
             this.gameOver = true;      
           }
         }  
       }
-
       play(player, square){
         let newBoard = this.state.board;
         newBoard[square] = player;
@@ -165,7 +157,6 @@
         } 
         return -1;       
       }
-
       isAboutToWin(player){
         // first row;
         let square;
@@ -210,13 +201,10 @@
         }
         
         return -1;
-
       }
-
       isBoardFull = () => {
         return !this.state.board.includes(0);
       }
-
       hasUserWon(){
         const board = this.state.board;
         const user  = this.user;
@@ -231,22 +219,17 @@
           (board[2] == user && board[4] == user && board[6] == user)
         )
       }
-
     }
-
     const Square = (props) => {
         return (
-          <button style    = {{background: props.color}} 
-                  disabled = {props.disableSquare} 
-                  onClick  = {props.handleClick }
-                  id       = {props.id}>
+          <button className = {props.player}
+                  disabled  = {props.disableSquare} 
+                  onClick   = {props.handleClick }
+                  id        = {props.id}>
           </button>
         )
     }
-
-
     ReactDOM.render(<Board />, document.getElementById('app'));
-
   </script>
 </body>
 </html>
