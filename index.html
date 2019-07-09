@@ -13,26 +13,45 @@
       width: 370px;
       margin: 40px auto 0 auto;
     }
+
     .board button{
       width: 100px;
       height:100px;
       margin: 10px;
       border: 1px solid black;
       display:inline-block;
-      background-image: url(images/field.jpg);
-      background-size:100% 100%;
+      background-size: 100% 100%;
     }
+
     button.messi{
       background-image: url(images/messi.jpg);
     }
+
     button.ronaldo{
       background-image: url(images/ronaldo.jpg);
     }
+
+    button.field{
+      background-image: url(images/field.jpg);
+    }
+
     label{
       font-weight: bold;
     }
+
     .info{
-      text-align: center;
+       text-align: center;
+    }
+
+    .board button.win{
+       animation-name: win;
+       animation-duration: 1s;
+       animation-iteration-count: 3;
+     }    
+
+    @keyframes win{
+      from{opacity : 1}
+      to{opacity : 0.5}
     }
   </style>
 
@@ -49,7 +68,8 @@
       gameOver = false
       message = ''
       state = {
-          board : [this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody]
+          board : [this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody],
+          winningSquares : []
       }
       
       computerPlay(){
@@ -61,20 +81,29 @@
        
       startOver = () => {
         let newBoard =  this.state.board;
+        const squares = document.querySelectorAll(".board button");
+
         newBoard.fill(this.nobody);
         this.gameOver = false;
         this.setState(() => {
             return {
-              board : newBoard
+              board : newBoard,
+              winningSquares : []
             }
+        });
+
+        squares.forEach(function(square){
+          console.log(square.classList.remove('win'));
         });
         this.computerPlay();    
       }
+
       render(){
         const board = this.state.board.map((square, ind) => {
             return (<Square 
                       key={ind} 
                       player={ square == this.computer ? 'messi' : ( square == this.user ? 'ronaldo' : 'field')} 
+                      win = { this.gameOver ? (this.state.winningSquares.indexOf(ind) != -1 ? 'win' : '') : ''}
                       disableSquare = {this.gameOver ? true : (square != this.nobody ? true : false) }
                       handleClick = {this.handleClick}
                       id={ind}
@@ -98,14 +127,17 @@
           </div>
         )
       }
+
       handleClick = (e) => {
         this.play(this.user,e.target.id);
  
         if (this.hasUserWon()){
+          this.animateBoard();
           this.gameOver = true;
           this.message = "Game over : You won!";
           return;
         }
+
         if (this.isBoardFull()){
           this.message = "Game over : It's a Tie.";
           this.gameOver = true;
@@ -113,6 +145,7 @@
            let winnerSquare = this.isAboutToWin(this.computer);
            if (winnerSquare != -1){
               this.play(this.computer, winnerSquare);
+              this.animateBoard();
               this.gameOver = true;
               this.message = "Game over : You lost!";
               return;
@@ -134,6 +167,7 @@
           }
         }  
       }
+
       play(player, square){
         let newBoard = this.state.board;
         newBoard[square] = player;
@@ -157,6 +191,7 @@
         } 
         return -1;       
       }
+
       isAboutToWin(player){
         // first row;
         let square;
@@ -202,9 +237,11 @@
         
         return -1;
       }
+
       isBoardFull = () => {
         return !this.state.board.includes(0);
       }
+
       hasUserWon(){
         const board = this.state.board;
         const user  = this.user;
@@ -219,16 +256,42 @@
           (board[2] == user && board[4] == user && board[6] == user)
         )
       }
-    }
+
+      animateSquares(square1, square2, square3){
+        const squares = document.querySelectorAll(".board button");
+        const board = this.state.board;
+        
+        if ((board[square1] != this.nobody) && (board[square1] == board[square2]) && (board[square2] == board[square3])){
+            this.setState(() => {
+              return {
+                winningSquares : [square1, square2, square3]
+              }
+            });
+        }
+      }
+
+      animateBoard(){
+        this.animateSquares(0,1,2);
+        this.animateSquares(3,4,5);
+        this.animateSquares(6,7,8);
+        this.animateSquares(0,3,6);
+        this.animateSquares(1,4,7);
+        this.animateSquares(2,5,8);
+        this.animateSquares(0,4,8);
+        this.animateSquares(2,4,6);
+      }
+ } 
+
     const Square = (props) => {
         return (
-          <button className = {props.player}
+          <button className = {[props.player, props.win].join(" ")}
                   disabled  = {props.disableSquare} 
                   onClick   = {props.handleClick }
                   id        = {props.id}>
           </button>
         )
     }
+
     ReactDOM.render(<Board />, document.getElementById('app'));
   </script>
 </body>
