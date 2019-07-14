@@ -1,0 +1,44 @@
+.board{
+  width: 370px;
+  margin: 40px auto 0 auto;
+}
+
+.board button{
+  width: 100px;
+  height:100px;
+  margin: 10px;
+  border: 1px solid black;
+  display:inline-block;
+  background-size: 100% 100%;
+}
+
+button.messi{
+  background-image: url(../images/messi.jpg);
+}
+
+button.ronaldo{
+  background-image: url(../images/ronaldo.jpg);
+}
+
+button.field{
+  background-image: url(../images/field.jpg);
+}
+
+label{
+  font-weight: bold;
+}
+
+.info{
+   text-align: center;
+}
+
+.board button.win{
+   animation-name: win;
+   animation-duration: 1s;
+   animation-iteration-count: 3;
+ }    
+
+@keyframes win{
+  from{opacity : 1}
+  to{opacity : 0.5}
+}
