@@ -1,8 +1,9 @@
 const Info = (props) => {
   return (
-      <div>
-         <label>The Tic-Tac-Toe game written in React.js</label><br/><br/>
-         <a href="https://github.com/livanojitov/tic-tac-toe">Source code</a><br/><br/>
+    <div className="info">
+         <label>Autor : Livan Ojito Villanueva</label><br/>
+         <label>The Tic-Tac-Toe game written in React.js</label><br/>
+         <a href="https://github.com/livanojitov/tic-tac-toe">Source code</a>
     </div>
   )
 }
@@ -83,7 +84,7 @@ class Board extends React.Component {
           {board}
 
           {this.state.gameOver && (
-            <div className="info">  
+            <div className="msg">  
                 <label>{this.state.message}</label>
                 <br/>
                 <br/>
