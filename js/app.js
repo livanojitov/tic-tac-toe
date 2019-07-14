@@ -1,47 +1,72 @@
+const Info = (props) => {
+  return (
+      <div>
+         <label>The Tic-Tac-Toe game written in React.js</label><br/><br/>
+         <a href="https://github.com/livanojitov/tic-tac-toe">Source code</a><br/><br/>
+    </div>
+  )
+}
+
 class Board extends React.Component {
     nobody = 0
     computer = 1
     user = 2
-    gameOver = false
-    message = ''
+
     state = {
         board : [this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody],
-        winningSquares : []
+        winningSquares : [],
+        gameOver : false,
+        message  : '',
+        disableBoard : true,
+        userStart : false,
+        computerStart : false        
     }
     
     computerPlay(){
       this.play(this.computer, Math.floor(Math.random() * this.state.board.length))
-    } 
-    componentWillMount(){
-      this.computerPlay();
     }
      
     startOver = () => {
       let newBoard =  this.state.board;
-      const squares = document.querySelectorAll(".board button");
-
       newBoard.fill(this.nobody);
-      this.gameOver = false;
       this.setState(() => {
           return {
             board : newBoard,
-            winningSquares : []
+            winningSquares : [],
+            gameOver : false,
+            disableBoard : true,
+            userStart : false,
+            computerStart : false
           }
       });
-
-      squares.forEach(function(square){
-        console.log(square.classList.remove('win'));
-      });
-      this.computerPlay();    
     }
 
+    startGame = (e) => {
+        if (e.target.value == "no"){
+            this.setState(() => {
+                return {
+                    computerStart : true,
+                    disableBoard : false
+                }
+            });             
+            this.computerPlay();
+        }else{
+            this.setState(() => {
+                return {
+                    userStart : true,
+                    disableBoard : false
+                }
+            });             
+        }
+    } 
+    
     render(){
       const board = this.state.board.map((square, ind) => {
           return (<Square 
                     key={ind} 
                     player={ square == this.computer ? 'messi' : ( square == this.user ? 'ronaldo' : 'field')} 
-                    win = { this.gameOver ? (this.state.winningSquares.indexOf(ind) != -1 ? 'win' : '') : ''}
-                    disableSquare = {this.gameOver ? true : (square != this.nobody ? true : false) }
+                    win = { this.state.gameOver ? (this.state.winningSquares.indexOf(ind) != -1 ? 'win' : '') : ''}
+                    disableSquare = {this.state.disableBoard ? true : (this.state.gameOver ? true : (square != this.nobody ? true : false)) }
                     handleClick = {this.handleClick}
                     id={ind}
                   />
@@ -49,42 +74,56 @@ class Board extends React.Component {
       });
       return(
         <div className="board">
-          <label>The Tic-Tac-Toe game written in React.js</label><br/><br/>
-          <a href="https://github.com/livanojitov/tic-tac-toe">Source code</a><br/><br/>
-          <label>To start playing click on any square.</label><br/><br/>
+           <Info/> 
+
+          <label>Do you want to start the game?</label>
+          <input onChange={this.startGame} disabled = {!this.state.disableBoard} type="radio" value="yes" name="gender" checked= {this.state.userStart}/>Yes
+          <input onChange={this.startGame} disabled = {!this.state.disableBoard} type="radio" value="no" name="gender" checked= {this.state.computerStart}/>No
+         
           {board}
-          <br/>
-          <br/>
-          <div className="info">  
-            {this.gameOver && <label>{this.message}</label>}
-            <br/>
-            <br/>
-            {this.gameOver && <input type="button" value="Start Over" onClick={this.startOver} />}
-          </div>            
+
+          {this.state.gameOver && (
+            <div className="info">  
+                <label>{this.state.message}</label>
+                <br/>
+                <br/>
+                <input type="button" value="Start Over" onClick={this.startOver} />
+            </div>)}  
         </div>
       )
     }
 
     handleClick = (e) => {
       this.play(this.user,e.target.id);
-
       if (this.hasUserWon()){
         this.animateBoard();
-        this.gameOver = true;
-        this.message = "Game over : You won!";
+        this.setState( () => {
+           return {
+             gameOver : true,
+             message  : "Game over : You won!"
+           }
+        });
         return;
       }
 
       if (this.isBoardFull()){
-        this.message = "Game over : It's a Tie.";
-        this.gameOver = true;
+        this.setState( () => {
+            return {
+              gameOver : true,
+              message  : "Game over : It's a Tie!"
+            }
+         });
       }else{
          let winnerSquare = this.isAboutToWin(this.computer);
          if (winnerSquare != -1){
             this.play(this.computer, winnerSquare);
             this.animateBoard();
-            this.gameOver = true;
-            this.message = "Game over : You lost!";
+            this.setState( () => {
+                return {
+                  gameOver : true,
+                  message  : "Game over : You lost!"
+                }
+             });
             return;
          }
          winnerSquare = this.isAboutToWin(this.user);
@@ -99,8 +138,12 @@ class Board extends React.Component {
             }
         }
         if (this.isBoardFull()){
-          this.message = "Game over : It's a Tie.";    
-          this.gameOver = true;      
+          this.setState(() => {
+            return {
+              gameOver : true,
+              message  : "Game over : It's a Tie!"
+            }
+          });
         }
       }  
     }
