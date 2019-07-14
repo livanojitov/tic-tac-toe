@@ -1,9 +1,9 @@
 const Info = (props) => {
   return (
     <div className="info">
-         <label>Autor : Livan Ojito Villanueva</label><br/>
          <label>The Tic-Tac-Toe game written in React.js</label><br/>
-         <a href="https://github.com/livanojitov/tic-tac-toe">Source code</a>
+         <label>Autor : Livan Ojito Villanueva</label><br/>
+         <label>Source: <a href="https://github.com/livanojitov/tic-tac-toe">https://github.com/livanojitov/tic-tac-toe</a></label>
     </div>
   )
 }
