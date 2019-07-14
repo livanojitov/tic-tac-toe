@@ -1,9 +1,58 @@
-const Info = (props) => {
+const About = () => {
   return (
     <div className="info">
          <label>The Tic-Tac-Toe game written in React.js</label><br/>
          <label>Autor : Livan Ojito Villanueva</label><br/>
          <label>Source: <a href="https://github.com/livanojitov/tic-tac-toe">https://github.com/livanojitov/tic-tac-toe</a></label>
+    </div>
+  )
+}
+
+class UserChoice extends React.Component {
+
+   componentDidUpdate(prevProps, prevState){
+     if (this.props.reset){
+       this.refs.computer.checked = '';
+       this.refs.user.checked = '';
+     }
+   }
+
+   startGame = (e) => {
+      if (e.target.value == "no"){
+         this.props.userChoice(1); // 1 - Computer starts playing        
+      }else{
+          this.props.userChoice(2); // 2 - User starts playing         
+      }
+   }
+
+   render() {
+     return (
+       <div>
+         <label>Do you want to start the game?</label>
+         <input onChange={this.startGame} 
+                disabled = {!this.props.disable} 
+                type="radio" 
+                value="yes" 
+                name="gender"
+                ref="user"/>Yes
+         <input onChange={this.startGame}
+                disabled = {!this.props.disable} 
+                type="radio"
+                value="no" 
+                name="gender"
+                ref="computer"/>No
+       </div> 
+     )  
+   }
+} 
+
+const Info = (props) => {
+  return (
+    <div className="msg">  
+        <label>{props.message}</label>
+        <br/>
+        <br/>
+        <input type="button" value="Start Over" onClick={props.startOver} />
     </div>
   )
 }
@@ -18,9 +67,7 @@ class Board extends React.Component {
         winningSquares : [],
         gameOver : false,
         message  : '',
-        disableBoard : true,
-        userStart : false,
-        computerStart : false        
+        disableBoard : true       
     }
     
     computerPlay(){
@@ -35,31 +82,21 @@ class Board extends React.Component {
             board : newBoard,
             winningSquares : [],
             gameOver : false,
-            disableBoard : true,
-            userStart : false,
-            computerStart : false
+            disableBoard : true
           }
       });
     }
 
-    startGame = (e) => {
-        if (e.target.value == "no"){
-            this.setState(() => {
-                return {
-                    computerStart : true,
-                    disableBoard : false
-                }
-            });             
-            this.computerPlay();
-        }else{
-            this.setState(() => {
-                return {
-                    userStart : true,
-                    disableBoard : false
-                }
-            });             
-        }
-    } 
+    userChoice = (player) => {
+      this.setState(() => {
+          return {
+            disableBoard : false
+          }
+      });      
+      if (player == this.computer){
+        this.computerPlay()
+      }
+    }
     
     render(){
       const board = this.state.board.map((square, ind) => {
@@ -75,21 +112,10 @@ class Board extends React.Component {
       });
       return(
         <div className="board">
-           <Info/> 
-
-          <label>Do you want to start the game?</label>
-          <input onChange={this.startGame} disabled = {!this.state.disableBoard} type="radio" value="yes" name="gender" checked= {this.state.userStart}/>Yes
-          <input onChange={this.startGame} disabled = {!this.state.disableBoard} type="radio" value="no" name="gender" checked= {this.state.computerStart}/>No
-         
-          {board}
-
-          {this.state.gameOver && (
-            <div className="msg">  
-                <label>{this.state.message}</label>
-                <br/>
-                <br/>
-                <input type="button" value="Start Over" onClick={this.startOver} />
-            </div>)}  
+           <About/> 
+           <UserChoice disable = {this.state.disableBoard} userChoice = {this.userChoice } reset={this.state.gameOver} />
+           {board}
+           {this.state.gameOver && ( <Info message = {this.state.message} startOver = {this.startOver}/>)}  
         </div>
       )
     }
