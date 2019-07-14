@@ -28,7 +28,7 @@ label{
   font-weight: bold;
 }
 
-.info{
+.msg{
    text-align: center;
    margin-top: 20px;
 }
@@ -42,4 +42,8 @@ label{
 @keyframes win{
   from{opacity : 1}
   to{opacity : 0.5}
+}
+
+.info{
+  margin-bottom: 10px;
 }
