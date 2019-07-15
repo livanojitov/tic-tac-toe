@@ -3,7 +3,7 @@
   margin: 40px auto 0;
 }
 
-.nav{
+.nav, .info{
   width: 90%;
   margin: 0 auto;  
   margin-bottom: 20px;
@@ -73,8 +73,4 @@ label{
 @keyframes win{
   from{opacity : 1}
   to{opacity : 0.5}
-}
-
-.info{
-  margin-bottom: 10px;
 }
