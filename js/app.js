@@ -27,7 +27,7 @@ const About = () => {
     <div className="info">
         <p>The Tic-Tac-Toe game written in React.js</p>
         <p>
-          <label>Autor : </label>Livan Ojito Villanueva
+          <label>Author : </label>Livan Ojito Villanueva
         </p>
         <p>
            <label>Source: </label><br/>
