@@ -30,7 +30,7 @@ const About = () => {
           <label>Author : </label>Livan Ojito Villanueva
         </p>
         <p>
-           <label>Source: </label><br/>
+           <label>Source Code : </label><br/>
            <a href="https://github.com/livanojitov/tic-tac-toe">https://github.com/livanojitov/tic-tac-toe</a>
         </p>
         <p>
