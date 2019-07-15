@@ -51,7 +51,7 @@ class UserChoice extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="choice">
         <label>Do you want to start the game?</label>
         <input onChange={this.startGame} 
                 disabled = {!this.props.disable} 
