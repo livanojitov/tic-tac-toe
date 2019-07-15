@@ -1,9 +1,33 @@
+const Link = ReactRouterDOM.Link, 
+      NavLink = ReactRouterDOM.NavLink, 
+      Route = ReactRouterDOM.Route;
+
+const Navigation = () => {
+  return (
+    <div className="nav">
+      <img src="./images/tic-tac-toe.png"/>
+      <ul>
+        <li><NavLink exact to="/about">About</NavLink></li>           
+        <li><NavLink exact to="/">Home</NavLink></li>
+      </ul>
+    </div>
+  )
+}
+
+const App = props => (
+  <ReactRouterDOM.HashRouter>
+   <Navigation/>
+   <Route path="/" exact component={Board} />
+   <Route path="/about" component={About} />
+  </ReactRouterDOM.HashRouter>
+)
+
 const About = () => {
   return (
     <div className="info">
-         <label>The Tic-Tac-Toe game written in React.js</label><br/>
-         <label>Autor : Livan Ojito Villanueva</label><br/>
-         <label>Source: <a href="https://github.com/livanojitov/tic-tac-toe">https://github.com/livanojitov/tic-tac-toe</a></label>
+         <p>The Tic-Tac-Toe game written in React.js</p>
+         <p><label>Autor : </label>Livan Ojito Villanueva</p>
+         <p><label>Source: </label><a href="https://github.com/livanojitov/tic-tac-toe">https://github.com/livanojitov/tic-tac-toe</a></p>
     </div>
   )
 }
@@ -112,7 +136,6 @@ class Board extends React.Component {
       });
       return(
         <div className="board">
-           <About/> 
            <UserChoice disable = {this.state.disableBoard} userChoice = {this.userChoice } reset={this.state.gameOver} />
            {board}
            {this.state.gameOver && ( <Info message = {this.state.message} startOver = {this.startOver}/>)}  
@@ -265,7 +288,6 @@ class Board extends React.Component {
     }
 
     animateSquares(square1, square2, square3){
-      const squares = document.querySelectorAll(".board button");
       const board = this.state.board;
       
       if ((board[square1] != this.nobody) && (board[square1] == board[square2]) && (board[square2] == board[square3])){
@@ -299,4 +321,4 @@ class Board extends React.Component {
       )
   }
 
-  ReactDOM.render(<Board />, document.getElementById('app'));
+  ReactDOM.render(<App />, document.getElementById('app'));
