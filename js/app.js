@@ -16,9 +16,9 @@ const Navigation = () => {
 
 const App = props => (
   <ReactRouterDOM.HashRouter>
-  <Navigation/>
-  <Route path="/" exact component={Board} />
-  <Route path="/about" component={About} />
+    <Navigation/>
+    <Route path="/" exact component={Board} />
+    <Route path="/about" component={About} />
   </ReactRouterDOM.HashRouter>
 )
 
