@@ -65,13 +65,13 @@ class UserChoice extends React.Component {
         <label>Computer is <img width="30" height="30" title="Lionel Messi"      src="./images/messi.jpg"/></label><br/><br/>
         <label>Do you want to start the game?</label>
         <input onChange={this.startGame} 
-                disabled = {!this.props.disable} 
+                disabled = {this.props.disable} 
                 type="radio" 
                 value="yes" 
                 name="gender"
                 ref="user"/>Yes
         <input onChange={this.startGame}
-                disabled = {!this.props.disable} 
+                disabled = {this.props.disable} 
                 type="radio"
                 value="no" 
                 name="gender"
@@ -147,7 +147,7 @@ class Board extends React.Component {
       });
       return(
         <div className="board">
-          <UserChoice disable = {this.state.disableBoard} userChoice = {this.userChoice } reset={this.state.gameOver} />
+          <UserChoice disable = {!this.state.disableBoard} userChoice = {this.userChoice } reset={this.state.gameOver} />
           {board}
           {this.state.gameOver && ( <Info message = {this.state.message} startOver = {this.startOver}/>)}  
         </div>
