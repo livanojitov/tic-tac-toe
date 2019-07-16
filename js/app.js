@@ -328,7 +328,7 @@ class Board extends React.Component {
 
   const Square = (props) => {
       return (
-        <button style={{ backgroundImage : "url(/tic-tac-toe/images/" + props.player +".jpg)"}}
+        <button style={{ backgroundImage : "url(images/" + props.player +".jpg)"}}
                 className = {[props.win].join(" ")}
                 disabled  = {props.disableSquare} 
                 onClick   = {props.handleClick }
