@@ -25,10 +25,10 @@ body{
 
 .nav a{
   text-decoration: none;
+  color: green;
 }
 
 .nav a.active{
-  color: black;
   font-weight: bold;
 }
 
@@ -36,6 +36,10 @@ body{
   content : "";
   display : block;
   clear   : both;
+}
+
+.info a{
+  color : green;
 }
 
 .board button{
