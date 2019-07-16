@@ -61,8 +61,9 @@ class UserChoice extends React.Component {
   render() {
     return (
       <div className="choice">
-        <label>You are     <img width="30" height="30" title="Cristiano Ronaldo" src="./images/ronaldo.jpg"/></label>, 
-        <label>Computer is <img width="30" height="30" title="Lionel Messi"      src="./images/messi.jpg"/></label><br/><br/>
+        <label>You are     <img width="30" height="30" title="Cristiano Ronaldo" src="./images/ronaldo0.jpg"/></label>, 
+        <label>Computer is <img width="30" height="30" title="Lionel Messi"      src="./images/messi0.jpg"/></label><br/><br/>
+
         <label>Do you want to start the game?</label>
         <input onChange={this.startGame} 
                 disabled = {this.props.disable} 
@@ -96,13 +97,15 @@ class Board extends React.Component {
     nobody = 0
     computer = 1
     user = 2
+    imageCounter = 6
 
     state = {
         board : [this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody],
         winningSquares : [],
         gameOver : false,
         message  : '',
-        disableBoard : true       
+        disableBoard : true,
+        image : Math.floor(Math.random() * this.imageCounter)
     }
     
     computerPlay(){
@@ -117,7 +120,8 @@ class Board extends React.Component {
             board : newBoard,
             winningSquares : [],
             gameOver : false,
-            disableBoard : true
+            disableBoard : true,
+            image : Math.floor(Math.random() * this.imageCounter)
           }
       });
     }
@@ -137,7 +141,7 @@ class Board extends React.Component {
       const board = this.state.board.map((square, ind) => {
           return (<Square 
                     key={ind} 
-                    player={ square == this.computer ? 'messi' : ( square == this.user ? 'ronaldo' : 'field')} 
+                    player={ square == this.computer ? 'messi' + this.state.image : ( square == this.user ? 'ronaldo' + this.state.image : 'field')} 
                     win = { this.state.gameOver ? (this.state.winningSquares.indexOf(ind) != -1 ? 'win' : '') : ''}
                     disableSquare = {this.state.disableBoard ? true : (this.state.gameOver ? true : (square != this.nobody ? true : false)) }
                     handleClick = {this.handleClick}
@@ -147,9 +151,9 @@ class Board extends React.Component {
       });
       return(
         <div className="board">
-          <UserChoice disable = {!this.state.disableBoard} userChoice = {this.userChoice } reset={this.state.gameOver} />
+          <UserChoice disable = {!this.state.disableBoard} userChoice = {this.userChoice } reset={this.state.gameOver}/>
           {board}
-          {this.state.gameOver && ( <Info message = {this.state.message} startOver = {this.startOver}/>)}  
+          {this.state.gameOver && ( <Info message = {this.state.message} startOver = {this.startOver}/>)} 
         </div>
       )
     }
@@ -171,7 +175,7 @@ class Board extends React.Component {
         this.setState( () => {
             return {
               gameOver : true,
-              message  : "Game over : It's a Tie!"
+              message  : "Game over : It's a draw!"
             }
         });
       }else{
@@ -202,7 +206,7 @@ class Board extends React.Component {
           this.setState(() => {
             return {
               gameOver : true,
-              message  : "Game over : It's a Tie!"
+              message  : "Game over : It's a draw!"
             }
           });
         }
@@ -324,7 +328,8 @@ class Board extends React.Component {
 
   const Square = (props) => {
       return (
-        <button className = {[props.player, props.win].join(" ")}
+        <button style={{ backgroundImage : "url(../images/" + props.player +".jpg)"}}
+                className = {[props.win].join(" ")}
                 disabled  = {props.disableSquare} 
                 onClick   = {props.handleClick }
                 id        = {props.id}>
