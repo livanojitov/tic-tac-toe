@@ -9,7 +9,7 @@ body{
 
 .nav, .info{
   width: 90%;
-  margin: 0 auto;  
+  margin: 0 auto;
   margin-bottom: 20px;
 }
 
@@ -47,12 +47,12 @@ body{
   background-size: 100% 100%;
 }
 
-button.messi{
-  background-image: url(../images/messi.jpg);
+button.messi0{
+  background-image: url(../images/messi0.jpg);
 }
 
-button.ronaldo{
-  background-image: url(../images/ronaldo.jpg);
+button.ronaldo0{
+  background-image: url(../images/ronaldo0.jpg);
 }
 
 button.field{
