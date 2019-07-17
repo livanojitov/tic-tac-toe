@@ -18,10 +18,10 @@ class UserChoice extends React.Component {
   render() {
     return (
       <div className="choice">
-        <label>You are     <img width="30" height="30" title="Cristiano Ronaldo" src="./images/ronaldo0.jpg"/></label>, 
-        <label>Computer is <img width="30" height="30" title="Lionel Messi"      src="./images/messi0.jpg"/></label><br/><br/>
+        <p>You: <img width="30" height="30" title="Cristiano Ronaldo" src="./images/ronaldo0.jpg"/> vs 
+           Computer: <img width="30" height="30" title="Lionel Messi" src="./images/messi0.jpg"/></p>
 
-        <label>Do you want to start the game?</label>
+        <span>Do you want to start the game?</span>
         <input onChange={this.startGame} 
                 disabled = {this.props.disable} 
                 type="radio" 
