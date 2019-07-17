@@ -7,7 +7,7 @@ body{
   margin: 40px auto 0;
 }
 
-.nav, .info{
+.nav, .about{
   width: 90%;
   margin: 0 auto;
   margin-bottom: 20px;
@@ -19,8 +19,8 @@ body{
 }
 
 .nav li{
-  float: right;
-  margin-right: 20px;
+  display: inline-block;
+  margin-right: 10px;
 }
 
 .nav a{
@@ -38,8 +38,16 @@ body{
   clear   : both;
 }
 
-.info a{
+.about a{
   color : green;
+}
+
+.about .me{
+  color: green;
+  font-weight: normal;
+}
+.about span{
+  font-weight: bold;
 }
 
 .board button{
@@ -63,13 +71,10 @@ button.field{
   background-image: url(../images/field.jpg);
 }
 
-label{
-  font-weight: bold;
-}
-
-.msg{
+.info{
    text-align: center;
    margin-top: 20px;
+   font-weight: bold;
 }
 
 .board button.win{
@@ -85,4 +90,5 @@ label{
 
 .choice{
   margin-bottom: 10px;
+  font-weight: bold;
 }
