@@ -21,7 +21,7 @@ class UserChoice extends React.Component {
         <p>You: <img width="30" height="30" title="Cristiano Ronaldo" src="./images/ronaldo0.jpg"/> vs 
            Computer: <img width="30" height="30" title="Lionel Messi" src="./images/messi0.jpg"/></p>
 
-        <span>Do you want to start the game?</span>
+        <span>Start the game?</span>
         <input onChange={this.startGame} 
                 disabled = {this.props.disable} 
                 type="radio" 
