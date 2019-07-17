@@ -46,12 +46,13 @@ body{
   color: green;
   font-weight: normal;
 }
+
 .about span{
   font-weight: bold;
 }
 
 .board{
-  width: 90%;
+  width: 95%;
   text-align: center;
   margin: 0 auto;
 }
