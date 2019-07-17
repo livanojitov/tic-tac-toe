@@ -1,18 +1,18 @@
 const About = () => {
   return (
-    <div className="info">
-        <p>The Tic-Tac-Toe game written in React.js</p>
+    <div className="about">
+        <h3>The Tic-Tac-Toe game written in React.js</h3>
         <p>
-          <label>Author : </label>Livan Ojito Villanueva
+          <span>Author : </span><span className="me">Livan Ojito Villanueva</span>
         </p>
         <p>
-            <label>Source Code : </label><br/>
+            <span>Source Code : </span><br/>
             <a href="https://github.com/livanojitov/tic-tac-toe">https://github.com/livanojitov/tic-tac-toe</a>
         </p>
         <p>
-          <label>LinkedIn: </label><br/>
+          <span>LinkedIn: </span><br/>
           <a href="https://ca.linkedin.com/in/livan-ojito-villanueva">https://ca.linkedin.com/in/livan-ojito-villanueva</a>
         </p>
     </div>
   )
-}
+} 
