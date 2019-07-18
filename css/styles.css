@@ -59,7 +59,7 @@ body{
   margin: 0 auto;
 }
 
-.board button{
+.board button, .history button{
   width: 80px;
   height:80px;
   margin: 5px;
@@ -106,4 +106,16 @@ button.ronaldo0{
 
 input[type=radio]:not([disabled]), .yes:not([disabled]), .no:not([disabled]){
   cursor: pointer;
+}
+
+.history{
+  text-align : center;
+}
+
+hr{
+  margin: 15px;
+}
+
+.delete{
+  margin-top: 10px;
 }
