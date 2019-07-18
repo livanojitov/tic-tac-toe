@@ -18,7 +18,6 @@ class Board extends React.Component {
     }
     
     startOver = () => {
-      this.props.displayHistory({ image: this.state.image, board : [...this.state.board], message: this.state.message});
       let newBoard =  this.state.board;
       newBoard.fill(this.nobody);
       this.setState(() => {
@@ -64,39 +63,35 @@ class Board extends React.Component {
       )
     }
 
+    gameOver = (message) => {
+      this.setState( () => {
+        return {
+          gameOver : true,
+          message
+        }
+      });
+      this.props.displayHistory({ image: this.state.image, board : [...this.state.board], message: this.state.message});
+    }
+
     handleClick = (e) => {
       this.play(this.user,e.target.id);
       if (this.hasUserWon()){
         this.animateBoard();
-        this.setState( () => {
-          return {
-            gameOver : true,
-            message  : "You won!"
-          }
-        });
+        this.gameOver("You won!");
         return;
       }
 
       if (this.isBoardFull()){
-        this.setState( () => {
-            return {
-              gameOver : true,
-              message  : "It's a draw!"
-            }
-        });
+        this.gameOver("It's a draw!");
       }else{
         let winnerSquare = this.isAboutToWin(this.computer);
         if (winnerSquare != -1){
             this.play(this.computer, winnerSquare);
             this.animateBoard();
-            this.setState( () => {
-                return {
-                  gameOver : true,
-                  message  : "You lost!"
-                }
-            });
+            this.gameOver("You lost!");
             return;
         }
+
         winnerSquare = this.isAboutToWin(this.user);
         if (winnerSquare != -1){
             this.play(this.computer, winnerSquare);
@@ -108,13 +103,9 @@ class Board extends React.Component {
               }
             }
         }
+        
         if (this.isBoardFull()){
-          this.setState(() => {
-            return {
-              gameOver : true,
-              message  : "It's a draw!"
-            }
-          });
+          this.gameOver("It's a draw!");
         }
       }  
     }
