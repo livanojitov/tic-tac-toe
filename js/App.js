@@ -32,6 +32,7 @@ class App extends React.Component {
           <Route path="/"        exact render={props => <Board displayHistory={this.updateHistory} {...props} />} />
           <Route path="/history" exact render={props => <History deleteHistory={this.deleteHistory} boards={this.state.newBoard} {...props} />} />
           <Route path="/about"   exact component={About}/>
+          <Route path="/contact" exact component={Contact}/>
         </ReactRouterDOM.HashRouter>
     )}
 }
