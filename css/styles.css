@@ -8,8 +8,8 @@ body{
   margin: 40px auto 0;
 }
 
-.nav, .about{
-  width: 85%;
+.nav, .about, .contact{
+  width: 95%;
   margin: 0 auto;
   margin-bottom: 20px;
 }
@@ -17,6 +17,7 @@ body{
 .nav ul{
   list-style: none;
   float :right;
+  padding-left: 0;
 }
 
 .nav li{
@@ -40,16 +41,16 @@ body{
   clear   : both;
 }
 
-.about a{
+.contact a{
   color : green;
 }
 
-.about .me{
+.contact .me{
   color: green;
   font-weight: normal;
 }
 
-.about span{
+.contact span, .about span{
   font-weight: bold;
 }
 
