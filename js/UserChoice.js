@@ -18,9 +18,9 @@ class UserChoice extends React.Component {
   render() {
     return (
       <div className="choice">
-        <p>You: <img width="30" height="30" title="Cristiano Ronaldo" src="./images/ronaldo0.jpg"/> vs 
-           Computer: <img width="30" height="30" title="Lionel Messi" src="./images/messi0.jpg"/></p>
-
+      
+        <p>You: <img width="30" height="30" title="Cristiano Ronaldo" src={"./images/ronaldo" + this.props.image + ".jpg"}/> vs 
+           Computer: <img width="30" height="30" title="Lionel Messi" src={"./images/messi" + this.props.image +  ".jpg"}/></p>
         <span>Start the game?</span>
 
         <input onChange={this.startGame} 
