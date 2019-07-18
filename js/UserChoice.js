@@ -22,18 +22,25 @@ class UserChoice extends React.Component {
            Computer: <img width="30" height="30" title="Lionel Messi" src="./images/messi0.jpg"/></p>
 
         <span>Start the game?</span>
-        <input onChange={this.startGame} 
+      
+       <input onChange={this.startGame} 
                 disabled = {this.props.disable} 
                 type="radio" 
                 value="yes" 
+                id="yes"
                 name="gender"
-                ref="user"/>Yes
+                ref="user"/>
+        <label disabled = {this.props.disable} className="yes" for="yes">Yes</label>
+
         <input onChange={this.startGame}
                 disabled = {this.props.disable} 
                 type="radio"
                 value="no" 
+                id="no"
                 name="gender"
-                ref="computer"/>No
+                ref="computer"/>
+        <label disabled = {this.props.disable} className="no" for="no">No</label>
+      
       </div> 
     )  
   }
