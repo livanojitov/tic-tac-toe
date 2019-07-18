@@ -100,3 +100,7 @@ button.field{
   margin-bottom: 10px;
   font-weight: bold;
 }
+
+input[type=radio]:not([disabled]), .yes:not([disabled]), .no:not([disabled]){
+  cursor: pointer;
+}
