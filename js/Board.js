@@ -18,6 +18,7 @@ class Board extends React.Component {
     }
     
     startOver = () => {
+      this.props.displayHistory({ image: this.state.image, board : [...this.state.board], message: this.state.message});
       let newBoard =  this.state.board;
       newBoard.fill(this.nobody);
       this.setState(() => {
@@ -28,7 +29,7 @@ class Board extends React.Component {
             disableBoard : true,
             image : Math.floor(Math.random() * this.imageCounter)
           }
-      });
+      }); 
     }
 
     userChoice = (player) => {
@@ -70,7 +71,7 @@ class Board extends React.Component {
         this.setState( () => {
           return {
             gameOver : true,
-            message  : "Game over : You won!"
+            message  : "You won!"
           }
         });
         return;
@@ -80,7 +81,7 @@ class Board extends React.Component {
         this.setState( () => {
             return {
               gameOver : true,
-              message  : "Game over : It's a draw!"
+              message  : "It's a draw!"
             }
         });
       }else{
@@ -91,7 +92,7 @@ class Board extends React.Component {
             this.setState( () => {
                 return {
                   gameOver : true,
-                  message  : "Game over : You lost!"
+                  message  : "You lost!"
                 }
             });
             return;
@@ -111,7 +112,7 @@ class Board extends React.Component {
           this.setState(() => {
             return {
               gameOver : true,
-              message  : "Game over : It's a draw!"
+              message  : "It's a draw!"
             }
           });
         }
