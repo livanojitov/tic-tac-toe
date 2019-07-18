@@ -49,7 +49,7 @@ const BoardHistory = (props) => {
             <div className="info"> 
                 {props.message}
             </div>
-            <input class="delete" type="button" onClick={(e)=>{props.deleteBoard(props.ind)}} value="Delete"/>
+            <input className="delete" type="button" onClick={(e)=>{props.deleteBoard(props.ind)}} value="Delete"/>
             <hr/>
         </div> 
     )
