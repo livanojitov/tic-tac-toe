@@ -56,13 +56,13 @@ class Board extends React.Component {
       });
       return(
         <div className="board">
-          <UserChoice disable = {!this.state.disableBoard} userChoice = {this.userChoice } reset={this.state.gameOver}/>
+          <UserChoice disable = {!this.state.disableBoard} userChoice = {this.userChoice } reset={this.state.gameOver} image={this.state.image}/>
           {board}
           {this.state.gameOver && ( <Info message = {this.state.message} startOver = {this.startOver}/>)} 
         </div>
       )
     }
-    
+
     gameOver = (message) => {
       this.setState( () => {
         return {
@@ -71,7 +71,7 @@ class Board extends React.Component {
         }
       });
       this.props.displayHistory({ image: this.state.image, board : [...this.state.board], message: message});
-    }    
+    }
 
     handleClick = (e) => {
       this.play(this.user,e.target.id);
@@ -103,7 +103,7 @@ class Board extends React.Component {
               }
             }
         }
-        
+
         if (this.isBoardFull()){
           this.gameOver("It's a draw!");
         }
