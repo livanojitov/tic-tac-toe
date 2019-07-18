@@ -22,6 +22,7 @@ body{
 .nav li{
   display: inline-block;
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .nav a{
@@ -43,7 +44,7 @@ body{
   color : green;
 }
 
-.about .me{
+.me{
   color: green;
   font-weight: normal;
 }
@@ -67,6 +68,10 @@ body{
   background-size: 100% 100%;
 }
 
+.board button:not([disabled]){
+  cursor: pointer;
+}
+
 button.messi0{
   background-image: url(../images/messi0.jpg);
 }
@@ -75,7 +80,7 @@ button.ronaldo0{
   background-image: url(../images/ronaldo0.jpg);
 }
 
-button.field{
+.field{
   background-image: url(../images/field.jpg);
 }
 
@@ -85,10 +90,8 @@ button.field{
    font-weight: bold;
 }
 
-.board button.win{
-   animation-name: win;
-   animation-duration: 1s;
-   animation-iteration-count: 3;
+.win{
+   animation: win 1s infinite;
  }    
 
 @keyframes win{
