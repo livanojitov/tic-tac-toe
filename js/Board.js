@@ -62,16 +62,16 @@ class Board extends React.Component {
         </div>
       )
     }
-
+    
     gameOver = (message) => {
       this.setState( () => {
         return {
           gameOver : true,
-          message
+          message : message
         }
       });
-      this.props.displayHistory({ image: this.state.image, board : [...this.state.board], message: this.state.message});
-    }
+      this.props.displayHistory({ image: this.state.image, board : [...this.state.board], message: message});
+    }    
 
     handleClick = (e) => {
       this.play(this.user,e.target.id);
