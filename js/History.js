@@ -1,7 +1,7 @@
 const History = (props) => {
     let boards;
     let deleteBoard=function(ind){
-        props.deleteHistory(ind);
+        props.deleteFromStore(ind);
     }
 
     if (props.boards.length > 0){
@@ -9,7 +9,8 @@ const History = (props) => {
             return (<BoardHistory 
                         key={ind} 
                         board={board.board}
-                        imagen={board.image} 
+                        imageUser={board.imageUser}
+                        imageComputer={board.imageComputer} 
                         message={board.message}
                         ind={ind}
                         deleteBoard={deleteBoard}
@@ -19,7 +20,7 @@ const History = (props) => {
     }else{
         boards = (
             <div className="info"> 
-              No history yet. Play some games.
+              No history yet. Play some games and comeback
             </div>  
         )    
     }  
@@ -37,8 +38,12 @@ const BoardHistory = (props) => {
 
     board = props.board.map((square, ind) => {
         return (
-            <button key={ind} style={{ backgroundImage : "url(images/" + (square == computer ? 'messi' + props.imagen : ( square == user ? 'ronaldo' + props.imagen : 'field')) +".jpg)"}}
-                    disabled = {true}> 
+            <button 
+                key={ind} 
+                style={{ backgroundImage : "url(images/" + (square == computer ? props.imageComputer : ( square == user ? props.imageUser : 'field')) +".jpg)"}}
+                title={(square == computer ? props.imageComputer : ( square == user ? props.imageUser : ''))}
+                disabled = {true}
+            >    
             </button>
           )
     });
