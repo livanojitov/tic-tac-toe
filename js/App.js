@@ -1,40 +1,62 @@
-const Link = ReactRouterDOM.Link, 
-      NavLink = ReactRouterDOM.NavLink, 
-      Route = ReactRouterDOM.Route;
-
-class App extends React.Component {      
-    state = {
-      newBoard : []
+const History = (props) => {
+    let boards;
+    let deleteBoard=function(ind){
+        props.deleteFromStore(ind);
     }
 
-    updateHistory = (oldBoard) =>{  
-      const newBoard1 = [...this.state.newBoard,oldBoard];
-      this.setState(() => {
-         return {
-           newBoard : newBoard1
-         }
-      });
-    }
-  
-    deleteHistory = (ind) => {
-      const newBoard = this.state.newBoard.filter((board, i) => i !== ind);
-      this.setState(() => {
-        return {
-         newBoard
-        } 
-      });     
-    }
-    
-    render(){
-      return (
-        <ReactRouterDOM.HashRouter>
-          <Navigation/>
-          <Route path="/"        exact render={props => <Board displayHistory={this.updateHistory} {...props} />} />
-          <Route path="/history" exact render={props => <History deleteHistory={this.deleteHistory} boards={this.state.newBoard} {...props} />} />
-          <Route path="/about"   exact component={About}/>
-          <Route path="/contact" exact component={Contact}/>
-        </ReactRouterDOM.HashRouter>
-    )}
+    if (props.boards.length > 0){
+        boards = props.boards.map((board, ind) => {    
+            return (<BoardHistory 
+                        key={ind} 
+                        board={board.board}
+                        imageUser={board.imageUser}
+                        imageComputer={board.imageComputer} 
+                        message={board.message}
+                        ind={ind}
+                        deleteBoard={deleteBoard}
+                    />
+              )
+        });
+    }else{
+        boards = (
+            <div className="info"> 
+              No history yet. Play some games and comeback
+            </div>  
+        )    
+    }  
+    return (
+        <div className="history">
+            {boards}
+        </div> 
+    )    
 }
 
-ReactDOM.render(<App/>, document.getElementById('app'));
+const BoardHistory = (props) => {
+    const computer = 1;
+    const user = 2;
+    let board;
+
+    board = props.board.map((square, ind) => {
+        return (
+            <button 
+                key={ind} 
+                style={{ backgroundImage : "url(images/" + (square == computer ? props.imageComputer : ( square == user ? props.imageUser : 'field')) +".jpg)"}}
+                title={(square == computer ? props.imageComputer : ( square == user ? props.imageUser : ''))}
+                disabled = {true}
+            >    
+            </button>
+          )
+    });
+    return (
+        <div>
+            {board}
+            <br/>   
+            <div className="info"> 
+                {props.message}
+            </div>
+            <input className="delete" type="button" onClick={(e)=>{props.deleteBoard(props.ind)}} value="Delete"/>
+            <hr/>
+        </div> 
+    )
+
+}
