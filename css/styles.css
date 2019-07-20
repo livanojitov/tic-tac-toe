@@ -1,119 +1,115 @@
 body{
-  background-color:darkseagreen;
-  margin: 0;
+    background-color:darkseagreen;
+    margin: 0;
 }
 
 .wrapper{
-  max-width: 320px;
-  margin: 40px auto 0;
+    max-width: 320px;
+    margin: 40px auto 0;
 }
 
 .nav, .about, .contact{
-  width: 95%;
-  margin: 0 auto;
-  margin-bottom: 20px;
+    width: 95%;
+    margin: 0 auto;
+    margin-bottom: 20px;
 }
 
 .nav ul{
-  list-style: none;
-  float :right;
-  padding-left: 0;
+    list-style: none;
+    float :right;
+    padding-left: 0;
 }
 
 .nav li{
-  display: inline-block;
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-.nav a{
-  text-decoration: none;
-  color: green;
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 .nav a.active{
-  font-weight: bold;
+    font-weight: 1000;
 }
 
 .nav:after{
-  content : "";
-  display : block;
-  clear   : both;
+    content : "";
+    display : block;
+    clear   : both;
 }
 
-.contact a{
-  color : green;
+a{
+    color : green;
+    text-decoration: none;  
 }
 
 .contact .me{
-  color: green;
-  font-weight: normal;
+    color: green;
+    font-weight: normal;
 }
 
 .contact span, .about span{
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .board{
-  width: 100%;
-  text-align: center;
-  margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .board button, .history button{
-  width: 100px;
-  height:100px;
-  margin: 3px;
-  border: 1px solid black;
-  display:inline-block;
-  background-size: 100% 100%;
+    width: 100px;
+    height:100px;
+    margin: 3px;
+    border: 1px solid black;
+    display:inline-block;
+    background-size: 100% 100%;
 }
 
 .board button:not([disabled]){
-  cursor: pointer;
-}
-
-.field{
-  background-image: url(../images/field.jpg);
-}
-
-.info{
-   text-align: center;
-   margin-top: 20px;
-   font-weight: bold;
+    cursor: pointer;
 }
 
 .win{
-   animation: win 1s infinite;
- }    
+    animation: win 1s infinite;
+}    
 
 @keyframes win{
-  from{opacity : 1}
-  to{opacity : 0.5}
+    from{opacity : 1}
+    to{opacity : 0.5}
+}
+
+.field{
+    background-image: url(../images/field.jpg);
+}
+
+.info{
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
 }
 
 .choice{
-  margin-bottom: 10px;
-  font-weight: bold;
+    margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .choice img{
-  width: 60px;
-  height: 60px;
+    width: 60px;
+    height: 60px;
 }
 
 input[type=radio]:not([disabled]), .yes:not([disabled]), .no:not([disabled]){
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .history{
-  text-align : center;
+    text-align : center;
 }
 
 hr{
-  margin: 15px;
+    margin: 15px;
 }
 
 .delete{
-  margin-top: 10px;
+    margin-top: 10px;
 }
