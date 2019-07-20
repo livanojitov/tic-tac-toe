@@ -4,23 +4,21 @@ const Link = ReactRouterDOM.Link,
 
 class App extends React.Component {      
     state = {
-      newBoard : []
+      boards : []
     }
 
-    updateStore= (oldBoard) =>{  
-      const newBoard1 = [...this.state.newBoard,oldBoard];
+    updateStore= (board) =>{
       this.setState(() => {
          return {
-           newBoard : newBoard1
+           boards : [...this.state.boards,board]
          }
       });
     }
   
     deleteFromStore = (ind) => {
-      const newBoard = this.state.newBoard.filter((board, i) => i !== ind);
       this.setState(() => {
         return {
-         newBoard
+         boards : this.state.boards.filter((board, i) => i !== ind)
         } 
       });     
     }
@@ -29,8 +27,8 @@ class App extends React.Component {
       return (
         <ReactRouterDOM.HashRouter>
           <Navigation/>
-          <Route path="/"        exact render={props => <Board updateStore={this.updateStore} {...props} />} />
-          <Route path="/history" exact render={props => <History deleteFromStore={this.deleteFromStore} boards={this.state.newBoard} {...props} />} />
+          <Route path="/"        exact render={props => <TicTacToe updateStore={this.updateStore} {...props} />} />
+          <Route path="/history" exact render={props => <History deleteFromStore={this.deleteFromStore} boards={this.state.boards} {...props} />} />
           <Route path="/about"   exact component={About}/>
           <Route path="/contact" exact component={Contact}/>
         </ReactRouterDOM.HashRouter>
