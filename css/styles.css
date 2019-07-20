@@ -1,62 +1,115 @@
-const History = (props) => {
-    let boards;
-    let deleteBoard=function(ind){
-        props.deleteFromStore(ind);
-    }
-
-    if (props.boards.length > 0){
-        boards = props.boards.map((board, ind) => {    
-            return (<BoardHistory 
-                        key={ind} 
-                        board={board.board}
-                        winningSquares={board.winningSquares}
-                        message={board.message}
-                        imageUser={board.imageUser}
-                        imageComputer={board.imageComputer} 
-                        ind={ind}
-                        deleteBoard={deleteBoard}
-                    />
-              )
-        });
-    }else{
-        boards = (
-            <div className="info"> 
-              No history yet. Play some games and comeback
-            </div>  
-        )    
-    }  
-    return (
-        <div className="history">
-            {boards}
-        </div> 
-    )    
+body{
+    background-color:darkseagreen;
+    margin: 0;
 }
 
-const BoardHistory = (props) => {
-    const computer = 1;
-    const user = 2;
-    let board;
+.wrapper{
+    max-width: 320px;
+    margin: 40px auto 0;
+}
 
-    board = props.board.map((square, ind) => {
-        return (
-            <button 
-                key={ind} 
-                style={{ backgroundImage : "url(images/" + (square == computer ? props.imageComputer : ( square == user ? props.imageUser : 'field')) +".jpg)"}}
-                title={(square == computer ? props.imageComputer : ( square == user ? props.imageUser : ''))}
-                disabled = {true}
-                className = {props.winningSquares.indexOf(ind) != -1 ? 'win' : ''}
-            >    
-            </button>
-          )
-    });
-    return (
-        <div>
-            {board}
-            <br/>   
-            <div className="info">{props.message}</div>
-            <input className="delete" type="button" onClick={(e)=>{props.deleteBoard(props.ind)}} value="Delete"/>
-            <hr/>
-        </div> 
-    )
+.nav, .about, .contact{
+    width: 95%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
 
+.nav ul{
+    list-style: none;
+    float: right;
+    padding-left: 0;
+}
+
+.nav li{
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.nav a.active{
+    font-weight: 1000;
+}
+
+.nav:after{
+    content: "";
+    display: block;
+    clear: both;
+}
+
+a{
+    color: green;
+    text-decoration: none;  
+}
+
+.contact .me{
+    color: green;
+    font-weight: normal;
+}
+
+.contact span, .about span{
+    font-weight: bold;
+}
+
+.board{
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.board button, .history button{
+    width: 100px;
+    height: 100px;
+    margin: 3px;
+    border: 1px solid black;
+    display: inline-block;
+    background-size: 100% 100%;
+}
+
+.board button:not([disabled]){
+    cursor: pointer;
+}
+
+.win{
+    animation: win 1s infinite;
+}    
+
+@keyframes win{
+    from{opacity: 1}
+    to{opacity: 0.5}
+}
+
+.field{
+    background-image: url(../images/field.jpg);
+}
+
+.info{
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.choice{
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.choice img{
+    width: 60px;
+    height: 60px;
+}
+
+input[type=radio]:not([disabled]), .yes:not([disabled]), .no:not([disabled]){
+    cursor: pointer;
+}
+
+.history{
+    text-align: center;
+}
+
+hr{
+    margin: 15px;
+}
+
+.delete{
+    margin-top: 10px;
 }
