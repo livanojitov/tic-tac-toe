@@ -9,9 +9,10 @@ const History = (props) => {
             return (<BoardHistory 
                         key={ind} 
                         board={board.board}
+                        winningSquares={board.winningSquares}
+                        message={board.message}
                         imageUser={board.imageUser}
                         imageComputer={board.imageComputer} 
-                        message={board.message}
                         ind={ind}
                         deleteBoard={deleteBoard}
                     />
@@ -43,6 +44,7 @@ const BoardHistory = (props) => {
                 style={{ backgroundImage : "url(images/" + (square == computer ? props.imageComputer : ( square == user ? props.imageUser : 'field')) +".jpg)"}}
                 title={(square == computer ? props.imageComputer : ( square == user ? props.imageUser : ''))}
                 disabled = {true}
+                className = {props.winningSquares.indexOf(ind) != -1 ? 'win' : ''}
             >    
             </button>
           )
@@ -51,9 +53,7 @@ const BoardHistory = (props) => {
         <div>
             {board}
             <br/>   
-            <div className="info"> 
-                {props.message}
-            </div>
+            <div className="info">{props.message}</div>
             <input className="delete" type="button" onClick={(e)=>{props.deleteBoard(props.ind)}} value="Delete"/>
             <hr/>
         </div> 
