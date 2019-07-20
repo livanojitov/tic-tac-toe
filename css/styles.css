@@ -55,15 +55,15 @@ body{
 }
 
 .board{
-  width: 95%;
+  width: 100%;
   text-align: center;
   margin: 0 auto;
 }
 
 .board button, .history button{
-  width: 80px;
-  height:80px;
-  margin: 5px;
+  width: 100px;
+  height:100px;
+  margin: 3px;
   border: 1px solid black;
   display:inline-block;
   background-size: 100% 100%;
@@ -71,14 +71,6 @@ body{
 
 .board button:not([disabled]){
   cursor: pointer;
-}
-
-button.messi0{
-  background-image: url(../images/messi0.jpg);
-}
-
-button.ronaldo0{
-  background-image: url(../images/ronaldo0.jpg);
 }
 
 .field{
@@ -103,6 +95,11 @@ button.ronaldo0{
 .choice{
   margin-bottom: 10px;
   font-weight: bold;
+}
+
+.choice img{
+  width: 60px;
+  height: 60px;
 }
 
 input[type=radio]:not([disabled]), .yes:not([disabled]), .no:not([disabled]){
