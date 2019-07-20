@@ -2,22 +2,37 @@ class Board extends React.Component {
     nobody = 0
     computer = 1
     user = 2
-    imageCounter = 6
+    players = ['Messi','Ronaldo','Ibrahimovic','Bale','Lozano','Suarez','Salah','Totti','Neymar','Hazard']
 
-    state = {
-        board : [this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody],
-        winningSquares : [],
-        gameOver : false,
-        message  : '',
-        disableBoard : true,
-        image : Math.floor(Math.random() * this.imageCounter)
+    constructor(props){
+      super(props);
+      const images = this.randomizeImages();
+      this.state = {
+          board : [this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody, this.nobody],
+          winningSquares : [],
+          gameOver : false,
+          message  : '',
+          disableBoard : true,
+          imageUser : images[0],
+          imageComputer : images[1]
+      };
     }
-    
+
+    randomizeImages(){
+        let imageUser = this.players[Math.floor(Math.random() * this.players.length)];
+        let imageComputer = this.players[Math.floor(Math.random() * this.players.length)];
+        while ( imageUser == imageComputer){
+            imageComputer = this.players[Math.floor(Math.random() * this.players.length)];
+        }
+        return [imageUser, imageComputer]
+    }
+
     computerPlay(){
-      this.play(this.computer, Math.floor(Math.random() * this.state.board.length))
+        this.play(this.computer, Math.floor(Math.random() * this.state.board.length))
     }
     
     startOver = () => {
+      const images = this.randomizeImages();
       let newBoard =  this.state.board;
       newBoard.fill(this.nobody);
       this.setState(() => {
@@ -26,27 +41,28 @@ class Board extends React.Component {
             winningSquares : [],
             gameOver : false,
             disableBoard : true,
-            image : Math.floor(Math.random() * this.imageCounter)
+            imageUser : images[0],
+            imageComputer : images[1]
           }
       }); 
     }
 
     userChoice = (player) => {
-      this.setState(() => {
-          return {
-            disableBoard : false
-          }
-      });      
-      if (player == this.computer){
-        this.computerPlay()
-      }
+        this.setState(() => {
+            return {
+              disableBoard : false
+            }
+        });      
+        if (player == this.computer){
+          this.computerPlay()
+        }
     }
     
     render(){
       const board = this.state.board.map((square, ind) => {
           return (<Square 
                     key={ind} 
-                    player={ square == this.computer ? 'messi' + this.state.image : ( square == this.user ? 'ronaldo' + this.state.image : 'field')} 
+                    player={ square == this.computer ? this.state.imageComputer : ( square == this.user ? this.state.imageUser : 'field')} 
                     win = { this.state.gameOver ? (this.state.winningSquares.indexOf(ind) != -1 ? 'win' : '') : ''}
                     disableSquare = {this.state.disableBoard ? true : (this.state.gameOver ? true : (square != this.nobody ? true : false)) }
                     handleClick = {this.handleClick}
@@ -56,7 +72,11 @@ class Board extends React.Component {
       });
       return(
         <div className="board">
-          <UserChoice disable = {!this.state.disableBoard} userChoice = {this.userChoice } reset={this.state.gameOver} image={this.state.image}/>
+          <UserChoice disable = {!this.state.disableBoard} 
+                      userChoice = {this.userChoice } 
+                      reset = {this.state.gameOver} 
+                      imageUser = {this.state.imageUser}
+                      imageComputer = {this.state.imageComputer} />
           {board}
           {this.state.gameOver && ( <Info message = {this.state.message} startOver = {this.startOver}/>)} 
         </div>
@@ -70,7 +90,7 @@ class Board extends React.Component {
           message : message
         }
       });
-      this.props.displayHistory({ image: this.state.image, board : [...this.state.board], message: message});
+      this.props.updateStore({ imageUser: this.state.imageUser, imageComputer: this.state.imageComputer, board : [...this.state.board], message: message});
     }
 
     handleClick = (e) => {
