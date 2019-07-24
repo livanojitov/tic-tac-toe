@@ -4,7 +4,7 @@ body{
 }
 
 .wrapper{
-    max-width: 320px;
+    max-width: 500px;
     margin: 40px auto 0;
 }
 
@@ -57,12 +57,16 @@ a{
 }
 
 .board button, .history button{
-    width: 100px;
-    height: 100px;
-    margin: 3px;
+    width: 33%;
     border: 1px solid black;
     display: inline-block;
     background-size: 100% 100%;
+}
+
+.board button:after, .history button:after{
+    content: "";
+    display: block;
+    padding-bottom: 100%;
 }
 
 .board button:not([disabled]){
