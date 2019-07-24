@@ -2,10 +2,10 @@ const Contact = () => {
   return (
     <div className="contact">
       <p>
-          <span>Author : </span><span className="me">Livan Ojito Villanueva</span>
+          <span>Author: </span><span className="me">Livan Ojito Villanueva</span>
       </p>
       <p>
-          <span>Email : </span><span className="me">livanojito@gmail.com</span>
+          <span>Email: </span><span className="me">livanojito@gmail.com</span>
       </p>                  
       <p>
           <span>Github: </span>
