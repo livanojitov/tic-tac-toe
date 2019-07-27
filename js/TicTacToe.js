@@ -20,10 +20,11 @@ class TicTacToe extends React.Component {
   }
 
   randomizeImages(){
-    let imageUser = this.players[Math.floor(Math.random() * this.players.length)];
-    let imageComputer = this.players[Math.floor(Math.random() * this.players.length)];
+    const length = this.players.length;
+    let imageUser = this.players[Math.floor(Math.random() * length)];
+    let imageComputer = this.players[Math.floor(Math.random() * length)];
     while ( imageUser == imageComputer){
-        imageComputer = this.players[Math.floor(Math.random() * this.players.length)];
+        imageComputer = this.players[Math.floor(Math.random() * length)];
     }
     return [imageUser, imageComputer]
   }
@@ -50,23 +51,20 @@ class TicTacToe extends React.Component {
   }
 
   userChoice = (player) => {
-    this.setState(() => {
-        return {
-          disableBoard : false
-        }
-    });      
+    this.setState(() => ({ disableBoard : false }));      
     if (player == this.computer){
       this.computerPlay()
     }
   }
   
   render(){
+    const { imageComputer, imageUser, gameOver, winningSquares, disableBoard, message} = this.state;
     const board = this.state.board.map((square, ind) => {
         return (<Square 
                   key={ind} 
-                  player={ square == this.computer ? this.state.imageComputer : ( square == this.user ? this.state.imageUser : 'field')} 
-                  win = { this.state.gameOver ? (this.state.winningSquares.indexOf(ind) != -1 ? 'win' : '') : ''}
-                  disableSquare = {this.state.disableBoard ? true : (this.state.gameOver ? true : (square != this.nobody ? true : false)) }
+                  player={ square == this.computer ? imageComputer : ( square == this.user ? imageUser : 'field')} 
+                  win = { gameOver ? (winningSquares.indexOf(ind) != -1 ? 'win' : '') : ''}
+                  disableSquare = {disableBoard ? true : (gameOver ? true : (square != this.nobody ? true : false)) }
                   handleClick = {this.handleClick}
                   id={ind}
                 />
@@ -74,30 +72,26 @@ class TicTacToe extends React.Component {
     });
     return(
       <div className="board">
-        <UserChoice disable = {!this.state.disableBoard} 
+        <UserChoice disable = {!disableBoard} 
                     userChoice = {this.userChoice } 
-                    reset = {this.state.gameOver} 
-                    imageUser = {this.state.imageUser}
-                    imageComputer = {this.state.imageComputer} />
+                    reset = {gameOver} 
+                    imageUser = {imageUser}
+                    imageComputer = {imageComputer} />
         {board}
-        {this.state.gameOver && ( <Info message = {this.state.message} startOver = {this.startOver}/>)} 
+        {gameOver && ( <Info message = {message} startOver = {this.startOver}/>)} 
       </div>
     )
   }
 
   gameOver = (message) => {
-    this.setState( () => {
-      return {
-        gameOver : true,
-        message : message
-      }
-    });
+    const { board, winningSquares, imageUser, imageComputer} = this.state;
+    this.setState( () => ({ gameOver : true, message : message }));
     this.props.updateStore({ 
-          board : [...this.state.board],
-          winningSquares : [...this.state.winningSquares],
+          board : [...board],
+          winningSquares : [...winningSquares],
           message: message,
-          imageUser: this.state.imageUser, 
-          imageComputer: this.state.imageComputer, 
+          imageUser: imageUser, 
+          imageComputer: imageComputer, 
     });
   }
 
@@ -252,12 +246,13 @@ class TicTacToe extends React.Component {
 } 
 
   const Square = (props) => {
+    const { win, disableSquare, handleClick, id } = props;
     return (
       <button style={{ backgroundImage : "url(images/" + props.player +".jpg)"}}
-              className = {props.win}
-              disabled  = {props.disableSquare} 
-              onClick   = {props.handleClick }
-              id        = {props.id}>
+              className = {win}
+              disabled  = {disableSquare} 
+              onClick   = {handleClick }
+              id        = {id}>
       </button>
     )
   }
