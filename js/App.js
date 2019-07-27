@@ -8,19 +8,11 @@ class App extends React.Component {
   }
 
   updateStore= (board) =>{
-    this.setState(() => {
-        return {
-          boards : [...this.state.boards,board]
-        }
-    });
+    this.setState(() => ({ boards : [...this.state.boards,board] }));
   }
 
   deleteFromStore = (ind) => {
-    this.setState(() => {
-      return {
-        boards : this.state.boards.filter((board, i) => i !== ind)
-      } 
-    });     
+    this.setState(() => ({ boards : this.state.boards.filter((board, i) => i !== ind)})); 
   }
   
   render(){
