@@ -117,3 +117,7 @@ hr{
 .delete{
     margin-top: 10px;
 }
+
+.about ul{
+  margin-top: 0;
+}
