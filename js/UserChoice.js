@@ -16,33 +16,34 @@ class UserChoice extends React.Component {
   }
 
   render() {
+    const { imageUser, imageComputer, disable } = this.props;
     return (
       <div className="choice">
         <p>
-           You are :    <img title={this.props.imageUser}     src={"./images/" + this.props.imageUser + ".jpg"}/>
+           You are :    <img title={imageUser}     src={"./images/" + imageUser + ".jpg"}/>
            &nbsp;&nbsp;&nbsp; 
-           Computer is: <img title={this.props.imageComputer} src={"./images/" + this.props.imageComputer +  ".jpg"}/>
+           Computer is: <img title={imageComputer} src={"./images/" + imageComputer +  ".jpg"}/>
        </p>
  
         <span>Start the game?</span>
 
         <input onChange={this.startGame} 
-                disabled = {this.props.disable} 
+                disabled = {disable} 
                 type="radio" 
                 value="yes" 
                 id="yes"
                 name="gender"
                 ref="user"/>
-        <label disabled = {this.props.disable} className="yes" htmlFor="yes">Yes</label>
+        <label disabled = {disable} className="yes" htmlFor="yes">Yes</label>
 
         <input onChange={this.startGame}
-                disabled = {this.props.disable} 
+                disabled = {disable} 
                 type="radio"
                 value="no" 
                 id="no"
                 name="gender"
                 ref="computer"/>
-        <label disabled = {this.props.disable} className="no" htmlFor="no">No</label>      
+        <label disabled = {disable} className="no" htmlFor="no">No</label>      
 
       </div> 
     )  
