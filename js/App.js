@@ -4,8 +4,35 @@ const Link = ReactRouterDOM.Link,
       Redirect = ReactRouterDOM.Redirect;
 
 class App extends React.Component {      
-  state = {
-    boards : []
+
+  constructor(props){
+    super(props);
+    this.state = {
+      boards : []
+    }
+    if (typeof(Storage) !== "undefined") {
+      if (localStorage.history) {
+        this.state = {
+          boards: JSON.parse(localStorage.history)
+        }
+      }
+    }  
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    if (typeof(Storage) !== "undefined") {
+      let boards = this.state.boards;
+      if (boards.length < prevState.boards.length){
+        if (boards.length){
+          localStorage.history = JSON.stringify(boards);
+        }else{
+          localStorage.removeItem('history');
+        } 
+      }
+      if (boards.length > prevState.boards.length){
+        localStorage.history = JSON.stringify(boards);
+      }
+    }
   }
 
   updateStore= (board) =>{
@@ -13,13 +40,16 @@ class App extends React.Component {
   }
 
   deleteFromStore = (ind) => {
-    this.setState(() => ({ boards : this.state.boards.filter((board, i) => i !== ind)})); 
+    if (ind >=0 && ind < this.state.boards.length && this.state.boards.length > 0){
+      this.setState(() => ({ boards : this.state.boards.filter((board, i) => i !== ind) }));       
+    }
   }
   
   render(){
     if (sessionStorage.redirect) {
       const redirect = sessionStorage.redirect
-      delete sessionStorage.redirect
+      delete sessionStorage.redirect;
+      console.log('redirect');
       return (
         <Redirect to={redirect}></Redirect>
       )
