@@ -10,6 +10,7 @@ const About = () => {
           <li><a target="_blank" href="http://es6-features.org">ES6</a></li>
           <li><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Learn/HTML">Html</a></li>
           <li><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS">Css</a></li>
+          <li><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage">Local Storage</a></li>  
         </ul>  
       </div> 
 
