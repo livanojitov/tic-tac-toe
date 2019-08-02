@@ -15,7 +15,7 @@ class UserChoice extends React.Component {
     }
   }
 
-  render() {
+  render() {console.log('UserChoice.render');
     const { imageUser, imageComputer, disable } = this.props;
     return (
       <div className="choice">
