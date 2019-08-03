@@ -30,7 +30,7 @@ class Board extends React.Component {
     const { folder, imageComputer, imageUser } = this.category;
     const board = this.state.board.map((square, ind) => {
       let player = (square == this.computer)? folder + '/' + imageComputer : (
-                   (square == this.user)?     folder + '/' + imageUser : 'field'); 
+                   (square == this.user)?     folder + '/' + imageUser : 'default'); 
       let win = gameOver ? (winningSquares.indexOf(ind) != -1 ? 'win' : '') : '';
       let disableSquare = this.disableBoard ? true : (gameOver ? true : (square != this.nobody ? true : false));
       return (<Square 
