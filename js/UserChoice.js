@@ -15,17 +15,12 @@ class UserChoice extends React.Component {
     }
   }
 
-  render() {console.log('UserChoice.render');
-    const { imageUser, imageComputer, disable } = this.props;
+  render() {
+    const { disable } = this.props;
     return (
       <div className="choice">
-        <p>
-           You are :    <img title={imageUser}     src={"./images/" + imageUser + ".jpg"}/>
-           &nbsp;&nbsp;&nbsp; 
-           Computer is: <img title={imageComputer} src={"./images/" + imageComputer +  ".jpg"}/>
-       </p>
- 
-        <span>Start the game?</span>
+
+         <span>Start the game?</span>
 
         <input onChange={this.startGame} 
                 disabled = {disable} 
