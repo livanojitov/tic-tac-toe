@@ -56,14 +56,14 @@ a{
     margin: 0 auto;
 }
 
-.board button, .history button{
+.board button, .game-history button{
     width: 33%;
     border: 1px solid black;
     display: inline-block;
     background-size: 100% 100%;
 }
 
-.board button:after, .history button:after{
+.board button:after, .game-history button:after{
     content: "";
     display: block;
     padding-bottom: 100%;
@@ -106,7 +106,7 @@ input[type=radio]:not([disabled]), .yes:not([disabled]), .no:not([disabled]){
     cursor: pointer;
 }
 
-.history{
+.history, .game-history{
     text-align: center;
 }
 
@@ -120,4 +120,10 @@ hr{
 
 .about ul{
   margin-top: 0;
+}
+
+.categories{
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
