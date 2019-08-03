@@ -3,7 +3,7 @@ const Link       = ReactRouterDOM.Link,
       Route      = ReactRouterDOM.Route,
       Redirect   = ReactRouterDOM.Redirect,
       Switch     = ReactRouterDOM.Switch;
-      
+
 class App extends React.Component {      
 
   constructor(props){
@@ -53,9 +53,9 @@ class App extends React.Component {
       return (
         <Redirect to={redirect}></Redirect>
       )
-    }else{ // basename="/tic-tac-toe"
+    }else{
       return (
-        <ReactRouterDOM.BrowserRouter >
+        <ReactRouterDOM.BrowserRouter basename="/tic-tac-toe">
           <Navigation/>
           <Switch>
             <Route path="/"        exact render={props => <Game updateStore={this.updateStore} {...props} />} />
