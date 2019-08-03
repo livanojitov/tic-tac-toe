@@ -9,9 +9,9 @@ class UserChoice extends React.Component {
 
   startGame = (e) => {
     if (e.target.value == "no"){
-      this.props.userChoice(1); // 1 - Computer starts playing        
+      this.props.userChoice(1); // Computer starts playing        
     }else{
-        this.props.userChoice(2); // 2 - User starts playing         
+        this.props.userChoice(2); // User starts playing         
     }
   }
 

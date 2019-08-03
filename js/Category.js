@@ -92,7 +92,7 @@ class Category extends React.Component{
       let categoryId = this.state.category;
       let category = this.categories[categoryId];
       this.props.onCategoryChange({
-        id            : categoryId,
+        category      : categoryId,
         name          : category.name,
         folder        : category.folder,
         count         : category.count,
