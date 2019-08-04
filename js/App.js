@@ -51,7 +51,7 @@ class App extends React.Component {
       )
     }else{
       return (
-        <ReactRouterDOM.BrowserRouter basename="/tic-tac-toe>
+        <ReactRouterDOM.BrowserRouter basename="/tic-tac-toe">
           <Navigation/>
           <Switch>
             <Route path="/"        exact render={props => <Game updateStore={this.updateStore} {...props} />} />
