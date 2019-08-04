@@ -4,7 +4,7 @@ class Square extends React.Component{
     const { win, disableSquare, handleClick, id, player } = this.props;
 
     return (
-      <button style={{ backgroundImage : "url(images/" + player +".jpg)"}}
+      <button style={{ backgroundImage : `url(images/${player}.jpg)`}}
               className = {win}
               disabled  = {disableSquare} 
               onClick   = {(e) => { if (handleClick){ handleClick(e)} }}

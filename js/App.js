@@ -1,8 +1,4 @@
-const Link       = ReactRouterDOM.Link, 
-      NavLink    = ReactRouterDOM.NavLink, 
-      Route      = ReactRouterDOM.Route,
-      Redirect   = ReactRouterDOM.Redirect,
-      Switch     = ReactRouterDOM.Switch;
+const { Link, NavLink, Route, Redirect, Switch } = ReactRouterDOM;
 
 class App extends React.Component {      
 
@@ -22,7 +18,7 @@ class App extends React.Component {
 
   componentDidUpdate(prevProps, prevState){
     if (typeof(Storage) !== "undefined") {
-      let games = this.state.games;
+      const games = this.state.games;
       if (games.length < prevState.games.length){
         if (games.length){
           localStorage.tictactoe = JSON.stringify(games);
@@ -54,8 +50,8 @@ class App extends React.Component {
         <Redirect to={redirect}></Redirect>
       )
     }else{
-      return (
-        <ReactRouterDOM.BrowserRouter basename="/tic-tac-toe">
+      return (// basename="/tic-tac-toe"
+        <ReactRouterDOM.BrowserRouter>
           <Navigation/>
           <Switch>
             <Route path="/"        exact render={props => <Game updateStore={this.updateStore} {...props} />} />

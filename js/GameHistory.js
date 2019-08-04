@@ -1,9 +1,9 @@
 const GameHistory = (props) => {
   let game = "";
   let board = "";
-  let gameId = props.match.params.id;
-  let computer = 1;
-  let user = 2;
+  const gameId = props.match.params.id;
+  const computer = 1;
+  const user = 2;
 
   if (props.games){
     for (let i=0; i< props.games.length; i++){
@@ -15,11 +15,11 @@ const GameHistory = (props) => {
   }
   
   if (game){
+    const pathImgComputer = `${game.folder}/${game.imageComputer}`;
+    const pathImgUser = `${game.folder}/${game.imageUser}`;
     board = game.board.map((square, ind) => {
-      let player = (square == computer)? game.folder + '/' + game.imageComputer : (
-                  (square == user)?     game.folder + '/' + game.imageUser : 'field'); 
+      let player = (square == computer) ? pathImgComputer : ( (square == user) ? pathImgUser : 'default'); 
       let win = game.winningSquares.indexOf(ind) != -1 ? 'win' : '';
-      //let disableSquare = game.disableBoard ? true : (gameOver ? true : (square != this.nobody ? true : false));
       let disableSquare = true;
       return (<Square 
                 key           = {ind} 

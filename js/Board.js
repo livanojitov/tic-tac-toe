@@ -2,8 +2,6 @@ class Board extends React.Component {
   nobody = 0
   computer = 1
   user = 2
-  category = {}
-  disableBoard = true
 
   constructor(props){
     super(props);
@@ -19,20 +17,24 @@ class Board extends React.Component {
 
   render(){
     const { winningSquares, gameOver, message } = this.state;
+
     if (this.props.category.folder != this.category.folder){
       if (!gameOver){
         this.category = this.props.category;
       }
     }
+
     if (this.props.disableBoard != this.disableBoard){
       this.disableBoard = this.props.disableBoard;
     }
+
     const { folder, imageComputer, imageUser } = this.category;
+    
     const board = this.state.board.map((square, ind) => {
-      let player = (square == this.computer)? folder + '/' + imageComputer : (
-                   (square == this.user)?     folder + '/' + imageUser : 'default'); 
-      let win = gameOver ? (winningSquares.indexOf(ind) != -1 ? 'win' : '') : '';
-      let disableSquare = this.disableBoard ? true : (gameOver ? true : (square != this.nobody ? true : false));
+      const player = (square == this.computer)? `${folder}/${imageComputer}` : (
+                   (square == this.user)?     `${folder}/${imageUser}` : 'default'); 
+      const win = gameOver ? (winningSquares.indexOf(ind) != -1 ? 'win' : '') : '';
+      const disableSquare = this.disableBoard ? true : (gameOver ? true : (square != this.nobody ? true : false));
       return (<Square 
                 key           = {ind} 
                 player        = {player} 
@@ -65,7 +67,7 @@ class Board extends React.Component {
   startOver = () => {
     this.category = this.props.category;
     //this.disableBoard = true;    
-    let newBoard =  this.state.board;
+    const newBoard =  this.state.board;
     newBoard.fill(this.nobody);
     this.setState(() => {
         return {
@@ -127,7 +129,7 @@ class Board extends React.Component {
   }
 
   play(player, square){
-    let newBoard = this.state.board;
+    const newBoard = this.state.board;
     newBoard[square] = player;
     this.setState(() => {
       return {
@@ -223,7 +225,7 @@ class Board extends React.Component {
     const board = this.state.board;
     
     if ((board[square1] != this.nobody) && (board[square1] == board[square2]) && (board[square2] == board[square3])){
-        let ws = this.state.winningSquares;
+        const ws = this.state.winningSquares;
         ws[0] = square1;
         ws[1] = square2;
         ws[2] = square3;

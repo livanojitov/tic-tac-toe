@@ -23,7 +23,7 @@ class Category extends React.Component{
   
   randomizeImages(){
     const length = this.categories[this.state.category].count;
-    let imageUser = Math.floor(Math.random() * length);
+    const imageUser = Math.floor(Math.random() * length);
     let imageComputer = Math.floor(Math.random() * length);
     while ( imageUser == imageComputer){
         imageComputer = Math.floor(Math.random() * length);
@@ -32,7 +32,8 @@ class Category extends React.Component{
   }
 
   render(){
-    let category = this.state.category;
+    const category = this.state.category;
+    const folder = this.categories[category].folder;
     const options = this.categories.map((category, index) => {
       return (
         <option key={index} value={index}>{category.name}</option>  
@@ -60,12 +61,11 @@ class Category extends React.Component{
       <div className = "categories">
         Category: &nbsp;
         {select}
-
-        <div className="choice">
+        <div className="random-images">
           <p>
-            You are :    <img title={this.imageUser}     src={"./images/" + this.categories[category].folder + "/" + this.imageUser + ".jpg"}/>
+            You are :    <img title={this.imageUser}     src={`./images/${folder}/${this.imageUser}.jpg`}/>
             &nbsp;&nbsp;&nbsp; 
-            Computer is: <img title={this.imageComputer} src={"./images/"  + this.categories[category].folder + "/" + this.imageComputer +  ".jpg"}/>
+            Computer is: <img title={this.imageComputer} src={`./images/${folder}/${this.imageComputer}.jpg`}/>
           </p>
         </div>
       </div>
@@ -73,7 +73,7 @@ class Category extends React.Component{
   }
 
   onChange = (e) => {
-    let category = e.target.value;
+    const category = e.target.value;
     this.setState(() => ({ category }));
   }
 
@@ -89,8 +89,8 @@ class Category extends React.Component{
 
   emitCategory(){
     if (this.props.onCategoryChange){
-      let categoryId = this.state.category;
-      let category = this.categories[categoryId];
+      const categoryId = this.state.category;
+      const category = this.categories[categoryId];
       this.props.onCategoryChange({
         category      : categoryId,
         name          : category.name,
@@ -103,9 +103,9 @@ class Category extends React.Component{
   }
 
   componentDidMount(){
-    let category = this.props.category;
+    const category = this.props.category;
     if (category && category != this.state.category && category < this.categories.length && category >= 0){
-      this.setState(() => ({ category : category }));
+      this.setState(() => ({ category }));
     }else{ 
       this.emitCategory();    
     }

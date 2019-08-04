@@ -14,9 +14,9 @@ class Game extends React.Component {
     return(
       <div className="board">
         <Category category="0" onCategoryChange = {this.onCategoryChange}/>
-        <UserChoice disable    = {!this.state.disableBoard} 
-                    userChoice = {this.userChoice } 
-                    reset      = {this.state.reset} 
+        <UserQuestion disable    = {!this.state.disableBoard} 
+                    userQuestion = {this.userQuestion } 
+                    reset        = {this.state.reset} 
                     />
         {(this.state.category.imageUser) && (
           <Board category     = {this.state.category} 
@@ -28,7 +28,7 @@ class Game extends React.Component {
     )
   }
 
-  userChoice = (who) => {
+  userQuestion = (who) => {
     this.setState(() => ({disableBoard: false, who}));
   }
 

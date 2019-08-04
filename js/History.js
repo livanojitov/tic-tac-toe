@@ -1,6 +1,6 @@
 const History = (props) => {
   let games;
-  let deleteBoard=function(ind){
+  const deleteBoard = function(ind){
       props.deleteFromStore(ind);
   }
 

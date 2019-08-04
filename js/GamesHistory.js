@@ -8,9 +8,7 @@ const GamesHistory = (props) => {
         disable       = "true" /> 
 
       <div className="info">
-        {props.message}
-        <br/>
-        <Link to={'/' + props.ind}>See Board</Link>
+        {props.message}&nbsp;&nbsp;<Link to={`/${props.ind}`}>See Board</Link>
       </div>
       <hr/>
     </div>           
