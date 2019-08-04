@@ -1,4 +1,4 @@
-const { Link, NavLink, Route, Redirect, Switch } = ReactRouterDOM;
+const { Link, NavLink, Route, Redirect, Switch, withRouter } = ReactRouterDOM;
 
 class App extends React.Component {      
 
@@ -70,4 +70,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App/>, document.getElementById('app'));
+ReactDOM.render(withRouter(<App/>), document.getElementById('app'));
