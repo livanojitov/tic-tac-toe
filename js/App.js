@@ -50,8 +50,8 @@ class App extends React.Component {
         <Redirect to={redirect}></Redirect>
       )
     }else{
-      return (// basename="/tic-tac-toe"
-        <ReactRouterDOM.BrowserRouter>
+      return (
+        <ReactRouterDOM.BrowserRouter basename="/tic-tac-toe">
           <Navigation/>
           <Switch>
             <Route path="/"        exact render={props => <Game updateStore={this.updateStore} {...props} />} />
