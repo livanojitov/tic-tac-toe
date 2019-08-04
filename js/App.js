@@ -49,7 +49,7 @@ class App extends React.Component {
       console.log("App.js redirect : ", redirect);
       console.log("App.js props : ", this.props);
       return (
-        <Redirect to={redirect}></Redirect>
+        <Redirect to={redirect}/>
       )
     }else{
       return (
