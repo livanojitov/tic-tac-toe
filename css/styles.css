@@ -92,14 +92,20 @@ a{
     font-weight: bold;
 }
 
-.choice{
-    margin-bottom: 10px;
-    font-weight: bold;
+.categories{
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
-.choice img{
+.categories img{
     width: 60px;
     height: 60px;
+}
+
+.random-images, .question{
+  margin-bottom: 10px;
+  font-weight: bold;
 }
 
 input[type=radio]:not([disabled]), .yes:not([disabled]), .no:not([disabled]){
@@ -122,8 +128,3 @@ hr{
   margin-top: 0;
 }
 
-.categories{
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
