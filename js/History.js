@@ -1,22 +1,15 @@
 const History = (props) => {
-  let games;
-  const deleteBoard = function(ind){
-      props.deleteFromStore(ind);
-  }
+  let games = '';
 
   if (props.games.length > 0){
-    games = props.games.map((board, ind) => {    
+    games = props.games.map((game, ind) => {    
         return (<GamesHistory 
-                  key={ind} 
-                  board={board.board}
-                  winningSquares={board.winningSquares}
-                  message={board.message}
-                  imageUser={board.imageUser}
-                  imageComputer={board.imageComputer} 
-                  folder={board.folder}
-                  category={board.category}
-                  ind={ind}
-                  deleteBoard={deleteBoard}
+                  key            = {ind} 
+                  message        = {game.message}
+                  imageUser      = {game.imageUser}
+                  imageComputer  = {game.imageComputer} 
+                  category       = {game.category}
+                  ind            = {ind}
                 />
           )
     });

@@ -16,8 +16,12 @@ class Category extends React.Component{
     this.imageUser = null;
     this.imageComputer = null;
 
+    let category = this.props.category;
+    if (!(category && category >=0 && category < this.categories.length)){
+      category = 0;
+    }
     this.state = {
-      category: this.props.category? this.props.category:0   
+      category: category 
     }
   }
   
@@ -41,12 +45,9 @@ class Category extends React.Component{
     });
 
     if (this.props.imageUser){
-      this.imageUser = this.props.imageUser;
-      this.imageComputer = this.props.imageComputer;
+      ({imageUser: this.imageUser, imageComputer: this.imageComputer} = this.props);
     }else{
-      const images = this.randomizeImages();
-      this.imageUser = images[0];
-      this.imageComputer = images[1]; 
+      [this.imageUser, this.imageComputer] = this.randomizeImages();
     }
 
     const select = ((typeof(this.props.disable) == 'undefined') || this.props.disable == "false") ? (
@@ -90,12 +91,9 @@ class Category extends React.Component{
   emitCategory(){
     if (this.props.onCategoryChange){
       const categoryId = this.state.category;
-      const category = this.categories[categoryId];
       this.props.onCategoryChange({
         category      : categoryId,
-        name          : category.name,
-        folder        : category.folder,
-        count         : category.count,
+        ...this.categories[categoryId],
         imageUser     : this.imageUser,
         imageComputer : this.imageComputer
       });
@@ -103,12 +101,7 @@ class Category extends React.Component{
   }
 
   componentDidMount(){
-    const category = this.props.category;
-    if (category && category != this.state.category && category < this.categories.length && category >= 0){
-      this.setState(() => ({ category }));
-    }else{ 
-      this.emitCategory();    
-    }
+    this.emitCategory();    
   }
 
 }

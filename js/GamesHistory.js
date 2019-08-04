@@ -1,14 +1,15 @@
 const GamesHistory = (props) => {
+  let {category, imageUser, imageComputer, message, ind} = props;
   return (
     <div className="games-history">
       <Category 
-        category      = {props.category} 
-        imageUser     = {props.imageUser} 
-        imageComputer = {props.imageComputer}
+        category      = {category} 
+        imageUser     = {imageUser} 
+        imageComputer = {imageComputer}
         disable       = "true" /> 
 
       <div className="info">
-        {props.message}&nbsp;&nbsp;<Link to={`/${props.ind}`}>See Board</Link>
+        {message}&nbsp;&nbsp;<Link to={`/${ind}`}>See Board</Link>
       </div>
       <hr/>
     </div>           

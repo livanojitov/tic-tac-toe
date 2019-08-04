@@ -29,10 +29,10 @@ class Board extends React.Component {
     }
 
     const { folder, imageComputer, imageUser } = this.category;
-    
+
     const board = this.state.board.map((square, ind) => {
       const player = (square == this.computer)? `${folder}/${imageComputer}` : (
-                   (square == this.user)?     `${folder}/${imageUser}` : 'default'); 
+                     (square == this.user)?     `${folder}/${imageUser}`     : 'default'); 
       const win = gameOver ? (winningSquares.indexOf(ind) != -1 ? 'win' : '') : '';
       const disableSquare = this.disableBoard ? true : (gameOver ? true : (square != this.nobody ? true : false));
       return (<Square 
@@ -55,7 +55,7 @@ class Board extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState){   
-    if (this.isBoardEmpty() && (this.props.who == this.computer) && !this.disableBoard){
+    if (this.isBoardEmpty() && (this.props.player == this.computer) && !this.disableBoard){
       this.computerPlay();
     }
   }
@@ -65,8 +65,7 @@ class Board extends React.Component {
   }
   
   startOver = () => {
-    this.category = this.props.category;
-    //this.disableBoard = true;    
+    this.category = this.props.category;   
     const newBoard =  this.state.board;
     newBoard.fill(this.nobody);
     this.setState(() => {
@@ -81,7 +80,7 @@ class Board extends React.Component {
   }
   
   gameOver = (message) => {
-    const { board, winningSquares, imageUser, imageComputer} = this.state;
+    const { board, winningSquares } = this.state;
     this.setState( () => ({ gameOver : true, message : message }));
     this.props.updateStore({
           board : [...board],
@@ -226,9 +225,7 @@ class Board extends React.Component {
     
     if ((board[square1] != this.nobody) && (board[square1] == board[square2]) && (board[square2] == board[square3])){
         const ws = this.state.winningSquares;
-        ws[0] = square1;
-        ws[1] = square2;
-        ws[2] = square3;
+        [ws[0], ws[1], ws[2]] = [square1, square2, square3];
         this.setState(() => ({ winningSquares : ws }));
     }
   }

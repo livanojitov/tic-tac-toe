@@ -5,7 +5,7 @@ class Game extends React.Component {
     this.state = {
       category: {},
       disableBoard: true,
-      who: 1,
+      player: 1,
       reset: false
      };
   }
@@ -13,7 +13,7 @@ class Game extends React.Component {
   render(){
     return(
       <div className="board">
-        <Category category="0" onCategoryChange = {this.onCategoryChange}/>
+        <Category category="6" onCategoryChange = {this.onCategoryChange}/>
         <UserQuestion disable    = {!this.state.disableBoard} 
                     userQuestion = {this.userQuestion } 
                     reset        = {this.state.reset} 
@@ -22,14 +22,14 @@ class Game extends React.Component {
           <Board category     = {this.state.category} 
                  disableBoard = {this.state.disableBoard}
                  startOver    = {this.startOver}
-                 who          = {this.state.who}
+                 player       = {this.state.player}
                  updateStore  = {this.props.updateStore} />)}
         </div>
     )
   }
 
-  userQuestion = (who) => {
-    this.setState(() => ({disableBoard: false, who}));
+  userQuestion = (player) => {
+    this.setState(() => ({disableBoard: false, player}));
   }
 
   onCategoryChange = (category) => {
