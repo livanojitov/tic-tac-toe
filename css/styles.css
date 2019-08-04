@@ -101,6 +101,7 @@ a{
 .categories img{
     width: 60px;
     height: 60px;
+    vertical-align: middle;
 }
 
 .random-images, .question{
@@ -127,4 +128,3 @@ hr{
 .about ul{
   margin-top: 0;
 }
-
