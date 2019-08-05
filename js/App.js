@@ -55,35 +55,22 @@ class App extends React.Component {
     if (sessionStorage.redirect) {
       const redirect = sessionStorage.redirect
       delete sessionStorage.redirect;
-      if (redirect == "/" || redirect == "/history" || redirect == "/about" || redirect == "/contact" || !isNaN(redirect) ){
-        return (
-          <Redirect to={redirect}></Redirect>
-         ) 
-      }else{
-        return (
-          <Redirect to="/"></Redirect>
-        ) 
-      }      
+      return (
+        <Redirect to={redirect}></Redirect>
+      )
     }else{
-      const arr = location.pathname.split("/");
-      if (arr.length > 1 && (arr[2] == "index" || arr[2] == "index.html")){
-        return (
-         <Redirect to="/"></Redirect>
-        )  
-      }else{
-        return (
-          <ReactRouterDOM.BrowserRouter basename="/tic-tac-toe">
-            <Navigation/>
-            <Switch>
-              <Route path="/"        exact render={props => <Game addToStore={this.addToStore} {...props} />} />
-              <Route path="/history" exact render={props => <History games={this.state.games} {...props} />} />
-              <Route path="/about"   exact component={About}/>
-              <Route path="/contact" exact component={Contact}/>
-              <Route path="/:id"     exact render={props => <GameHistory deleteFromStore={this.deleteFromStore} game={ this.getFromStore(props.match.params.id)} {...props}/>} />
-            </Switch>
-          </ReactRouterDOM.BrowserRouter>
-        )
-      }
+      return (
+        <ReactRouterDOM.BrowserRouter basename="/tic-tac-toe">
+          <Navigation/>
+          <Switch>
+            <Route path="/"        exact render={props => <Game addToStore={this.addToStore} {...props} />} />
+            <Route path="/history" exact render={props => <History games={this.state.games} {...props} />} />
+            <Route path="/about"   exact component={About}/>
+            <Route path="/contact" exact component={Contact}/>
+            <Route path="/:id"     exact render={props => <GameHistory deleteFromStore={this.deleteFromStore} game={ this.getFromStore(props.match.params.id)} {...props}/>} />
+          </Switch>
+        </ReactRouterDOM.BrowserRouter>
+      )
     }
   }
 }
