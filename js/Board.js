@@ -82,7 +82,7 @@ class Board extends React.Component {
   gameOver = (message) => {
     const { board, winningSquares } = this.state;
     this.setState( () => ({ gameOver : true, message : message }));
-    this.props.updateStore({
+    this.props.addToStore({
           board : [...board],
           winningSquares : [...winningSquares],
           message: message,

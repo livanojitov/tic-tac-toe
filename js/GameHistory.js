@@ -39,10 +39,8 @@ const GameHistory = (props) => {
         <br/>
       { game && 
         <div className="info">
-          {game.message}
-          <br/>
-          <input type="button" value="Delete" onClick={(e) => { props.deleteFromStore(gameId); props.history.push('/history')}} className="delete"/>
-          &nbsp;&nbsp;
+          {game.message}&nbsp;&nbsp;
+          <input type="button" value="Delete" onClick={(e) => { props.deleteFromStore(gameId); props.history.push('/history')}} className="delete"/>&nbsp;&nbsp;
           <input type="button" value="Back"   onClick={(e) => {props.history.push('/history')}}/>              
         </div>
       } 

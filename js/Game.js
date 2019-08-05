@@ -23,7 +23,7 @@ class Game extends React.Component {
                  disableBoard = {this.state.disableBoard}
                  startOver    = {this.startOver}
                  player       = {this.state.player}
-                 updateStore  = {this.props.updateStore} />)}
+                 addToStore  = {this.props.addToStore} />)}
         </div>
     )
   }
