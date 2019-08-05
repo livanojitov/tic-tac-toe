@@ -43,7 +43,9 @@ class App extends React.Component {
   }
   
   render(){
+    
     if (sessionStorage.redirect) {
+      console.log(this);
       const redirect = sessionStorage.redirect
       delete sessionStorage.redirect;
       console.log("App.js redirect : ", redirect);
