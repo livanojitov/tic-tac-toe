@@ -11,7 +11,7 @@ body{
 .nav, .about, .contact{
     width: 95%;
     margin: 0 auto;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .nav ul{
