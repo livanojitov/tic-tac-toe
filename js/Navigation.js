@@ -3,8 +3,8 @@ const Navigation = () => {
   const [nav] = useState([
     { name: 'Home',    to: '/'        },
     { name: 'History', to: '/history' },
-    { name: 'About',   to: 'about'    },
-    { name: 'Contact', to: 'contact'  }
+    { name: 'About',   to: '/about'    },
+    { name: 'Contact', to: '/contact'  }
   ]);
 
   return (
