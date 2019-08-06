@@ -10,10 +10,10 @@ const Contact = () => {
   return (
     <div className="contact">
       <p>
-          <span>Author : </span><span className="me">{contact.author}</span>
+          <span>Author: </span><span className="me">{contact.author}</span>
       </p>
       <p>
-          <span>Email : </span><span className="me">{contact.email}</span>
+          <span>Email: </span><span className="me">{contact.email}</span>
       </p>                  
       <p>
           <span>Github: </span>
