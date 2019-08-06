@@ -1,20 +1,22 @@
-const History = (props) => {
-  let games = '';
+const History = () => {
+  const { useContext } = React;
+  const { games } = useContext(GameContext);
+  let historyGames;
 
-  if (props.games.length > 0){
-    games = props.games.map((game, ind) => {    
-        return (<GamesHistory 
-                  key            = {ind} 
-                  message        = {game.message}
-                  imageUser      = {game.imageUser}
-                  imageComputer  = {game.imageComputer} 
-                  category       = {game.category}
-                  ind            = {ind}
-                />
-          )
+  if (games && games.length > 0){
+    historyGames = games.map((game) => {  
+      return (<GamesHistory 
+                key            = {game.id} 
+                message        = {game.message}
+                imageUser      = {game.imageUser}
+                imageComputer  = {game.imageComputer} 
+                category       = {game.category}
+                id             = {game.id}
+              />
+        )
     });
   }else{
-    games = (
+    historyGames = (
       <div className="info"> 
         No history yet. Play some games and comeback
       </div>  
@@ -22,7 +24,7 @@ const History = (props) => {
   }  
   return (
     <div className="history">
-        {games}
+        {historyGames}
     </div> 
   )    
 }

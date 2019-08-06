@@ -2,6 +2,7 @@ class Board extends React.Component {
   nobody = 0
   computer = 1
   user = 2
+  static contextType = GameContext
 
   constructor(props){
     super(props);
@@ -82,12 +83,19 @@ class Board extends React.Component {
   gameOver = (message) => {
     const { board, winningSquares } = this.state;
     this.setState( () => ({ gameOver : true, message : message }));
-    this.props.addToStore({
+    const { addGame} = this.context;
+    addGame({
+      board : [...board],
+      winningSquares : [...winningSquares],
+      message: message,
+      ...this.category
+    });
+/*    this.props.addToStore({
           board : [...board],
           winningSquares : [...winningSquares],
           message: message,
           ...this.category
-    });
+    });*/
   }
 
   handleClick = (e) => {

@@ -1,12 +1,13 @@
 const GameHistory = (props) => {
-  let game = "";
   let board = "";
-  const gameId = props.match.params.id;
   const computer = 1;
   const user = 2;
-
-  game = props.game[0];
-
+  const { useContext } = React;
+  const { getGame, removeGame } = useContext(GameContext);
+  let game = {};
+  const gameId = props.match.params.id; 
+  game = getGame(gameId);
+ 
   if (game){
     const pathImgComputer = `${game.folder}/${game.imageComputer}`;
     const pathImgUser     = `${game.folder}/${game.imageUser}`;
@@ -40,7 +41,7 @@ const GameHistory = (props) => {
       { game && 
         <div className="info">
           {game.message}&nbsp;&nbsp;
-          <input type="button" value="Delete" onClick={(e) => { props.deleteFromStore(gameId); props.history.push('/history')}} className="delete"/>&nbsp;&nbsp;
+          <input type="button" value="Delete" onClick={(e) => { removeGame(gameId); props.history.push('/history')}} className="delete"/>&nbsp;&nbsp;
           <input type="button" value="Back"   onClick={(e) => {props.history.push('/history')}}/>              
         </div>
       } 
