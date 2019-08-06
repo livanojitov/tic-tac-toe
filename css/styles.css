@@ -87,7 +87,7 @@ a{
 
 .info{
     text-align: center;
-    margin-top: 15px;
+    margin-top: 10px;
     font-weight: bold;
 }
 
@@ -118,10 +118,6 @@ input[type=radio]:not([disabled]), .yes:not([disabled]), .no:not([disabled]){
 
 hr{
     margin: 15px;
-}
-
-.delete{
-    margin-top: 10px;
 }
 
 .about ul{
