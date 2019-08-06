@@ -13,11 +13,10 @@ class Game extends React.Component {
   render(){
     return(
       <div className="board">
-        <Category category="5" onCategoryChange = {this.onCategoryChange}/>
+        <Category onCategoryChange = {this.onCategoryChange}/>
         <UserQuestion disable    = {!this.state.disableBoard} 
-                    userQuestion = {this.userQuestion } 
-                    reset        = {this.state.reset} 
-                    />
+                      userQuestion = {this.userQuestion } 
+                      reset        = {this.state.reset} />
         {(this.state.category.imageUser) && (
           <Board category     = {this.state.category} 
                  disableBoard = {this.state.disableBoard}

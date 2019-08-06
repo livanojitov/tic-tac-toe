@@ -4,11 +4,11 @@ const About = () => {
     { name: 'React.js',       href: 'https://reactjs.org/'                                                  },
     { name: 'React Hooks',    href: 'https://reactjs.org/docs/hooks-intro.html'                             },
     { name: 'Context API',    href: 'https://reactjs.org/docs/context.html'                                 },
+    { name: 'Local Storage',  href: 'https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage'  },    
     { name: 'Javascript',     href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript'               },
     { name: 'ES6',            href: 'http://es6-features.org'                                               },
-    { name: 'Html',           href: 'https://developer.mozilla.org/en-US/docs/Learn/HTML'                   },
-    { name: 'Css',            href: 'https://developer.mozilla.org/en-US/docs/Web/CSS'                      },
-    { name: 'Local Storage',  href: 'https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage'  }
+    { name: 'HTML',           href: 'https://developer.mozilla.org/en-US/docs/Learn/HTML'                   },
+    { name: 'CSS',            href: 'https://developer.mozilla.org/en-US/docs/Web/CSS'                      }
   ]);
    
   const lis = skills.map((skill, key) => {

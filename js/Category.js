@@ -18,10 +18,10 @@ class Category extends React.Component{
 
     let category = this.props.category;
     if (!(category && category >=0 && category < this.categories.length)){
-      category = 0;
+      category = Math.floor(Math.random() * this.categories.length);
     }
     this.state = {
-      category: category 
+      category
     }
   }
   
