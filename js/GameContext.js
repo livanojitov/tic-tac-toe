@@ -28,8 +28,8 @@ const GameContextProvider = (props) => {
   };
 
   const removeGame = (id) => {
-    GameContextProvider.delete = 1;
     if (games.length > 0){
+      GameContextProvider.delete = 1;
       setGames(games.filter(game => game.id != id));   
     } 
   }
