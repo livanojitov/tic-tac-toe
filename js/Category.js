@@ -63,11 +63,9 @@ class Category extends React.Component{
         Category: &nbsp;
         {select}
         <div className="random-images">
-          <p>
-            You are :    <img title={this.imageUser}     src={`./images/${folder}/${this.imageUser}.jpg`}/>
-            &nbsp;&nbsp;&nbsp; 
-            Computer is: <img title={this.imageComputer} src={`./images/${folder}/${this.imageComputer}.jpg`}/>
-          </p>
+          You are :    <img title={this.imageUser}     src={`./images/${folder}/${this.imageUser}.jpg`}/>
+          &nbsp;&nbsp;&nbsp; 
+          Computer is: <img title={this.imageComputer} src={`./images/${folder}/${this.imageComputer}.jpg`}/>  
         </div>
       </div>
     )
