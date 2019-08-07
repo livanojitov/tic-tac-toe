@@ -7,7 +7,7 @@ class App extends React.Component {
       return (
         <GameContextProvider>
           <ReactRouterDOM.BrowserRouter basename="/tic-tac-toe">
-            <Navigation/>
+            withRouter(Navigation)
             <Switch>
               <Route path="/"        exact component={Game}        />
               <Route path="/history" exact component={History}     /> 
