@@ -3,7 +3,7 @@ const { Link, NavLink, Route, Redirect, Switch } = ReactRouterDOM;
 class App extends React.Component {      
   c
   render(){
-    console.log('props : ', props);
+    console.log('props : ', this.props);
       return (
         <GameContextProvider>
           <ReactRouterDOM.BrowserRouter basename="/tic-tac-toe">
