@@ -8,7 +8,9 @@ class App extends React.Component {
       delete localStorage.redirect;
       console.log('redirecting to : ', redirect);
       return (
-        <Redirect to={redirect}></Redirect>
+        <GameContextProvider>
+          <Redirect to={redirect}></Redirect>
+        </GameContextProvider>
        ) 
     }else{
       return (
