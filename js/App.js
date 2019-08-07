@@ -3,10 +3,11 @@ const { Link, NavLink, Route, Redirect, Switch } = ReactRouterDOM;
 class App extends React.Component {      
 
   render(){
-    if (sessionStorage.redirect) {
-      const redirect = sessionStorage.redirect
-      delete sessionStorage.redirect;
+    if (localStorage.redirect) {
+      const redirect = localStorage.redirect
+      delete localStorage.redirect;
       return (
+        console.log('redirecting to : ', redirect);
         <Redirect to={redirect}></Redirect>
        ) 
     }else{
