@@ -2,17 +2,7 @@ const { Link, NavLink, Route, Redirect, Switch } = ReactRouterDOM;
 
 class App extends React.Component {      
   
-  render(){console.log('App.render');
-    if (localStorage.redirect) {
-      const redirect = localStorage.redirect
-      delete localStorage.redirect;
-      console.log('redirecting to : ', redirect);
-      return (
-        <GameContextProvider>
-          <Redirect to={redirect}></Redirect>
-        </GameContextProvider>
-       ) 
-    }else{
+  render(){
       return (
         <GameContextProvider>
           <ReactRouterDOM.BrowserRouter basename="/tic-tac-toe">
@@ -27,7 +17,6 @@ class App extends React.Component {
           </ReactRouterDOM.BrowserRouter>
         </GameContextProvider>
       )
-    }
   }
 }
 
