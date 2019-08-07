@@ -6,8 +6,8 @@ class App extends React.Component {
     if (localStorage.redirect) {
       const redirect = localStorage.redirect
       delete localStorage.redirect;
+      console.log('redirecting to : ', redirect);
       return (
-        console.log('redirecting to : ', redirect);
         <Redirect to={redirect}></Redirect>
        ) 
     }else{
