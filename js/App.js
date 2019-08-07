@@ -21,4 +21,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(withRouter(App), document.getElementById('app'));
+ReactDOM.render(withRouter(App)(), document.getElementById('app'));
