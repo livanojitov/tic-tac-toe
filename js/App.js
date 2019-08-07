@@ -1,8 +1,8 @@
 const { Link, NavLink, Route, Redirect, Switch } = ReactRouterDOM;
 
 class App extends React.Component {      
-
-  render(){
+  
+  render(){console.log('App.render');
     if (localStorage.redirect) {
       const redirect = localStorage.redirect
       delete localStorage.redirect;
