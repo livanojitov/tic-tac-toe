@@ -18,7 +18,7 @@ const About = () => {
   });
 
   const [source] = useState('https://github.com/livanojitov/tic-tac-toe');
-  const [games]  = useState({ name: 'Matching pairs ( built with Vue.js )', href: 'ttps://livanojitov.github.io/matching-pairs'});
+  const [games]  = useState({ name: 'Matching pairs ( built with Vue.js )', href: 'https://livanojitov.github.io/matching-pairs'});
 
     return (
 
