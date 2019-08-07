@@ -6,8 +6,8 @@ permalink: /404.html
   <head>
     <title>404 page</title>
     <script>
-      localStorage.redirect = '/' + location.pathname.slice(1).split('/').slice(1).join('/');
-      localStorage.time = new Date();
+     // localStorage.redirect = '/' + location.pathname.slice(1).split('/').slice(1).join('/');
+     // localStorage.time = new Date();
       location.replace(location.pathname.split('/').slice(0, 2).join('/'));
     </script>
   </head>
