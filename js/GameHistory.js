@@ -29,25 +29,29 @@ const GameHistory = (props) => {
   }
 
   return (
-    <div className="game-history">
-      { game && 
-        <Category 
-            category      = {game.category} 
-            imageUser     = {game.imageUser} 
-            imageComputer = {game.imageComputer}
-            disable       = "true" /> }  
+    <div>
+      { game && (
+      <div className="game-history">
+        
+          <Category 
+              category      = {game.category} 
+              imageUser     = {game.imageUser} 
+              imageComputer = {game.imageComputer}
+              disable       = "true" /> 
 
-        <UserQuestion whoStarted = {game.whoStarted}/>
+          <StartGame whoStarted = {game.whoStarted}/> 
 
-        {board}
-        <br/>
-      { game && 
-        <div className="info">
-          {game.message}&nbsp;&nbsp;
-          <input type="button" value="Delete" onClick={(e) => { removeGame(gameId); props.history.push('/history')}} className="delete"/>&nbsp;&nbsp;
-          <input type="button" value="Back"   onClick={(e) => {props.history.push('/history')}}/>              
-        </div>
-      } 
+          {board}
+          <br/>
+        
+          <div className="info">
+            {game.message}&nbsp;&nbsp;
+            <input type="button" value="Delete" onClick={(e) => { removeGame(gameId); props.history.push('/history')}} className="delete"/>&nbsp;&nbsp;
+            <input type="button" value="Back"   onClick={(e) => {props.history.push('/history')}}/>              
+          </div>
+        
+      </div>
+      )}
     </div>
   )
 }

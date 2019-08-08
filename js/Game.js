@@ -12,21 +12,22 @@ class Game extends React.Component {
 
   render(){
     return(
-      <div className="board">
+      <div className="game">
+
         <Category onCategoryChange = {this.onCategoryChange}/>
-        <UserQuestion disable    = {!this.state.disableBoard} 
-                      userQuestion = {this.userQuestion } 
-                      reset        = {this.state.reset} />
+
+        <StartGame whoStart = {this.whoStart }  />
+                      
         {(this.state.category.imageUser) && (
           <Board category     = {this.state.category} 
                  disableBoard = {this.state.disableBoard}
-                 startOver    = {this.startOver}
-                 player       = {this.state.player} />)}
-        </div>
+                 getPlayer    = {this.getPlayer} />)}
+                
+      </div>
     )
   }
 
-  userQuestion = (player) => {
+  whoStart = (player) => {
     this.setState(() => ({disableBoard: false, player}));
   }
 
@@ -34,8 +35,12 @@ class Game extends React.Component {
     this.setState(() => ({category}));
   }
 
-  startOver = () => {
-    this.setState(() => ({disableBoard: true, reset: true}));
+  getCategory = () => {
+    return this.state.category;
+  }
+
+  getPlayer = () => {
+    return this.state.player;
   }
 
 }

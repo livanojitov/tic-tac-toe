@@ -7,6 +7,7 @@ class Board extends React.Component {
   constructor(props){
     super(props);
     this.category = this.props.category;
+    this.player = this.props.getPlayer();
     this.disableBoard = this.props.disableBoard;
     this.state = {
         board : Array(9).fill(this.nobody),
@@ -35,7 +36,7 @@ class Board extends React.Component {
       const player = (square == this.computer)? `${folder}/${imageComputer}` : (
                      (square == this.user)?     `${folder}/${imageUser}`     : 'default'); 
       const win = gameOver ? (winningSquares.indexOf(ind) != -1 ? 'win' : '') : '';
-      const disableSquare = this.disableBoard ? true : (gameOver ? true : (square != this.nobody ? true : false));
+      const disableSquare = this.disableBoard ? true : (square != this.nobody ? true : false);
       return (<Square 
                 key           = {ind} 
                 player        = {player} 
@@ -48,7 +49,7 @@ class Board extends React.Component {
     });  
     
     return (
-      <div>
+      <div class="board">
         {board}
         {gameOver && ( <Info message = {message} startOver = {this.startOver}/>)} 
       </div>
@@ -56,7 +57,7 @@ class Board extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState){   
-    if (this.isBoardEmpty() && (this.props.player == this.computer) && !this.disableBoard){
+    if (this.isBoardEmpty() && (this.props.getPlayer() == this.computer) && !this.disableBoard){
       this.computerPlay();
     }
   }
@@ -66,7 +67,8 @@ class Board extends React.Component {
   }
   
   startOver = () => {
-    this.category = this.props.category;   
+    this.category = this.props.category;  
+    this.player = this.props.getPlayer();
     const newBoard =  this.state.board;
     newBoard.fill(this.nobody);
     this.setState(() => {
@@ -77,7 +79,6 @@ class Board extends React.Component {
           message  : ''              
         }
     });
-    this.props.startOver();
   }
   
   gameOver = (message) => {
@@ -88,7 +89,7 @@ class Board extends React.Component {
       board          : [...board],
       winningSquares : [...winningSquares],
       message        : message,
-      whoStarted     : this.props.player,
+      whoStarted     : this.player,
       ...this.category,
     });
   }
@@ -103,31 +104,34 @@ class Board extends React.Component {
 
     if (this.isBoardFull()){
       this.gameOver("It's a draw!");
-    }else{
-      let winnerSquare = this.isAboutToWin(this.computer);
-      if (winnerSquare != -1){
-        this.play(this.computer, winnerSquare);
-        this.animateBoard();
-        this.gameOver("You lost!");
-        return;
-      }
+      return;
+    }
 
-      winnerSquare = this.isAboutToWin(this.user);
-      if (winnerSquare != -1){
-        this.play(this.computer, winnerSquare);
-      }else{
-        for (let i=0; i< this.state.board.length; i++){
-          if (this.state.board[i] == this.nobody){
-            this.play(this.computer, i);
-            break;
-          }
+    let winnerSquare = this.isAboutToWin(this.computer);
+    if (winnerSquare != -1){
+      this.play(this.computer, winnerSquare);
+      this.animateBoard();
+      this.gameOver("You lost!");
+      return;
+    }
+
+    winnerSquare = this.isAboutToWin(this.user);
+    if (winnerSquare != -1){
+      this.play(this.computer, winnerSquare);
+    }else{
+      const emptySquares = [];
+      for (let i=0; i< this.state.board.length; i++){
+        if (this.state.board[i] == this.nobody){
+          emptySquares.push(i);
         }
       }
+      this.play(this.computer,emptySquares[Math.floor(Math.random() * emptySquares.length)]);
+    }
 
-      if (this.isBoardFull()){
-        this.gameOver("It's a draw!");
-      }
-    }  
+    if (this.isBoardFull()){
+      this.gameOver("It's a draw!");
+    }
+    
   }
 
   play(player, square){
