@@ -17,7 +17,7 @@ class Category extends React.Component{
     this.imageComputer = null;
 
     let category = this.props.category;
-    if (!(category && category >=0 && category < this.categories.length)){
+    if (!(category >=0 && category < this.categories.length)){
       category = Math.floor(Math.random() * this.categories.length);
     }
     this.state = {
