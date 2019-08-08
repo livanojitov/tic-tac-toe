@@ -85,10 +85,11 @@ class Board extends React.Component {
     this.setState( () => ({ gameOver : true, message : message }));
     const { addGame } = this.context;
     addGame({
-      board : [...board],
+      board          : [...board],
       winningSquares : [...winningSquares],
-      message: message,
-      ...this.category
+      message        : message,
+      whoStarted     : this.props.player,
+      ...this.category,
     });
   }
 

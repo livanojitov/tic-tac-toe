@@ -21,8 +21,7 @@ class Game extends React.Component {
           <Board category     = {this.state.category} 
                  disableBoard = {this.state.disableBoard}
                  startOver    = {this.startOver}
-                 player       = {this.state.player}
-                 addToStore  = {this.props.addToStore} />)}
+                 player       = {this.state.player} />)}
         </div>
     )
   }

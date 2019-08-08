@@ -36,6 +36,9 @@ const GameHistory = (props) => {
             imageUser     = {game.imageUser} 
             imageComputer = {game.imageComputer}
             disable       = "true" /> }  
+
+        <UserQuestion whoStarted = {game.whoStarted}/>
+
         {board}
         <br/>
       { game && 

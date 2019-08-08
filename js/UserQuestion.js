@@ -8,12 +8,11 @@ class UserQuestion extends React.Component {
   }
 
   render() {
-    const { disable } = this.props;
-    return (
+    const { disable, whoStarted } = this.props;
+  
+    const html = ((typeof(whoStarted) == 'undefined') || whoStarted == "false") ? (
       <div className="question">
-
-         <span>Start the game?</span>
-
+        <span>Start the game?</span>
         <input onChange  = {() => this.props.userQuestion(2)} 
                 disabled = {disable} 
                 type     = "radio" 
@@ -31,8 +30,15 @@ class UserQuestion extends React.Component {
                 name     = "gender"
                 ref      = "computer"/>
         <label disabled = {disable} className="no" htmlFor="no">No</label>      
+      </div>
+  ) : (
+    <div className="question">
+     {whoStarted == 1 ? 'The computer started to play.' : 'You started to play.'}
+    </div>
+  );
 
-      </div> 
+    return (
+      html
     )  
   }
 } 

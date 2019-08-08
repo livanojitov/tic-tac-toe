@@ -12,6 +12,7 @@ const History = () => {
                 imageComputer  = {game.imageComputer} 
                 category       = {game.category}
                 id             = {game.id}
+                whoStarted     = {game.whoStarted}
               />
         )
     });
