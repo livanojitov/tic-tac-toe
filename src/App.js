@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Navigation from './components/Navigation';
+import GameContextProvider from './components/GameContext';
+import Game                from './components/Game';
+import History             from './components/History';
+import About               from './components/About';
+import Contact             from './components/Contact';
+import GameHistory         from './components/GameHistory';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <GameContextProvider>
+      <BrowserRouter basename="/tic-tac-toe" >
+        <Navigation/>
+        <Switch>
+          <Route path="/"        exact component={Game}        />
+          <Route path="/history" exact component={History}     /> 
+          <Route path="/about"   exact component={About}       />
+          <Route path="/contact" exact component={Contact}     />
+          <Route path="/:id"     exact component={GameHistory} /> 
+        </Switch>
+      </BrowserRouter>
+    </GameContextProvider>
+  )
 }
 
 export default App;
