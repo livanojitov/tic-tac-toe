@@ -63,12 +63,8 @@ class Board extends React.Component {
 
   componentDidUpdate(prevProps, prevState){   
     if (this.isBoardEmpty() && (this.props.getPlayer() === this.computer) && !this.disableBoard){
-      this.computerPlay();
+      this.play(this.computer, [0,2,6,8][Math.floor(Math.random() * 4)]);
     }
-  }
-
-  computerPlay(){
-    this.play(this.computer, Math.floor(Math.random() * this.state.board.length))
   }
   
   startOver = () => {
@@ -105,17 +101,54 @@ class Board extends React.Component {
     });
   }
 
+  playFromTwo = (square1, square2, square3) => {
+    const computer = this.computer;
+    const user     = this.user;    
+    const board    = this.state.board;
+
+    if (board[square1] === computer){
+      if (board[1] === user || board[7] === user){
+        this.play(computer, square2);
+        return true;
+      }else if (board[3] === user || board[5] === user){
+        this.play(computer, square3);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  playFromFour = (arr1, arr2, arr3, arr4) => {
+    const computer = this.computer;
+    const user     = this.user;    
+    const board    = this.state.board;
+
+    if (board[arr1[0]] === computer && board[arr1[1]] === user && board[arr1[2]] === computer && board[arr1[3]] === user){
+      this.play(computer, arr1[4]);
+      return true;
+    }else if (board[arr2[0]] === computer && board[arr2[1]] === user && board[arr2[2]] === computer && board[arr2[3]] === user){
+        this.play(computer, arr2[4]);
+        return true;
+    }else if (board[arr3[0]] === computer && board[arr3[1]] === user && board[arr3[2]] === computer && board[arr3[3]] === user){
+      this.play(computer, arr3[4]);
+      return true;
+    }else if (board[arr4[0]] === computer && board[arr4[1]] === user && board[arr4[2]] === computer && board[arr4[3]] === user){
+      this.play(computer, arr4[4]);
+      return true;
+    }  
+    return false;
+  }
 
   handleClick = (e) => {
     const computer = this.computer;
     const user     = this.user;
     const board    = this.state.board;
-    let winnerSquare;
+    let winnerSquares;
 
     this.play(user,e.target.id);
-    winnerSquare = this.hasPlayerWon(user);
-    if (winnerSquare){
-      this.gameOver("You won!", winnerSquare);
+    winnerSquares = this.isAWinner(user);
+    if (winnerSquares){
+      this.gameOver("You won!", winnerSquares);
       return;
     }
      
@@ -158,16 +191,43 @@ class Board extends React.Component {
 
     } 
 
-    winnerSquare = this.isAboutToWin(computer);
-    if (winnerSquare !== -1){
-      this.play(computer, winnerSquare[0]);
-      this.gameOver("You lost!", winnerSquare);
+    if (this.player === computer){
+
+      if (this.numberOfPlays() === 2){
+          if (this.playFromTwo(8, 2, 6) || 
+              this.playFromTwo(2, 8, 0) || 
+              this.playFromTwo(0, 6, 2) || 
+              this.playFromTwo(6, 0, 8)){
+            return;
+          }
+      }
+
+      if (this.numberOfPlays() === 4){
+        winnerSquares = this.isAboutToWin(computer);
+        if (winnerSquares !== -1){
+          this.play(computer, winnerSquares[0]);
+          this.gameOver("You lost!", winnerSquares);
+          return;
+        }      
+        if (this.playFromFour([8,1,2,5,6], [8,3,6,7,2], [8,5,6,7,0], [8,7,2,5,0]) ||
+            this.playFromFour([2,1,8,5,6], [2,3,0,1,8], [2,7,8,5,0], [2,5,0,1,6]) ||
+            this.playFromFour([0,1,6,3,8], [0,3,2,1,8], [0,5,2,1,6], [0,7,6,3,2]) ||
+            this.playFromFour([6,1,0,3,8], [6,3,8,7,2], [6,5,8,7,0], [6,7,0,3,2]) ){
+          return;
+        }
+      } 
+    }    
+
+    winnerSquares = this.isAboutToWin(computer);
+    if (winnerSquares !== -1){
+      this.play(computer, winnerSquares[0]);
+      this.gameOver("You lost!", winnerSquares);
       return;
     }
 
-    winnerSquare = this.isAboutToWin(user);
-    if (winnerSquare !== -1){
-      this.play(computer, winnerSquare[0]);
+    winnerSquares = this.isAboutToWin(user);
+    if (winnerSquares !== -1){
+      this.play(computer, winnerSquares[0]);
     }else{
       const emptySquares = [];
       for (let i=0; i< board.length; i++){
@@ -230,10 +290,11 @@ class Board extends React.Component {
   }
 
   isBoardEmpty = () => {
-    return (!(this.state.board.includes(this.computer) || this.state.board.includes(this.user)));
+    const board = this.state.board;
+    return (!(board.includes(this.computer) || board.includes(this.user)));
   }
 
-  hasPlayerWon(player){
+  isAWinner(player){
     const board = this.state.board;
     return (
       ((board[0] === player && board[1] === player && board[2] === player) && [0,1,2]) || 
