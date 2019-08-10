@@ -107,11 +107,13 @@ class Board extends React.Component {
 
 
   handleClick = (e) => {
-    const board = this.state.board;
+    const computer = this.computer;
+    const user     = this.user;
+    const board    = this.state.board;
     let winnerSquare;
 
-    this.play(this.user,e.target.id);
-    winnerSquare = this.hasPlayerWon(this.user);
+    this.play(user,e.target.id);
+    winnerSquare = this.hasPlayerWon(user);
     if (winnerSquare){
       this.gameOver("You won!", winnerSquare);
       return;
@@ -126,43 +128,46 @@ class Board extends React.Component {
       this.player = this.props.getPlayer();
     }
 
-    if (this.player === this.user){
+    if (this.player === user){
 
       if (this.numberOfPlays() === 1){
-        if (board[0] === this.user || board[2] === this.user || board[6] === this.user || board[8] === this.user){
-          this.play(this.computer, 4);
-        }else if (board[4] === this.user){
-          this.play(this.computer, [0,2,6,8][Math.floor(Math.random() * 4)]);
+        if (board[0] === user || board[2] === user || board[6] === user || board[8] === user){
+          this.play(computer, 4);
+        }else if (board[4] === user){
+          this.play(computer, [0,2,6,8][Math.floor(Math.random() * 4)]);
         }else{
-          this.play(this.computer, 4);
+          this.play(computer, 4);
         }
         return;
       }
       
       if (this.numberOfPlays() === 3){
-        if ((board[0] === this.computer && board[4] === this.user && board[8] === this.user) || 
-            (board[0] === this.user     && board[4] === this.user && board[8] === this.computer)){
-          this.play(this.computer, [2,6][Math.floor(Math.random() * 2)]);
+        if ((board[0] === computer && board[4] === user && board[8] === user) || 
+            (board[0] === user     && board[4] === user && board[8] === computer)){
+          this.play(computer, [2,6][Math.floor(Math.random() * 2)]);
           return;
-        }else if ((board[2] === this.computer && board[4] === this.user && board[6] === this.user) || 
-                  (board[2] === this.user     && board[4] === this.user && board[6] === this.computer)){
-          this.play(this.computer, [0,8][Math.floor(Math.random() * 2)]);
+        }else if ((board[2] === computer && board[4] === user && board[6] === user) || 
+                  (board[2] === user     && board[4] === user && board[6] === computer)){
+          this.play(computer, [0,8][Math.floor(Math.random() * 2)]);
           return;
-        }       
+        }else if (board[4] === computer && ((board[0] === user && board[8] === user) || (board[2] === user && board[6] === user))){
+          this.play(computer, [1,3,5,7][Math.floor(Math.random() * 4)]);
+          return;
+        }
       }
 
     } 
 
-    winnerSquare = this.isAboutToWin(this.computer);
+    winnerSquare = this.isAboutToWin(computer);
     if (winnerSquare !== -1){
-      this.play(this.computer, winnerSquare[0]);
+      this.play(computer, winnerSquare[0]);
       this.gameOver("You lost!", winnerSquare);
       return;
     }
 
-    winnerSquare = this.isAboutToWin(this.user);
+    winnerSquare = this.isAboutToWin(user);
     if (winnerSquare !== -1){
-      this.play(this.computer, winnerSquare[0]);
+      this.play(computer, winnerSquare[0]);
     }else{
       const emptySquares = [];
       for (let i=0; i< board.length; i++){
@@ -170,7 +175,7 @@ class Board extends React.Component {
           emptySquares.push(i);
         }
       }
-      this.play(this.computer,emptySquares[Math.floor(Math.random() * emptySquares.length)]);
+      this.play(computer,emptySquares[Math.floor(Math.random() * emptySquares.length)]);
     }
 
     if (this.isBoardFull()){
