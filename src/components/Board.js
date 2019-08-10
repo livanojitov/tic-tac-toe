@@ -12,7 +12,7 @@ class Board extends React.Component {
   constructor(props){
     super(props);
     this.category = this.props.category;
-    this.player = this.props.getPlayer();
+    this.player = -1;
     this.disableBoard = this.props.disableBoard;
     this.state = {
         board : Array(9).fill(this.nobody),
@@ -99,18 +99,52 @@ class Board extends React.Component {
     });
   }
 
+
   handleClick = (e) => {
+    const board = this.state.board;
+
     this.play(this.user,e.target.id);
     if (this.hasUserWon()){
       this.animateBoard();
       this.gameOver("You won!");
       return;
     }
-
+     
     if (this.isBoardFull()){
       this.gameOver("It's a draw!");
       return;
     }
+
+    if (this.player === -1){
+      this.player = this.props.getPlayer();
+    }
+
+    if (this.player === this.user){
+
+      if (this.numberOfPlays() === 1){
+        if (board[0] === this.user || board[2] === this.user || board[6] === this.user || board[8] === this.user){
+          this.play(this.computer, 4);
+        }else if (board[4] === this.user){
+          this.play(this.computer, [0,2,6,8][Math.floor(Math.random() * 4)]);
+        }else{
+          this.play(this.computer, 4);
+        }
+        return;
+      }
+      
+      if (this.numberOfPlays() === 3){
+        if ((board[0] === this.computer && board[4] === this.user && board[8] === this.user) || 
+            (board[0] === this.user     && board[4] === this.user && board[8] === this.computer)){
+          this.play(this.computer, [2,6][Math.floor(Math.random() * 2)]);
+          return;
+        }else if ((board[2] === this.computer && board[4] === this.user && board[6] === this.user) || 
+                  (board[2] === this.user     && board[4] === this.user && board[6] === this.computer)){
+          this.play(this.computer, [0,8][Math.floor(Math.random() * 2)]);
+          return;
+        }       
+      }
+
+    } // user started playing
 
     let winnerSquare = this.isAboutToWin(this.computer);
     if (winnerSquare !== -1){
@@ -125,8 +159,8 @@ class Board extends React.Component {
       this.play(this.computer, winnerSquare);
     }else{
       const emptySquares = [];
-      for (let i=0; i< this.state.board.length; i++){
-        if (this.state.board[i] === this.nobody){
+      for (let i=0; i< board.length; i++){
+        if (board[i] === this.nobody){
           emptySquares.push(i);
         }
       }
@@ -207,6 +241,16 @@ class Board extends React.Component {
     }
     
     return -1;
+  }
+
+  numberOfPlays = () => {
+      let count = 0;
+      for (let i=0; i< 9; i++){
+        if (this.state.board[i] !== this.nobody){
+          count++;
+        }
+      }
+      return count;    
   }
 
   isBoardFull = () => {

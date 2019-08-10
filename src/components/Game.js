@@ -10,7 +10,7 @@ class Game extends React.Component {
     this.state = {
       category: {},
       disableBoard: true,
-      player: 1,
+      player: -1,
       reset: false
      };
   }
