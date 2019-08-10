@@ -4,7 +4,7 @@ import Info            from './Info';
 import { GameContext } from './GameContext';
 
 class Board extends React.Component {
-  nobody = 0
+  empty = 0
   computer = 1
   user = 2
   static contextType = GameContext
@@ -15,7 +15,7 @@ class Board extends React.Component {
     this.player = -1;
     this.disableBoard = this.props.disableBoard;
     this.state = {
-        board : Array(9).fill(this.nobody),
+        board : Array(9).fill(this.empty),
         winningSquares : [],
         gameOver : false,
         message  : ''
@@ -41,7 +41,7 @@ class Board extends React.Component {
       const player = (square === this.computer)? `${folder}/${imageComputer}` : (
                      (square === this.user)?     `${folder}/${imageUser}`     : 'default'); 
       const win = gameOver ? (winningSquares.indexOf(ind) !== -1 ? 'win' : '') : '';
-      const disableSquare = this.disableBoard ? true : (square !== this.nobody ? true : false);
+      const disableSquare = this.disableBoard ? true : (square !== this.empty ? true : false);
       return (<Square 
                 key           = {ind} 
                 player        = {player} 
@@ -75,7 +75,7 @@ class Board extends React.Component {
     this.category = this.props.category;  
     this.player = this.props.getPlayer();
     const newBoard =  this.state.board;
-    newBoard.fill(this.nobody);
+    newBoard.fill(this.empty);
     this.setState(() => {
         return {
           board : newBoard,
@@ -86,9 +86,15 @@ class Board extends React.Component {
     });
   }
   
-  gameOver = (message) => {
-    const { board, winningSquares } = this.state;
-    this.setState( () => ({ gameOver : true, message : message }));
+  gameOver = (message, winningSquares) => {
+    const { board } = this.state;
+    if (winningSquares.length){
+      const ws = this.state.winningSquares;
+      [ws[0], ws[1], ws[2]] = winningSquares;
+      this.setState(() => ({ gameOver : true, message  : message, winningSquares : ws }));
+    }else{
+      this.setState(() => ({ gameOver : true, message  : message }));
+    } 
     const { addGame } = this.context;
     addGame({
       board          : [...board],
@@ -102,16 +108,17 @@ class Board extends React.Component {
 
   handleClick = (e) => {
     const board = this.state.board;
+    let winnerSquare;
 
     this.play(this.user,e.target.id);
-    if (this.hasUserWon()){
-      this.animateBoard();
-      this.gameOver("You won!");
+    winnerSquare = this.hasPlayerWon(this.user);
+    if (winnerSquare){
+      this.gameOver("You won!", winnerSquare);
       return;
     }
      
     if (this.isBoardFull()){
-      this.gameOver("It's a draw!");
+      this.gameOver("It's a draw!", []);
       return;
     }
 
@@ -144,23 +151,22 @@ class Board extends React.Component {
         }       
       }
 
-    } // user started playing
+    } 
 
-    let winnerSquare = this.isAboutToWin(this.computer);
+    winnerSquare = this.isAboutToWin(this.computer);
     if (winnerSquare !== -1){
-      this.play(this.computer, winnerSquare);
-      this.animateBoard();
-      this.gameOver("You lost!");
+      this.play(this.computer, winnerSquare[0]);
+      this.gameOver("You lost!", winnerSquare);
       return;
     }
 
     winnerSquare = this.isAboutToWin(this.user);
     if (winnerSquare !== -1){
-      this.play(this.computer, winnerSquare);
+      this.play(this.computer, winnerSquare[0]);
     }else{
       const emptySquares = [];
       for (let i=0; i< board.length; i++){
-        if (board[i] === this.nobody){
+        if (board[i] === this.empty){
           emptySquares.push(i);
         }
       }
@@ -168,7 +174,7 @@ class Board extends React.Component {
     }
 
     if (this.isBoardFull()){
-      this.gameOver("It's a draw!");
+      this.gameOver("It's a draw!", []);
     }
     
   }
@@ -185,68 +191,29 @@ class Board extends React.Component {
   
   check(player, square1, square2, square3){
     const board = this.state.board;
-    if (board[square1] === player && board[square2] === player && board[square3] === this.nobody){
-      return square3;
-    } 
-    if (board[square1] === player && board[square2] === this.nobody && board[square3] === player){
-      return square2;
-    }
-    if (board[square1] === this.nobody && board[square2] === player && board[square3] === player){
-      return square1;
-    } 
-    return -1;       
+    const empty = this.empty;
+    return (((board[square1] === player && board[square2] === player && board[square3] === empty)  && [square3, square1, square2]) ||
+            ((board[square1] === player && board[square2] === empty  && board[square3] === player) && [square2, square3, square1]) ||
+            ((board[square1] === empty  && board[square2] === player && board[square3] === player) && [square1, square3, square2]) || -1);
   }
 
   isAboutToWin(player){
-    // first row;
     let square;
-    square = this.check(player, 0, 1, 2);
-    if (square !== -1){
-      return square;
-    }
-    // second row
-    square = this.check(player, 3, 4, 5);
-    if (square !== -1){
-      return square;
-    }
-    // third row;
-    square = this.check(player, 6, 7, 8);
-    if (square !== -1){
-      return square;
-    }
-    // first column;
-    square = this.check(player, 0, 3, 6);
-    if (square !== -1){
-      return square;
-    }
-    // second column
-    square = this.check(player, 1, 4, 7);
-    if (square !== -1){
-      return square;
-    }
-    // third column;
-    square = this.check(player, 2, 5, 8);
-    if (square !== -1){
-      return square;
-    }
-    // first diagonal;
-    square = this.check(player, 0, 4, 8);
-    if (square !== -1){
-      return square;
-    }
-    // second diagonal;
-    square = this.check(player, 2, 4, 6);
-    if (square !== -1){
-      return square;
-    }
-    
-    return -1;
+    return (
+    (!((square = this.check(player, 0, 1, 2)) === -1 ) && square) || 
+    (!((square = this.check(player, 3, 4, 5)) === -1 ) && square) || 
+    (!((square = this.check(player, 6, 7, 8)) === -1 ) && square) || 
+    (!((square = this.check(player, 0, 3, 6)) === -1 ) && square) || 
+    (!((square = this.check(player, 1, 4, 7)) === -1 ) && square) || 
+    (!((square = this.check(player, 2, 5, 8)) === -1 ) && square) || 
+    (!((square = this.check(player, 0, 4, 8)) === -1 ) && square) || 
+    (!((square = this.check(player, 2, 4, 6)) === -1 ) && square) || -1);
   }
 
   numberOfPlays = () => {
       let count = 0;
       for (let i=0; i< 9; i++){
-        if (this.state.board[i] !== this.nobody){
+        if (this.state.board[i] !== this.empty){
           count++;
         }
       }
@@ -261,41 +228,20 @@ class Board extends React.Component {
     return (!(this.state.board.includes(this.computer) || this.state.board.includes(this.user)));
   }
 
-  hasUserWon(){
+  hasPlayerWon(player){
     const board = this.state.board;
-    const user  = this.user;
     return (
-      (board[0] === user && board[1] === user && board[2] === user) || 
-      (board[3] === user && board[4] === user && board[5] === user) || 
-      (board[6] === user && board[7] === user && board[8] === user) || 
-      (board[0] === user && board[3] === user && board[6] === user) || 
-      (board[1] === user && board[4] === user && board[7] === user) || 
-      (board[2] === user && board[5] === user && board[8] === user) || 
-      (board[0] === user && board[4] === user && board[8] === user) || 
-      (board[2] === user && board[4] === user && board[6] === user)
+      ((board[0] === player && board[1] === player && board[2] === player) && [0,1,2]) || 
+      ((board[3] === player && board[4] === player && board[5] === player) && [3,4,5]) || 
+      ((board[6] === player && board[7] === player && board[8] === player) && [6,7,8]) || 
+      ((board[0] === player && board[3] === player && board[6] === player) && [0,3,6]) || 
+      ((board[1] === player && board[4] === player && board[7] === player) && [1,4,7]) || 
+      ((board[2] === player && board[5] === player && board[8] === player) && [2,5,8]) || 
+      ((board[0] === player && board[4] === player && board[8] === player) && [0,4,8]) || 
+      ((board[2] === player && board[4] === player && board[6] === player) && [2,4,6]) 
     )
   }
 
-  animateSquares(square1, square2, square3){
-    const board = this.state.board;
-    
-    if ((board[square1] !== this.nobody) && (board[square1] === board[square2]) && (board[square2] === board[square3])){
-        const ws = this.state.winningSquares;
-        [ws[0], ws[1], ws[2]] = [square1, square2, square3];
-        this.setState(() => ({ winningSquares : ws }));
-    }
-  }
-
-  animateBoard(){
-    this.animateSquares(0,1,2);
-    this.animateSquares(3,4,5);
-    this.animateSquares(6,7,8);
-    this.animateSquares(0,3,6);
-    this.animateSquares(1,4,7);
-    this.animateSquares(2,5,8);
-    this.animateSquares(0,4,8);
-    this.animateSquares(2,4,6);
-  }
 }  
 
 export default Board
