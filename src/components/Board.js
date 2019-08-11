@@ -25,8 +25,10 @@ class Board extends React.Component {
   render(){
     const { winningSquares, gameOver } = this.state;
     const message = this.message;
-    
-    if (this.props.category.folder !== this.category.folder){
+
+    if ((this.props.category.folder        !== this.category.folder)       || 
+        (this.props.category.imageUser     !== this.category.imageUser)    ||
+        (this.props.category.imageComputer !== this.category.imageComputer)){
       if (!gameOver){
         this.category = this.props.category;
       }

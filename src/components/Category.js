@@ -15,19 +15,26 @@ class Category extends React.Component{
       { name: "Seinfeld"           , folder: "seinfeld" , count : 20}
     ];
 
-    this.imageUser = null;
-    this.imageComputer = null;
-
     let categoryId = this.props.categoryId;
     if (!(categoryId && categoryId >=0 && categoryId < this.categories.length)){
       categoryId = Math.floor(Math.random() * this.categories.length);
     }
+
     this.state = {
       categoryId
     }
+
+    let imageUser = this.props.imageUser;
+    let imageComputer = this.props.imageComputer;
+    if (!imageUser){
+      [imageUser, imageComputer] = this.randomizeImages();
+    }
+    
+    this.state.imageUser = imageUser;
+    this.state.imageComputer = imageComputer;
   }
   
-  randomizeImages(){
+  randomizeImages = () => {
     const length = this.categories[this.state.categoryId].count;
     const imageUser = Math.floor(Math.random() * length);
     let imageComputer = Math.floor(Math.random() * length);
@@ -46,12 +53,6 @@ class Category extends React.Component{
       )
     });
 
-    if (this.props.imageUser){
-      ({imageUser: this.imageUser, imageComputer: this.imageComputer} = this.props);
-    }else{
-      [this.imageUser, this.imageComputer] = this.randomizeImages();
-    }
-
     const select = ((typeof(this.props.disable) === 'undefined') || this.props.disable === "false") ? (
           <select value={categoryId} onChange={this.onChange}>
             {options}
@@ -60,27 +61,35 @@ class Category extends React.Component{
             <span>{this.categories[categoryId].name}</span>
           );
 
+    const imageUser = this.state.imageUser;
+    const imageComputer = this.state.imageComputer;
+    const refreshButton = ((typeof(this.props.disable) === 'undefined') || this.props.disable === "false") ? (
+        <button onClick={this.refresh}>Refresh</button>   
+      ) : (
+        ''
+      );
+
     return (
       <div className = "categories">
         Category: &nbsp;
         {select}
         <div className="random-images">
-          You are :    <img title={this.imageUser}     src={`./images/${folder}/${this.imageUser}.jpg`}     alt="user"/>
-          &nbsp;&nbsp;&nbsp; 
-          Computer is: <img title={this.imageComputer} src={`./images/${folder}/${this.imageComputer}.jpg`} alt="computer"/>  
+          You:      <img title={imageUser}     src={`./images/${folder}/${imageUser}.jpg`}     alt="user"/>&nbsp;
+          Computer: <img title={imageComputer} src={`./images/${folder}/${imageComputer}.jpg`} alt="computer"/>&nbsp;&nbsp;
+          {refreshButton}
         </div>
       </div>
     )
   }
 
   componentDidUpdate(prevProps, prevState){
-    if (prevState.categoryId !== this.state.categoryId){
+    if ((prevState.categoryId !== this.state.categoryId) || (this.state.imageUser !== prevState.imageUser)){
       this.emitCategory();
     }     
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return (this.state.categoryId !== nextState.categoryId)
+   return ((this.state.categoryId !== nextState.categoryId) || (this.state.imageUser !== nextState.imageUser));
   }
 
   componentDidMount(){
@@ -93,8 +102,8 @@ class Category extends React.Component{
       this.props.onCategoryChange({
         categoryId,
         ...this.categories[categoryId],
-        imageUser     : this.imageUser,
-        imageComputer : this.imageComputer
+        imageUser     : this.state.imageUser,
+        imageComputer : this.state.imageComputer
       });
     }
   }
@@ -103,7 +112,11 @@ class Category extends React.Component{
     const categoryId = e.target.value;
     this.setState(() => ({ categoryId }));
   }
-    
+
+  refresh = () => {
+    let [imageUser, imageComputer] = this.randomizeImages();
+    this.setState(() => ({imageUser, imageComputer}));
+  }
 }
 
 export default Category;
