@@ -27,15 +27,15 @@ class Category extends React.Component{
     let imageUser = this.props.imageUser;
     let imageComputer = this.props.imageComputer;
     if (!imageUser){
-      [imageUser, imageComputer] = this.randomizeImages();
+      [imageUser, imageComputer] = this.randomizeImages(categoryId);
     }
     
     this.state.imageUser = imageUser;
     this.state.imageComputer = imageComputer;
   }
   
-  randomizeImages = () => {
-    const length = this.categories[this.state.categoryId].count;
+  randomizeImages = (categoryId) => {
+    const length = this.categories[categoryId].count;
     const imageUser = Math.floor(Math.random() * length);
     let imageComputer = Math.floor(Math.random() * length);
     while ( imageUser === imageComputer){
@@ -110,11 +110,12 @@ class Category extends React.Component{
 
   onChange = (e) => {
     const categoryId = e.target.value;
-    this.setState(() => ({ categoryId }));
+    let [imageUser, imageComputer] = this.randomizeImages(categoryId);
+    this.setState(() => ({categoryId, imageUser, imageComputer}));
   }
 
   refresh = () => {
-    let [imageUser, imageComputer] = this.randomizeImages();
+    let [imageUser, imageComputer] = this.randomizeImages(this.state.categoryId);
     this.setState(() => ({imageUser, imageComputer}));
   }
 }

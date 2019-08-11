@@ -124,3 +124,10 @@ hr{
 .about ul{
   margin-top: 0;
 }
+
+@media screen and (min-width: 400px) {
+  .categories img{
+    width: 100px;
+    height: 100px;
+  }    
+}
