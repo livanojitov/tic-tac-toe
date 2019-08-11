@@ -71,7 +71,7 @@ class Board extends React.Component {
     this.category = this.props.category;  
     this.player = this.props.getPlayer();
     const newBoard =  this.state.board;
-    newBoard.fill(this.empty);
+    newBoard.fill(this.empty); 
     this.setState(() => {
         return {
           board : newBoard,
@@ -97,6 +97,7 @@ class Board extends React.Component {
       winningSquares : [...winningSquares],
       message        : message,
       whoStarted     : this.player,
+      level          : this.props.getLevel(),
       ...this.category,
     });
   }
@@ -161,61 +162,63 @@ class Board extends React.Component {
       this.player = this.props.getPlayer();
     }
 
-    if (this.player === user){
+    if (this.props.getLevel() === 2){
+      if (this.player === user){
 
-      if (this.numberOfPlays() === 1){
-        if (board[0] === user || board[2] === user || board[6] === user || board[8] === user){
-          this.play(computer, 4);
-        }else if (board[4] === user){
-          this.play(computer, [0,2,6,8][Math.floor(Math.random() * 4)]);
-        }else{
-          this.play(computer, 4);
-        }
-        return;
-      }
-      
-      if (this.numberOfPlays() === 3){
-        if ((board[0] === computer && board[4] === user && board[8] === user) || 
-            (board[0] === user     && board[4] === user && board[8] === computer)){
-          this.play(computer, [2,6][Math.floor(Math.random() * 2)]);
-          return;
-        }else if ((board[2] === computer && board[4] === user && board[6] === user) || 
-                  (board[2] === user     && board[4] === user && board[6] === computer)){
-          this.play(computer, [0,8][Math.floor(Math.random() * 2)]);
-          return;
-        }else if (board[4] === computer && ((board[0] === user && board[8] === user) || (board[2] === user && board[6] === user))){
-          this.play(computer, [1,3,5,7][Math.floor(Math.random() * 4)]);
+        if (this.numberOfPlays() === 1){
+          if (board[0] === user || board[2] === user || board[6] === user || board[8] === user){
+            this.play(computer, 4);
+          }else if (board[4] === user){
+            this.play(computer, [0,2,6,8][Math.floor(Math.random() * 4)]);
+          }else{
+            this.play(computer, 4);
+          }
           return;
         }
-      }
-
-    } 
-
-    if (this.player === computer){
-
-      if (this.numberOfPlays() === 2){
-          if (this.playFromTwo(8, 2, 6) || 
-              this.playFromTwo(2, 8, 0) || 
-              this.playFromTwo(0, 6, 2) || 
-              this.playFromTwo(6, 0, 8)){
+        
+        if (this.numberOfPlays() === 3){
+          if ((board[0] === computer && board[4] === user && board[8] === user) || 
+              (board[0] === user     && board[4] === user && board[8] === computer)){
+            this.play(computer, [2,6][Math.floor(Math.random() * 2)]);
+            return;
+          }else if ((board[2] === computer && board[4] === user && board[6] === user) || 
+                    (board[2] === user     && board[4] === user && board[6] === computer)){
+            this.play(computer, [0,8][Math.floor(Math.random() * 2)]);
+            return;
+          }else if (board[4] === computer && ((board[0] === user && board[8] === user) || (board[2] === user && board[6] === user))){
+            this.play(computer, [1,3,5,7][Math.floor(Math.random() * 4)]);
             return;
           }
-      }
-
-      if (this.numberOfPlays() === 4){
-        winnerSquares = this.isAboutToWin(computer);
-        if (winnerSquares !== -1){
-          this.play(computer, winnerSquares[0]);
-          this.gameOver("You lost!", winnerSquares);
-          return;
-        }      
-        if (this.playFromFour([8,1,2,5,6], [8,3,6,7,2], [8,5,6,7,0], [8,7,2,5,0]) ||
-            this.playFromFour([2,1,8,5,6], [2,3,0,1,8], [2,7,8,5,0], [2,5,0,1,6]) ||
-            this.playFromFour([0,1,6,3,8], [0,3,2,1,8], [0,5,2,1,6], [0,7,6,3,2]) ||
-            this.playFromFour([6,1,0,3,8], [6,3,8,7,2], [6,5,8,7,0], [6,7,0,3,2]) ){
-          return;
         }
+
       } 
+
+      if (this.player === computer){
+
+        if (this.numberOfPlays() === 2){
+            if (this.playFromTwo(8, 2, 6) || 
+                this.playFromTwo(2, 8, 0) || 
+                this.playFromTwo(0, 6, 2) || 
+                this.playFromTwo(6, 0, 8)){
+              return;
+            }
+        }
+
+        if (this.numberOfPlays() === 4){
+          winnerSquares = this.isAboutToWin(computer);
+          if (winnerSquares !== -1){
+            this.play(computer, winnerSquares[0]);
+            this.gameOver("You lost!", winnerSquares);
+            return;
+          }      
+          if (this.playFromFour([8,1,2,5,6], [8,3,6,7,2], [8,5,6,7,0], [8,7,2,5,0]) ||
+              this.playFromFour([2,1,8,5,6], [2,3,0,1,8], [2,7,8,5,0], [2,5,0,1,6]) ||
+              this.playFromFour([0,1,6,3,8], [0,3,2,1,8], [0,5,2,1,6], [0,7,6,3,2]) ||
+              this.playFromFour([6,1,0,3,8], [6,3,8,7,2], [6,5,8,7,0], [6,7,0,3,2]) ){
+            return;
+          }
+        } 
+      }
     }    
 
     winnerSquares = this.isAboutToWin(computer);

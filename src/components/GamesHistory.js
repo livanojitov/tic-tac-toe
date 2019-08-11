@@ -3,9 +3,10 @@ import { GameContext }       from './GameContext';
 import { Link }              from 'react-router-dom';
 import Category              from './Category';
 import StartGame             from './StartGame';
+import Level                 from './Level';
 
 const GamesHistory = (props) => {
-  let {category, imageUser, imageComputer, message, id, whoStarted} = props;
+  let {category, imageUser, imageComputer, message, id, whoStarted, level} = props;
 
   const { removeGame}  = useContext(GameContext);
 
@@ -18,8 +19,11 @@ const GamesHistory = (props) => {
         imageComputer = {imageComputer}
         disable       = "true" /> 
 
-      <StartGame whoStarted = {whoStarted}/>
-
+      <div className="questions">
+        <StartGame whoStarted = {whoStarted}/> 
+        <Level level = {level} />
+      </div>
+      
       <div className="info">
         {message}&nbsp;&nbsp;
         <Link to={`/${id}`}>See Game</Link>&nbsp;&nbsp;

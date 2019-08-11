@@ -3,6 +3,7 @@ import { GameContext }       from './GameContext';
 import Square                from './Square';
 import Category              from './Category';
 import StartGame             from './StartGame';
+import Level                 from './Level';
 
 const GameHistory = (props) => {
   let board = "";
@@ -41,9 +42,12 @@ const GameHistory = (props) => {
               category      = {game.category} 
               imageUser     = {game.imageUser} 
               imageComputer = {game.imageComputer}
-              disable       = "true" /> 
+              disable       = "true" />
 
-          <StartGame whoStarted = {game.whoStarted}/> 
+          <div className="questions">
+            <StartGame whoStarted = {game.whoStarted}/> 
+            <Level level = {game.level} />
+          </div>
 
           {board}
           <br/>

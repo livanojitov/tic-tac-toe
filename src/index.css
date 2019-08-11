@@ -118,9 +118,14 @@ margin-bottom: 5px;
   vertical-align: middle;
 }
 
-.random-images, .question{
+.random-images, .questions{
 margin: 10px 0;
 font-weight: bold;
+}
+
+.level, .question{
+  display: inline-block;
+  width: 50%;
 }
 
 input[type=radio]:not([disabled]), .yes:not([disabled]), .no:not([disabled]){

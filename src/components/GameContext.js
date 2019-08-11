@@ -30,13 +30,14 @@ const GameContextProvider = (props) => {
   const removeGame = (id) => {
     if (games.length > 0){
       GameContextProvider.delete = 1;
+      id = id * 1;
       setGames(games.filter(game => game.id !== id));   
     } 
   }
 
   const getGame = (id) => {
-    id = id * 1;
     if (games.length > 0){
+      id = id * 1;
       return games.filter((game) => game.id === id)[0];
     }else{
       return false;

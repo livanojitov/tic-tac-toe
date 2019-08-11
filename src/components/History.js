@@ -16,6 +16,7 @@ const History = () => {
                 category       = {game.category}
                 id             = {game.id}
                 whoStarted     = {game.whoStarted}
+                level          = {game.level}
               />
         )
     });

@@ -89,9 +89,9 @@ class Category extends React.Component{
   }
 
   emitCategory(){
-    if (this.props.onCategoryChange){
+    if (this.props.setCategory){
       const categoryId = this.state.category;
-      this.props.onCategoryChange({
+      this.props.setCategory({
         category      : categoryId,
         ...this.categories[categoryId],
         imageUser     : this.imageUser,
