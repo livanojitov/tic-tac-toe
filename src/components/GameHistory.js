@@ -39,7 +39,7 @@ const GameHistory = (props) => {
       <div className="game-history">
         
           <Category 
-              category      = {game.category} 
+              categoryId    = {game.categoryId} 
               imageUser     = {game.imageUser} 
               imageComputer = {game.imageComputer}
               disable       = "true" />

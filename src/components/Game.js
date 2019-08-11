@@ -20,10 +20,10 @@ class Game extends React.Component {
   render(){
     return(
       <div className="game">
-        <Category setCategory = {this.setCategory}/>  
+        <Category onCategoryChange = {this.setCategory}/>  
         <div className="questions">
-          <StartGame setPlayer = {this.setPlayer } />
-          <Level setLevel = {this.setLevel} />
+          <StartGame onPlayerChange = {this.setPlayer } />
+          <Level onLevelChange = {this.setLevel} />
         </div>
         {(this.state.category.imageUser) && (
           <Board category     = {this.state.category} 

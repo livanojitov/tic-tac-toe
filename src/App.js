@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Navigation from './components/Navigation';
+import Navigation          from './components/Navigation';
 import GameContextProvider from './components/GameContext';
 import Game                from './components/Game';
 import History             from './components/History';

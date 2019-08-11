@@ -13,7 +13,7 @@ const History = () => {
                 message        = {game.message}
                 imageUser      = {game.imageUser}
                 imageComputer  = {game.imageComputer} 
-                category       = {game.category}
+                categoryId     = {game.categoryId}
                 id             = {game.id}
                 whoStarted     = {game.whoStarted}
                 level          = {game.level}

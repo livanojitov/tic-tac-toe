@@ -34,8 +34,8 @@ class StartGame extends React.Component {
   }
 
   setPlayer(player){
-    if (this.props.setPlayer){
-      this.props.setPlayer(player);
+    if (this.props.onPlayerChange){
+      this.props.onPlayerChange(player);
     }
   }  
 } 

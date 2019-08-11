@@ -14,17 +14,18 @@ class Board extends React.Component {
     this.category = this.props.category;
     this.player = -1;
     this.disableBoard = this.props.disableBoard;
+    this.message = '';
     this.state = {
         board : Array(9).fill(this.empty),
         winningSquares : [],
-        gameOver : false,
-        message  : ''
+        gameOver : false
     };
   }
 
   render(){
-    const { winningSquares, gameOver, message } = this.state;
-
+    const { winningSquares, gameOver } = this.state;
+    const message = this.message;
+    
     if (this.props.category.folder !== this.category.folder){
       if (!gameOver){
         this.category = this.props.category;
@@ -70,32 +71,33 @@ class Board extends React.Component {
   startOver = () => {
     this.category = this.props.category;  
     this.player = this.props.getPlayer();
+    this.message = '';
     const newBoard =  this.state.board;
     newBoard.fill(this.empty); 
     this.setState(() => {
         return {
           board : newBoard,
           winningSquares : [],
-          gameOver : false,
-          message  : ''              
+          gameOver : false           
         }
     });
   }
   
   gameOver = (message, winningSquares) => {
     const { board } = this.state;
+    this.message = message;
     if (winningSquares.length){
       const ws = this.state.winningSquares;
       [ws[0], ws[1], ws[2]] = winningSquares;
-      this.setState(() => ({ gameOver : true, message  : message, winningSquares : ws }));
+      this.setState(() => ({ gameOver : true, winningSquares : ws }));
     }else{
-      this.setState(() => ({ gameOver : true, message  : message }));
+      this.setState(() => ({ gameOver : true }));
     } 
     const { addGame } = this.context;
     addGame({
       board          : [...board],
       winningSquares : [...winningSquares],
-      message        : message,
+      message,
       whoStarted     : this.player,
       level          : this.props.getLevel(),
       ...this.category,

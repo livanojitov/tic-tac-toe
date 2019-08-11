@@ -42,22 +42,24 @@ class Level extends React.Component {
   }
 
   setLevel = (e) => {
-    const value = e.target.value;
-    this.setState(() => ({level : value}));
+    const level = e.target.value;
+    this.setState(() => ({level}));
+  }
+
+  onLevelChange = () => {
+    if (this.props.onLevelChange){
+      this.props.onLevelChange(this.state.level * 1);
+    }
   }
 
   componentDidUpdate(prevProps, prevState){
     if (prevState.level !== this.state.level){
-      if (this.props.setLevel){
-        this.props.setLevel(this.state.level * 1);
-      }     
+      this.onLevelChange();
     }     
   }
 
   componentDidMount(){
-    if (this.props.setLevel){
-      this.props.setLevel(this.state.level * 1);
-    }
+    this.onLevelChange();
   }  
 } 
 

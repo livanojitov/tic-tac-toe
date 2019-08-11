@@ -6,7 +6,7 @@ import StartGame             from './StartGame';
 import Level                 from './Level';
 
 const GamesHistory = (props) => {
-  let {category, imageUser, imageComputer, message, id, whoStarted, level} = props;
+  let {categoryId, imageUser, imageComputer, message, id, whoStarted, level} = props;
 
   const { removeGame}  = useContext(GameContext);
 
@@ -14,7 +14,7 @@ const GamesHistory = (props) => {
     <div className="games-history">
 
       <Category 
-        category      = {category} 
+        categoryId    = {categoryId} 
         imageUser     = {imageUser} 
         imageComputer = {imageComputer}
         disable       = "true" /> 

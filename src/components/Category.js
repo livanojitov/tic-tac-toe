@@ -18,17 +18,17 @@ class Category extends React.Component{
     this.imageUser = null;
     this.imageComputer = null;
 
-    let category = this.props.category;
-    if (!(category >=0 && category < this.categories.length)){
-      category = Math.floor(Math.random() * this.categories.length);
+    let categoryId = this.props.categoryId;
+    if (!(categoryId && categoryId >=0 && categoryId < this.categories.length)){
+      categoryId = Math.floor(Math.random() * this.categories.length);
     }
     this.state = {
-      category
+      categoryId
     }
   }
   
   randomizeImages(){
-    const length = this.categories[this.state.category].count;
+    const length = this.categories[this.state.categoryId].count;
     const imageUser = Math.floor(Math.random() * length);
     let imageComputer = Math.floor(Math.random() * length);
     while ( imageUser === imageComputer){
@@ -38,8 +38,8 @@ class Category extends React.Component{
   }
 
   render(){
-    const category = this.state.category;
-    const folder = this.categories[category].folder;
+    const categoryId = this.state.categoryId;
+    const folder = this.categories[categoryId].folder;
     const options = this.categories.map((category, index) => {
       return (
         <option key={index} value={index}>{category.name}</option>  
@@ -53,11 +53,11 @@ class Category extends React.Component{
     }
 
     const select = ((typeof(this.props.disable) === 'undefined') || this.props.disable === "false") ? (
-          <select value={category} onChange={this.onChange}>
+          <select value={categoryId} onChange={this.onChange}>
             {options}
           </select>     
           ) : (
-            <span>{this.categories[category].name}</span>
+            <span>{this.categories[categoryId].name}</span>
           );
 
     return (
@@ -73,26 +73,25 @@ class Category extends React.Component{
     )
   }
 
-  onChange = (e) => {
-    const category = e.target.value;
-    this.setState(() => ({ category }));
-  }
-
   componentDidUpdate(prevProps, prevState){
-    if (prevState.category !== this.state.category){
+    if (prevState.categoryId !== this.state.categoryId){
       this.emitCategory();
     }     
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return (this.state.category !== nextState.category)
+    return (this.state.categoryId !== nextState.categoryId)
+  }
+
+  componentDidMount(){
+    this.emitCategory();    
   }
 
   emitCategory(){
-    if (this.props.setCategory){
-      const categoryId = this.state.category;
-      this.props.setCategory({
-        category      : categoryId,
+    if (this.props.onCategoryChange){
+      const categoryId = this.state.categoryId;
+      this.props.onCategoryChange({
+        categoryId,
         ...this.categories[categoryId],
         imageUser     : this.imageUser,
         imageComputer : this.imageComputer
@@ -100,10 +99,11 @@ class Category extends React.Component{
     }
   }
 
-  componentDidMount(){
-    this.emitCategory();    
+  onChange = (e) => {
+    const categoryId = e.target.value;
+    this.setState(() => ({ categoryId }));
   }
-
+    
 }
 
 export default Category;
