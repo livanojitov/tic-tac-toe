@@ -5,30 +5,32 @@ class Level extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      level : "2"
+      level : "1"
     }   
   }
 
   render() {
 
-    const { level } = this.props;
+    const { disable, level } = this.props;
   
     const html = (typeof(level) === 'undefined') ? (
       <div className="level">
         <span>Level?</span>
-        <input  onChange  = {this.setLevel}
+        <input  onChange = {this.setLevel}
+                disabled = {disable} 
                 type     = "radio" 
                 value    = "1" 
                 name     = "level" 
                 checked  = { this.state.level === "1"}/>
-        <label htmlFor="easy">Easy</label>
+        <label  disabled = {disable}  htmlFor="easy">Easy</label>
 
-        <input  onChange={this.setLevel}
+        <input  onChange = {this.setLevel}
+                disabled = {disable} 
                 type     = "radio"
                 value    = "2" 
                 name     = "level"
                 checked  = { this.state.level === "2"}/>
-        <label htmlFor="hard">Hard</label>      
+        <label  disabled = {disable} htmlFor="hard">Hard</label>      
       </div>
     ) : (
       <div className="level">

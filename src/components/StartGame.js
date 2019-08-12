@@ -2,25 +2,34 @@ import React from 'react';
 
 class StartGame extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      who : "1"
+    }   
+  }
+
   render() {
     const { disable, whoStarted } = this.props;
   
     const html = (typeof(whoStarted) === 'undefined') ? (
       <div className="question">
         <span>Start?</span>
-        <input onChange  = {() => this.setPlayer(2)} 
+        <input onChange  = {this.setPlayer} 
                 disabled = {disable} 
                 type     = "radio" 
-                value    = "yes"
-                name     = "gender" />
-        <label disabled = {disable} className="yes" htmlFor="yes">Yes</label>
+                value    = "2"
+                name     = "player"
+                checked  = { this.state.who === "2"}/>
+        <label disabled = {disable} htmlFor="yes">Yes</label>
 
-        <input onChange={() => this.setPlayer(1)}
+        <input onChange={this.setPlayer}
                 disabled = {disable} 
                 type     = "radio"
-                value    = "no"
-                name     = "gender" />
-        <label disabled = {disable} className="no" htmlFor="no">No</label>      
+                value    = "1"
+                name     = "player"
+                checked  = { this.state.who === "1"}/>
+        <label disabled = {disable} htmlFor="no">No</label>      
       </div>
     ) : (
       <div className="question">
@@ -33,11 +42,26 @@ class StartGame extends React.Component {
     )  
   }
 
-  setPlayer(player){
+  setPlayer = (e) => {
+    const who = e.target.value;
+    this.setState(() => ({who}));
+  }
+
+  onPlayerChange = () => {
     if (this.props.onPlayerChange){
-      this.props.onPlayerChange(player);
+      this.props.onPlayerChange(this.state.who * 1);
     }
-  }  
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    if (prevState.who !== this.state.who){
+      this.onPlayerChange();
+    }     
+  }
+
+  componentDidMount(){
+    this.onPlayerChange();
+  }   
 } 
 
 export default StartGame;

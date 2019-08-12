@@ -106,7 +106,14 @@ a{
 
 .level, .question{
   display: inline-block;
-  width: 50%;
+}
+
+.level{
+  width: 55%;
+}
+
+.question{
+  width: 45%
 }
 
 input[type=radio]:not([disabled]), .yes:not([disabled]), .no:not([disabled]){
@@ -123,6 +130,10 @@ hr{
 
 .about ul{
   margin-top: 0;
+}
+
+.start-playing{
+  margin-bottom: 10px;
 }
 
 @media screen and (min-width: 400px) {
