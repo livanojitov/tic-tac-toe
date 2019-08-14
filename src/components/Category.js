@@ -16,7 +16,7 @@ class Category extends React.Component{
     ];
 
     let categoryId = this.props.categoryId;
-    if (!(categoryId && categoryId >=0 && categoryId < this.categories.length)){
+    if (!(typeof(categoryId) != undefined && categoryId >=0 && categoryId < this.categories.length)){
       categoryId = Math.floor(Math.random() * this.categories.length);
     }
 

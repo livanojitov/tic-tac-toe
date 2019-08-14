@@ -1,24 +1,26 @@
 import { NavLink }         from 'react-router-dom';
 import React, { useState } from 'react';
-//import Logo                from '../../public/images/logo.jpg';
 
 const Navigation = () => {
 
-  const [nav] = useState([
-    { name: 'Home',    to: '/'        },
-    { name: 'History', to: '/history' },
-    { name: 'About',   to: '/about'    },
-    { name: 'Contact', to: '/contact'  }
+  const [routes] = useState([
+    { name: 'Home',    url: '/'        },
+    { name: 'History', url: '/history' },
+    { name: 'About',   url: '/about'   },
+    { name: 'Contact', url: '/contact' }
   ]);
+
+  const lis = routes.map((route, key) => {
+    return  (
+      <li key={key}><NavLink exact to={route.url}>{route.name}</NavLink></li>
+    )  
+  });
 
   return (
     <div className="nav">
       <img src={'./images/logo.jpg'} alt="Logo"/>
       <ul>
-        <li><NavLink exact to={nav[0].to}>{nav[0].name}</NavLink></li>   
-        <li><NavLink exact to={nav[1].to}>{nav[1].name}</NavLink></li>     
-        <li><NavLink exact to={nav[2].to}>{nav[2].name}</NavLink></li>  
-        <li><NavLink exact to={nav[3].to}>{nav[3].name}</NavLink></li>                   
+        {lis}                  
       </ul>
     </div>
   )

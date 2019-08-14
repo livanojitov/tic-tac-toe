@@ -40,6 +40,10 @@ a{
   text-decoration: none;  
 }
 
+.about{
+  margin-top: 10px;
+}
+
 .contact .me{
   color: green;
   font-weight: normal;
@@ -108,12 +112,20 @@ a{
   display: inline-block;
 }
 
+.question{
+  width: 45%
+}
+
 .level{
   width: 55%;
 }
 
-.question{
-  width: 45%
+.history .question, .game-history .question{
+  width: 70%;
+}
+
+.history .level, .game-history .level{
+  width: 30%;
 }
 
 input[type=radio]:not([disabled]), .yes:not([disabled]), .no:not([disabled]){
@@ -134,6 +146,10 @@ hr{
 
 .start-playing{
   margin-bottom: 10px;
+}
+
+.see-game a{
+  color: black;
 }
 
 @media screen and (min-width: 400px) {

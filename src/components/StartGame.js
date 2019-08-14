@@ -33,7 +33,7 @@ class StartGame extends React.Component {
       </div>
     ) : (
       <div className="question">
-        {whoStarted === 1 ? 'Start? Computer' : 'Start? You'}
+        Game started by: {whoStarted === 1 ? 'Computer' : 'You'}
       </div>
     );
 

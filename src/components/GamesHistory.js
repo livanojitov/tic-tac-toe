@@ -26,8 +26,8 @@ const GamesHistory = (props) => {
       
       <div className="info">
         {message}&nbsp;&nbsp;
-        <Link to={`/${id}`}>See Game</Link>&nbsp;&nbsp;
-        <input type="button" value="Delete" onClick={(e) => { removeGame(id); }} className="delete"/>&nbsp;&nbsp;
+        <button className="see-game"><Link to={`/${id}`}>See Game</Link></button>&nbsp;&nbsp;
+        <input type="button" value="Delete Game" onClick={(e) => { removeGame(id); }} className="delete"/>&nbsp;&nbsp;
       </div>
 
       <hr/>

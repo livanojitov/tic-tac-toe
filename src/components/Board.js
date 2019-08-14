@@ -11,7 +11,7 @@ let check = function (player, square1, square2, square3){
 
 class Board {
   constructor(){
-    board =  Array(9).fill(empty);
+    board = Array(9).fill(empty);
   }
 
   reset(){
