@@ -8,10 +8,10 @@ import About               from './components/About';
 import Contact             from './components/Contact';
 import GameHistory         from './components/GameHistory';
 
-function App() {
+function App() {// basename="/tic-tac-toe"
   return (
     <GameContextProvider>
-      <BrowserRouter basename="/tic-tac-toe" >
+      <BrowserRouter  >
         <Navigation/>
         <Switch>
           <Route path="/"        exact component={Game}        />

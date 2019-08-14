@@ -36,23 +36,55 @@ class TicTacToe {
     return false;
   }
 
-  playFromFour = (arr1, arr2, arr3, arr4) => { 
-    const board = this.board.getBoard();
+  playFromTwo1 = (square1, square2, square3, square4) => {
+    const board = this.board.getBoard();  
+    if (board[square1] === computer && board[square2] === user){
+      this.play(computer, [square3,square4][Math.floor(Math.random() * 2)]);
+      return true;
+    }
+  }  
 
-    if (board[arr1[0]] === computer && board[arr1[1]] === user && board[arr1[2]] === computer && board[arr1[3]] === user){
-      this.play(computer, arr1[4]);
+  check(square1, square2, square3, square4, square5){
+    const board = this.board.getBoard();
+    if (board[square1] === empty && 
+        ((board[square2] === empty && board[square3] === computer) || (board[square2] === computer && board[square3] === empty)) && 
+        ((board[square4] === empty && board[square5] === computer) || (board[square4] === computer && board[square5] === empty))){
+      this.play(computer, square1);
       return true;
-    }else if (board[arr2[0]] === computer && board[arr2[1]] === user && board[arr2[2]] === computer && board[arr2[3]] === user){
-        this.play(computer, arr2[4]);
-        return true;
-    }else if (board[arr3[0]] === computer && board[arr3[1]] === user && board[arr3[2]] === computer && board[arr3[3]] === user){
-      this.play(computer, arr3[4]);
+    }else{
+      return false;
+    }
+  }
+
+  checkForDoubleWinning = () => {
+    return (
+      this.check(0,1,2,3,6) || this.check(0,1,2,4,8) || this.check(0,3,6,4,8) || this.check(2,0,1,5,8) || 
+      this.check(2,0,1,4,6) || this.check(2,5,8,4,6) || this.check(6,0,3,7,8) || this.check(6,0,3,2,4) || 
+      this.check(6,2,4,7,8) || this.check(8,6,7,2,5) || this.check(8,6,7,0,4) || this.check(8,2,5,0,4) ||
+      this.check(1,0,2,4,7) || this.check(3,0,6,4,5) || this.check(5,2,8,3,4) || this.check(7,1,4,6,8));
+  }
+
+  check1(square1, square2, square3){
+    const board = this.board.getBoard();
+    if (board[square1] === computer && board[square2] === empty && board[square3] === empty){
+      this.play(computer, [square2, square3][Math.floor(Math.random() * 2)]);
       return true;
-    }else if (board[arr4[0]] === computer && board[arr4[1]] === user && board[arr4[2]] === computer && board[arr4[3]] === user){
-      this.play(computer, arr4[4]);
+    }
+    if (board[square1] === empty && board[square2] === computer && board[square3] === empty){
+      this.play(computer, [square1, square3][Math.floor(Math.random() * 2)]);
       return true;
-    }  
+    }
+    if (board[square1] === empty && board[square2] === empty && board[square3] === computer){
+      this.play(computer, [square1, square2][Math.floor(Math.random() * 2)]);
+      return true;
+    }
     return false;
+  }
+
+  checkForSingleWinning = () => {
+    return (
+      this.check1(0,1,2) || this.check1(3,4,5) || this.check1(6,7,8) || this.check1(0,3,6) || 
+      this.check1(1,4,7) || this.check1(2,5,8) || this.check1(0,4,8) || this.check1(2,4,6));
   }
 
   playComputer = () => {
@@ -62,8 +94,7 @@ class TicTacToe {
     if (this.level === hard){
       
       if (this.startingPlayer === user){
-
-        if (this.board.notEmptySquares() === 1){
+        if (this.board.numberOfNotEmptySquares() === 1){
           if (board[4] === user){
             this.play(computer, [0,2,6,8][Math.floor(Math.random() * 4)]);
           }else{
@@ -71,8 +102,8 @@ class TicTacToe {
           }
           return;
         }
-        
-        if (this.board.notEmptySquares() === 3){
+
+        if (this.board.numberOfNotEmptySquares() === 3){
           if ((board[0] === computer && board[4] === user && board[8] === user) || 
               (board[0] === user     && board[4] === user && board[8] === computer)){
             this.play(computer, [2,6][Math.floor(Math.random() * 2)]);
@@ -90,29 +121,15 @@ class TicTacToe {
       } 
 
       if (this.startingPlayer === computer){
-
-        if (this.board.notEmptySquares() === 2){
-            if (this.playFromTwo(8, 2, 6) || 
-                this.playFromTwo(2, 8, 0) || 
-                this.playFromTwo(0, 6, 2) || 
-                this.playFromTwo(6, 0, 8)){
+        if (this.board.numberOfNotEmptySquares() === 2){
+          if (this.playFromTwo(8,2,6)    || this.playFromTwo(2,8,0)    || this.playFromTwo(0,6,2)    || this.playFromTwo(6,0,8)   || 
+              this.playFromTwo1(0,2,6,8) || this.playFromTwo1(0,6,2,8) || this.playFromTwo1(0,8,2,6) || this.playFromTwo1(2,0,6,8)||
+              this.playFromTwo1(2,6,0,8) || this.playFromTwo1(2,8,0,6) || this.playFromTwo1(6,0,2,8) || this.playFromTwo1(6,2,0,8)||
+              this.playFromTwo1(6,8,0,2) || this.playFromTwo1(8,0,2,6) || this.playFromTwo1(8,2,0,6) || this.playFromTwo1(8,6,0,2)){
               return;
-            }
-        }
-
-        if (this.board.notEmptySquares() === 4){
-          winnerSquares = this.board.isAboutToWin(computer);
-          if (winnerSquares !== -1){
-            this.play(computer, winnerSquares[0]);
-            return;
-          }      
-          if (this.playFromFour([8,1,2,5,6], [8,3,6,7,2], [8,5,6,7,0], [8,7,2,5,0]) ||
-              this.playFromFour([2,1,8,5,6], [2,3,0,1,8], [2,7,8,5,0], [2,5,0,1,6]) ||
-              this.playFromFour([0,1,6,3,8], [0,3,2,1,8], [0,5,2,1,6], [0,7,6,3,2]) ||
-              this.playFromFour([6,1,0,3,8], [6,3,8,7,2], [6,5,8,7,0], [6,7,0,3,2]) ){
-            return;
           }
-        } 
+        }  
+        
       }
     }    
 
@@ -128,8 +145,18 @@ class TicTacToe {
       return;
     }
 
+    if (this.level === hard){
+      if (this.checkForDoubleWinning()){
+        return;
+      }
+      if (this.checkForSingleWinning()){
+        return;
+      }
+    }  
+
     const emptySquares = this.board.getEmptySquares();
     this.play(computer,emptySquares[Math.floor(Math.random() * emptySquares.length)]);
+    
   }
 
   userPlay = (square) => {

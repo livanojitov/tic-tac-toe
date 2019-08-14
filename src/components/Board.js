@@ -48,15 +48,15 @@ class Board {
     (!((square = check(player, 2, 4, 6)) === -1 ) && square) || -1);
   }
 
-  notEmptySquares(){
+  numberOfNotEmptySquares(){
     let counter = 0;
-    for (let i=0; i< board.length; i++){
+    for(let i=0; i<board.length; i++){
       if (board[i] !== empty){
         counter++;
       }
     }
-    return counter;    
-  }
+    return counter;
+  }  
 
   isFull(){
     return !board.includes(0);
