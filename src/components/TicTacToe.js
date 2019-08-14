@@ -125,16 +125,11 @@ class TicTacToe {
     winnerSquares = this.board.isAboutToWin(user);
     if (winnerSquares !== -1){
       this.play(computer, winnerSquares[0]);
-    }else{
-      const emptySquares = [];
-      for (let i=0; i< board.length; i++){
-        if (board[i] === empty){
-          emptySquares.push(i);
-        }
-      }
-      this.play(computer,emptySquares[Math.floor(Math.random() * emptySquares.length)]);
+      return;
     }
 
+    const emptySquares = this.board.getEmptySquares();
+    this.play(computer,emptySquares[Math.floor(Math.random() * emptySquares.length)]);
   }
 
   userPlay = (square) => {

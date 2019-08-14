@@ -78,6 +78,16 @@ class Board {
       ((board[2] === player && board[4] === player && board[6] === player) && [2,4,6]) 
     )  
   }  
+
+  getEmptySquares(){
+    const emptySquares = [];
+    for (let i = 0; i < board.length; i++){
+      if (board[i] === empty){
+        emptySquares.push(i);
+      }
+    }
+    return emptySquares;
+  }
 }
 
 export default Board;

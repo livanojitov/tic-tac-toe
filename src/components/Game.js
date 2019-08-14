@@ -53,7 +53,7 @@ class Game extends React.Component {
   }
 
   startPlaying = () => {
-    this.setState(() => ({disableBoard: false}));
+    this.setState(() => ({disableBoard: false, once: false}));
     this.onStartOver();   
   }
 
