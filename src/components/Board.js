@@ -1,7 +1,8 @@
 const empty = 0;
 const computer = 1;
 const user = 2;
-let   board;
+let   board = null;
+let   squareNumbers = 9;
 
 let check = function (player, square1, square2, square3){
   return (((board[square1] === player && board[square2] === player && board[square3] === empty)  && [square3, square1, square2]) ||
@@ -11,23 +12,27 @@ let check = function (player, square1, square2, square3){
 
 class Board {
   constructor(){
-    board = Array(9).fill(empty);
+    board = Array(squareNumbers).fill(empty);
   }
 
   reset(){
-    board = Array(9).fill(empty);
+    board = Array(squareNumbers).fill(empty);
   }
 
   play(player, square){
-    board[square] = player;
+    if (square >= 0 && square < board.length && (player === computer || player === user)){
+      board[square] = player;
+    }  
   }
 
   getBoard(){
     return [...board];
   }
 
-  getSquare(index){
-    return board[index]
+  getSquare(square){
+    if (square >= 0 && square < board.length){
+      return board[square];
+    }
   }
 
   isAboutToWin(player){
@@ -43,7 +48,7 @@ class Board {
     (!((square = check(player, 2, 4, 6)) === -1 ) && square) || -1);
   }
 
-  numberOfPlays(){
+  notEmptySquares(){
     let counter = 0;
     for (let i=0; i< board.length; i++){
       if (board[i] !== empty){

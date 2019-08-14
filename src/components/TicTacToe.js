@@ -9,7 +9,7 @@ const hard = 2;
 class TicTacToe {
   constructor(){
     this.board = new Board();
-    this.player = user;
+    this.startingPlayer = user;
     this.level = easy;
   }
 
@@ -17,8 +17,8 @@ class TicTacToe {
     this.level = level;
   }
 
-  setPlayer(player){
-    this.player = player;
+  setPlayer(startingPlayer){
+    this.startingPlayer = startingPlayer;
   }
 
   playFromTwo = (square1, square2, square3) => {    
@@ -60,12 +60,11 @@ class TicTacToe {
     let winnerSquares;
 
     if (this.level === hard){
-      if (this.player === user){
+      
+      if (this.startingPlayer === user){
 
-        if (this.board.numberOfPlays() === 1){
-          if (board[0] === user || board[2] === user || board[6] === user || board[8] === user){
-            this.play(computer, 4);
-          }else if (board[4] === user){
+        if (this.board.notEmptySquares() === 1){
+          if (board[4] === user){
             this.play(computer, [0,2,6,8][Math.floor(Math.random() * 4)]);
           }else{
             this.play(computer, 4);
@@ -73,7 +72,7 @@ class TicTacToe {
           return;
         }
         
-        if (this.board.numberOfPlays() === 3){
+        if (this.board.notEmptySquares() === 3){
           if ((board[0] === computer && board[4] === user && board[8] === user) || 
               (board[0] === user     && board[4] === user && board[8] === computer)){
             this.play(computer, [2,6][Math.floor(Math.random() * 2)]);
@@ -90,9 +89,9 @@ class TicTacToe {
 
       } 
 
-      if (this.player === computer){
+      if (this.startingPlayer === computer){
 
-        if (this.board.numberOfPlays() === 2){
+        if (this.board.notEmptySquares() === 2){
             if (this.playFromTwo(8, 2, 6) || 
                 this.playFromTwo(2, 8, 0) || 
                 this.playFromTwo(0, 6, 2) || 
@@ -101,7 +100,7 @@ class TicTacToe {
             }
         }
 
-        if (this.board.numberOfPlays() === 4){
+        if (this.board.notEmptySquares() === 4){
           winnerSquares = this.board.isAboutToWin(computer);
           if (winnerSquares !== -1){
             this.play(computer, winnerSquares[0]);

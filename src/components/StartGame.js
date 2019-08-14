@@ -5,7 +5,7 @@ class StartGame extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      who : "1"
+      who : "2"
     }   
   }
 
