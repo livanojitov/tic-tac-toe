@@ -120,6 +120,10 @@ a{
   width: 55%;
 }
 
+.level span, .question span{
+  cursor: default;
+}
+
 .history .question, .game-history .question{
   width: 70%;
 }

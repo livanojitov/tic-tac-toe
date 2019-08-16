@@ -14,22 +14,24 @@ class StartGame extends React.Component {
   
     const html = (typeof(whoStarted) === 'undefined') ? (
       <div className="question">
-        <span>Start?</span>
+        <span title = "Who starts playing the game: You or the computer?">Start?</span>
         <input onChange  = {this.setPlayer} 
                 disabled = {disable} 
                 type     = "radio" 
                 value    = "2"
                 name     = "player"
+                title    = "You start playing the game."
                 checked  = { this.state.who === "2"}/>
-        <label disabled = {disable} htmlFor="yes">Yes</label>
+        <label disabled = {disable} htmlFor = "yes" title = "You start playing the game.">Yes</label>
 
         <input onChange={this.setPlayer}
                 disabled = {disable} 
                 type     = "radio"
                 value    = "1"
                 name     = "player"
+                title    = "The computer starts playing the game."
                 checked  = { this.state.who === "1"}/>
-        <label disabled = {disable} htmlFor="no">No</label>      
+        <label disabled = {disable} htmlFor = "no" title = "The computer starts playing the game.">No</label>      
       </div>
     ) : (
       <div className="question">
