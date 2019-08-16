@@ -68,33 +68,25 @@ class Game extends React.Component {
         }else{
           this.game.computer.play(); 
         }
-        this.setState(() => ({board : this.game.getBoard()}));
-        let winnerSquares = this.game.isAWinner(this.computer);
-        if (winnerSquares){
-          this.gameOver("You lost!", winnerSquares);
-        }else if (this.game.isFull()){
-          this.gameOver("It's a draw!");
-        }else{
-          this.player = this.user;
-          window.setTimeout(this.gameStarts, this.timeout);
-        }  
       }else if (this.player === this.user){
         if (e){
-          this.game.user.play(e.target.id);      
-          this.setState(() => ({board : this.game.getBoard()}));
-          let winnerSquares = this.game.isAWinner(this.user);
-          if (winnerSquares){
-            this.gameOver("You won!", winnerSquares);
-          }else if (this.game.isFull()){
-            this.gameOver("It's a draw!");
-          }else{
-            this.player = this.computer;
-            window.setTimeout(this.gameStarts, this.timeout);
-          } 
+          this.game.user.play(e.target.id);
         }else{
           window.setTimeout(this.gameStarts, this.timeout);
         } 
       }
+      if ((this.player === this.computer) || ((this.player === this.user) && e)){
+        this.setState(() => ({board : this.game.getBoard()}));
+        let winnerSquares = this.game.isAWinner(this.player);
+        if (winnerSquares){
+          this.gameOver(this.player === this.computer ? "You lost!" : "You won!", winnerSquares);
+        }else if (this.game.isFull()){
+          this.gameOver("It's a draw!");
+        }else{
+          this.player = this.player === this.computer ? this.user : this.computer;
+          window.setTimeout(this.gameStarts, this.timeout);
+        }          
+      } 
     }  
   }
   
