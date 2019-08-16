@@ -39,7 +39,7 @@ class BoardUI extends React.Component {
                 player        = {player} 
                 win           = {win}
                 disableSquare = {disableSquare}
-                handleClick   = {(e) => this.props.onUserPlay(e)}
+                handleClick   = {(e) => this.props.onPlayUser(e)}
                 id            = {ind}
               />
       ) 

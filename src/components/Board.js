@@ -2,7 +2,7 @@ const empty = 0;
 const computer = 1;
 const user = 2;
 let   board = null;
-let   squareNumbers = 9;
+const totalSquares = 9;
 
 let check = function (player, square1, square2, square3){
   return (((board[square1] === player && board[square2] === player && board[square3] === empty)  && [square3, square1, square2]) ||
@@ -12,17 +12,20 @@ let check = function (player, square1, square2, square3){
 
 class Board {
   constructor(){
-    board = Array(squareNumbers).fill(empty);
+    board = Array(totalSquares).fill(empty);
   }
 
   reset(){
-    board = Array(squareNumbers).fill(empty);
+    board = Array(totalSquares).fill(empty);
   }
 
   play(player, square){
     if (square >= 0 && square < board.length && (player === computer || player === user)){
       board[square] = player;
-    }  
+      return true;
+    }else{
+      return false;
+    }
   }
 
   getBoard(){
@@ -32,6 +35,8 @@ class Board {
   getSquare(square){
     if (square >= 0 && square < board.length){
       return board[square];
+    }else{
+      return -1;
     }
   }
 
@@ -48,15 +53,14 @@ class Board {
     (!((square = check(player, 2, 4, 6)) === -1 ) && square) || -1);
   }
 
-  numberOfNotEmptySquares(){
-    let counter = 0;
-    for(let i=0; i<board.length; i++){
-      if (board[i] !== empty){
-        counter++;
+  totalSquaresPlayed(){
+    return board.reduce((total, square) =>{
+      if (square !== empty){
+        total++;
       }
-    }
-    return counter;
-  }  
+      return total
+    });
+  } 
 
   isFull(){
     return !board.includes(0);
@@ -80,14 +84,13 @@ class Board {
   }  
 
   getEmptySquares(){
-    const emptySquares = [];
-    for (let i = 0; i < board.length; i++){
-      if (board[i] === empty){
-        emptySquares.push(i);
+    return board.reduce((arr, square, index )=> {
+      if (square === empty){
+        arr.push(index);
       }
-    }
-    return emptySquares;
-  }
+      return arr;
+    }, []);
+  }  
 }
 
 export default Board;
