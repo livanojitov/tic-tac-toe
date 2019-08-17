@@ -53,9 +53,9 @@ class Board {
   } 
 
   isAboutToWin_(player, square1, square2, square3){
-    return (((board[square1] === player && board[square2] === player && board[square3] === empty)  && square3) ||
-            ((board[square1] === player && board[square2] === empty  && board[square3] === player) && square2) ||
-            ((board[square1] === empty  && board[square2] === player && board[square3] === player) && square1) || -1);
+    return (((board[square1] === player && board[square2] === player && board[square3] === empty)  && [square3]) ||
+            ((board[square1] === player && board[square2] === empty  && board[square3] === player) && [square2]) ||
+            ((board[square1] === empty  && board[square2] === player && board[square3] === player) && [square1]) || -1);
   }
 
   isAboutToWin(player){
@@ -72,16 +72,9 @@ class Board {
   }
 
   canWinInTwoMovesSingle_(player, square1, square2, square3){
-    if (board[square1] === player && board[square2] === empty && board[square3] === empty){
-      return [square2, square3];
-    }
-    if (board[square1] === empty && board[square2] === player && board[square3] === empty){
-      return [square1, square3];
-    }
-    if (board[square1] === empty && board[square2] === empty && board[square3] === player){
-      return [square1, square2];
-    }
-    return -1;
+    return (((board[square1] === player && board[square2] === empty  && board[square3] === empty)  && [square2, square3]) ||
+            ((board[square1] === empty  && board[square2] === player && board[square3] === empty)  && [square1, square3]) ||
+            ((board[square1] === empty  && board[square2] === empty  && board[square3] === player) && [square1, square2]) || -1);
   }
 
   canWinInTwoMovesSingle = (player) => {
@@ -101,7 +94,7 @@ class Board {
     if (board[square1] === empty && 
         ((board[square2] === empty && board[square3] === player) || (board[square2] === player && board[square3] === empty)) && 
         ((board[square4] === empty && board[square5] === player) || (board[square4] === player && board[square5] === empty))){
-      return square1;
+      return [square1];
     }else{
       return -1;
     }

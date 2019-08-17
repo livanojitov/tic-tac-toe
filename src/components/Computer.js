@@ -17,10 +17,6 @@ class Computer{
     this.startingPlayer = startingPlayer;
   }
 
-  playRandomly(){
-    this.board.play(computer, [0,2,6,8][Math.floor(Math.random() * 4)]);
-  }
-
   playFromTwo = (square1, square2, square3) => {    
     const board = this.board.getBoard();
     if (board[square1] === computer){
@@ -78,6 +74,10 @@ class Computer{
       } 
 
       if (this.startingPlayer === computer){
+        if (this.board.isEmpty()){
+          this.board.play(computer, [0,2,6,8,4][Math.floor(Math.random() * 5)]);
+          return;
+        }
         if (this.board.totalSquaresPlayed() === 2){
           if (this.playFromTwo(8,2,6)    || this.playFromTwo(2,8,0)    || this.playFromTwo(0,6,2)    || this.playFromTwo(6,0,8)   || 
               this.playFromTwo1(0,2,6,8) || this.playFromTwo1(0,6,2,8) || this.playFromTwo1(0,8,2,6) || this.playFromTwo1(2,0,6,8)||
@@ -86,23 +86,23 @@ class Computer{
               return;
           }
         }  
-      }
+      } 
 
       winnerSquare = this.board.isAboutToWin(computer);
       if (winnerSquare !== -1){
-        this.board.play(computer, winnerSquare);
+        this.board.play(computer, winnerSquare[0]);
         return;
       }
-  
+      
       winnerSquare = this.board.isAboutToWin(user);
       if (winnerSquare !== -1){
-        this.board.play(computer, winnerSquare);
+        this.board.play(computer, winnerSquare[0]);
         return;
       }
   
       winnerSquare = this.board.canWinInTwoMovesDouble(computer);
       if (winnerSquare !== -1){
-        this.board.play(computer, winnerSquare);
+        this.board.play(computer, winnerSquare[0]);
         return;
       }
 

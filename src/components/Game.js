@@ -63,11 +63,7 @@ class Game extends React.Component {
   gameStarts = (e) => {
     if (!this.state.gameOver){
       if (this.player === this.computer){
-        if (this.game.isEmpty()){
-          this.game.computer.playRandomly();
-        }else{
-          this.game.computer.play(); 
-        }
+        this.game.computer.play();
       }else if (this.player === this.user){
         if (e){
           this.game.user.play(e.target.id);
