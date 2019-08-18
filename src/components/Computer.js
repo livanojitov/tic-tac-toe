@@ -4,15 +4,15 @@ class Computer{
   }
 
   playFromTwo = (square1, square2, square3) => {    
-    const board = this.board.getBoard();
+    const squares = this.board.squares;
     const user  = this.board.user;
     const computer = this.board.computer;
 
-    if (board[square1] === computer){
-      if (board[1] === user || board[7] === user){
+    if (squares[square1] === computer){
+      if (squares[1] === user || squares[7] === user){
         this.board.play(computer, square2);
         return true;
-      }else if (board[3] === user || board[5] === user){
+      }else if (squares[3] === user || squares[5] === user){
         this.board.play(computer, square3);
         return true;
       }
@@ -21,11 +21,11 @@ class Computer{
   }
 
   playFromTwo1 = (square1, square2, square3, square4) => {
-    const board = this.board.getBoard();  
+    const squares = this.board.squares;  
     const user  = this.board.user;
     const computer = this.board.computer;    
-    
-    if (board[square1] === computer && board[square2] === user){
+
+    if (squares[square1] === computer && squares[square2] === user){
       this.board.play(computer, [square3,square4][Math.floor(Math.random() * 2)]);
       return true;
     }else{
@@ -34,9 +34,10 @@ class Computer{
   }  
 
   play = () => {
-    const board = this.board.getBoard();
-    const user  = this.board.user;
+    const squares = this.board.squares;
+    const empty = this.board.empty;
     const computer = this.board.computer;
+    const user  = this.board.user;
     const hard = this.board.hard;
     const level = this.board.level;
     let winnerSquare;
@@ -44,7 +45,7 @@ class Computer{
     if (level === hard){
       if (this.board.startingPlayer === user){
         if (this.board.totalSquaresPlayed === 1){
-          if (board[4] === user){
+          if (squares[4] === user){
             this.board.play(computer, [0,2,6,8][Math.floor(Math.random() * 4)]);
           }else{
             this.board.play(computer, 4);
@@ -52,15 +53,15 @@ class Computer{
           return;
         }
         if (this.board.totalSquaresPlayed === 3){
-          if ((board[0] === computer && board[4] === user && board[8] === user) || 
-              (board[0] === user     && board[4] === user && board[8] === computer)){
+          if ((squares[0] === computer && squares[4] === user && squares[8] === user) || 
+              (squares[0] === user     && squares[4] === user && squares[8] === computer)){
             this.board.play(computer, [2,6][Math.floor(Math.random() * 2)]);
             return;
-          }else if ((board[2] === computer && board[4] === user && board[6] === user) || 
-                    (board[2] === user     && board[4] === user && board[6] === computer)){
+          }else if ((squares[2] === computer && squares[4] === user && squares[6] === user) || 
+                    (squares[2] === user     && squares[4] === user && squares[6] === computer)){
             this.board.play(computer, [0,8][Math.floor(Math.random() * 2)]);
             return;
-          }else if (board[4] === computer && ((board[0] === user && board[8] === user) || (board[2] === user && board[6] === user))){
+          }else if (squares[4] === computer && ((squares[0] === user && squares[8] === user) || (squares[2] === user && squares[6] === user))){
             this.board.play(computer, [1,3,5,7][Math.floor(Math.random() * 4)]);
             return;
           }
@@ -68,7 +69,7 @@ class Computer{
       } 
 
       if (this.board.startingPlayer === computer){
-        if (this.board.isEmpty()){
+        if (this.board.isEmpty){
           this.board.play(computer, [0,2,6,8,4][Math.floor(Math.random() * 5)]);
           return;
         }
@@ -87,13 +88,13 @@ class Computer{
         this.board.play(computer, winnerSquare[0]);
         return;
       }
-      
+
       winnerSquare = this.board.isAboutToWin(user);
       if (winnerSquare !== -1){
         this.board.play(computer, winnerSquare[0]);
         return;
       }
-  
+
       winnerSquare = this.board.canWinInTwoMovesDouble(computer);
       if (winnerSquare !== -1){
         this.board.play(computer, winnerSquare[0]);
@@ -101,16 +102,25 @@ class Computer{
       }
 
       winnerSquare = this.board.canWinInTwoMovesSingle(computer);
+      let winnerSquare1 = 0;
       if (winnerSquare !== -1){
-        this.board.play(computer, winnerSquare[Math.floor(Math.random() * 2)]);
+        while (winnerSquare1 !== -1){
+          let randomIndex = Math.floor(Math.random() * 2);
+          this.board.play(computer, winnerSquare[randomIndex]);
+          winnerSquare1 = this.board.canWinInTwoMovesDouble(user);
+          if (winnerSquare1 !== -1){
+            this.board.play(empty, winnerSquare[randomIndex]);
+          }
+        }
         return;
       }
        
     }   
 
-    const emptySquares = this.board.getEmptySquares();
-    this.board.play(computer,emptySquares[Math.floor(Math.random() * emptySquares.length)]);      
+    const emptySquares = this.board.emptySquaresIndexes;
+    this.board.play(computer,emptySquares[Math.floor(Math.random() * emptySquares.length)]); 
   }
+ 
 }
 
 export default Computer;

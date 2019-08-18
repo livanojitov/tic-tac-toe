@@ -16,6 +16,10 @@ class Board {
     this.startingPlayer = startingPlayer;
   }
 
+  get empty(){
+    return empty;
+  }
+
   get computer(){
     return computer;
   }
@@ -56,23 +60,48 @@ class Board {
     }  
   }
 
+  get totalSquaresPlayed(){
+    return totalSquaresPlayed;
+  } 
+
+  get isFull(){
+    return !board.includes(0);
+  }
+
+  get isEmpty(){
+    return (!(board.includes(computer) || board.includes(user)));
+  }
+
+  get emptySquaresIndexes(){
+    return board.reduce((arr, square, index )=> {
+      if (square === empty){
+        arr.push(index);
+      }
+      return arr;
+    }, []);
+  }
+
+  get squares(){
+    return [...board];
+  }
+
   reset(){
     board = Array(totalSquares).fill(empty);
     totalSquaresPlayed = 0;
   }
 
   play(player, square){
-    if (square >= 0 && square < board.length && (player === computer || player === user)){
+    if (square >= 0 && square < board.length && (player === computer || player === user || player === empty)){
       board[square] = player;
-      totalSquaresPlayed++;
+      if (player !== empty){
+        totalSquaresPlayed++;
+      }else{
+        totalSquaresPlayed--;
+      }  
       return true;
     }else{
       return false;
     }
-  }
-
-  getBoard(){
-    return [...board];
   }
 
   getPlayer(square){
@@ -82,19 +111,6 @@ class Board {
       return -1;
     }
   }
-
-  getEmptySquares(){
-    return board.reduce((arr, square, index )=> {
-      if (square === empty){
-        arr.push(index);
-      }
-      return arr;
-    }, []);
-  }
-
-  get totalSquaresPlayed(){
-    return totalSquaresPlayed;
-  } 
 
   isAboutToWin_(player, square1, square2, square3){
     return (((board[square1] === player && board[square2] === player && board[square3] === empty)  && [square3]) ||
@@ -163,14 +179,6 @@ class Board {
       (!((square = this.canWinInTwoMovesDouble_(player,3,0,6,4,5)) === -1 ) && square) || 
       (!((square = this.canWinInTwoMovesDouble_(player,5,2,8,3,4)) === -1 ) && square) || 
       (!((square = this.canWinInTwoMovesDouble_(player,7,1,4,6,8)) === -1 ) && square) || -1);
-  }
-
-  isFull(){
-    return !board.includes(0);
-  }
-
-  isEmpty(){
-    return (!(board.includes(computer) || board.includes(user)));
   }
 
   isAWinner(player){
