@@ -1,7 +1,3 @@
-const computer = 1;
-const user = 2;
-const hard = 2;
-
 class Computer{
   constructor(board){
     this.board = board;
@@ -9,6 +5,9 @@ class Computer{
 
   playFromTwo = (square1, square2, square3) => {    
     const board = this.board.getBoard();
+    const user  = this.board.user;
+    const computer = this.board.computer;
+
     if (board[square1] === computer){
       if (board[1] === user || board[7] === user){
         this.board.play(computer, square2);
@@ -23,6 +22,9 @@ class Computer{
 
   playFromTwo1 = (square1, square2, square3, square4) => {
     const board = this.board.getBoard();  
+    const user  = this.board.user;
+    const computer = this.board.computer;    
+    
     if (board[square1] === computer && board[square2] === user){
       this.board.play(computer, [square3,square4][Math.floor(Math.random() * 2)]);
       return true;
@@ -32,12 +34,14 @@ class Computer{
   }  
 
   play = () => {
-
     const board = this.board.getBoard();
+    const user  = this.board.user;
+    const computer = this.board.computer;
+    const hard = this.board.hard;
+    const level = this.board.level;
     let winnerSquare;
 
-    if (this.board.level === hard){
-      
+    if (level === hard){
       if (this.board.startingPlayer === user){
         if (this.board.totalSquaresPlayed === 1){
           if (board[4] === user){

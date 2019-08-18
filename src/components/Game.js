@@ -9,9 +9,6 @@ import Computer        from './Computer';
 import { GameContext } from './GameContext';
 
 class Game extends React.Component {
-  computer_ = 1;
-  user_ = 2;
-  easy = 1;
   static contextType = GameContext;
 
   constructor(props){
@@ -21,7 +18,7 @@ class Game extends React.Component {
     this.level  = 0;
     this.timeout = 1;
     this.board = new Board();
-    this.computer = new Computer(this.board, this.user_, this.easy);    
+    this.computer = new Computer(this.board);    
     this.message = '';
     this.state = {
       category: {},
@@ -64,25 +61,27 @@ class Game extends React.Component {
   }
 
   gameStarts = (e) => {
+    const user = this.board.user;
+    const computer = this.board.computer;
     if (!this.state.gameOver){
-      if (this.player === this.computer_){
+      if (this.player === computer){
         this.computer.play();
-      }else if (this.player === this.user_){
+      }else if (this.player === user){
         if (e){
-          this.board.play(this.user_, e.target.id); 
+          this.board.play(user, e.target.id); 
         }else{
           window.setTimeout(this.gameStarts, this.timeout);
         } 
       }
-      if ((this.player === this.computer_) || ((this.player === this.user_) && e)){
+      if ((this.player === computer) || ((this.player === user) && e)){
         this.setState(() => ({board : this.board.getBoard()}));
         let winnerSquares = this.board.isAWinner(this.player);
         if (winnerSquares){
-          this.gameOver(this.player === this.computer_ ? "You lost!" : "You won!", winnerSquares);
+          this.gameOver(this.player === computer ? "You lost!" : "You won!", winnerSquares);
         }else if (this.board.isFull()){
           this.gameOver("It's a draw!");
         }else{
-          this.player = this.player === this.computer_ ? this.user_ : this.computer_;
+          this.player = this.player === computer ? user : computer;
           window.setTimeout(this.gameStarts, this.timeout);
         }          
       } 

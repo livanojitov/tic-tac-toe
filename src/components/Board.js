@@ -16,9 +16,26 @@ class Board {
     this.startingPlayer = startingPlayer;
   }
 
+  get computer(){
+    return computer;
+  }
+
+  get user(){
+    return user;
+  }
+
+  get easy(){
+    return easy;
+  }
+
+  get hard(){
+    return hard;
+  }
+
   get level(){
     return _level;
   }
+
   set level(level){
     if (level === easy || level === hard){
       _level = level;
