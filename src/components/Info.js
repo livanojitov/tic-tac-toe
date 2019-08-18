@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Info = (props) => {
+const Info = ({message, startOver}) => {
   return (
     <div className="info">  
-        <span>Game over : {props.message}</span>&nbsp;&nbsp;
-        <input type="button" value="Play again" onClick={props.startOver} />
+        <span>Game over : {message}</span>&nbsp;&nbsp;
+        <input type="button" value="Play again" onClick={startOver} />
     </div>
   )
 }

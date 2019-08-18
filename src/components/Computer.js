@@ -3,18 +3,8 @@ const user = 2;
 const hard = 2;
 
 class Computer{
-  constructor(board, startingPlayer, level){
+  constructor(board){
     this.board = board;
-    this.startingPlayer = startingPlayer;
-    this.level = level;
-  }
-
-  setLevel(level){
-    this.level = level;
-  }
-
-  setStartingPlayer(startingPlayer){
-    this.startingPlayer = startingPlayer;
   }
 
   playFromTwo = (square1, square2, square3) => {    
@@ -46,10 +36,10 @@ class Computer{
     const board = this.board.getBoard();
     let winnerSquare;
 
-    if (this.level === hard){
+    if (this.board.level === hard){
       
-      if (this.startingPlayer === user){
-        if (this.board.totalSquaresPlayed() === 1){
+      if (this.board.startingPlayer === user){
+        if (this.board.totalSquaresPlayed === 1){
           if (board[4] === user){
             this.board.play(computer, [0,2,6,8][Math.floor(Math.random() * 4)]);
           }else{
@@ -57,7 +47,7 @@ class Computer{
           }
           return;
         }
-        if (this.board.totalSquaresPlayed() === 3){
+        if (this.board.totalSquaresPlayed === 3){
           if ((board[0] === computer && board[4] === user && board[8] === user) || 
               (board[0] === user     && board[4] === user && board[8] === computer)){
             this.board.play(computer, [2,6][Math.floor(Math.random() * 2)]);
@@ -73,12 +63,12 @@ class Computer{
         }
       } 
 
-      if (this.startingPlayer === computer){
+      if (this.board.startingPlayer === computer){
         if (this.board.isEmpty()){
           this.board.play(computer, [0,2,6,8,4][Math.floor(Math.random() * 5)]);
           return;
         }
-        if (this.board.totalSquaresPlayed() === 2){
+        if (this.board.totalSquaresPlayed === 2){
           if (this.playFromTwo(8,2,6)    || this.playFromTwo(2,8,0)    || this.playFromTwo(0,6,2)    || this.playFromTwo(6,0,8)   || 
               this.playFromTwo1(0,2,6,8) || this.playFromTwo1(0,6,2,8) || this.playFromTwo1(0,8,2,6) || this.playFromTwo1(2,0,6,8)||
               this.playFromTwo1(2,6,0,8) || this.playFromTwo1(2,8,0,6) || this.playFromTwo1(6,0,2,8) || this.playFromTwo1(6,2,0,8)||

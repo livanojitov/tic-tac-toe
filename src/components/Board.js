@@ -1,21 +1,53 @@
 const empty = 0;
 const computer = 1;
 const user = 2;
-let   board = null;
+const easy = 1;
+const hard = 2;
 const totalSquares = 9;
+let   board = null;
+let   _startingPlayer = user;
+let   _level = easy;
+let   totalSquaresPlayed = 0;
 
 class Board {
-  constructor(){
+  constructor(startingPlayer = user, level = easy){
     board = Array(totalSquares).fill(empty);
+    this.level = level;
+    this.startingPlayer = startingPlayer;
+  }
+
+  get level(){
+    return _level;
+  }
+  set level(level){
+    if (level === easy || level === hard){
+      _level = level;
+    }else{
+      throw new Error('Invalid level');
+    }
+  }
+
+  get startingPlayer(){
+    return _startingPlayer;
+  }
+
+  set startingPlayer(startingPlayer){
+    if (startingPlayer === computer || startingPlayer === user){
+      _startingPlayer = startingPlayer;
+    }else{
+      throw new Error('Invalid starting player');
+    }  
   }
 
   reset(){
     board = Array(totalSquares).fill(empty);
+    totalSquaresPlayed = 0;
   }
 
   play(player, square){
     if (square >= 0 && square < board.length && (player === computer || player === user)){
       board[square] = player;
+      totalSquaresPlayed++;
       return true;
     }else{
       return false;
@@ -43,13 +75,8 @@ class Board {
     }, []);
   }
 
-  totalSquaresPlayed(){
-    return board.reduce((total, square) =>{
-      if (square !== empty){
-        total++;
-      }
-      return total
-    });
+  get totalSquaresPlayed(){
+    return totalSquaresPlayed;
   } 
 
   isAboutToWin_(player, square1, square2, square3){

@@ -8,19 +8,15 @@ const easy = 1;
 class TicTacToe {
   constructor(){
     this.board = new Board();
-    this.startingPlayer = user;
-    this.level = easy;
     this.user = new User(this.board);
-    this.computer = new Computer(this.board, this.startingPlayer, this.level);
+    this.computer = new Computer(this.board, user, easy);
   }
 
   setLevel(level){
-    this.level = level;
     this.computer.setLevel(level);
   }
 
   setPlayer(startingPlayer){
-    this.startingPlayer = startingPlayer;
     this.computer.setStartingPlayer(startingPlayer);
   }
 
