@@ -100,23 +100,28 @@ class Computer{
         this.board.play(computer, winnerSquare[0]);
         return;
       }
-
+      
       winnerSquare = this.board.canWinInTwoMovesSingle(computer);
       let winnerSquare1 = 0;
       if (winnerSquare !== -1){
-        while (winnerSquare1 !== -1){
-          let randomIndex = Math.floor(Math.random() * 2);
-          this.board.play(computer, winnerSquare[randomIndex]);
+        this.board.play(computer, winnerSquare[0]);
+        winnerSquare1 = this.board.canWinInTwoMovesDouble(user);
+        if (winnerSquare1 === winnerSquare[1]){
+          this.board.play(empty, winnerSquare[0]);
+          this.board.play(computer, winnerSquare[1]);
           winnerSquare1 = this.board.canWinInTwoMovesDouble(user);
-          if (winnerSquare1 !== -1){
-            this.board.play(empty, winnerSquare[randomIndex]);
-          }
+          if (winnerSquare1 === winnerSquare[0]){
+            this.board.play(empty, winnerSquare[1]);
+          }else{
+            return;
+          }  
+        }else{
+          return;
         }
+      }else{
         return;
-      }
-       
-    }   
-
+      }  
+    }
     const emptySquares = this.board.emptySquaresIndexes;
     this.board.play(computer,emptySquares[Math.floor(Math.random() * emptySquares.length)]); 
   }
