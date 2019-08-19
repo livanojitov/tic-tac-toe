@@ -100,7 +100,7 @@ class Computer{
         this.board.play(computer, winnerSquare[0]);
         return;
       }
-      
+
       winnerSquare = this.board.canWinInTwoMovesSingle(computer);
       let winnerSquare1 = 0;
       if (winnerSquare !== -1){
@@ -114,13 +114,11 @@ class Computer{
             this.board.play(empty, winnerSquare[1]);
           }else{
             return;
-          }  
+          }
         }else{
           return;
         }
-      }else{
-        return;
-      }  
+      } 
     }
     const emptySquares = this.board.emptySquaresIndexes;
     this.board.play(computer,emptySquares[Math.floor(Math.random() * emptySquares.length)]); 
