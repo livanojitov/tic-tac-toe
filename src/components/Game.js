@@ -54,27 +54,31 @@ class Game extends React.Component {
   }
 
   gameInit = () => {
-    let newState = {
+    let state = {
       disableBoard: false, 
       showStartButton: false
     }
     if (!this.board.isEmpty){
       this.message = '';
       this.board.reset();
-      newState = {
-        ...newState,
+      state = {
+        ...state,
         winningSquares: [],
         gameOver: false,
         board: this.board.squares        
       }
     }
-    this.setState(() => ({...newState}));
-    this.board.level = this.level;
-    this.board.startingPlayer =  this.startingPlayer;
-    this.player = this.startingPlayer;
-    if (this.startingPlayer === this.board.computer){
-      this.gameStarts();
-    }  
+    this.setState(
+      () => ({...state}), 
+      () => {
+        this.board.level = this.level;
+        this.board.startingPlayer =  this.startingPlayer;
+        this.player = this.startingPlayer;
+        if (this.startingPlayer === this.board.computer){
+          this.gameStarts();
+        }  
+      }
+    );
   }
 
   gameStarts = (e) => {
