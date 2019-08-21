@@ -57,8 +57,8 @@ class Game extends React.Component {
     this.setState(() => ({disableBoard: false, showStartButton: false}));
     this.board.level = this.level;
     this.board.startingPlayer =  this.startingPlayer;
+    this.player = this.startingPlayer;
     if (this.startingPlayer === this.board.computer){
-
       this.gameStarts();
     }  
   }
@@ -93,15 +93,8 @@ class Game extends React.Component {
     this.setState(() => ({      
       winningSquares : [],
       gameOver : false,
-      board: this.board.squares, 
-      disableBoard: false,
-      showStartButton: false
-    }), () => {
-      this.board.level = this.level;
-      this.board.startingPlayer = this.startingPlayer;
-      this.player = this.startingPlayer;
-      this.gameStarts();
-    });
+      board: this.board.squares
+    }), () => { this.gameInit() });
   }
 
   gameOver = (message, winningSquares = []) => {
