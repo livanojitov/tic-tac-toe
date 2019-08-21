@@ -13,12 +13,12 @@ class Game extends React.Component {
 
   constructor(props){
     super(props);
-    this.startingPlayer = 0;
-    this.player = 0;
-    this.level  = 0;
-    this.timeout = 1;
     this.board = new Board();
+    this.startingPlayer = this.board.user; 
+    this.player = this.startingPlayer;   
     this.computer = new Computer(this.board);    
+    this.level  = 0;
+    this.timeout = 1;    
     this.message = '';
     this.state = {
       category: {},
@@ -57,7 +57,10 @@ class Game extends React.Component {
     this.setState(() => ({disableBoard: false, showStartButton: false}));
     this.board.level = this.level;
     this.board.startingPlayer =  this.startingPlayer;
-    this.gameStarts();
+    if (this.startingPlayer === this.board.computer){
+
+      this.gameStarts();
+    }  
   }
 
   gameStarts = (e) => {
@@ -66,24 +69,20 @@ class Game extends React.Component {
     if (!this.state.gameOver){
       if (this.player === computer){
         this.computer.play();
-      }else if (this.player === user){
-        if (e){
+      }else{
           this.board.play(user, e.target.id); 
-        }else{
-          window.setTimeout(this.gameStarts, this.timeout);
-        } 
       }
-      if ((this.player === computer) || ((this.player === user) && e)){
-        this.setState(() => ({board : this.board.squares}));
-        let winnerSquares = this.board.isAWinner(this.player);
-        if (winnerSquares){
-          this.gameOver(this.player === computer ? "You lost!" : "You won!", winnerSquares);
-        }else if (this.board.isFull){
-          this.gameOver("It's a draw!");
-        }else{
-          this.player = this.player === computer ? user : computer;
+      this.setState(() => ({board : this.board.squares}));
+      let winnerSquares = this.board.isAWinner(this.player);
+      if (winnerSquares){
+        this.gameOver(this.player === computer ? "You lost!" : "You won!", winnerSquares);
+      }else if (this.board.isFull){
+        this.gameOver("It's a draw!");
+      }else{
+        this.player = this.player === computer ? user : computer;
+        if (this.player === computer){
           window.setTimeout(this.gameStarts, this.timeout);
-        }          
+        }  
       } 
     }  
   }
