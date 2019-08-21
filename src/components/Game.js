@@ -48,13 +48,27 @@ class Game extends React.Component {
                    onPlayUser     = {this.gameStarts}
                    winningSquares = {winningSquares}
                    gameOver       = {gameOver} />)}
-        {gameOver && ( <Info message = {this.message} startOver = {this.startOver}/>)}                  
+        {gameOver && ( <Info message = {this.message} startOver = {this.gameInit}/>)}                  
         </div>
     )
   }
 
   gameInit = () => {
-    this.setState(() => ({disableBoard: false, showStartButton: false}));
+    let newState = {
+      disableBoard: false, 
+      showStartButton: false
+    }
+    if (!this.board.isEmpty){
+      this.message = '';
+      this.board.reset();
+      newState = {
+        ...newState,
+        winningSquares: [],
+        gameOver: false,
+        board: this.board.squares        
+      }
+    }
+    this.setState(() => ({...newState}));
     this.board.level = this.level;
     this.board.startingPlayer =  this.startingPlayer;
     this.player = this.startingPlayer;
@@ -86,24 +100,14 @@ class Game extends React.Component {
       } 
     }  
   }
-  
-  startOver = () => {
-    this.message = '';
-    this.board.reset();
-    this.setState(() => ({      
-      winningSquares : [],
-      gameOver : false,
-      board: this.board.squares
-    }), () => { this.gameInit() });
-  }
 
   gameOver = (message, winningSquares = []) => {
     this.message = message;
     this.setState(() => ({ gameOver : true, disableBoard: true, showStartButton: false, winningSquares }));
-    this.saveGame(message, winningSquares);
+    this.gameSave(message, winningSquares);
   }
  
-  saveGame = (message, winningSquares) => {
+  gameSave = (message, winningSquares) => {
     const { addGame } = this.context;
     addGame({
       board          : [...this.board.squares],
