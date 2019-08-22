@@ -8,28 +8,28 @@ body{
   margin: 10px auto 0;
 }
 
-.nav, .about, .contact{
+nav, .about, .contact{
   width: 95%;
   margin: 0 auto
 }
 
-.nav ul{
+nav ul{
   list-style: none;
   float: right;
   padding-left: 0;
 }
 
-.nav li{
+nav li{
   display: inline-block;
   margin-right: 10px;
   cursor: pointer;
 }
 
-.nav a.active{
+nav a.active{
   font-weight: 1000;
 }
 
-.nav:after{
+nav:after{
   content: "";
   display: block;
   clear: both;
@@ -103,7 +103,7 @@ a{
   vertical-align: middle;
 }
 
-.random-images, .questions{
+.random-images, .settings{
   margin: 10px 0;
   font-weight: bold;
 }

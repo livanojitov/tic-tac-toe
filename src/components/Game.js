@@ -36,7 +36,7 @@ class Game extends React.Component {
     return(
       <div className="game">
         <Category onCategoryChange = {this.setCategory}/>  
-        <div className="questions">
+        <div className="settings">
           <StartGame disable={!disableBoard} onPlayerChange = {this.setStartingPlayer} />
           <Level     disable={!disableBoard} onLevelChange  = {this.setLevel } />
         </div>

@@ -18,7 +18,7 @@ const GamesHistory = ({categoryId, imageUser, imageComputer, message, id, whoSta
         imageComputer = {imageComputer}
         disable       = "true" /> 
 
-      <div className="questions">
+      <div className="settings">
         <StartGame whoStarted = {whoStarted}/> 
         <Level level = {level} />
       </div>

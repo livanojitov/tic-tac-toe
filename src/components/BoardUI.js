@@ -13,22 +13,21 @@ class BoardUI extends React.Component {
   }
 
   render(){
-    const { winningSquares, gameOver } = this.props;
-
-    if ((this.props.category.folder        !== this.category.folder)       || 
-        (this.props.category.imageUser     !== this.category.imageUser)    ||
-        (this.props.category.imageComputer !== this.category.imageComputer)){
+    const { winningSquares, gameOver, category } = this.props;
+    if ((category.folder        !== this.category.folder)       || 
+        (category.imageUser     !== this.category.imageUser)    ||
+        (category.imageComputer !== this.category.imageComputer)){
       if (!gameOver){
-        this.category = this.props.category;
+        this.category = this.props.category;   
       }
-    }
-
-    if (this.props.disableBoard !== this.disableBoard){
-      this.disableBoard = this.props.disableBoard;
     }
 
     const { folder, imageComputer, imageUser } = this.category;
 
+    if (this.props.disableBoard !== this.disableBoard){
+      this.disableBoard = this.props.disableBoard;
+    }
+    
     const board = this.props.board.map((square, ind) => {
       const player = (square === this.computer)? `${folder}/${imageComputer}` : (
                      (square === this.user)?     `${folder}/${imageUser}`     : 'default'); 

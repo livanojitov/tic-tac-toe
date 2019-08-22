@@ -17,12 +17,12 @@ const Navigation = () => {
   });
 
   return (
-    <div className="nav">
+    <nav>
       <img src={'./images/logo.jpg'} alt="Logo"/>
       <ul>
         {lis}                  
       </ul>
-    </div>
+    </nav>
   )
 }
 
