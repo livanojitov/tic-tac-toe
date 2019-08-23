@@ -53,7 +53,7 @@ class Category extends React.Component{
       )
     });
 
-    const select = ((typeof(this.props.disable) === 'undefined') || this.props.disable === "false") ? (
+    const select = ((typeof(this.props.disabled) === 'undefined') || this.props.disabled === "false") ? (
           <select value={categoryId} onChange={this.onChange}>
             {options}
           </select>     
@@ -63,7 +63,7 @@ class Category extends React.Component{
 
     const imageUser = this.state.imageUser;
     const imageComputer = this.state.imageComputer;
-    const refreshButton = ((typeof(this.props.disable) === 'undefined') || this.props.disable === "false") ? (
+    const refreshButton = ((typeof(this.props.disabled) === 'undefined') || this.props.disabled === "false") ? (
         <button onClick={this.refresh}>Refresh</button>   
       ) : (
         ''

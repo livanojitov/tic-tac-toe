@@ -22,7 +22,7 @@ class Game extends React.Component {
     this.message = '';
     this.state = {
       category: {},
-      disableBoard: true,
+      disabled: true,
       reset: false,
       board: this.board.squares,
       winningSquares: [],
@@ -32,18 +32,18 @@ class Game extends React.Component {
   }
 
   render(){
-    const {disableBoard, category, board, winningSquares, gameOver, showStartButton} = this.state;
+    const {disabled, category, board, winningSquares, gameOver, showStartButton} = this.state;
     return(
       <div className="game">
         <Category onCategoryChange = {this.setCategory}/>  
         <div className="settings">
-          <StartGame disable={!disableBoard} onPlayerChange = {this.setStartingPlayer} />
-          <Level     disable={!disableBoard} onLevelChange  = {this.setLevel } />
+          <StartGame disabled={!disabled} onPlayerChange = {this.setStartingPlayer} />
+          <Level     disabled={!disabled} onLevelChange  = {this.setLevel } />
         </div>
         {showStartButton &&  ( <div className="start-playing"><button onClick={this.gameInit}>Start the game</button></div>)}
         {(category.imageUser) && (
           <BoardUI category       = {category} 
-                   disableBoard   = {disableBoard}
+                   disabled       = {disabled}
                    board          = {board}
                    onPlayUser     = {this.gameStarts}
                    winningSquares = {winningSquares}
@@ -55,7 +55,7 @@ class Game extends React.Component {
 
   gameInit = () => {
     let state = {
-      disableBoard: false, 
+      disabled: false, 
       showStartButton: false
     }
     if (!this.board.isEmpty){
@@ -107,7 +107,7 @@ class Game extends React.Component {
 
   gameOver = (message, winningSquares = []) => {
     this.message = message;
-    this.setState(() => ({ gameOver : true, disableBoard: true, showStartButton: false, winningSquares }));
+    this.setState(() => ({ gameOver : true, disabled: true, showStartButton: false, winningSquares }));
     this.gameSave(message, winningSquares);
   }
  

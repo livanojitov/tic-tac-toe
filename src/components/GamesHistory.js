@@ -16,7 +16,7 @@ const GamesHistory = ({categoryId, imageUser, imageComputer, message, id, whoSta
         categoryId    = {categoryId} 
         imageUser     = {imageUser} 
         imageComputer = {imageComputer}
-        disable       = "true" /> 
+        disabled      = "true" /> 
 
       <div className="settings">
         <StartGame whoStarted = {whoStarted}/> 
