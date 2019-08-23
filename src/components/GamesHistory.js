@@ -5,7 +5,7 @@ import Category              from './Category';
 import StartGame             from './StartGame';
 import Level                 from './Level';
 
-const GamesHistory = ({categoryId, imageUser, imageComputer, message, id, whoStarted, level}) => {
+const GamesHistory = ({categoryId, imageUser, imageComputer, message, id, first, level}) => {
 
   const { removeGame}  = useContext(GameContext);
 
@@ -16,11 +16,11 @@ const GamesHistory = ({categoryId, imageUser, imageComputer, message, id, whoSta
         categoryId    = {categoryId} 
         imageUser     = {imageUser} 
         imageComputer = {imageComputer}
-        disabled      = "true" /> 
+        history       = "true" /> 
 
       <div className="settings">
-        <StartGame whoStarted = {whoStarted}/> 
-        <Level level = {level} />
+        <StartGame first = {first} history = {true} /> 
+        <Level     level = {level} history = {true} />        
       </div>
       
       <div className="info">

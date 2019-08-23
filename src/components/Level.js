@@ -11,11 +11,14 @@ class Level extends React.Component {
 
   render() {
 
-    const { disabled, level } = this.props;
-  
-    const html = (typeof(level) === 'undefined') ? (
+    const { disabled, level, history } = this.props;
+
+    const html = (typeof(history) === 'undefined'  || history === "false") ? ( 
+           
       <div className="level">
+
         <span title = "How easy or hard the computer plays.">Level?</span>
+
         <input  onChange = {this.setLevel}
                 disabled = {disabled} 
                 type     = "radio" 
@@ -32,7 +35,8 @@ class Level extends React.Component {
                 name     = "level"
                 title    = "The computer does some thinking before playing."
                 checked  = { this.state.level === "2"}/>
-        <label  disabled = {disabled} htmlFor = "hard" title = "The computer does some thinking before playing.">Hard</label>      
+        <label  disabled = {disabled} htmlFor = "hard" title = "The computer does some thinking before playing.">Hard</label>  
+
       </div>
     ) : (
       <div className="level">

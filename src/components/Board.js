@@ -1,19 +1,15 @@
-const empty = 0;
-const computer = 1;
-const user = 2;
-const easy = 1;
-const hard = 2;
-const totalSquares = 9;
+import * as constants from './Constants';
+const { empty, user, computer, easy, hard,totalSquares } = constants;
 let   board = null;
-let   _startingPlayer = user;
+let   _first = user;
 let   _level = easy;
 let   totalSquaresPlayed = 0;
 
 class Board {
-  constructor(startingPlayer = user, level = easy){
+  constructor(first = user, level = easy){
     board = Array(totalSquares).fill(empty);
     this.level = level;
-    this.startingPlayer = startingPlayer;
+    this.first = first;
   }
 
   get empty(){
@@ -48,13 +44,13 @@ class Board {
     }
   }
 
-  get startingPlayer(){
-    return _startingPlayer;
+  get first(){
+    return _first;
   }
 
-  set startingPlayer(startingPlayer){
-    if (startingPlayer === computer || startingPlayer === user){
-      _startingPlayer = startingPlayer;
+  set first(first){
+    if (first === computer || first === user){
+      _first = first;
     }else{
       throw new Error('Invalid starting player');
     }  
@@ -65,7 +61,7 @@ class Board {
   } 
 
   get isFull(){
-    return !board.includes(0);
+    return !board.includes(empty);
   }
 
   get isEmpty(){

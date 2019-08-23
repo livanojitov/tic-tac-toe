@@ -20,18 +20,18 @@ class Category extends React.Component{
       categoryId = Math.floor(Math.random() * this.categories.length);
     }
 
-    this.state = {
-      categoryId
-    }
-
     let imageUser = this.props.imageUser;
     let imageComputer = this.props.imageComputer;
     if (!imageUser){
       [imageUser, imageComputer] = this.randomizeImages(categoryId);
     }
-    
-    this.state.imageUser = imageUser;
-    this.state.imageComputer = imageComputer;
+ 
+    this.state = {
+      categoryId,
+      imageUser,
+      imageComputer
+    }
+
   }
   
   randomizeImages = (categoryId) => {
@@ -45,29 +45,25 @@ class Category extends React.Component{
   }
 
   render(){
-    const categoryId = this.state.categoryId;
-    const folder = this.categories[categoryId].folder;
-    const options = this.categories.map((category, index) => {
-      return (
-        <option key={index} value={index}>{category.name}</option>  
-      )
-    });
-
-    const select = ((typeof(this.props.disabled) === 'undefined') || this.props.disabled === "false") ? (
-          <select value={categoryId} onChange={this.onChange}>
-            {options}
-          </select>     
-          ) : (
-            <span>{this.categories[categoryId].name}</span>
-          );
-
-    const imageUser = this.state.imageUser;
-    const imageComputer = this.state.imageComputer;
-    const refreshButton = ((typeof(this.props.disabled) === 'undefined') || this.props.disabled === "false") ? (
-        <button onClick={this.refresh}>Refresh</button>   
-      ) : (
-        ''
-      );
+    const { history } = this.props;
+    const { categoryId, imageUser, imageComputer } = this.state;
+    const { folder, name } = this.categories[categoryId];
+    let select, refreshButton;
+    if (typeof(history) === 'undefined' || history === "false"){
+      select =  (
+        <select value={categoryId} onChange={this.onChange}>
+          {this.categories.map(
+            (category, index) => {
+              return (
+                <option key={index} value={index}>{category.name}</option>  
+              )
+            })}
+        </select>);
+      refreshButton = <button onClick={this.refresh}>Refresh</button>;
+    }else{
+      select = <span>{name}</span>;
+      refreshButton = '';
+    }
 
     return (
       <div className = "categories">

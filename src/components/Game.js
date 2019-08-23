@@ -14,8 +14,8 @@ class Game extends React.Component {
   constructor(props){
     super(props);
     this.board = new Board();
-    this.startingPlayer = this.board.user; 
-    this.player = this.startingPlayer;   
+    this.first = this.board.user; 
+    this.player = this.first;   
     this.computer = new Computer(this.board);    
     this.level  = 0;
     this.timeout = 1;    
@@ -25,19 +25,19 @@ class Game extends React.Component {
       disabled: true,
       reset: false,
       board: this.board.squares,
-      winningSquares: [],
+      winners: [],
       gameOver: false,
       showStartButton: true
      };
   }
 
   render(){
-    const {disabled, category, board, winningSquares, gameOver, showStartButton} = this.state;
+    const {disabled, category, board, winners, gameOver, showStartButton} = this.state;
     return(
       <div className="game">
         <Category onCategoryChange = {this.setCategory}/>  
         <div className="settings">
-          <StartGame disabled={!disabled} onPlayerChange = {this.setStartingPlayer} />
+          <StartGame disabled={!disabled} onPlayerChange = {this.setFirst} />
           <Level     disabled={!disabled} onLevelChange  = {this.setLevel } />
         </div>
         {showStartButton &&  ( <div className="start-playing"><button onClick={this.gameInit}>Start the game</button></div>)}
@@ -45,8 +45,8 @@ class Game extends React.Component {
           <BoardUI category       = {category} 
                    disabled       = {disabled}
                    board          = {board}
-                   onPlayUser     = {this.gameStarts}
-                   winningSquares = {winningSquares}
+                   onUserPlayed   = {this.gamePlay}
+                   winners        = {winners}
                    gameOver       = {gameOver} />)}
         {gameOver && ( <Info message = {this.message} startOver = {this.gameInit}/>)}                  
         </div>
@@ -63,7 +63,7 @@ class Game extends React.Component {
       this.board.reset();
       state = {
         ...state,
-        winningSquares: [],
+        winners: [],
         gameOver: false,
         board: this.board.squares        
       }
@@ -72,16 +72,16 @@ class Game extends React.Component {
       () => ({...state}), 
       () => {
         this.board.level = this.level;
-        this.board.startingPlayer =  this.startingPlayer;
-        this.player = this.startingPlayer;
-        if (this.startingPlayer === this.board.computer){
-          this.gameStarts();
+        this.board.first =  this.first;
+        this.player = this.first;
+        if (this.first === this.board.computer){
+          this.gamePlay();
         }  
       }
     );
   }
 
-  gameStarts = (e) => {
+  gamePlay = (e) => {
     const user = this.board.user;
     const computer = this.board.computer;
     if (!this.state.gameOver){
@@ -99,25 +99,25 @@ class Game extends React.Component {
       }else{
         this.player = this.player === computer ? user : computer;
         if (this.player === computer){
-          window.setTimeout(this.gameStarts, this.timeout);
+          window.setTimeout(this.gamePlay, this.timeout);
         }  
       } 
     }  
   }
 
-  gameOver = (message, winningSquares = []) => {
+  gameOver = (message, winners = []) => {
     this.message = message;
-    this.setState(() => ({ gameOver : true, disabled: true, showStartButton: false, winningSquares }));
-    this.gameSave(message, winningSquares);
+    this.setState(() => ({ gameOver : true, disabled: true, showStartButton: false, winners }));
+    this.gameSave(message, winners);
   }
  
-  gameSave = (message, winningSquares) => {
+  gameSave = (message, winners) => {
     const { addGame } = this.context;
     addGame({
       board          : [...this.board.squares],
-      winningSquares : [...winningSquares],
+      winners        : [...winners],
       message,
-      whoStarted     : this.startingPlayer,
+      first          : this.first,
       level          : this.level,
       ...this.state.category,
     });
@@ -127,8 +127,8 @@ class Game extends React.Component {
     this.setState(() => ({category}));
   }
 
-  setStartingPlayer = (player) => {
-    this.startingPlayer = player;
+  setFirst = (player) => {
+    this.first = player;
     this.player = player;
   }
 

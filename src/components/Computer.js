@@ -1,12 +1,15 @@
+import * as constants from './Constants';
+
+const { empty, user, computer, hard } = constants;
+
 class Computer{
+
   constructor(board){
     this.board = board;
   }
 
   playFromTwo = (square1, square2, square3) => {    
     const squares = this.board.squares;
-    const user  = this.board.user;
-    const computer = this.board.computer;
 
     if (squares[square1] === computer){
       if (squares[1] === user || squares[7] === user){
@@ -21,9 +24,7 @@ class Computer{
   }
 
   playFromTwo1 = (square1, square2, square3, square4) => {
-    const squares = this.board.squares;  
-    const user  = this.board.user;
-    const computer = this.board.computer;    
+    const squares = this.board.squares;   
 
     if (squares[square1] === computer && squares[square2] === user){
       this.board.play(computer, [square3,square4][Math.floor(Math.random() * 2)]);
@@ -35,15 +36,11 @@ class Computer{
 
   play = () => {
     const squares = this.board.squares;
-    const empty = this.board.empty;
-    const computer = this.board.computer;
-    const user  = this.board.user;
-    const hard = this.board.hard;
     const level = this.board.level;
-    let winnerSquare;
+    let winner;
 
     if (level === hard){
-      if (this.board.startingPlayer === user){
+      if (this.board.first === user){
         if (this.board.totalSquaresPlayed === 1){
           if (squares[4] === user){
             this.board.play(computer, [0,2,6,8][Math.floor(Math.random() * 4)]);
@@ -68,7 +65,7 @@ class Computer{
         }
       } 
 
-      if (this.board.startingPlayer === computer){
+      if (this.board.first === computer){
         if (this.board.isEmpty){
           this.board.play(computer, [0,2,6,8,4][Math.floor(Math.random() * 5)]);
           return;
@@ -83,36 +80,36 @@ class Computer{
         }  
       } 
 
-      winnerSquare = this.board.isAboutToWin(computer);
-      if (winnerSquare !== -1){
-        this.board.play(computer, winnerSquare[0]);
+      winner = this.board.isAboutToWin(computer);
+      if (winner !== -1){
+        this.board.play(computer, winner[0]);
         return;
       }
 
-      winnerSquare = this.board.isAboutToWin(user);
-      if (winnerSquare !== -1){
-        this.board.play(computer, winnerSquare[0]);
+      winner = this.board.isAboutToWin(user);
+      if (winner !== -1){
+        this.board.play(computer, winner[0]);
         return;
       }
 
-      winnerSquare = this.board.canWinInTwoMovesDouble(computer);
-      if (winnerSquare !== -1){
-        this.board.play(computer, winnerSquare[0]);
+      winner = this.board.canWinInTwoMovesDouble(computer);
+      if (winner !== -1){
+        this.board.play(computer, winner[0]);
         return;
       }
     }
 
-    winnerSquare = this.board.canWinInTwoMovesSingle(computer);
-    let winnerSquare1 = 0;
-    if (winnerSquare !== -1){
-      this.board.play(computer, winnerSquare[0]);
-      winnerSquare1 = this.board.canWinInTwoMovesDouble(user);
-      if (winnerSquare1[0] === winnerSquare[1]){
-        this.board.play(empty, winnerSquare[0]);
-        this.board.play(computer, winnerSquare[1]);
-        winnerSquare1 = this.board.canWinInTwoMovesDouble(user);
-        if (winnerSquare1[0] === winnerSquare[0]){
-          this.board.play(empty, winnerSquare[1]);
+    winner = this.board.canWinInTwoMovesSingle(computer);
+    let winner1 = 0;
+    if (winner !== -1){
+      this.board.play(computer, winner[0]);
+      winner1 = this.board.canWinInTwoMovesDouble(user);
+      if (winner1[0] === winner[1]){
+        this.board.play(empty, winner[0]);
+        this.board.play(computer, winner[1]);
+        winner1 = this.board.canWinInTwoMovesDouble(user);
+        if (winner1[0] === winner[0]){
+          this.board.play(empty, winner[1]);
         }else{
           return;
         }

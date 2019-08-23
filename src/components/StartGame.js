@@ -1,41 +1,45 @@
 import React from 'react';
+import * as constants from './Constants';
 
 class StartGame extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      who : "2"
+      who : constants.user
     }   
   }
 
   render() {
-    const { disabled, whoStarted } = this.props;
-  
-    const html = (typeof(whoStarted) === 'undefined') ? (
+    const { disabled, first, history } = this.props;
+    const html = (typeof(history) === 'undefined'  || history === "false") ? (
+
       <div className="question">
+
         <span title = "Who starts playing the game: You or the computer?">Start?</span>
+
         <input onChange  = {this.setPlayer} 
                 disabled = {disabled} 
                 type     = "radio" 
-                value    = "2"
+                value    = {constants.user}
                 name     = "player"
                 title    = "You start playing the game."
-                checked  = { this.state.who === "2"}/>
-        <label disabled = {disabled} htmlFor = "yes" title = "You start playing the game.">Yes</label>
+                checked  = { this.state.who === constants.user}/>
+        <label  disabled = {disabled} htmlFor = "yes" title = "You start playing the game.">Yes</label>
 
-        <input onChange={this.setPlayer}
+        <input onChange  = {this.setPlayer}
                 disabled = {disabled} 
                 type     = "radio"
-                value    = "1"
+                value    = {constants.computer}
                 name     = "player"
                 title    = "The computer starts playing the game."
-                checked  = { this.state.who === "1"}/>
-        <label disabled = {disabled} htmlFor = "no" title = "The computer starts playing the game.">No</label>      
+                checked  = { this.state.who === constants.computer}/>
+        <label  disabled = {disabled} htmlFor = "no" title = "The computer starts playing the game.">No</label>   
+
       </div>
     ) : (
       <div className="question">
-        Game started by: {whoStarted === 1 ? 'Computer' : 'You'}
+        Game started by: {first === constants.computer ? 'Computer' : 'You'}
       </div>
     );
 
@@ -45,13 +49,13 @@ class StartGame extends React.Component {
   }
 
   setPlayer = (e) => {
-    const who = e.target.value;
+    const who = e.target.value * 1;
     this.setState(() => ({who}));
   }
 
   onPlayerChange = () => {
     if (this.props.onPlayerChange){
-      this.props.onPlayerChange(this.state.who * 1);
+      this.props.onPlayerChange(this.state.who);
     }
   }
 

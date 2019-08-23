@@ -8,12 +8,12 @@ import BoardUI               from './BoardUI';
 const GameHistory = (props) => {
   const { getGame, removeGame } = useContext(GameContext);
   let category = {};  
-  let categoryId, folder, imageComputer, imageUser, whoStarted, level, board, winningSquares, message;
+  let categoryId, folder, imageComputer, imageUser, first, level, board, winners, message;
   let game = {};
   const gameId = props.match.params.id;
   game = getGame(gameId);  
   if (game){
-    ({categoryId, folder, imageComputer, imageUser, whoStarted, level, board, winningSquares, message } = game);
+    ({categoryId, folder, imageComputer, imageUser, first, level, board, winners, message } = game);
     category = {
       folder,
       imageComputer,
@@ -29,17 +29,17 @@ const GameHistory = (props) => {
               categoryId    = {categoryId} 
               imageUser     = {imageUser} 
               imageComputer = {imageComputer}
-              disabled      = "true" />
+              history       = "true" />
 
           <div className="settings">
-            <StartGame whoStarted = {whoStarted}/> 
-            <Level level = {level} />
+            <StartGame first = {first} history = {true} /> 
+            <Level     level = {level} history = {true} />
           </div>
 
           <BoardUI category       = {category} 
                    disabled       = {true}
                    board          = {board}
-                   winningSquares = {winningSquares}
+                   winners        = {winners}
                    gameOver       = {true} />
 
           <div className="info">

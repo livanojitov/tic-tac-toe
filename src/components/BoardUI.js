@@ -1,11 +1,12 @@
-import React           from 'react';
-import Square          from './Square';
+import React          from 'react';
+import Square         from './Square';
+import * as constants from './Constants';
 
 class BoardUI extends React.Component {
-  empty = 0
-  computer = 1
-  user = 2
-
+  empty = constants.empty;
+  computer = constants.computer;
+  user = constants.user;
+  
   constructor(props){
     super(props);
     this.category = this.props.category;
@@ -13,32 +14,36 @@ class BoardUI extends React.Component {
   }
 
   render(){
-    const { winningSquares, gameOver, category } = this.props;
-    if ((category.folder        !== this.category.folder)       || 
-        (category.imageUser     !== this.category.imageUser)    ||
-        (category.imageComputer !== this.category.imageComputer)){
+    const { winners, gameOver, category, disabled } = this.props;
+    let { folder1, imageUser1, imageComputer1 } = category;
+    let { folder, imageUser, imageComputer } = this.category;
+    if ((folder1        !== folder)       || 
+        (imageUser1     !== imageUser)    ||
+        (imageComputer1 !== imageComputer)){
       if (!gameOver){
-        this.category = this.props.category;   
+        this.category = category;   
+        ({ folder, imageComputer, imageUser } = this.category);
       }
     }
 
-    const { folder, imageComputer, imageUser } = this.category;
-
-    if (this.props.disabled !== this.disabled){
+    if (disabled !== this.disabled){
       this.disabled = this.props.disabled;
     }
     
     const board = this.props.board.map((square, ind) => {
-      const player = (square === this.computer)? `${folder}/${imageComputer}` : (
-                     (square === this.user)?     `${folder}/${imageUser}`     : 'default'); 
-      const win = gameOver ? (winningSquares.indexOf(ind) !== -1 ? 'win' : '') : '';
+      const player = (square === this.computer)?
+                      `${folder}/${imageComputer}` : (
+                     (square === this.user)?
+                      `${folder}/${imageUser}`:
+                     'default'); 
+      const win = gameOver ? (winners.indexOf(ind) !== -1 ? 'win' : '') : '';
       const disabled = this.disabled ? true : (square !== this.empty ? true : false);
       return (<Square 
                 key           = {ind} 
                 player        = {player} 
                 win           = {win}
                 disabled      = {disabled}
-                handleClick   = {(e) => this.props.onPlayUser(e)}
+                handleClick   = {(e) => this.props.onUserPlayed(e)}
                 id            = {ind}
               />
       ) 
