@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Square = ({ win, disabled, handleClick, id, player }) => {
+const Square = ({ win, disabled, handleClick, id, player }) => { 
   return (
     <button style     = {{ backgroundImage : `url(images/${player}.jpg)`}}
             className = {win}
