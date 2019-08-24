@@ -70,8 +70,8 @@ class Category extends React.Component{
         Category: &nbsp;
         {select}
         <div className="random-images">
-          You:      <img title={imageUser}     src={`/images/${folder}/${imageUser}.jpg`}     alt="user"/>&nbsp;
-          Computer: <img title={imageComputer} src={`/images/${folder}/${imageComputer}.jpg`} alt="computer"/>&nbsp;&nbsp;
+          You:      <img title={imageUser}     src={`./images/${folder}/${imageUser}.jpg`}     alt="user"/>&nbsp;
+          Computer: <img title={imageComputer} src={`./images/${folder}/${imageComputer}.jpg`} alt="computer"/>&nbsp;&nbsp;
           {refreshButton}
         </div>
       </div>
