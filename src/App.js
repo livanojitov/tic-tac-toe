@@ -12,7 +12,7 @@ import GameHistory         from './components/GameHistory';
 function App() {
   return (
     <GameContextProvider>
-      <BrowserRouter basename="/tic-tac-toe" >
+      <BrowserRouter>
         <div className='header'>
           <Header/>
           <Navigation/>
