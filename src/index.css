@@ -8,14 +8,31 @@ body{
   margin: 10px auto 0;
 }
 
-nav, .about, .contact{
+header, nav{ 
+  display: block;
+}
+
+header{
+  float: left;
+}
+
+nav{
+  float: right;
+}
+
+.header, .about, .contact{
   width: 95%;
   margin: 0 auto
 }
 
+.header:after{
+  content: "";
+  display: block;
+  clear: both;
+}
+
 nav ul{
   list-style: none;
-  float: right;
   padding-left: 0;
 }
 
@@ -27,12 +44,6 @@ nav li{
 
 nav a.active{
   font-weight: 1000;
-}
-
-nav:after{
-  content: "";
-  display: block;
-  clear: both;
 }
 
 a{

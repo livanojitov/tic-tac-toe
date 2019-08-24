@@ -16,7 +16,7 @@ const GamesHistory = ({categoryId, imageUser, imageComputer, message, id, first,
         categoryId    = {categoryId} 
         imageUser     = {imageUser} 
         imageComputer = {imageComputer}
-        history       = "true" /> 
+        history       = {true} /> 
 
       <div className="settings">
         <StartGame first = {first} history = {true} /> 

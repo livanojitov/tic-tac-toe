@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Header              from './components/Header';
 import Navigation          from './components/Navigation';
 import GameContextProvider from './components/GameContext';
 import Game                from './components/Game';
@@ -12,7 +13,10 @@ function App() {
   return (
     <GameContextProvider>
       <BrowserRouter basename="/tic-tac-toe" >
-        <Navigation/>
+        <div className='header'>
+          <Header/>
+          <Navigation/>
+        </div>
         <Switch>
           <Route path="/"        exact component={Game}        />
           <Route path="/history" exact component={History}     /> 

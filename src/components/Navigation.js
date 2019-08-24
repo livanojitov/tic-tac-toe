@@ -18,7 +18,6 @@ const Navigation = () => {
 
   return (
     <nav>
-      <img src={'./images/logo.jpg'} alt="Logo"/>
       <ul>
         {lis}                  
       </ul>

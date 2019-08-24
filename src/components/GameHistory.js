@@ -7,18 +7,14 @@ import BoardUI               from './BoardUI';
 
 const GameHistory = (props) => {
   const { getGame, removeGame } = useContext(GameContext);
-  let category = {};  
+  let category = {};
   let categoryId, folder, imageComputer, imageUser, first, level, board, winners, message;
   let game = {};
   const gameId = props.match.params.id;
-  game = getGame(gameId);  
+  game = getGame(gameId);
   if (game){
     ({categoryId, folder, imageComputer, imageUser, first, level, board, winners, message } = game);
-    category = {
-      folder,
-      imageComputer,
-      imageUser
-    }
+    category = { folder, imageComputer, imageUser };
   }
   return (
     <div>
@@ -29,23 +25,22 @@ const GameHistory = (props) => {
               categoryId    = {categoryId} 
               imageUser     = {imageUser} 
               imageComputer = {imageComputer}
-              history       = "true" />
+              history       = {true} />
 
           <div className="settings">
             <StartGame first = {first} history = {true} /> 
             <Level     level = {level} history = {true} />
           </div>
 
-          <BoardUI category       = {category} 
-                   disabled       = {true}
+          <BoardUI category       = {category}
                    board          = {board}
                    winners        = {winners}
-                   gameOver       = {true} />
+                   history        = {true} />
 
           <div className="info">
             {message}&nbsp;&nbsp;
             <input type="button" value="Delete Game" onClick={(e) => { removeGame(gameId); props.history.push('/history')}} className="delete"/>&nbsp;&nbsp;
-            <input type="button" value="Back"   onClick={(e) => {props.history.push('/history')}}/>              
+            <input type="button" value="Back" onClick={(e) => {props.history.push('/history')}}/>              
           </div> 
 
       </div>

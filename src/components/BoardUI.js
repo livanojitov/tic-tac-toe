@@ -2,59 +2,63 @@ import React          from 'react';
 import Square         from './Square';
 import * as constants from './Constants';
 
-class BoardUI extends React.Component {
-  empty = constants.empty;
-  computer = constants.computer;
-  user = constants.user;
-  
-  constructor(props){
-    super(props);
-    this.category = this.props.category;
-    this.disabled = this.props.disabled;
-  }
+const empty    = constants.empty;
+const computer = constants.computer;
+const user     = constants.user;
+let   category;
 
-  render(){
-    const { winners, gameOver, category, disabled } = this.props;
-    let { folder1, imageUser1, imageComputer1 } = category;
-    let { folder, imageUser, imageComputer } = this.category;
+const BoardUI = (props) => {
+    if (!category){
+      category = props.category;
+    }
+
+    const { winners, gameOver,   category:category1, history } = props;
+    let   { folder1, imageUser1, imageComputer1              } = category1;
+    let   { folder,  imageUser,  imageComputer               } = category;
     if ((folder1        !== folder)       || 
         (imageUser1     !== imageUser)    ||
         (imageComputer1 !== imageComputer)){
       if (!gameOver){
-        this.category = category;   
-        ({ folder, imageComputer, imageUser } = this.category);
+        category = category1;   
+        ({ folder, imageComputer, imageUser } = category);
       }
     }
-
-    if (disabled !== this.disabled){
-      this.disabled = this.props.disabled;
-    }
     
-    const board = this.props.board.map((square, ind) => {
-      const player = (square === this.computer)?
+    const board = props.board.map((square, ind) => {
+      const player = (square === computer)?
                       `${folder}/${imageComputer}` : (
-                     (square === this.user)?
+                     (square === user)?
                       `${folder}/${imageUser}`:
                      'default'); 
-      const win = gameOver ? (winners.indexOf(ind) !== -1 ? 'win' : '') : '';
-      const disabled = this.disabled ? true : (square !== this.empty ? true : false);
+      let win, disabled;
+      let clickEvent = {};
+      if (typeof(history) === 'undefined' || history === "false"){
+        win = gameOver ? (winners.indexOf(ind) !== -1 ? 'win' : '') : '';
+        disabled = props.disabled ? true : (square !== empty ? true : false);
+        clickEvent.handleClick = (e) => {
+          props.onUserPlayed(e)
+        }        
+      }else{
+        win = winners.indexOf(ind) !== -1 ? 'win' : '';
+        disabled = true;
+      }
+
       return (<Square 
                 key           = {ind} 
                 player        = {player} 
                 win           = {win}
                 disabled      = {disabled}
-                handleClick   = {(e) => this.props.onUserPlayed(e)}
                 id            = {ind}
+                {...clickEvent}                
               />
       ) 
-    });  
+    }); 
     
     return (
       <div className="board">
         {board}
       </div>
     )
-  }
  
 }  
 
