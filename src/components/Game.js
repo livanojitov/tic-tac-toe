@@ -41,7 +41,7 @@ class Game extends React.Component {
           <Level     disabled={!disabled} onLevelChange  = {this.setLevel } />
         </div>
         {showStartButton &&  ( <div className="start-playing"><button onClick={this.gameInit}>Start the game</button></div>)}
-        {(category.imageUser) && (
+        {('imageUser' in category) && (
           <BoardUI category       = {category} 
                    disabled       = {disabled}
                    board          = {board}
@@ -49,7 +49,7 @@ class Game extends React.Component {
                    winners        = {winners}
                    gameOver       = {gameOver} />)}
         {gameOver && ( <Info message = {this.message} startOver = {this.gameInit}/>)}                  
-        </div>
+      </div>
     )
   }
 
