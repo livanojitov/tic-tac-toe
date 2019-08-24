@@ -8,117 +8,116 @@ class Computer{
     this.board = board;
   }
 
-  playFromTwo = (square1, square2, square3) => {    
-    const squares = this.board.squares;
-
-    if (squares[square1] === computer){
-      if (squares[1] === user || squares[7] === user){
-        this.board.play(computer, square2);
-        return true;
-      }else if (squares[3] === user || squares[5] === user){
-        this.board.play(computer, square3);
-        return true;
+  playFromTwo = () => {    
+    const players = this.board.players;
+    const arr = [[8,2,6], [2,8,0], [0,6,2], [6,0,8]];
+    for (let i=0; i< arr.length; i++){
+      if (players[arr[i][0]] === computer){
+        if (players[1] === user || players[7] === user){
+          this.board.play(computer, arr[i][1]);
+          return true;
+        }else if (players[3] === user || players[5] === user){
+          this.board.play(computer, arr[i][2]);
+          return true;
+        }
       }
-    }
+    }  
     return false;
   }
 
-  playFromTwo1 = (square1, square2, square3, square4) => {
-    const squares = this.board.squares;   
-
-    if (squares[square1] === computer && squares[square2] === user){
-      this.board.play(computer, [square3,square4][Math.floor(Math.random() * 2)]);
-      return true;
-    }else{
-      return false;
+  playFromTwo1 = () => {
+    const players = this.board.players;
+    const arr = [[0,2,6,8],[0,6,2,8],[0,8,2,6],[2,0,6,8],[2,6,0,8],[2,8,0,6],[6,0,2,8],[6,2,0,8],[6,8,0,2],[8,0,2,6],[8,2,0,6],[8,6,0,2]];
+    for (let i=0; i< arr.length; i++){
+      if (players[arr[i][0]] === computer && players[arr[i][1]] === user){
+        this.board.play(computer, [arr[i][2],arr[i][3]][Math.floor(Math.random() * 2)]);
+        return true;
+      }
     }
-  }  
+    return false;     
+  }
 
   play = () => {
-    const squares = this.board.squares;
+    const players = this.board.players;
     const level = this.board.level;
-    let winner;
+    let winner, winners, winners1, square1, square2;
+    let found = false;
+    const result  = [];
 
     if (level === hard){
       if (this.board.first === user){
-        if (this.board.totalSquaresPlayed === 1){
-          if (squares[4] === user){
+        if (this.board.playsCounter === 1){
+          if (players[4] === user){
             this.board.play(computer, [0,2,6,8][Math.floor(Math.random() * 4)]);
           }else{
             this.board.play(computer, 4);
           }
           return;
         }
-        if (this.board.totalSquaresPlayed === 3){
-          if ((squares[0] === computer && squares[4] === user && squares[8] === user) || 
-              (squares[0] === user     && squares[4] === user && squares[8] === computer)){
-            this.board.play(computer, [2,6][Math.floor(Math.random() * 2)]);
-            return;
-          }else if ((squares[2] === computer && squares[4] === user && squares[6] === user) || 
-                    (squares[2] === user     && squares[4] === user && squares[6] === computer)){
-            this.board.play(computer, [0,8][Math.floor(Math.random() * 2)]);
-            return;
-          }else if (squares[4] === computer && ((squares[0] === user && squares[8] === user) || (squares[2] === user && squares[6] === user))){
-            this.board.play(computer, [1,3,5,7][Math.floor(Math.random() * 4)]);
-            return;
-          }
-        }
-      } 
-
-      if (this.board.first === computer){
+      }else{
         if (this.board.isEmpty){
           this.board.play(computer, [0,2,6,8,4][Math.floor(Math.random() * 5)]);
           return;
         }
-        if (this.board.totalSquaresPlayed === 2){
-          if (this.playFromTwo(8,2,6)    || this.playFromTwo(2,8,0)    || this.playFromTwo(0,6,2)    || this.playFromTwo(6,0,8)   || 
-              this.playFromTwo1(0,2,6,8) || this.playFromTwo1(0,6,2,8) || this.playFromTwo1(0,8,2,6) || this.playFromTwo1(2,0,6,8)||
-              this.playFromTwo1(2,6,0,8) || this.playFromTwo1(2,8,0,6) || this.playFromTwo1(6,0,2,8) || this.playFromTwo1(6,2,0,8)||
-              this.playFromTwo1(6,8,0,2) || this.playFromTwo1(8,0,2,6) || this.playFromTwo1(8,2,0,6) || this.playFromTwo1(8,6,0,2)){
+        if (this.board.playsCounter === 2){
+          if (this.playFromTwo()){ 
               return;
+          }else{
+            if (this.playFromTwo1()){
+              return;
+            }  
           }
         }  
-      } 
-
-      winner = this.board.isAboutToWin(computer);
-      if (winner !== -1){
-        this.board.play(computer, winner[0]);
-        return;
       }
-
-      winner = this.board.isAboutToWin(user);
-      if (winner !== -1){
-        this.board.play(computer, winner[0]);
-        return;
-      }
-
-      winner = this.board.canWinInTwoMovesDouble(computer);
-      if (winner !== -1){
-        this.board.play(computer, winner[0]);
-        return;
-      }
-    }
-
-    winner = this.board.canWinInTwoMovesSingle(computer);
-    let winner1 = 0;
-    if (winner !== -1){
-      this.board.play(computer, winner[0]);
-      winner1 = this.board.canWinInTwoMovesDouble(user);
-      if (winner1[0] === winner[1]){
-        this.board.play(empty, winner[0]);
-        this.board.play(computer, winner[1]);
-        winner1 = this.board.canWinInTwoMovesDouble(user);
-        if (winner1[0] === winner[0]){
-          this.board.play(empty, winner[1]);
-        }else{
-          return;
-        }
+      if ((winner = this.board.isAboutToWin(computer)) !== -1){
+        this.board.play(computer, winner);
+      }else if ((winner = this.board.isAboutToWin(user)) !== -1){
+        this.board.play(computer, winner);
+      }else if ((winners = this.board.canWinInTwoMovesDouble(computer)) !== -1){
+        this.board.play(computer, winners[Math.floor(Math.random() * winners.length)]);  
       }else{
-        return;
-      }
+        winners = this.board.canWinInTwoMovesSingle(computer)
+        if (winners !== -1){
+          for (let i=0; i< winners.length; i++){
+            for (let j=0; j< 2; j++){
+              if (j === 0){
+                square1 = winners[i][0];
+                square2 = winners[i][1];
+              }else{
+                square1 = winners[i][1];
+                square2 = winners[i][0];            
+              }
+              this.board.play(computer, square1);
+              winners1 = this.board.canWinInTwoMovesDouble(user);
+              for (let k=0; k<winners1.length; k++){
+                if (winners1[k] === square2){
+                  found = true;
+                  break;
+                }
+              }
+              if (!found){
+                result.push(square1);
+              }else{
+                found = false;
+              }
+              this.board.play(empty, square1)
+            }
+          }
+          if (result.length > 0){
+            this.board.play(computer, result[Math.floor(Math.random() * result.length)]);
+          }else{
+            const emptySquares = this.board.emptySquares;
+            this.board.play(computer,emptySquares[Math.floor(Math.random() * emptySquares.length)]);            
+          }
+        }else{
+          const emptySquares = this.board.emptySquares;
+          this.board.play(computer,emptySquares[Math.floor(Math.random() * emptySquares.length)]);            
+        }
+      }   
+    }else{
+      const emptySquares = this.board.emptySquares;
+      this.board.play(computer,emptySquares[Math.floor(Math.random() * emptySquares.length)]); 
     }
-    const emptySquares = this.board.emptySquaresIndexes;
-    this.board.play(computer,emptySquares[Math.floor(Math.random() * emptySquares.length)]); 
   }
  
 }

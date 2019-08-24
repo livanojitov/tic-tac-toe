@@ -24,7 +24,7 @@ class Game extends React.Component {
       category: {},
       disabled: true,
       reset: false,
-      board: this.board.squares,
+      board: this.board.players,
       winners: [],
       gameOver: false,
       showStartButton: true
@@ -65,7 +65,7 @@ class Game extends React.Component {
         ...state,
         winners: [],
         gameOver: false,
-        board: this.board.squares        
+        board: this.board.players        
       }
     }
     this.setState(
@@ -90,10 +90,10 @@ class Game extends React.Component {
       }else{
           this.board.play(user, e.target.id); 
       }
-      this.setState(() => ({board : this.board.squares}));
-      let winnerSquares = this.board.isAWinner(this.player);
-      if (winnerSquares){
-        this.gameOver(this.player === computer ? "You lost!" : "You won!", winnerSquares);
+      this.setState(() => ({board : this.board.players}));
+      let winners = this.board.isAWinner(this.player);
+      if (winners){
+        this.gameOver(this.player === computer ? "You lost!" : "You won!", winners);
       }else if (this.board.isFull){
         this.gameOver("It's a draw!");
       }else{
@@ -114,7 +114,7 @@ class Game extends React.Component {
   gameSave = (message, winners) => {
     const { addGame } = this.context;
     addGame({
-      board          : [...this.board.squares],
+      board          : [...this.board.players],
       winners        : [...winners],
       message,
       first          : this.first,

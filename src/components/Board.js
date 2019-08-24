@@ -3,7 +3,7 @@ const { empty, user, computer, easy, hard,totalSquares } = constants;
 let   board = null;
 let   _first = user;
 let   _level = easy;
-let   totalSquaresPlayed = 0;
+let   playsCounter = 0;
 
 class Board {
   constructor(first = user, level = easy){
@@ -56,8 +56,8 @@ class Board {
     }  
   }
 
-  get totalSquaresPlayed(){
-    return totalSquaresPlayed;
+  get playsCounter(){
+    return playsCounter;
   } 
 
   get isFull(){
@@ -68,7 +68,7 @@ class Board {
     return (!(board.includes(computer) || board.includes(user)));
   }
 
-  get emptySquaresIndexes(){
+  get emptySquares(){
     return board.reduce((arr, square, index )=> {
       if (square === empty){
         arr.push(index);
@@ -77,22 +77,22 @@ class Board {
     }, []);
   }
 
-  get squares(){
+  get players(){
     return [...board];
   }
 
   reset(){
     board = Array(totalSquares).fill(empty);
-    totalSquaresPlayed = 0;
+    playsCounter = 0;
   }
 
   play(player, square){
     if (square >= 0 && square < board.length && (player === computer || player === user || player === empty)){
       board[square] = player;
       if (player !== empty){
-        totalSquaresPlayed++;
+        playsCounter++;
       }else{
-        totalSquaresPlayed--;
+        playsCounter--;
       }  
       return true;
     }else{
@@ -100,81 +100,74 @@ class Board {
     }
   }
 
-  getPlayer(square){
-    if (square >= 0 && square < board.length){
-      return board[square];
-    }else{
-      return -1;
-    }
-  }
-
-  isAboutToWin_(player, square1, square2, square3){
-    return (((board[square1] === player && board[square2] === player && board[square3] === empty)  && [square3]) ||
-            ((board[square1] === player && board[square2] === empty  && board[square3] === player) && [square2]) ||
-            ((board[square1] === empty  && board[square2] === player && board[square3] === player) && [square1]) || -1);
-  }
-
   isAboutToWin(player){
-    let square;
-    return (
-    (!((square = this.isAboutToWin_(player, 0, 1, 2)) === -1 ) && square) || 
-    (!((square = this.isAboutToWin_(player, 3, 4, 5)) === -1 ) && square) || 
-    (!((square = this.isAboutToWin_(player, 6, 7, 8)) === -1 ) && square) || 
-    (!((square = this.isAboutToWin_(player, 0, 3, 6)) === -1 ) && square) || 
-    (!((square = this.isAboutToWin_(player, 1, 4, 7)) === -1 ) && square) || 
-    (!((square = this.isAboutToWin_(player, 2, 5, 8)) === -1 ) && square) || 
-    (!((square = this.isAboutToWin_(player, 0, 4, 8)) === -1 ) && square) || 
-    (!((square = this.isAboutToWin_(player, 2, 4, 6)) === -1 ) && square) || -1);
-  }
+    const arr = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]];
+    let square0, square1, square2;
 
-  canWinInTwoMovesSingle_(player, square1, square2, square3){
-    return (((board[square1] === player && board[square2] === empty  && board[square3] === empty)  && [square2, square3]) ||
-            ((board[square1] === empty  && board[square2] === player && board[square3] === empty)  && [square1, square3]) ||
-            ((board[square1] === empty  && board[square2] === empty  && board[square3] === player) && [square1, square2]) || -1);
+    for (let i=0; i<arr.length; i++){
+      square0 = arr[i][0];
+      square1 = arr[i][1];
+      square2 = arr[i][2]; 
+      if (board[square0] === player && board[square1] === player  && board[square2] === empty){
+        return square2;
+      }
+      if (board[square0] === player  && board[square1] === empty && board[square2] === player){
+        return square1;
+      }
+      if (board[square0] === empty  && board[square1] === player  && board[square2] === player){
+        return square0;
+      }
+    }
+    return -1
   }
 
   canWinInTwoMovesSingle = (player) => {
-    let square;
-    return (
-      (!((square = this.canWinInTwoMovesSingle_(player,0,1,2)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesSingle_(player,3,4,5)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesSingle_(player,6,7,8)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesSingle_(player,0,3,6)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesSingle_(player,1,4,7)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesSingle_(player,2,5,8)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesSingle_(player,0,4,8)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesSingle_(player,2,4,6)) === -1 ) && square) || -1);
-  }
+    const arr = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]];
+    const result = [];
+    let square0, square1, square2;
 
-  canWinInTwoMovesDouble_(player, square1, square2, square3, square4, square5){
-    if (board[square1] === empty && 
-        ((board[square2] === empty && board[square3] === player) || (board[square2] === player && board[square3] === empty)) && 
-        ((board[square4] === empty && board[square5] === player) || (board[square4] === player && board[square5] === empty))){
-      return [square1];
+    for (let i=0; i<arr.length; i++){
+      square0 = arr[i][0];
+      square1 = arr[i][1];
+      square2 = arr[i][2]; 
+      if (board[square0] === player && board[square1] === empty  && board[square2] === empty){
+        result.push([square1, square2]);
+      }
+      if (board[square0] === empty  && board[square1] === player && board[square2] === empty){
+        result.push([square0, square2]);
+      }
+      if (board[square0] === empty  && board[square1] === empty  && board[square2] === player){
+        result.push([square0, square1]);
+      }
+    }
+    if (result.length > 0){
+      return result;
     }else{
       return -1;
-    }
+    }      
   }
 
   canWinInTwoMovesDouble = (player) => {
-    let square;
-    return (
-      (!((square = this.canWinInTwoMovesDouble_(player,0,1,2,3,6)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesDouble_(player,0,1,2,4,8)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesDouble_(player,0,3,6,4,8)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesDouble_(player,2,0,1,5,8)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesDouble_(player,2,0,1,4,6)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesDouble_(player,2,5,8,4,6)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesDouble_(player,6,0,3,7,8)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesDouble_(player,6,0,3,2,4)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesDouble_(player,6,2,4,7,8)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesDouble_(player,8,6,7,2,5)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesDouble_(player,8,6,7,0,4)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesDouble_(player,8,2,5,0,4)) === -1 ) && square) ||
-      (!((square = this.canWinInTwoMovesDouble_(player,1,0,2,4,7)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesDouble_(player,3,0,6,4,5)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesDouble_(player,5,2,8,3,4)) === -1 ) && square) || 
-      (!((square = this.canWinInTwoMovesDouble_(player,7,1,4,6,8)) === -1 ) && square) || -1);
+    const arr = [ [0,1,2,3,6], [0,1,2,4,8], [0,3,6,4,8], [2,0,1,5,8], [2,0,1,4,6], [2,5,8,4,6], [6,0,3,7,8], [6,0,3,2,4], [6,2,4,7,8], [8,6,7,2,5], [8,6,7,0,4], [8,2,5,0,4], [1,0,2,4,7], [3,0,6,4,5], [5,2,8,3,4], [7,1,4,6,8]];
+    const result = [];
+    let square0, square1, square2, square3, square4;
+    for (let i=0; i<arr.length; i++){
+      square0 = arr[i][0];
+      square1 = arr[i][1];
+      square2 = arr[i][2];
+      square3 = arr[i][3];
+      square4 = arr[i][4];
+      if (board[square0] === empty && 
+        ((board[square1] === empty && board[square2] === player) || (board[square1] === player && board[square2] === empty)) && 
+        ((board[square3] === empty && board[square4] === player) || (board[square3] === player && board[square4] === empty))){
+        result.push(square0);
+      }
+    }
+    if (result.length > 0){
+      return result;
+    }else{
+      return -1;
+    }  
   }
 
   isAWinner(player){
