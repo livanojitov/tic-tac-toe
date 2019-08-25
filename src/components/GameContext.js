@@ -1,39 +1,22 @@
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useReducer, createContext, useEffect } from 'react';
+import { gameReducer } from '../reducers/gameReducer';
+
 export const GameContext = createContext();
 
 const GameContextProvider = (props) => {
 
-  const [games, setGames] = useState([]);
+  const [games, dispatch] = useReducer(gameReducer,[], () => {
+    if (typeof(Storage) !== "undefined") {
+      const games = localStorage.getItem('tictactoe');
+      return games ? JSON.parse(games) : [];
+    }      
+  });
 
   useEffect(() => {
     if (typeof(Storage) !== "undefined") {
-      if (games.length){
-        localStorage.tictactoe = JSON.stringify(games);
-      }else{
-        if (GameContextProvider.delete === 1){
-          GameContextProvider.delete = 0;
-          localStorage.removeItem('tictactoe');
-        }else{
-          if (localStorage.tictactoe){
-            setGames(JSON.parse(localStorage.tictactoe));
-          }
-        }
+        localStorage.setItem('tictactoe', JSON.stringify(games));
       }
-    }
   },[games]);
-
-  const addGame = (game) => {
-    game.id = Math.floor(Math.random() * 10000);
-    setGames([...games, game]);
-  };
-
-  const removeGame = (id) => {
-    if (games.length > 0){
-      GameContextProvider.delete = 1;
-      id = id * 1;
-      setGames(games.filter(game => game.id !== id));   
-    } 
-  }
 
   const getGame = (id) => {
     if (games.length > 0){
@@ -45,7 +28,7 @@ const GameContextProvider = (props) => {
   }
 
   return (
-    <GameContext.Provider value={{ games, addGame, removeGame, getGame }}>
+    <GameContext.Provider value={{ games, dispatch, getGame }}>
       {props.children}
     </GameContext.Provider>
   );

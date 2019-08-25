@@ -110,7 +110,19 @@ class Game extends React.Component {
     this.setState(() => ({ gameOver : true, disabled: true, showStartButton: false, winners }));
     this.gameSave(message, winners);
   }
- 
+
+  gameSave = (message, winners) => {
+    const { dispatch } = this.context;
+    dispatch({type: 'ADD_GAME', game : {
+      board          : [...this.board.players],
+      winners        : [...winners],
+      message,
+      first          : this.first,
+      level          : this.level,
+      ...this.state.category,
+    }});
+  }
+  /*
   gameSave = (message, winners) => {
     const { addGame } = this.context;
     addGame({
@@ -122,7 +134,7 @@ class Game extends React.Component {
       ...this.state.category,
     });
   }
-
+*/
   setCategory = (category) => {
     this.setState(() => ({category}));
   }
