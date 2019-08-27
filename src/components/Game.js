@@ -122,19 +122,7 @@ class Game extends React.Component {
       ...this.state.category,
     }});
   }
-  /*
-  gameSave = (message, winners) => {
-    const { addGame } = this.context;
-    addGame({
-      board          : [...this.board.players],
-      winners        : [...winners],
-      message,
-      first          : this.first,
-      level          : this.level,
-      ...this.state.category,
-    });
-  }
-*/
+
   setCategory = (category) => {
     this.setState(() => ({category}));
   }

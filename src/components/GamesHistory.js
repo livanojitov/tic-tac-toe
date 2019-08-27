@@ -26,7 +26,12 @@ const GamesHistory = ({categoryId, imageUser, imageComputer, message, id, first,
       <div className="info">
         {message}&nbsp;&nbsp;
         <button className="see-game"><Link to={`/${id}`}>See Game</Link></button>&nbsp;&nbsp;
-        <input type="button" value="Delete Game" onClick={(e) => { dispatch({type: 'REMOVE_GAME', id })}} className="delete"/>&nbsp;&nbsp;
+        <input type="button" 
+               value="Delete Game" 
+               onClick={(e) => { 
+                 dispatch({type: 'REMOVE_GAME', id });
+               }} 
+               className="delete"/>&nbsp;&nbsp;
       </div>
 
       <hr/>

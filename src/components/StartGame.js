@@ -3,12 +3,9 @@ import * as constants from './Constants';
 
 class StartGame extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      who : constants.user
-    }   
-  }
+  state = {
+    who : constants.user
+  } 
 
   render() {
     const { disabled, first, history } = this.props;
@@ -24,7 +21,8 @@ class StartGame extends React.Component {
                 value    = {constants.user}
                 name     = "player"
                 title    = "You start playing the game."
-                checked  = { this.state.who === constants.user}/>
+                checked  = {this.state.who === constants.user}
+                id       = "yes" />
         <label  disabled = {disabled} htmlFor = "yes" title = "You start playing the game.">Yes</label>
 
         <input onChange  = {this.setPlayer}
@@ -33,7 +31,8 @@ class StartGame extends React.Component {
                 value    = {constants.computer}
                 name     = "player"
                 title    = "The computer starts playing the game."
-                checked  = { this.state.who === constants.computer}/>
+                checked  = {this.state.who === constants.computer}
+                id       = "no" />
         <label  disabled = {disabled} htmlFor = "no" title = "The computer starts playing the game.">No</label>   
 
       </div>

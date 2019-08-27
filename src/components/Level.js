@@ -1,12 +1,10 @@
 import React from 'react';
+import * as constants from './Constants';
 
 class Level extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      level : "1"
-    }   
+  state = {
+    level : constants.easy
   }
 
   render() {
@@ -22,19 +20,21 @@ class Level extends React.Component {
         <input  onChange = {this.setLevel}
                 disabled = {disabled} 
                 type     = "radio" 
-                value    = "1" 
+                value    = {constants.easy} 
                 name     = "level"
                 title    = "The computer plays randomly." 
-                checked  = { this.state.level === "1"}/>
+                checked  = {this.state.level === constants.easy}
+                id       = "easy" />
         <label  disabled = {disabled} htmlFor = "easy" title = "The computer plays randomly." >Easy</label>
 
         <input  onChange = {this.setLevel}
                 disabled = {disabled} 
                 type     = "radio"
-                value    = "2" 
+                value    = {constants.hard}
                 name     = "level"
                 title    = "The computer does some thinking before playing."
-                checked  = { this.state.level === "2"}/>
+                checked  = {this.state.level === constants.hard}
+                id       = "hard" />
         <label  disabled = {disabled} htmlFor = "hard" title = "The computer does some thinking before playing.">Hard</label>  
 
       </div>
@@ -50,13 +50,13 @@ class Level extends React.Component {
   }
 
   setLevel = (e) => {
-    const level = e.target.value;
+    const level = e.target.value * 1;
     this.setState(() => ({level}));
   }
 
   onLevelChange = () => {
     if (this.props.onLevelChange){
-      this.props.onLevelChange(this.state.level * 1);
+      this.props.onLevelChange(this.state.level);
     }
   }
 

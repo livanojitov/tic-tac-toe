@@ -39,8 +39,18 @@ const GameHistory = (props) => {
 
           <div className="info">
             {message}&nbsp;&nbsp;
-            <input type="button" value="Delete Game" onClick={(e) => { dispatch({type: 'REMOVE_GAME', id: gameId}); props.history.push('/history')}} className="delete"/>&nbsp;&nbsp;
-            <input type="button" value="Back" onClick={(e) => {props.history.push('/history')}}/>              
+            <input type="button"
+                   value="Delete Game" 
+                   onClick={(e) => { 
+                     dispatch({type: 'REMOVE_GAME', id: gameId}); 
+                     props.history.push('/history')
+                   }} 
+                   className="delete"/>&nbsp;&nbsp;
+            <input type="button" 
+                   value="Back" 
+                   onClick={(e) => {
+                     props.history.push('/history')
+                   }}/>              
           </div> 
 
       </div>
