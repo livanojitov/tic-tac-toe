@@ -23,7 +23,7 @@ const About = () => {
   const [games]  = useState(
     { 
       name: 'Matching pairs ( built with Vue.js )', 
-      url: 'https://livanojitov.github.io/matching-pairs'
+      url: 'https://lojito.github.io/matching-pairs'
     });
 
   return (
