@@ -19,7 +19,7 @@ const About = () => {
     )
   });
 
-  const [source] = useState('https://github.com/livanojitov/tic-tac-toe');
+  const [source] = useState('https://github.com/lojito/tic-tac-toe');
   const [games]  = useState(
     { 
       name: 'Matching pairs ( built with Vue.js )', 
