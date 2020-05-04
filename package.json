@@ -4,13 +4,13 @@
   "private": true,
   "homepage": "https://lojito.github.io/tic-tac-toe/",
   "dependencies": {
-    "gh-pages": "^2.1.1",
-    "minimist": "^1.2.3",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-router-dom": "^5.0.1",
+    "gh-pages": "^2.2.0",
+    "minimist": "^1.2.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.0.1",
-    "serialize-javascript": "^2.1.1"
+    "serialize-javascript": "^2.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
