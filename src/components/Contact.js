@@ -5,7 +5,7 @@ const Contact = () => {
   const [contact] = useState({
     author:   'Livan Ojito Villanueva',
     email :   'livanojito@gmail.com',
-    github:   'https://github.com/livanojitov',
+    github:   'https://github.com/lojito',
     linkedin: 'https://ca.linkedin.com/in/livan-ojito-villanueva'
   });
 
