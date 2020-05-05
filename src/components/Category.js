@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Images from './Images';
 
-class Category extends React.Component{ 
+class Category extends Component{ 
 
   constructor(props){
     super(props);
@@ -48,7 +49,8 @@ class Category extends React.Component{
     const { history } = this.props;
     const { categoryId, imageUser, imageComputer } = this.state;
     const { folder, name } = this.categories[categoryId];
-    let select, refreshButton;
+    let select, hideRefreshButton;
+
     if (typeof(history) === 'undefined' || history === "false"){
       select =  (
         <select value={categoryId} onChange={this.onChange}>
@@ -59,21 +61,17 @@ class Category extends React.Component{
               )
             })}
         </select>);
-      refreshButton = <button onClick={this.refresh}>Refresh</button>;
+      hideRefreshButton = false;
     }else{
       select = <span>{name}</span>;
-      refreshButton = '';
+      hideRefreshButton = true;
     }
 
     return (
       <div className = "categories">
         Category: &nbsp;
         {select}
-        <div className="random-images">
-          You:      <img title={imageUser}     src={`./images/${folder}/${imageUser}.jpg`}     alt="user"/>&nbsp;
-          Computer: <img title={imageComputer} src={`./images/${folder}/${imageComputer}.jpg`} alt="computer"/>&nbsp;&nbsp;
-          {refreshButton}
-        </div>
+        <Images hideRefreshButton={hideRefreshButton}  imageUser={imageUser} imageComputer={imageComputer} folder={folder} refresh={ this.refresh}/>
       </div>
     )
   }
@@ -106,12 +104,12 @@ class Category extends React.Component{
 
   onChange = (e) => {
     const categoryId = e.target.value;
-    let [imageUser, imageComputer] = this.randomizeImages(categoryId);
+    const [imageUser, imageComputer] = this.randomizeImages(categoryId);
     this.setState(() => ({categoryId, imageUser, imageComputer}));
   }
 
   refresh = () => {
-    let [imageUser, imageComputer] = this.randomizeImages(this.state.categoryId);
+    const [imageUser, imageComputer] = this.randomizeImages(this.state.categoryId);
     this.setState(() => ({imageUser, imageComputer}));
   }
 }
