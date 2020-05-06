@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { GameContext }       from './GameContext';
+import { GameContext }       from '../contexts/GameContext';
 import { Link }              from 'react-router-dom';
 import Category              from './Category';
 import StartGame             from './StartGame';

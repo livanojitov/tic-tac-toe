@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { GameContext }       from './GameContext';
+import { GameContext }       from '../contexts/GameContext';
+import { CategoryContext }   from '../contexts/CategoryContext';
 import Category              from './Category';
 import StartGame             from './StartGame';
 import Level                 from './Level';
@@ -7,14 +8,16 @@ import BoardUI               from './BoardUI';
 
 const GameHistory = (props) => {
   const { getGame, dispatch } = useContext(GameContext);
+  const { categories } = useContext(CategoryContext);
   let category = {};
   let categoryId, folder, imageComputer, imageUser, first, level, board, winners, message;
   let game = {};
   const gameId = props.match.params.id;
   game = getGame(gameId);
   if (game){
-    ({categoryId, folder, imageComputer, imageUser, first, level, board, winners, message } = game);
-    category = { folder, imageComputer, imageUser };
+    ({categoryId, imageComputer, imageUser, first, level, board, winners, message } = game);
+    folder = categories[categoryId].folder;
+    category = { folder , imageComputer, imageUser };
   }
   return (
     <div>

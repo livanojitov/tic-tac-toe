@@ -6,7 +6,7 @@ import BoardUI               from './BoardUI';
 import Info                  from './Info';
 import Board                 from './Board';
 import Computer              from './Computer';
-import { GameContext }       from './GameContext';
+import { GameContext }       from '../contexts/GameContext';
 
 class Game extends Component {
   static contextType = GameContext;
@@ -119,7 +119,9 @@ class Game extends Component {
       message,
       first          : this.first,
       level          : this.level,
-      ...this.state.category
+      categoryId     : this.state.category.categoryId,
+      imageUser      : this.state.category.imageUser,
+      imageComputer : this.state.category.imageComputer
     }});
   }
 

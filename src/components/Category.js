@@ -1,30 +1,23 @@
 import React, { Component } from 'react';
 import Images from './Images';
+import { CategoryContext }   from '../contexts/CategoryContext';
 
 class Category extends Component{ 
+  static contextType = CategoryContext;
 
   constructor(props){
     super(props);
-    this.categories = [
-      { name: "La Habana"          , folder: "habana"   , count : 20} ,
-      { name: "Vancouver landmarks", folder: "vancouver", count : 20} , 
-      { name: "Soccer players"     , folder: "soccer"   , count : 20} , 
-      { name: "Fruits & Vegetables", folder: "fruits"   , count : 20} ,
-      { name: "Animals"            , folder: "animals"  , count : 20} , 
-      { name: "Alphabet"           , folder: "alphabet" , count : 26} , 
-      { name: "Puppies"            , folder: "puppies"  , count : 20} , 
-      { name: "Seinfeld"           , folder: "seinfeld" , count : 20}
-    ];
 
     let categoryId = this.props.categoryId;
-    if (!(typeof(categoryId) != undefined && categoryId >=0 && categoryId < this.categories.length)){
-      categoryId = Math.floor(Math.random() * this.categories.length);
+    if (!(typeof(categoryId) != undefined && categoryId >=0 && categoryId < 8)){ // this.categories.length
+      categoryId = Math.floor(Math.random() * 8);
     }
 
     let imageUser = this.props.imageUser;
     let imageComputer = this.props.imageComputer;
     if (!imageUser){
-      [imageUser, imageComputer] = this.randomizeImages(categoryId);
+     imageUser = 0;
+     imageComputer = 1;
     }
  
     this.state = {
@@ -36,7 +29,8 @@ class Category extends Component{
   }
   
   randomizeImages = (categoryId) => {
-    const length = this.categories[categoryId].count;
+    const { categories } = this.context;
+    const length = categories[categoryId].count;
     const imageUser = Math.floor(Math.random() * length);
     let imageComputer = Math.floor(Math.random() * length);
     while ( imageUser === imageComputer){
@@ -46,15 +40,16 @@ class Category extends Component{
   }
 
   render(){
+    const { categories } = this.context;
     const { history } = this.props;
     const { categoryId, imageUser, imageComputer } = this.state;
-    const { folder, name } = this.categories[categoryId];
+    const { folder, name } = categories[categoryId];
     let select, hideRefreshButton;
 
     if (typeof(history) === 'undefined' || history === "false"){
       select =  (
         <select value={categoryId} onChange={this.onChange}>
-          {this.categories.map(
+          {categories.map(
             (category, index) => {
               return (
                 <option key={index} value={index}>{category.name}</option>  
@@ -92,10 +87,11 @@ class Category extends Component{
 
   emitCategory(){
     if (this.props.onCategoryChange){
+      const { categories } = this.context;
       const categoryId = this.state.categoryId;
       this.props.onCategoryChange({
         categoryId,
-        folder        : this.categories[categoryId].folder,
+        folder        : categories[categoryId].folder,
         imageUser     : this.state.imageUser,
         imageComputer : this.state.imageComputer
       });
