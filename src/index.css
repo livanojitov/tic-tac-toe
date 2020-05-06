@@ -168,6 +168,14 @@ hr{
   margin-bottom: 10px;
 }
 
+.see-game, .delete-game{
+  margin: 0 5px;
+}
+
+.delete-game, .back{
+  cursor: pointer;
+}
+
 .see-game a{
   color: black;
 }

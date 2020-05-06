@@ -95,7 +95,7 @@ class Category extends Component{
       const categoryId = this.state.categoryId;
       this.props.onCategoryChange({
         categoryId,
-        ...this.categories[categoryId],
+        folder        : this.categories[categoryId].folder,
         imageUser     : this.state.imageUser,
         imageComputer : this.state.imageComputer
       });

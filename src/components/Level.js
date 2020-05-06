@@ -1,7 +1,7 @@
-import React from 'react';
+import React,{ Component } from 'react';
 import * as constants from './Constants';
 
-class Level extends React.Component {
+class Level extends Component {
 
   state = {
     level : constants.easy

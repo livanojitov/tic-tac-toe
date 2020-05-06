@@ -1,14 +1,14 @@
-import React           from 'react';
-import Category        from './Category';
-import StartGame       from './StartGame';
-import Level           from './Level';
-import BoardUI         from './BoardUI';
-import Info            from './Info';
-import Board           from './Board';
-import Computer        from './Computer';
-import { GameContext } from './GameContext';
+import React, { Component }  from 'react';
+import Category              from './Category';
+import StartGame             from './StartGame';
+import Level                 from './Level';
+import BoardUI               from './BoardUI';
+import Info                  from './Info';
+import Board                 from './Board';
+import Computer              from './Computer';
+import { GameContext }       from './GameContext';
 
-class Game extends React.Component {
+class Game extends Component {
   static contextType = GameContext;
 
   constructor(props){
@@ -119,7 +119,7 @@ class Game extends React.Component {
       message,
       first          : this.first,
       level          : this.level,
-      ...this.state.category,
+      ...this.state.category
     }});
   }
 

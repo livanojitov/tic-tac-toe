@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import * as constants from './Constants';
 
-class StartGame extends React.Component {
+class StartGame extends Component {
 
   state = {
     who : constants.user
