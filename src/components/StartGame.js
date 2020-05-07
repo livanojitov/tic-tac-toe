@@ -13,32 +13,32 @@ class StartGame extends Component {
 
       <div className="question">
 
-        <span title = "Who starts playing the game: You or the computer?">Start?</span>
+        <span title = {constants.startTooltip}>{constants.start}?</span>
 
         <input onChange  = {this.setPlayer} 
                 disabled = {disabled} 
                 type     = "radio" 
                 value    = {constants.user}
                 name     = "player"
-                title    = "You start playing the game."
+                title    = {constants.yesTooltip}
                 checked  = {this.state.who === constants.user}
                 id       = "yes" />
-        <label  disabled = {disabled} htmlFor = "yes" title = "You start playing the game.">Yes</label>
+        <label  disabled = {disabled} htmlFor = "yes" title = {constants.yesTooltip}>{constants.yes}</label>
 
         <input onChange  = {this.setPlayer}
                 disabled = {disabled} 
                 type     = "radio"
                 value    = {constants.computer}
                 name     = "player"
-                title    = "The computer starts playing the game."
+                title    = {constants.noTooltip}
                 checked  = {this.state.who === constants.computer}
                 id       = "no" />
-        <label  disabled = {disabled} htmlFor = "no" title = "The computer starts playing the game.">No</label>   
+        <label  disabled = {disabled} htmlFor = "no" title = {constants.noTooltip}>{constants.no}</label>   
 
       </div>
     ) : (
       <div className="question">
-        Game started by: {first === constants.computer ? 'Computer' : 'You'}
+        {constants.gameStartedBy} {first === constants.computer ? constants.opponent : constants.you}
       </div>
     );
 

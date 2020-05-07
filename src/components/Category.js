@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Images from './Images';
 import { CategoryContext }   from '../contexts/CategoryContext';
+import * as constants from './Constants';
 
 class Category extends Component{ 
   static contextType = CategoryContext;
@@ -64,7 +65,7 @@ class Category extends Component{
 
     return (
       <div className = "categories">
-        Category: &nbsp;
+        {constants.category}: &nbsp;
         {select}
         <Images hideRefreshButton={hideRefreshButton}  imageUser={imageUser} imageComputer={imageComputer} folder={folder} refresh={ this.refresh}/>
       </div>
@@ -87,11 +88,9 @@ class Category extends Component{
 
   emitCategory(){
     if (this.props.onCategoryChange){
-      const { categories } = this.context;
       const categoryId = this.state.categoryId;
       this.props.onCategoryChange({
         categoryId,
-        folder        : categories[categoryId].folder,
         imageUser     : this.state.imageUser,
         imageComputer : this.state.imageComputer
       });

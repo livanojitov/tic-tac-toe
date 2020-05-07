@@ -7,6 +7,7 @@ import Info                  from './Info';
 import Board                 from './Board';
 import Computer              from './Computer';
 import { GameContext }       from '../contexts/GameContext';
+import * as constants        from './Constants';
 
 class Game extends Component {
   static contextType = GameContext;
@@ -40,7 +41,7 @@ class Game extends Component {
           <StartGame disabled={!disabled} onPlayerChange = {this.setFirst} />
           <Level     disabled={!disabled} onLevelChange  = {this.setLevel } />
         </div>
-        {showStartButton &&  ( <div className="start-playing"><button onClick={this.gameInit}>Start the game</button></div>)}
+        {showStartButton &&  ( <div className="start-playing"><button onClick={this.gameInit}>{constants.play}</button></div>)}
         {('imageUser' in category) && (
           <BoardUI category       = {category} 
                    disabled       = {disabled}
@@ -93,9 +94,9 @@ class Game extends Component {
       this.setState(() => ({board : this.board.players}));
       let winners = this.board.isAWinner(this.player);
       if (winners){
-        this.gameOver(this.player === computer ? "You lost!" : "You won!", winners);
+        this.gameOver(this.player === computer ? constants.lost : constants.won, winners);
       }else if (this.board.isFull){
-        this.gameOver("It's a draw!");
+        this.gameOver(constants.draw);
       }else{
         this.player = this.player === computer ? user : computer;
         if (this.player === computer){

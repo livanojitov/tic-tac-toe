@@ -15,32 +15,32 @@ class Level extends Component {
            
       <div className="level">
 
-        <span title = "How easy or hard the computer plays.">Level?</span>
+        <span title = {constants.levelTooltip}>{constants.level}?</span>
 
         <input  onChange = {this.setLevel}
                 disabled = {disabled} 
                 type     = "radio" 
                 value    = {constants.easy} 
                 name     = "level"
-                title    = "The computer plays randomly." 
+                title    = {constants.computerPlaysEasyTooltip} 
                 checked  = {this.state.level === constants.easy}
                 id       = "easy" />
-        <label  disabled = {disabled} htmlFor = "easy" title = "The computer plays randomly." >Easy</label>
+        <label  disabled = {disabled} htmlFor = "easy" title = {constants.computerPlaysEasyTooltip} >{constants.computerPlaysEasy} </label>
 
         <input  onChange = {this.setLevel}
                 disabled = {disabled} 
                 type     = "radio"
                 value    = {constants.hard}
                 name     = "level"
-                title    = "The computer does some thinking before playing."
+                title    = {constants.computerPlaysHardTooltip}
                 checked  = {this.state.level === constants.hard}
                 id       = "hard" />
-        <label  disabled = {disabled} htmlFor = "hard" title = "The computer does some thinking before playing.">Hard</label>  
+        <label  disabled = {disabled} htmlFor = "hard" title = {constants.computerPlaysHardTooltip}>{constants.computerPlaysHard}</label>  
 
       </div>
     ) : (
       <div className="level">
-        {level === 1 ? 'Level: Easy' : 'Level: Hard'}
+        {level === constants.easy ? constants.levelHistoryEasy : constants.levelHistoryHard}
       </div>
     );
 
