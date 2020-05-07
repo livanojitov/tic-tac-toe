@@ -1,35 +1,35 @@
 import * as constants from './Constants';
-const { empty, user, computer, easy, hard,totalSquares } = constants;
+const { EMPTY, USER, COMPUTER, EASY, HARD, TOTAL_SQUARES } = constants;
 let   board = null;
-let   _first = user;
-let   _level = easy;
+let   _first = USER;
+let   _level = EASY;
 let   playsCounter = 0;
 
 class Board {
-  constructor(first = user, level = easy){
-    board = Array(totalSquares).fill(empty);
+  constructor(first = USER, level = EASY){
+    board = Array(TOTAL_SQUARES).fill(EMPTY);
     this.level = level;
     this.first = first;
   }
 
   get empty(){
-    return empty;
+    return EMPTY;
   }
 
   get computer(){
-    return computer;
+    return COMPUTER;
   }
 
   get user(){
-    return user;
+    return USER;
   }
 
   get easy(){
-    return easy;
+    return EASY;
   }
 
   get hard(){
-    return hard;
+    return HARD;
   }
 
   get level(){
@@ -37,7 +37,7 @@ class Board {
   }
 
   set level(level){
-    if (level === easy || level === hard){
+    if (level === EASY || level === HARD){
       _level = level;
     }else{
       throw new Error('Invalid level');
@@ -49,7 +49,7 @@ class Board {
   }
 
   set first(first){
-    if (first === computer || first === user){
+    if (first === COMPUTER || first === USER){
       _first = first;
     }else{
       throw new Error('Invalid starting player');
@@ -61,16 +61,16 @@ class Board {
   } 
 
   get isFull(){
-    return !board.includes(empty);
+    return !board.includes(EMPTY);
   }
 
   get isEmpty(){
-    return (!(board.includes(computer) || board.includes(user)));
+    return (!(board.includes(COMPUTER) || board.includes(USER)));
   }
 
   get emptySquares(){
     return board.reduce((arr, square, index )=> {
-      if (square === empty){
+      if (square === EMPTY){
         arr.push(index);
       }
       return arr;
@@ -82,14 +82,14 @@ class Board {
   }
 
   reset(){
-    board = Array(totalSquares).fill(empty);
+    board = Array(TOTAL_SQUARES).fill(EMPTY);
     playsCounter = 0;
   }
 
   play(player, square){
-    if (square >= 0 && square < board.length && (player === computer || player === user || player === empty)){
+    if (square >= 0 && square < board.length && (player === COMPUTER || player === USER || player === EMPTY)){
       board[square] = player;
-      if (player !== empty){
+      if (player !== EMPTY){
         playsCounter++;
       }else{
         playsCounter--;
@@ -108,13 +108,13 @@ class Board {
       square0 = arr[i][0];
       square1 = arr[i][1];
       square2 = arr[i][2]; 
-      if (board[square0] === player && board[square1] === player  && board[square2] === empty){
+      if (board[square0] === player && board[square1] === player  && board[square2] === EMPTY){
         return square2;
       }
-      if (board[square0] === player  && board[square1] === empty && board[square2] === player){
+      if (board[square0] === player  && board[square1] === EMPTY && board[square2] === player){
         return square1;
       }
-      if (board[square0] === empty  && board[square1] === player  && board[square2] === player){
+      if (board[square0] === EMPTY  && board[square1] === player  && board[square2] === player){
         return square0;
       }
     }
@@ -130,13 +130,13 @@ class Board {
       square0 = arr[i][0];
       square1 = arr[i][1];
       square2 = arr[i][2]; 
-      if (board[square0] === player && board[square1] === empty  && board[square2] === empty){
+      if (board[square0] === player && board[square1] === EMPTY  && board[square2] === EMPTY){
         result.push([square1, square2]);
       }
-      if (board[square0] === empty  && board[square1] === player && board[square2] === empty){
+      if (board[square0] === EMPTY  && board[square1] === player && board[square2] === EMPTY){
         result.push([square0, square2]);
       }
-      if (board[square0] === empty  && board[square1] === empty  && board[square2] === player){
+      if (board[square0] === EMPTY  && board[square1] === EMPTY  && board[square2] === player){
         result.push([square0, square1]);
       }
     }
@@ -157,9 +157,9 @@ class Board {
       square2 = arr[i][2];
       square3 = arr[i][3];
       square4 = arr[i][4];
-      if (board[square0] === empty && 
-        ((board[square1] === empty && board[square2] === player) || (board[square1] === player && board[square2] === empty)) && 
-        ((board[square3] === empty && board[square4] === player) || (board[square3] === player && board[square4] === empty))){
+      if (board[square0] === EMPTY && 
+        ((board[square1] === EMPTY && board[square2] === player) || (board[square1] === player && board[square2] === EMPTY)) && 
+        ((board[square3] === EMPTY && board[square4] === player) || (board[square3] === player && board[square4] === EMPTY))){
         result.push(square0);
       }
     }

@@ -41,7 +41,7 @@ class Game extends Component {
           <StartGame disabled={!disabled} onPlayerChange = {this.setFirst} />
           <Level     disabled={!disabled} onLevelChange  = {this.setLevel } />
         </div>
-        {showStartButton &&  ( <div className="start-playing"><button onClick={this.gameInit}>{constants.play}</button></div>)}
+        {showStartButton &&  ( <div className="start-playing"><button onClick={this.gameInit}>{constants.PLAY}</button></div>)}
         {('imageUser' in category) && (
           <BoardUI category       = {category} 
                    disabled       = {disabled}
@@ -94,9 +94,9 @@ class Game extends Component {
       this.setState(() => ({board : this.board.players}));
       let winners = this.board.isAWinner(this.player);
       if (winners){
-        this.gameOver(this.player === computer ? constants.lost : constants.won, winners);
+        this.gameOver(this.player === computer ? constants.LOST : constants.WON, winners);
       }else if (this.board.isFull){
-        this.gameOver(constants.draw);
+        this.gameOver(constants.DRAW);
       }else{
         this.player = this.player === computer ? user : computer;
         if (this.player === computer){

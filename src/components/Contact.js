@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import * as constants from './Constants';
+const { AUTHOR, EMAIL, GITHUB, LINKEDIN, HIRE_ME } = constants;
 
 const Contact = () => {
 
@@ -12,21 +14,21 @@ const Contact = () => {
   return (
     <div className="contact">
       <p>
-          <span>Author: </span><span className="me">{contact.author}</span>
+          <span>{AUTHOR} </span><span className="me">{contact.author}</span>
       </p>
       <p>
-          <span>Email: </span><span className="me">{contact.email}</span>
+          <span>{EMAIL} </span><span className="me">{contact.email}</span>
       </p>                  
       <p>
-          <span>Github: </span>
+          <span>{GITHUB} </span>
           <a target="_blank" href={contact.github} rel="noopener noreferrer">{contact.github}</a>
       </p>        
       <p>
-          <span>LinkedIn: </span>
+          <span>{LINKEDIN} </span>
           <a target="_blank" href={contact.linkedin} rel="noopener noreferrer">{contact.linkedin}</a>
       </p>    
       <p>
-          <span>Hire me! </span>
+          <span>{HIRE_ME} </span>
       </p>                  
     </div>
   )

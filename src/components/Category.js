@@ -10,7 +10,7 @@ class Category extends Component{
     super(props);
 
     let categoryId = this.props.categoryId;
-    if (!(typeof(categoryId) != undefined && categoryId >=0 && categoryId < 8)){ // this.categories.length
+    if (!(typeof(categoryId) != undefined && categoryId >=0 && categoryId < 8)){
       categoryId = Math.floor(Math.random() * 8);
     }
 
@@ -65,7 +65,7 @@ class Category extends Component{
 
     return (
       <div className = "categories">
-        {constants.category}: &nbsp;
+        <span>{constants.CATEGORY}: </span>
         {select}
         <Images hideRefreshButton={hideRefreshButton}  imageUser={imageUser} imageComputer={imageComputer} folder={folder} refresh={ this.refresh}/>
       </div>

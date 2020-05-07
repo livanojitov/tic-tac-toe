@@ -3,9 +3,9 @@ import Square                from './Square';
 import { CategoryContext }   from '../contexts/CategoryContext';
 import * as constants        from './Constants';
 
-const empty    = constants.empty;
-const computer = constants.computer;
-const user     = constants.user;
+const empty    = constants.EMPTY;
+const computer = constants.COMPUTER;
+const user     = constants.USER;
 let   category;
 
 const BoardUI = (props) => {
@@ -27,6 +27,7 @@ const BoardUI = (props) => {
     }
     
     let folder = categories[categoryId].folder;
+    
     const board = props.board.map((square, ind) => {
       const player = (square === computer)?
                       `${folder}/${imageComputer}` : (

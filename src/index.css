@@ -116,12 +116,16 @@ nav li a:hover{
   width: 50px;
   height: 50px;
   vertical-align: middle;
-  margin: 0 5px;
+  margin-right: 15px;
 }
 
 .random-images, .settings{
   margin: 10px 0;
   font-weight: bold;
+}
+
+.user-image, .computer-image{
+  display: inline;
 }
 
 .level, .question{
@@ -178,6 +182,10 @@ hr{
 
 .see-game a{
   color: black;
+}
+
+.play-again{
+  margin-left: 5px;
 }
 
 @media screen and (min-width: 400px) {

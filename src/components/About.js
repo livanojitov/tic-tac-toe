@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import * as constants from './Constants';
+const { GAME_WRITTEN_WITH, SOURCE_CODE, OTHER_GAMES } = constants;
 
 const About = () => {
 
@@ -31,18 +33,18 @@ const About = () => {
     <div className="about">
 
       <div>
-        <span>This game is written with: </span>
+        <span>{GAME_WRITTEN_WITH} </span>
         <ul>
           {lis}
         </ul>  
       </div> 
 
       <p>
-          <span>Source Code: </span>
+          <span>{SOURCE_CODE} </span>
           <a target="_blank" href={source} rel="noopener noreferrer">{source}</a>
       </p>
       
-      <span>Other games: </span>            
+      <span>{OTHER_GAMES} </span>            
       <ul>
         <li>
           <a target="_blank" href={games.url} rel="noopener noreferrer">{games.name}</a>

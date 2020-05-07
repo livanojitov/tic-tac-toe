@@ -1,10 +1,11 @@
 import React,{ Component } from 'react';
 import * as constants from './Constants';
+const { EASY, LEVEL_TOOLTIP, LEVEL, COMPUTER_PLAYS_EASY_TOOLTIP, COMPUTER_PLAYS_EASY, HARD, COMPUTER_PLAYS_HARD_TOOLTIP, COMPUTER_PLAYS_HARD,  LEVEL_HISTORY_EASY, LEVEL_HISTORY_HARD} = constants;
 
 class Level extends Component {
 
   state = {
-    level : constants.easy
+    level : EASY
   }
 
   render() {
@@ -15,32 +16,32 @@ class Level extends Component {
            
       <div className="level">
 
-        <span title = {constants.levelTooltip}>{constants.level}?</span>
+        <span title = {LEVEL_TOOLTIP}>{LEVEL}?</span>
 
         <input  onChange = {this.setLevel}
                 disabled = {disabled} 
                 type     = "radio" 
-                value    = {constants.easy} 
+                value    = {EASY} 
                 name     = "level"
-                title    = {constants.computerPlaysEasyTooltip} 
-                checked  = {this.state.level === constants.easy}
+                title    = {COMPUTER_PLAYS_EASY_TOOLTIP} 
+                checked  = {this.state.level === EASY}
                 id       = "easy" />
-        <label  disabled = {disabled} htmlFor = "easy" title = {constants.computerPlaysEasyTooltip} >{constants.computerPlaysEasy} </label>
+        <label  disabled = {disabled} htmlFor = "easy" title = {COMPUTER_PLAYS_EASY_TOOLTIP} >{COMPUTER_PLAYS_EASY} </label>
 
         <input  onChange = {this.setLevel}
                 disabled = {disabled} 
                 type     = "radio"
-                value    = {constants.hard}
+                value    = {HARD}
                 name     = "level"
-                title    = {constants.computerPlaysHardTooltip}
-                checked  = {this.state.level === constants.hard}
+                title    = {COMPUTER_PLAYS_HARD_TOOLTIP}
+                checked  = {this.state.level === HARD}
                 id       = "hard" />
-        <label  disabled = {disabled} htmlFor = "hard" title = {constants.computerPlaysHardTooltip}>{constants.computerPlaysHard}</label>  
+        <label  disabled = {disabled} htmlFor = "hard" title = {COMPUTER_PLAYS_HARD_TOOLTIP}>{COMPUTER_PLAYS_HARD}</label>  
 
       </div>
     ) : (
       <div className="level">
-        {level === constants.easy ? constants.levelHistoryEasy : constants.levelHistoryHard}
+        {level === EASY ? LEVEL_HISTORY_EASY : LEVEL_HISTORY_HARD}
       </div>
     );
 

@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { GameContext }       from '../contexts/GameContext';
 import GamesHistory          from './GamesHistory';
+import * as constants from './Constants';
+const { NO_HISTORY_YET} = constants;
 
 const History = () => {
   const { games } = useContext(GameContext);
@@ -23,7 +25,7 @@ const History = () => {
   }else{
     historyGames = (
       <div className="info"> 
-        No history yet. Play some games and comeback
+        {NO_HISTORY_YET}
       </div>  
     )    
   }  

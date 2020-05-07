@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import * as constants from './Constants';
+const { USER, START_TOOLTIP, START, YES_TOOLTIP, YES, COMPUTER, NO_TOOLTIP, NO, GAME_STARTED_BY, OPPONENT, YOU } = constants;
 
 class StartGame extends Component {
 
   state = {
-    who : constants.user
+    who : USER
   } 
 
   render() {
@@ -13,32 +14,32 @@ class StartGame extends Component {
 
       <div className="question">
 
-        <span title = {constants.startTooltip}>{constants.start}?</span>
+        <span title = {START_TOOLTIP}>{START}?</span>
 
         <input onChange  = {this.setPlayer} 
                 disabled = {disabled} 
                 type     = "radio" 
-                value    = {constants.user}
+                value    = {USER}
                 name     = "player"
-                title    = {constants.yesTooltip}
-                checked  = {this.state.who === constants.user}
+                title    = {YES_TOOLTIP}
+                checked  = {this.state.who === USER}
                 id       = "yes" />
-        <label  disabled = {disabled} htmlFor = "yes" title = {constants.yesTooltip}>{constants.yes}</label>
+        <label  disabled = {disabled} htmlFor = "yes" title = {YES_TOOLTIP}>{YES}</label>
 
         <input onChange  = {this.setPlayer}
                 disabled = {disabled} 
                 type     = "radio"
-                value    = {constants.computer}
+                value    = {COMPUTER}
                 name     = "player"
-                title    = {constants.noTooltip}
-                checked  = {this.state.who === constants.computer}
+                title    = {NO_TOOLTIP}
+                checked  = {this.state.who === COMPUTER}
                 id       = "no" />
-        <label  disabled = {disabled} htmlFor = "no" title = {constants.noTooltip}>{constants.no}</label>   
+        <label  disabled = {disabled} htmlFor = "no" title = {NO_TOOLTIP}>{NO}</label>   
 
       </div>
     ) : (
       <div className="question">
-        {constants.gameStartedBy} {first === constants.computer ? constants.opponent : constants.you}
+        {GAME_STARTED_BY} {first === COMPUTER ? OPPONENT : YOU}
       </div>
     );
 
