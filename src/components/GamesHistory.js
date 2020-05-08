@@ -6,7 +6,6 @@ import StartGame             from './StartGame';
 import Level                 from './Level';
 
 const GamesHistory = ({categoryId, imageUser, imageComputer, message, id, first, level}) => {
-
   const {dispatch}  = useContext(GameContext);
 
   return (
@@ -16,11 +15,11 @@ const GamesHistory = ({categoryId, imageUser, imageComputer, message, id, first,
         categoryId    = {categoryId} 
         imageUser     = {imageUser} 
         imageComputer = {imageComputer}
-        history       = {true} /> 
+      /> 
 
       <div className="settings">
-        <StartGame first = {first} history = {true} /> 
-        <Level     level = {level} history = {true} />        
+        <StartGame first = {first}/>
+        <Level     level = {level}/>        
       </div>
       
       <div className="info">

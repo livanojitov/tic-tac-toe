@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
+import { HistoryContext }   from '../contexts/HistoryContext';
 import * as constants from './Constants';
+
 const { USER, START_TOOLTIP, START, YES_TOOLTIP, YES, COMPUTER, NO_TOOLTIP, NO, GAME_STARTED_BY, OPPONENT, YOU } = constants;
 
 class StartGame extends Component {
-
+  static contextType = HistoryContext;
   state = {
     who : USER
   } 
 
   render() {
-    const { disabled, first, history } = this.props;
-    const html = (typeof(history) === 'undefined'  || history === "false") ? (
+    const { history } = this.context;
+    const { disabled, first } = this.props;
+    const html = (!history) ? (
 
       <div className="question">
 

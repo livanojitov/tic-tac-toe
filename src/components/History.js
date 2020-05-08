@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { GameContext }       from '../contexts/GameContext';
 import GamesHistory          from './GamesHistory';
 import * as constants from './Constants';
+
 const { NO_HISTORY_YET} = constants;
 
 const History = () => {
@@ -28,7 +29,8 @@ const History = () => {
         {NO_HISTORY_YET}
       </div>  
     )    
-  }  
+  }
+
   return (
     <div className="history">
         {historyGames}

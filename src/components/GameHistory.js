@@ -11,11 +11,13 @@ const GameHistory = (props) => {
   let categoryId, imageComputer, imageUser, first, level, board, winners, message;
   let game = {};
   const gameId = props.match.params.id;
+
   game = getGame(gameId);
   if (game){
     ({categoryId, imageComputer, imageUser, first, level, board, winners, message } = game);
     category = { categoryId , imageComputer, imageUser };
   }
+  
   return (
     <div>
       { game && (
@@ -25,17 +27,17 @@ const GameHistory = (props) => {
               categoryId    = {categoryId} 
               imageUser     = {imageUser} 
               imageComputer = {imageComputer}
-              history       = {true} />
+          />
 
           <div className="settings">
-            <StartGame first = {first} history = {true} /> 
-            <Level     level = {level} history = {true} />
+            <StartGame first = {first} /> 
+            <Level     level = {level} />
           </div>
 
           <BoardUI category       = {category}
                    board          = {board}
                    winners        = {winners}
-                   history        = {true} />
+          />
 
           <div className="info">
             {message}

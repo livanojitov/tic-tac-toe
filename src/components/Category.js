@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Images from './Images';
 import { CategoryContext }   from '../contexts/CategoryContext';
+import { HistoryContext }   from '../contexts/HistoryContext';
 import * as constants from './Constants';
 
 class Category extends Component{ 
@@ -40,46 +41,67 @@ class Category extends Component{
     return [imageUser, imageComputer]
   }
 
+  randomizeImage = (categoryId, who) => {
+    const { categories } = this.context;
+    const length = categories[categoryId].count;
+    let imageWho, imageOpponent;
+
+    imageOpponent = (who === constants.USER) ? this.state.imageComputer : this.state.imageUser;
+    imageWho = Math.floor(Math.random() * length);
+    while ( imageWho === imageOpponent){
+      imageWho = Math.floor(Math.random() * length);
+    }
+    return imageWho;
+  }
+  
   render(){
     const { categories } = this.context;
-    const { history } = this.props;
     const { categoryId, imageUser, imageComputer } = this.state;
     const { folder, name } = categories[categoryId];
     let select, hideRefreshButton;
 
-    if (typeof(history) === 'undefined' || history === "false"){
-      select =  (
-        <select value={categoryId} onChange={this.onChange}>
-          {categories.map(
-            (category, index) => {
-              return (
-                <option key={index} value={index}>{category.name}</option>  
-              )
-            })}
-        </select>);
-      hideRefreshButton = false;
-    }else{
-      select = <span>{name}</span>;
-      hideRefreshButton = true;
-    }
-
     return (
-      <div className = "categories">
-        <span>{constants.CATEGORY}: </span>
-        {select}
-        <Images hideRefreshButton={hideRefreshButton}  imageUser={imageUser} imageComputer={imageComputer} folder={folder} refresh={ this.refresh}/>
-      </div>
+      <HistoryContext.Consumer>{(historyContext) => {
+      const { history } = historyContext;
+      if (!history){  
+        select =  (
+          <select value={categoryId} onChange={this.onChange}>
+            {categories.map(
+              (category, index) => {
+                return (
+                  <option key={index} value={index}>{category.name}</option>  
+                )
+              })}
+          </select>);
+        hideRefreshButton = false;
+      }else{
+        select = <span>{name}</span>;
+        hideRefreshButton = true;
+      }
+
+      return (
+        <div className = "categories">
+          <span>{constants.CATEGORY}: </span>
+          {select}
+          <Images hideRefreshButton={hideRefreshButton}  imageUser={imageUser} imageComputer={imageComputer} folder={folder} refresh={ this.refresh}/>
+        </div>
+      )
+    }}</HistoryContext.Consumer>
     )
   }
 
   componentDidUpdate(prevProps, prevState){
-    if ((prevState.categoryId !== this.state.categoryId) || (this.state.imageUser !== prevState.imageUser)){
+    if ((prevState.categoryId !== this.state.categoryId) || 
+        (this.state.imageUser !== prevState.imageUser)   || 
+        (this.state.imageComputer !== prevState.imageComputer)){
       this.emitCategory();
     }     
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-   return ((this.state.categoryId !== nextState.categoryId) || (this.state.imageUser !== nextState.imageUser));
+   return ((this.state.categoryId !== nextState.categoryId) || 
+           (this.state.imageUser !== nextState.imageUser)   ||
+           (this.state.imageComputer !== nextState.imageComputer));
   }
 
   componentDidMount(){
@@ -103,9 +125,13 @@ class Category extends Component{
     this.setState(() => ({categoryId, imageUser, imageComputer}));
   }
 
-  refresh = () => {
-    const [imageUser, imageComputer] = this.randomizeImages(this.state.categoryId);
-    this.setState(() => ({imageUser, imageComputer}));
+  refresh = (who) => {
+    let imageWho = this.randomizeImage(this.state.categoryId, who);
+    if (who === constants.USER){
+      this.setState(() => ({imageUser : imageWho}));
+    }else {
+      this.setState(() => ({imageComputer : imageWho}));
+    }  
   }
 }
 

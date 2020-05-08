@@ -1,18 +1,20 @@
 import React,{ Component } from 'react';
+import { HistoryContext }   from '../contexts/HistoryContext';
 import * as constants from './Constants';
+
 const { EASY, LEVEL_TOOLTIP, LEVEL, COMPUTER_PLAYS_EASY_TOOLTIP, COMPUTER_PLAYS_EASY, HARD, COMPUTER_PLAYS_HARD_TOOLTIP, COMPUTER_PLAYS_HARD,  LEVEL_HISTORY_EASY, LEVEL_HISTORY_HARD} = constants;
 
 class Level extends Component {
-
+  static contextType = HistoryContext;
   state = {
     level : EASY
   }
 
   render() {
+    const { history } = this.context;
+    const { disabled, level} = this.props;
 
-    const { disabled, level, history } = this.props;
-
-    const html = (typeof(history) === 'undefined'  || history === "false") ? ( 
+    const html = (!history) ? ( 
            
       <div className="level">
 
