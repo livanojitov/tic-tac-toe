@@ -1,6 +1,6 @@
 import * as constants from './Constants';
 
-const { EMPTY, USER, COMPUTER, HARD } = constants;
+const { EMPTY, USER, COMPUTER, EASY, HARD, NORMAL } = constants;
 
 class Computer{
 
@@ -44,7 +44,7 @@ class Computer{
     let found = false;
     const result  = [];
 
-    if (level === HARD){
+    const playHard = () =>{
       if (this.board.first === USER){
         if (this.board.playsCounter === 1){
           if (players[4] === USER){
@@ -113,10 +113,24 @@ class Computer{
           const emptySquares = this.board.emptySquares;
           this.board.play(COMPUTER,emptySquares[Math.floor(Math.random() * emptySquares.length)]);            
         }
-      }   
-    }else{
+      } 
+    }
+
+    const playEasy = () =>{
       const emptySquares = this.board.emptySquares;
-      this.board.play(COMPUTER,emptySquares[Math.floor(Math.random() * emptySquares.length)]); 
+      this.board.play(COMPUTER,emptySquares[Math.floor(Math.random() * emptySquares.length)]);
+    }
+
+    if (level === HARD){
+      playHard();
+    }else if (level === EASY){
+      playEasy();
+    }else if (level === NORMAL){
+      if (Math.floor(Math.random() * 2)){
+        playHard();
+      }else{
+        playEasy();
+      }
     }
   }
  

@@ -1,5 +1,5 @@
 import * as constants from './Constants';
-const { EMPTY, USER, COMPUTER, EASY, HARD, TOTAL_SQUARES } = constants;
+const { EMPTY, USER, COMPUTER, EASY, HARD, NORMAL, TOTAL_SQUARES } = constants;
 let   board = null;
 let   _first = USER;
 let   _level = EASY;
@@ -37,7 +37,7 @@ class Board {
   }
 
   set level(level){
-    if (level === EASY || level === HARD){
+    if (level === EASY || level === HARD || level === NORMAL){
       _level = level;
     }else{
       throw new Error('Invalid level');
