@@ -139,16 +139,19 @@ nav li a:hover{
   margin: 0 2px;
 }
 
+.levels {
+  margin-left: 5px;
+}
 .level, .question{
   display: inline-block;
 }
 
 .question{
-  width: 45%
+  width: 55%
 }
 
 .level{
-  width: 55%;
+  width: 45%;
 }
 
 .level span, .question span{

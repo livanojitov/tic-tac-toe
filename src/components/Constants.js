@@ -14,9 +14,9 @@ const CATEGORY = 'Category';
 const YOU = 'You';
 const OPPONENT = 'Computer';
 const REFRESH = 'Refresh';
-const USER_IMAGE_TOOLTIP = 'You will play with this image';
-const COMPUTER_IMAGE_TOOLTIP = 'The computer will play with this image';
-const REFRESH_TOOLTIP = 'Click to refresh the two images';
+const USER_IMAGE_TOOLTIP = 'You will play with this image.';
+const COMPUTER_IMAGE_TOOLTIP = 'The computer will play with this image.';
+const REFRESH_TOOLTIP = 'Click to refresh the image.';
 
 const START = 'Start';
 const YES = 'Yes';
