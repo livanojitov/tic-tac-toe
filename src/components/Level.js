@@ -2,7 +2,7 @@ import React,{ Component } from 'react';
 import { HistoryContext }   from '../contexts/HistoryContext';
 import * as constants from './Constants';
 
-const { LEVEL, LEVEL_TOOLTIP, EASY, HARD, NORMAL, COMPUTER_PLAYS_EASY, COMPUTER_PLAYS_HARD, COMPUTER_PLAYS_NORMAL, LEVEL_HISTORY_EASY, LEVEL_HISTORY_HARD, LEVEL_HISTORY_NORMAL} = constants;
+const { EASY, LEVEL_TOOLTIP, LEVEL, COMPUTER_PLAYS_EASY_TOOLTIP, COMPUTER_PLAYS_EASY, HARD, COMPUTER_PLAYS_HARD_TOOLTIP, COMPUTER_PLAYS_HARD,  LEVEL_HISTORY_EASY, LEVEL_HISTORY_HARD} = constants;
 
 class Level extends Component {
   static contextType = HistoryContext;
@@ -20,16 +20,30 @@ class Level extends Component {
 
         <span title = {LEVEL_TOOLTIP}>{LEVEL}?</span>
 
-        <select onChange={this.setLevel} disabled = {disabled} >
-          <option key={EASY}   value={EASY}>{COMPUTER_PLAYS_EASY}</option>  
-          <option key={HARD}   value={HARD}>{COMPUTER_PLAYS_HARD}</option>  
-          <option key={NORMAL} value={NORMAL}>{COMPUTER_PLAYS_NORMAL}</option>  
-        </select>
+        <input  onChange = {this.setLevel}
+                disabled = {disabled} 
+                type     = "radio" 
+                value    = {EASY} 
+                name     = "level"
+                title    = {COMPUTER_PLAYS_EASY_TOOLTIP} 
+                checked  = {this.state.level === EASY}
+                id       = "easy" />
+        <label  disabled = {disabled} htmlFor = "easy" title = {COMPUTER_PLAYS_EASY_TOOLTIP} >{COMPUTER_PLAYS_EASY} </label>
+
+        <input  onChange = {this.setLevel}
+                disabled = {disabled} 
+                type     = "radio"
+                value    = {HARD}
+                name     = "level"
+                title    = {COMPUTER_PLAYS_HARD_TOOLTIP}
+                checked  = {this.state.level === HARD}
+                id       = "hard" />
+        <label  disabled = {disabled} htmlFor = "hard" title = {COMPUTER_PLAYS_HARD_TOOLTIP}>{COMPUTER_PLAYS_HARD}</label>  
 
       </div>
     ) : (
       <div className="level">
-        {level === EASY ? LEVEL_HISTORY_EASY : ((level === HARD) ? LEVEL_HISTORY_HARD : LEVEL_HISTORY_NORMAL)}
+        {level === EASY ? LEVEL_HISTORY_EASY : LEVEL_HISTORY_HARD}
       </div>
     );
 

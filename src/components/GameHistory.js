@@ -20,7 +20,7 @@ const GameHistory = (props) => {
   }
   
   useEffect(() => {
-    return () => {
+    return () => {console.log("unmounting..");
       changeHistory(0);
     }
   })
