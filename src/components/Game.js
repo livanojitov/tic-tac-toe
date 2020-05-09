@@ -23,7 +23,7 @@ class Game extends Component {
     this.timeout = 1;    
     this.message = '';
     this.state = {
-      categoryId: undefined,
+      categoryId: -1,
       imageUser: 0,      
       imageComputer: 1,
       disabled: true,
@@ -40,13 +40,13 @@ class Game extends Component {
     return(
       <div className="game">
         <Category onCategoryChange = {this.setCategory}/>
-        {!!categoryId && ( <Images categoryId={categoryId} onImageChange = { this.setImages}/> )}
+        {categoryId >= 0 && ( <Images categoryId={categoryId} onImageChange = { this.setImages}/> )}
         <div className="settings">
           <StartGame disabled={!disabled} onPlayerChange = {this.setFirst} />
           <Level     disabled={!disabled} onLevelChange  = {this.setLevel } />
         </div>
         {showStartButton &&  ( <div className="start-playing"><button onClick={this.gameInit}>{constants.PLAY}</button></div>)}
-        {!!categoryId && (
+        {categoryId >= 0 && (
           <BoardUI categoryId     = {categoryId} 
                    imageUser      = {imageUser}
                    imageComputer  = {imageComputer}
