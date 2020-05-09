@@ -40,13 +40,13 @@ class Game extends Component {
     return(
       <div className="game">
         <Category onCategoryChange = {this.setCategory}/>
-        {this.state.categoryId && ( <Images categoryId={this.state.categoryId} onImageChange = { this.setImages}/> )}
+        {!!categoryId && ( <Images categoryId={categoryId} onImageChange = { this.setImages}/> )}
         <div className="settings">
           <StartGame disabled={!disabled} onPlayerChange = {this.setFirst} />
           <Level     disabled={!disabled} onLevelChange  = {this.setLevel } />
         </div>
         {showStartButton &&  ( <div className="start-playing"><button onClick={this.gameInit}>{constants.PLAY}</button></div>)}
-        {categoryId && (
+        {!!categoryId && (
           <BoardUI categoryId     = {categoryId} 
                    imageUser      = {imageUser}
                    imageComputer  = {imageComputer}
