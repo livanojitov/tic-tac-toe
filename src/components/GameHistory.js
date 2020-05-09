@@ -1,13 +1,15 @@
-import React, { useContext } from 'react';
-import { GameContext }       from '../contexts/GameContext';
-import Category              from './Category';
-import Images                from './Images';
-import StartGame             from './StartGame';
-import Level                 from './Level';
-import BoardUI               from './BoardUI';
+import React, { useContext, useEffect } from 'react';
+import { GameContext }                  from '../contexts/GameContext';
+import Category                         from './Category';
+import Images                           from './Images';
+import StartGame                        from './StartGame';
+import Level                            from './Level';
+import BoardUI                          from './BoardUI';
+import { HistoryContext }               from '../contexts/HistoryContext';
 
 const GameHistory = (props) => {
   const { getGame, dispatch } = useContext(GameContext);
+  const { changeHistory }  = useContext(HistoryContext);
   let categoryId, imageComputer, imageUser, first, level, board, winners, message;
   let game = {};
   const gameId = props.match.params.id;
@@ -17,6 +19,12 @@ const GameHistory = (props) => {
     ({categoryId, imageComputer, imageUser, first, level, board, winners, message } = game);
   }
   
+  useEffect(() => {
+    return () => {console.log("unmounting..");
+      changeHistory(0);
+    }
+  })
+
   return (
     <div>
       { game && (

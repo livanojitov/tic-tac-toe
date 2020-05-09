@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { GameContext }       from '../contexts/GameContext';
 import { Link }              from 'react-router-dom';
 import Category              from './Category';
+import Images                from './Images';
 import StartGame             from './StartGame';
 import Level                 from './Level';
 
@@ -11,11 +12,9 @@ const GamesHistory = ({categoryId, imageUser, imageComputer, message, id, first,
   return (
     <div className="games-history">
 
-      <Category 
-        categoryId    = {categoryId} 
-        imageUser     = {imageUser} 
-        imageComputer = {imageComputer}
-      /> 
+      <Category categoryId = {categoryId}/>
+
+      <Images categoryId={categoryId}/>
 
       <div className="settings">
         <StartGame first = {first}/>
