@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { GameContext }       from '../contexts/GameContext';
 import GamesHistory          from './GamesHistory';
-import * as constants from './Constants';
+import * as constants        from './Constants';
 
 const { NO_HISTORY_YET} = constants;
 

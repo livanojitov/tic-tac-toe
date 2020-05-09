@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Images from './Images';
 import { CategoryContext }   from '../contexts/CategoryContext';
 import { HistoryContext }   from '../contexts/HistoryContext';
 import * as constants from './Constants';
@@ -14,51 +13,18 @@ class Category extends Component{
     if (!(typeof(categoryId) != undefined && categoryId >=0 && categoryId < 8)){
       categoryId = Math.floor(Math.random() * 8);
     }
-
-    let imageUser = this.props.imageUser;
-    let imageComputer = this.props.imageComputer;
-    if (!imageUser){
-     imageUser = 0;
-     imageComputer = 1;
-    }
  
     this.state = {
-      categoryId,
-      imageUser,
-      imageComputer
+      categoryId
     }
 
-  }
-  
-  randomizeImages = (categoryId) => {
-    const { categories } = this.context;
-    const length = categories[categoryId].count;
-    const imageUser = Math.floor(Math.random() * length);
-    let imageComputer = Math.floor(Math.random() * length);
-    while ( imageUser === imageComputer){
-        imageComputer = Math.floor(Math.random() * length);
-    }
-    return [imageUser, imageComputer]
-  }
-
-  randomizeImage = (categoryId, who) => {
-    const { categories } = this.context;
-    const length = categories[categoryId].count;
-    let imageWho, imageOpponent;
-
-    imageOpponent = (who === constants.USER) ? this.state.imageComputer : this.state.imageUser;
-    imageWho = Math.floor(Math.random() * length);
-    while ( imageWho === imageOpponent){
-      imageWho = Math.floor(Math.random() * length);
-    }
-    return imageWho;
   }
   
   render(){
     const { categories } = this.context;
-    const { categoryId, imageUser, imageComputer } = this.state;
-    const { folder, name } = categories[categoryId];
-    let select, hideRefreshButton;
+    const { categoryId } = this.state;
+    const { name } = categories[categoryId];
+    let select;
 
     return (
       <HistoryContext.Consumer>{(historyContext) => {
@@ -73,17 +39,14 @@ class Category extends Component{
                 )
               })}
           </select>);
-        hideRefreshButton = false;
       }else{
         select = <span>{name}</span>;
-        hideRefreshButton = true;
       }
 
       return (
         <div className = "categories">
           <span>{constants.CATEGORY}: </span>
           {select}
-          <Images hideRefreshButton={hideRefreshButton}  imageUser={imageUser} imageComputer={imageComputer} folder={folder} refresh={ this.refresh}/>
         </div>
       )
     }}</HistoryContext.Consumer>
@@ -91,17 +54,13 @@ class Category extends Component{
   }
 
   componentDidUpdate(prevProps, prevState){
-    if ((prevState.categoryId !== this.state.categoryId) || 
-        (this.state.imageUser !== prevState.imageUser)   || 
-        (this.state.imageComputer !== prevState.imageComputer)){
+    if (prevState.categoryId !== this.state.categoryId){
       this.emitCategory();
     }     
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-   return ((this.state.categoryId !== nextState.categoryId) || 
-           (this.state.imageUser !== nextState.imageUser)   ||
-           (this.state.imageComputer !== nextState.imageComputer));
+  shouldComponentUpdate(nextProps, nextState){
+   return (this.state.categoryId !== nextState.categoryId);
   }
 
   componentDidMount(){
@@ -112,27 +71,17 @@ class Category extends Component{
     if (this.props.onCategoryChange){
       const categoryId = this.state.categoryId;
       this.props.onCategoryChange({
-        categoryId,
-        imageUser     : this.state.imageUser,
-        imageComputer : this.state.imageComputer
+        categoryId
       });
     }
   }
 
   onChange = (e) => {
     const categoryId = e.target.value;
-    const [imageUser, imageComputer] = this.randomizeImages(categoryId);
-    this.setState(() => ({categoryId, imageUser, imageComputer}));
+    this.setState(() => ({categoryId}));
   }
 
-  refresh = (who) => {
-    let imageWho = this.randomizeImage(this.state.categoryId, who);
-    if (who === constants.USER){
-      this.setState(() => ({imageUser : imageWho}));
-    }else {
-      this.setState(() => ({imageComputer : imageWho}));
-    }  
-  }
+
 }
 
 export default Category;

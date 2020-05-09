@@ -7,25 +7,27 @@ import * as constants        from './Constants';
 const empty    = constants.EMPTY;
 const computer = constants.COMPUTER;
 const user     = constants.USER;
-let   category;
+let   categoryId, imageUser, imageComputer;
 
 const BoardUI = (props) => {
     const { categories } = useContext(CategoryContext);
     const { history    } = useContext(HistoryContext);
 
-    if (!category){
-      category = props.category;
+    if (!categoryId){
+      categoryId = props.categoryId;
+      imageUser = props.imageUser;
+      imageComputer = props.imageComputer;
     }
 
-    const { winners, gameOver,   category:category1} = props;
-    let   { categoryId1, imageUser1, imageComputer1 } = category1;
-    let   { categoryId,  imageUser,  imageComputer  } = category;
+    const { winners, gameOver, categoryId:categoryId1, imageUser:imageUser1, imageComputer:imageComputer1} = props;
+
     if ((categoryId1    !== categoryId)   || 
         (imageUser1     !== imageUser)    ||
         (imageComputer1 !== imageComputer)){
       if (!gameOver){
-        category = category1;   
-        ({ categoryId, imageComputer, imageUser } = category);
+        categoryId = categoryId1;
+        imageUser = imageUser1;
+        imageComputer = imageComputer1;
       }
     }
     

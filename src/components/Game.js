@@ -1,5 +1,6 @@
 import React, { Component }  from 'react';
 import Category              from './Category';
+import Images                from './Images';
 import StartGame             from './StartGame';
 import Level                 from './Level';
 import BoardUI               from './BoardUI';
@@ -22,7 +23,9 @@ class Game extends Component {
     this.timeout = 1;    
     this.message = '';
     this.state = {
-      category: {},
+      categoryId: undefined,
+      imageUser: 0,      
+      imageComputer: 1,
       disabled: true,
       reset: false,
       board: this.board.players,
@@ -33,17 +36,20 @@ class Game extends Component {
   }
 
   render(){
-    const {disabled, category, board, winners, gameOver, showStartButton} = this.state;
+    const {disabled, categoryId, board, winners, gameOver, showStartButton, imageUser, imageComputer} = this.state;
     return(
       <div className="game">
-        <Category onCategoryChange = {this.setCategory}/>  
+        <Category onCategoryChange = {this.setCategory}/>
+        {this.state.categoryId && ( <Images categoryId={this.state.categoryId} onImageChange = { this.setImages}/> )}
         <div className="settings">
           <StartGame disabled={!disabled} onPlayerChange = {this.setFirst} />
           <Level     disabled={!disabled} onLevelChange  = {this.setLevel } />
         </div>
         {showStartButton &&  ( <div className="start-playing"><button onClick={this.gameInit}>{constants.PLAY}</button></div>)}
-        {('imageUser' in category) && (
-          <BoardUI category       = {category} 
+        {categoryId && (
+          <BoardUI categoryId     = {categoryId} 
+                   imageUser      = {imageUser}
+                   imageComputer  = {imageComputer}
                    disabled       = {disabled}
                    board          = {board}
                    onUserPlayed   = {this.gamePlay}
@@ -120,14 +126,18 @@ class Game extends Component {
       message,
       first          : this.first,
       level          : this.level,
-      categoryId     : this.state.category.categoryId,
-      imageUser      : this.state.category.imageUser,
-      imageComputer : this.state.category.imageComputer
+      categoryId     : this.state.categoryId,
+      imageUser      : this.state.imageUser,
+      imageComputer  : this.state.imageComputer
     }});
   }
 
-  setCategory = (category) => {
-    this.setState(() => ({category}));
+  setCategory = (categoryId) => {
+    this.setState(() => (categoryId));
+  }
+
+  setImages = (images) => {
+      this.setState(() => (images));
   }
 
   setFirst = (player) => {

@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { GameContext }       from '../contexts/GameContext';
 import Category              from './Category';
+import Images                from './Images';
 import StartGame             from './StartGame';
 import Level                 from './Level';
 import BoardUI               from './BoardUI';
 
 const GameHistory = (props) => {
   const { getGame, dispatch } = useContext(GameContext);
-  let category = {};
   let categoryId, imageComputer, imageUser, first, level, board, winners, message;
   let game = {};
   const gameId = props.match.params.id;
@@ -15,7 +15,6 @@ const GameHistory = (props) => {
   game = getGame(gameId);
   if (game){
     ({categoryId, imageComputer, imageUser, first, level, board, winners, message } = game);
-    category = { categoryId , imageComputer, imageUser };
   }
   
   return (
@@ -23,18 +22,18 @@ const GameHistory = (props) => {
       { game && (
       <div className="game-history">
 
-          <Category 
-              categoryId    = {categoryId} 
-              imageUser     = {imageUser} 
-              imageComputer = {imageComputer}
-          />
+          <Category categoryId = {categoryId}/>
+
+          <Images categoryId={categoryId}/>
 
           <div className="settings">
             <StartGame first = {first} /> 
             <Level     level = {level} />
           </div>
 
-          <BoardUI category       = {category}
+          <BoardUI categoryId     = {categoryId}
+                   imageUser      = {imageUser}
+                   imageComputer  = {imageComputer}                   
                    board          = {board}
                    winners        = {winners}
           />
