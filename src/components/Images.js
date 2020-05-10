@@ -47,7 +47,7 @@ const Images = ({categoryId, imageUser:imageUser1, imageComputer:imageComputer1,
   }
 
   return (
-      <div className={ history ? "random-images history" : "random-images"}>
+      <div className={ history ? "images history" : "images"}>
 
         <div className='user-image' title={ !history ? USER_IMAGE_TOOLTIP : "" }>
           <span>{YOU}: </span>

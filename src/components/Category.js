@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CategoryContext }   from '../contexts/CategoryContext';
+import { CategoryContext }  from '../contexts/CategoryContext';
 import { HistoryContext }   from '../contexts/HistoryContext';
 import * as constants from './Constants';
 

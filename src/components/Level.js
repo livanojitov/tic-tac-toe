@@ -2,7 +2,7 @@ import React,{ Component } from 'react';
 import { HistoryContext }   from '../contexts/HistoryContext';
 import * as constants from './Constants';
 
-const { LEVEL, LEVEL_TOOLTIP, EASY, HARD, NORMAL, COMPUTER_PLAYS_EASY, COMPUTER_PLAYS_HARD, COMPUTER_PLAYS_NORMAL, LEVEL_HISTORY_EASY, LEVEL_HISTORY_HARD, LEVEL_HISTORY_NORMAL} = constants;
+const { LEVEL, LEVEL_TOOLTIP, EASY, HARD, NORMAL, LEVEL_EASY, LEVEL_HARD, LEVEL_NORMAL, LEVEL_EASY_HISTORY, LEVEL_HARD_HISTORY, LEVEL_NORMAL_HISTORY} = constants;
 
 class Level extends Component {
   static contextType = HistoryContext;
@@ -21,15 +21,15 @@ class Level extends Component {
         <span title = {LEVEL_TOOLTIP}>{LEVEL}?</span>
 
         <select className="levels" onChange={this.setLevel} disabled = {disabled} >
-          <option key={EASY}   value={EASY}>{COMPUTER_PLAYS_EASY}</option>  
-          <option key={HARD}   value={HARD}>{COMPUTER_PLAYS_HARD}</option>  
-          <option key={NORMAL} value={NORMAL}>{COMPUTER_PLAYS_NORMAL}</option>  
+          <option key={EASY}   value={EASY}>{LEVEL_EASY}</option>  
+          <option key={HARD}   value={HARD}>{LEVEL_HARD}</option>  
+          <option key={NORMAL} value={NORMAL}>{LEVEL_NORMAL}</option>  
         </select>
 
       </div>
     ) : (
       <div className="level">
-        {level === EASY ? LEVEL_HISTORY_EASY : ((level === HARD) ? LEVEL_HISTORY_HARD : LEVEL_HISTORY_NORMAL)}
+        {level === EASY ? LEVEL_EASY_HISTORY : ((level === HARD) ? LEVEL_HARD_HISTORY : LEVEL_NORMAL_HISTORY)}
       </div>
     );
 

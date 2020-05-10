@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { HistoryContext }   from '../contexts/HistoryContext';
 import * as constants from './Constants';
 
-const { USER, START_TOOLTIP, START, YES_TOOLTIP, YES, COMPUTER, NO_TOOLTIP, NO, GAME_STARTED_BY, OPPONENT, YOU } = constants;
+const { USER, START_TOOLTIP, START, YES_TOOLTIP, YES, COMPUTER, NO_TOOLTIP, NO, START_HISTORY, OPPONENT, YOU } = constants;
 
 class StartGame extends Component {
   static contextType = HistoryContext;
@@ -42,7 +42,7 @@ class StartGame extends Component {
       </div>
     ) : (
       <div className="question">
-        {GAME_STARTED_BY} {first === COMPUTER ? OPPONENT : YOU}
+        {START_HISTORY} {first === COMPUTER ? OPPONENT : YOU}
       </div>
     );
 
