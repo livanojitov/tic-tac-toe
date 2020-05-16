@@ -13,7 +13,8 @@ const CategoryContextProvider = (props) => {
     { name: "Alphabet"           , folder: "alphabet" , count : 26} , 
     { name: "Puppies"            , folder: "puppies"  , count : 20} , 
     { name: "Seinfeld"           , folder: "seinfeld" , count : 20} ,
-    { name: "Spain"              , folder: "spain"    , count : 20}
+    { name: "Spain"              , folder: "spain"    , count : 20} ,
+    { name: "Germany"            , folder: "germany"  , count : 20}
   ]);
 
   return (
