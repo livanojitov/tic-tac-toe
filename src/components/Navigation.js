@@ -21,7 +21,7 @@ const Navigation = () => {
   return (
     <nav>
       <input type="checkbox" id="menu" />
-      <label class="mylabel" for="menu">
+      <label className="mylabel" htmlFor="menu">
         <div id="burger-container">
             <div id="burger">
               <span>&nbsp;</span>

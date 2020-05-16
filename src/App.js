@@ -11,6 +11,13 @@ import About                            from './components/About';
 import Contact                          from './components/Contact';
 import GameHistory                      from './components/GameHistory';
 
+const closeMobileMenu = () => {
+  var chk = document.querySelector('input#menu');
+  if (chk){
+    chk.checked = false;
+  }
+}
+
 function App() {
   return (
     <GameContextProvider>
@@ -22,11 +29,11 @@ function App() {
           </div>
           <CategoryContextProvider>
             <Switch>
-              <Route path="/"        exact component={Game}        />
-              <Route path="/history" exact component={History1}    /> 
-              <Route path="/about"   exact component={About}       />
-              <Route path="/contact" exact component={Contact}     />
-              <Route path="/:id"     exact component={GameHistory} /> 
+              <Route path="/"        exact render={(props)=>{closeMobileMenu();return (<Game        {...props}/>)}}  />
+              <Route path="/history" exact render={(props)=>{closeMobileMenu();return (<History1    {...props}/>)}}  />
+              <Route path="/about"   exact render={(props)=>{closeMobileMenu();return (<About       {...props}/>)}}  />
+              <Route path="/contact" exact render={(props)=>{closeMobileMenu();return (<Contact     {...props}/>)}}  /> 
+              <Route path="/:id"     exact render={(props)=>{closeMobileMenu();return (<GameHistory {...props}/>)}}  /> 
             </Switch>
           </CategoryContextProvider>
         </BrowserRouter>

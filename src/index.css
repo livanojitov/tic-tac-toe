@@ -261,17 +261,17 @@ label.mylabel{
     transition: all ease 1s;
   }
   
-  input#menu:checked ~ label >  #burger-container span:nth-child(2){
+  input#menu:checked + label > #burger-container span:nth-child(2){
     width: 0;
     opacity: 0;
   }
   
-  input#menu:checked ~ label > #burger-container span:nth-child(3){
+  input#menu:checked + label > #burger-container span:nth-child(3){
     transform: rotate(45deg);
     top: -9px;
   }
   
-  input#menu:checked ~ label >  #burger-container span:nth-child(1){
+  input#menu:checked + label > #burger-container span:nth-child(1){
     transform: rotate(-45deg);
     top: 9px;
   }  
