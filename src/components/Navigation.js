@@ -20,7 +20,17 @@ const Navigation = () => {
 
   return (
     <nav>
-      <ul>
+      <input type="checkbox" id="menu" />
+      <label class="mylabel" for="menu">
+        <div id="burger-container">
+            <div id="burger">
+              <span>&nbsp;</span>
+              <span>&nbsp;</span>
+              <span>&nbsp;</span>
+            </div>
+          </div>
+      </label>      
+      <ul className='nav'>
         {lis}                  
       </ul>
     </nav>

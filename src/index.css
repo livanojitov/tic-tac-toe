@@ -9,26 +9,17 @@ body{
 }
 
 header, nav{ 
-  display: block;
-}
-
-header{
-  float: left;
+  display:inline-block;
+  width: 50%;
 }
 
 nav{
-  float: right;
+  vertical-align: super;
 }
 
 .header, .about, .contact{
   width: 95%;
   margin: 0 auto
-}
-
-.header:after{
-  content: "";
-  display: block;
-  clear: both;
 }
 
 nav ul{
@@ -203,9 +194,98 @@ hr{
   margin-left: 5px;
 }
 
-@media screen and (min-width: 400px) {
-  .images img{
-    width: 100px;
-    height: 100px;
-  }    
+input#menu{
+  display: none;
+}
+
+label.mylabel{
+  display: none;
+  cursor: pointer;
+} 
+
+#burger-container{
+  position: relative;
+  width: 100%;
+}
+
+#burger{
+  cursor: pointer;
+  display: block;
+}
+
+#burger span{
+  background: green;
+  display: block;
+  left: 80%;
+  width: 30px;
+  height: 3px;
+  margin-bottom: 6px;
+  position: relative;
+  top: 0;
+  transition: all ease-in-out 0.4s;
+}
+
+@media screen and (max-width: 400px) {
+
+  .header{
+    margin-top: 10px;
+  }
+
+  header{
+    vertical-align: top;
+    width: 40%;
+  }
+
+  nav{
+    width: 60%;
+  }
+
+  nav li{
+    display: block;
+  }
+  
+  nav a{
+    display: block;
+    text-decoration: none;
+    padding: 5px;
+    background-color: #8fbc8f;
+  }
+
+  label.mylabel{
+    display: inline-block;
+    width: 100%;
+  }
+  
+  input#menu:checked ~ ul{
+    max-height: 150px;
+    transition: all ease 1s;
+  }
+  
+  input#menu:checked ~ label >  #burger-container span:nth-child(2){
+    width: 0;
+    opacity: 0;
+  }
+  
+  input#menu:checked ~ label > #burger-container span:nth-child(3){
+    transform: rotate(45deg);
+    top: -9px;
+  }
+  
+  input#menu:checked ~ label >  #burger-container span:nth-child(1){
+    transform: rotate(-45deg);
+    top: 9px;
+  }  
+
+  #burger{
+    margin-top: 10px;
+  }
+  
+  ul.nav{
+    margin: 0;
+    display: block;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    text-align: left;
+  }
 }

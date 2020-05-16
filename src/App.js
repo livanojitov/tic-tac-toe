@@ -23,7 +23,7 @@ function App() {
           <CategoryContextProvider>
             <Switch>
               <Route path="/"        exact component={Game}        />
-              <Route path="/history" exact component={History1}     /> 
+              <Route path="/history" exact component={History1}    /> 
               <Route path="/about"   exact component={About}       />
               <Route path="/contact" exact component={Contact}     />
               <Route path="/:id"     exact component={GameHistory} /> 
