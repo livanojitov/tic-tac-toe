@@ -14,14 +14,14 @@ const History = () => {
   if (games && games.length > 0){
     historyGames = games.map((game) => {  
       return (<GamesHistory 
-                key            = {game.id} 
-                message        = {game.message}
+                key            = {game.id}
                 imageUser      = {game.imageUser}
-                imageComputer  = {game.imageComputer} 
+                imageComputer  = {game.imageComputer}
                 categoryId     = {game.categoryId}
                 id             = {game.id}
                 first          = {game.first}
                 level          = {game.level}
+                result         = {game.result}
               />
         )
     });

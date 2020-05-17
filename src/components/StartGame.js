@@ -23,25 +23,10 @@ class StartGame extends Component {
 
                   <span title = {DICTIONARY[language].START_TOOLTIP}>{DICTIONARY[language].START}?</span>
 
-                  <input onChange  = {this.setPlayer} 
-                          disabled = {disabled} 
-                          type     = "radio" 
-                          value    = {USER}
-                          name     = "player"
-                          title    = {DICTIONARY[language].YES_TOOLTIP}
-                          checked  = {this.state.who === USER}
-                          id       = "yes" />
-                  <label  disabled = {disabled} htmlFor = "yes" title = {DICTIONARY[language].YES_TOOLTIP}>{DICTIONARY[language].YES}</label>
-
-                  <input onChange  = {this.setPlayer}
-                          disabled = {disabled} 
-                          type     = "radio"
-                          value    = {COMPUTER}
-                          name     = "player"
-                          title    = {DICTIONARY[language].NO_TOOLTIP}
-                          checked  = {this.state.who === COMPUTER}
-                          id       = "no" />
-                  <label  disabled = {disabled} htmlFor = "no" title = {DICTIONARY[language].NO_TOOLTIP}>{DICTIONARY[language].NO}</label>   
+                  <select className="" onChange={this.setPlayer} disabled = {disabled} >
+                    <option key="0"  value={USER}>{DICTIONARY[language].YES}</option>  
+                    <option key="1"  value={COMPUTER}>{DICTIONARY[language].NO}</option>  
+                  </select> 
 
                 </div>
               ) : (
