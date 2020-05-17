@@ -113,8 +113,8 @@ nav li a:hover{
 }
 
 .images img{
-  width: 45px;
-  height: 45px;
+  width: 35px;
+  height: 35px;
   vertical-align: middle;
 }
 
@@ -125,10 +125,6 @@ nav li a:hover{
 
 .user-image, .computer-image{
   display: inline;
-}
-
-.computer-image{
-  margin-left: 3px;
 }
 
 .history .user-image{
@@ -157,14 +153,6 @@ nav li a:hover{
 
 .level span, .question span{
   cursor: default;
-}
-
-.history .question, .game-history .question{
-  width: 70%;
-}
-
-.history .level, .game-history .level{
-  width: 30%;
 }
 
 input[type=radio]:not([disabled]), .yes:not([disabled]), .no:not([disabled]){
