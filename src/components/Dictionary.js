@@ -1,13 +1,15 @@
 const EMPTY = 0;
 const COMPUTER = 1;
 const USER = 2;
+const TOTAL_SQUARES = 9;
 const EASY = 1;
 const HARD = 2;
 const NORMAL = 3;
-const TOTAL_SQUARES = 9;
 const LOST = 0;
 const WON =  1;
 const DRAW = 2;
+
+
 const DICTIONARY = [
 {
   CATEGORY: 'Category',
@@ -21,7 +23,7 @@ const DICTIONARY = [
   
   START: 'Start',
   START_TOOLTIP: 'Who starts playing the game: You or the computer?',
-  START_HISTORY: 'Game started by:',
+  START_HISTORY: 'Started by:',
   YES: 'Yes',
   YES_TOOLTIP: 'You start playing the game.',
   NO: 'No',
@@ -48,7 +50,7 @@ const DICTIONARY = [
   OTHER_GAMES: 'Other games:',
   
   AUTHOR: 'Author:',
-  EMAIL: 'Email:',
+  EMAIL: 'E-mail:',
   GITHUB: 'Github:',
   LINKEDIN: 'LinkedIn:',
   HIRE_ME: 'Hire me!',
@@ -69,7 +71,7 @@ const DICTIONARY = [
 CATEGORY: 'Catégorie',
 
 YOU: 'Vous',
-OPPONENT: 'Ordinateur',
+OPPONENT: 'L\'Ordi',
 REFRESH: 'Rafraîchir',
 USER_IMAGE_TOOLTIP: 'Vous allez jouer avec cetter image.',
 COMPUTER_IMAGE_TOOLTIP: 'L\'ordinateur va jouer avec cetter image.',
@@ -77,7 +79,7 @@ REFRESH_TOOLTIP: 'Cliquez pour rafraîchir cette image.',
 
 START: 'Commencer',
 START_TOOLTIP: 'Qui commence le jeu: Vous ou L\'ordinateur?',
-START_HISTORY: 'Le jeu a été commencé par:',
+START_HISTORY: 'Commencé par:',
 YES: 'Oui',
 YES_TOOLTIP: 'Vous commencez à jouer le jeu.', 
 NO: 'Non',
@@ -97,7 +99,7 @@ GAME_OVER: 'Jeu terminé',
 PLAY_AGAIN: 'Rejouer',
 MESSAGE_LOST: 'Vous avez perdu!',
 MESSAGE_WON: 'Vous avez gagné!',
-MESSAGE_DRAW: 'C\'est une partie nulle!',
+MESSAGE_DRAW: 'Partie nulle!',
 
 GAME_WRITTEN_WITH: 'Ce jeu a été écrit avec:',
 SOURCE_CODE: 'Code source:',
@@ -125,22 +127,22 @@ CONTACT: 'Contact',
   CATEGORY: 'Categoría',
 
   YOU: 'Usted',
-  OPPONENT: 'Computadora',
+  OPPONENT: 'Ordenador',
   REFRESH: 'Refrescar',
   USER_IMAGE_TOOLTIP: 'Usted jugará con esta imagen.',
-  COMPUTER_IMAGE_TOOLTIP: 'La computadora jugará con esta imagen.',
+  COMPUTER_IMAGE_TOOLTIP: 'El ordenador jugará con esta imagen.',
   REFRESH_TOOLTIP: 'Haga click para refrescar la imagen.',
   
   START: 'Comenzar',
-  START_TOOLTIP: 'Quién comienza la partida: Usted o la computadora?',
-  START_HISTORY: 'Partida comenzada por:',
+  START_TOOLTIP: 'Quién comienza la partida: Usted o el ordenador?',
+  START_HISTORY: 'Comenzado por:',
   YES: 'Sí',
   YES_TOOLTIP: 'Usted comienza la partida.',
   NO: 'No',
-  NO_TOOLTIP: 'La computadora comienza la partida.',
+  NO_TOOLTIP: 'El ordenador comienza la partida.',
   
   LEVEL: 'Nivel',
-  LEVEL_TOOLTIP: 'Cuánto tiempo la computadora piensa antes de jugar.',
+  LEVEL_TOOLTIP: 'Cuánto tiempo el ordenador piensa antes de jugar.',
   LEVEL_EASY: 'Fácil',
   LEVEL_HARD: 'Difícil',
   LEVEL_NORMAL: 'Normal',
@@ -148,7 +150,7 @@ CONTACT: 'Contact',
   LEVEL_HARD_HISTORY: 'Nivel: Difícil',
   LEVEL_NORMAL_HISTORY: 'Nivel: Normal',
   
-  PLAY: 'Comienza el juego',
+  PLAY: 'Comience el juego',
   GAME_OVER: 'Juego acabado',
   PLAY_AGAIN: 'Jugar de nuevo',
   MESSAGE_LOST: 'Usted perdió!',
@@ -160,13 +162,13 @@ CONTACT: 'Contact',
   SOURCE_CODE: 'Código fuente:',
   
   AUTHOR: 'Autor:',
-  EMAIL: 'E-mail:',
+  EMAIL: 'Correo electrónico:',
   GITHUB: 'Github:',
   LINKEDIN: 'LinkedIn:',
-  HIRE_ME: 'Contrateme!',
+  HIRE_ME: 'Contráteme!',
   
   
-  NO_HISTORY_YET: 'No hay historial aún. Juegue algunas partidas y regrese.',
+  NO_HISTORY_YET: 'No hay historial aún. Juegue algunas partidas y regrese luego.',
   START_OVER: 'Jugar de nuevo',
   SEE_GAME: 'Ver juego',
   DELETE_GAME: 'Borrar juego',
