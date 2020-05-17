@@ -1,22 +1,28 @@
 import React, { useContext, useEffect } from 'react';
 import { GameContext }                  from '../contexts/GameContext';
+import { HistoryContext }               from '../contexts/HistoryContext';
+import { LanguageContext }              from '../contexts/LanguageContext';
 import Category                         from './Category';
 import Images                           from './Images';
 import StartGame                        from './StartGame';
 import Level                            from './Level';
 import BoardUI                          from './BoardUI';
-import { HistoryContext }               from '../contexts/HistoryContext';
+import Info                             from './Info';
+import DICTIONARY                       from './Dictionary';
 
 const GameHistory = (props) => {
   const { getGame, dispatch } = useContext(GameContext);
-  const { changeHistory }  = useContext(HistoryContext);
-  let categoryId, imageComputer, imageUser, first, level, board, winners, message;
-  let game = {};
+  const { changeHistory }     = useContext(HistoryContext);
+  const { getLanguage } = useContext(LanguageContext);
+  const language = getLanguage();  
   const gameId = props.match.params.id;
+
+  let categoryId, imageComputer, imageUser, first, level, board, winners, result;
+  let game = {};
 
   game = getGame(gameId);
   if (game){
-    ({categoryId, imageComputer, imageUser, first, level, board, winners, message } = game);
+    ({categoryId, imageComputer, imageUser, first, level, board, winners, result } = game);
   }
   
   useEffect(() => {
@@ -45,24 +51,23 @@ const GameHistory = (props) => {
                    board          = {board}
                    winners        = {winners}
           />
-
+          
           <div className="info">
-            {message}
+            <Info result = {result}/>
             <input type="button"
-                   value="Delete Game" 
+                   value={DICTIONARY[language].DELETE_GAME} 
                    onClick={(e) => { 
                      dispatch({type: 'REMOVE_GAME', id: gameId}); 
                      props.history.push('/history')
                    }} 
                    className="delete-game"/>
             <input type="button" 
-                   value="Back" 
+                   value={DICTIONARY[language].BACK}
                    onClick={(e) => {
                      props.history.push('/history')
                    }}
-                   className="back"/>              
-          </div> 
-
+                   className="back"/>
+          </div>         
       </div>
       )}
     </div>

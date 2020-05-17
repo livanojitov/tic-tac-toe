@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import * as constants from './Constants';
-const { GAME_WRITTEN_WITH, SOURCE_CODE, OTHER_GAMES } = constants;
+import React, { useState, useContext } from 'react';
+import DICTIONARY from './Dictionary';
+import { LanguageContext } from '../contexts/LanguageContext';
 
 const About = () => {
+  const { getLanguage } = useContext(LanguageContext);
+  const language = getLanguage();
 
   const [skills] = useState([
     { name: 'React.js',       url: 'https://reactjs.org/'                                                  },
@@ -33,18 +35,18 @@ const About = () => {
     <div className="about">
 
       <div>
-        <span>{GAME_WRITTEN_WITH} </span>
+        <span>{DICTIONARY[language].GAME_WRITTEN_WITH} </span>
         <ul>
           {lis}
         </ul>  
       </div> 
 
       <p>
-          <span>{SOURCE_CODE} </span>
+          <span>{DICTIONARY[language].SOURCE_CODE} </span>
           <a target="_blank" href={source} rel="noopener noreferrer">{source}</a>
       </p>
       
-      <span>{OTHER_GAMES} </span>            
+      <span>{DICTIONARY[language].OTHER_GAMES} </span>            
       <ul>
         <li>
           <a target="_blank" href={games.url} rel="noopener noreferrer">{games.name}</a>

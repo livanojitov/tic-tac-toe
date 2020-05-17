@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { HistoryContext }   from '../contexts/HistoryContext';
-import * as constants from './Constants';
-
-const { USER, START_TOOLTIP, START, YES_TOOLTIP, YES, COMPUTER, NO_TOOLTIP, NO, START_HISTORY, OPPONENT, YOU } = constants;
+import { LanguageContext }  from '../contexts/LanguageContext';
+import { USER, COMPUTER }   from './Dictionary';
+import DICTIONARY           from './Dictionary';
 
 class StartGame extends Component {
   static contextType = HistoryContext;
@@ -13,41 +13,43 @@ class StartGame extends Component {
   render() {
     const { history } = this.context;
     const { disabled, first } = this.props;
-    const html = (!history) ? (
-
-      <div className="question">
-
-        <span title = {START_TOOLTIP}>{START}?</span>
-
-        <input onChange  = {this.setPlayer} 
-                disabled = {disabled} 
-                type     = "radio" 
-                value    = {USER}
-                name     = "player"
-                title    = {YES_TOOLTIP}
-                checked  = {this.state.who === USER}
-                id       = "yes" />
-        <label  disabled = {disabled} htmlFor = "yes" title = {YES_TOOLTIP}>{YES}</label>
-
-        <input onChange  = {this.setPlayer}
-                disabled = {disabled} 
-                type     = "radio"
-                value    = {COMPUTER}
-                name     = "player"
-                title    = {NO_TOOLTIP}
-                checked  = {this.state.who === COMPUTER}
-                id       = "no" />
-        <label  disabled = {disabled} htmlFor = "no" title = {NO_TOOLTIP}>{NO}</label>   
-
-      </div>
-    ) : (
-      <div className="question">
-        {START_HISTORY} {first === COMPUTER ? OPPONENT : YOU}
-      </div>
-    );
 
     return (
-      html
+      <LanguageContext.Consumer>{(languageContext) => {
+        const { getLanguage } = languageContext;
+        const language = getLanguage();
+        return (!history) ? ( 
+                <div className="question">
+
+                  <span title = {DICTIONARY[language].START_TOOLTIP}>{DICTIONARY[language].START}?</span>
+
+                  <input onChange  = {this.setPlayer} 
+                          disabled = {disabled} 
+                          type     = "radio" 
+                          value    = {USER}
+                          name     = "player"
+                          title    = {DICTIONARY[language].YES_TOOLTIP}
+                          checked  = {this.state.who === USER}
+                          id       = "yes" />
+                  <label  disabled = {disabled} htmlFor = "yes" title = {DICTIONARY[language].YES_TOOLTIP}>{DICTIONARY[language].YES}</label>
+
+                  <input onChange  = {this.setPlayer}
+                          disabled = {disabled} 
+                          type     = "radio"
+                          value    = {COMPUTER}
+                          name     = "player"
+                          title    = {DICTIONARY[language].NO_TOOLTIP}
+                          checked  = {this.state.who === COMPUTER}
+                          id       = "no" />
+                  <label  disabled = {disabled} htmlFor = "no" title = {DICTIONARY[language].NO_TOOLTIP}>{DICTIONARY[language].NO}</label>   
+
+                </div>
+              ) : (
+                <div className="question">
+                  {DICTIONARY[language].START_HISTORY} {first === COMPUTER ? DICTIONARY[language].OPPONENT : DICTIONARY[language].YOU}
+                </div>
+              );
+      }}</LanguageContext.Consumer>
     )  
   }
 

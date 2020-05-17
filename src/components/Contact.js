@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import * as constants from './Constants';
-const { AUTHOR, EMAIL, GITHUB, LINKEDIN, HIRE_ME } = constants;
+import React, { useState, useContext } from 'react';
+import { LanguageContext } from '../contexts/LanguageContext';
+import DICTIONARY from './Dictionary';
 
 const Contact = () => {
+  const { getLanguage } = useContext(LanguageContext);
+  const language = getLanguage();
 
   const [contact] = useState({
     author:   'Livan Ojito Villanueva',
@@ -14,21 +16,21 @@ const Contact = () => {
   return (
     <div className="contact">
       <p>
-          <span>{AUTHOR} </span><span className="me">{contact.author}</span>
+          <span>{DICTIONARY[language].AUTHOR} </span><span className="me">{contact.author}</span>
       </p>
       <p>
-          <span>{EMAIL} </span><span className="me">{contact.email}</span>
+          <span>{DICTIONARY[language].EMAIL} </span><span className="me">{contact.email}</span>
       </p>                  
       <p>
-          <span>{GITHUB} </span>
+          <span>{DICTIONARY[language].GITHUB} </span>
           <a target="_blank" href={contact.github} rel="noopener noreferrer">{contact.github}</a>
       </p>        
       <p>
-          <span>{LINKEDIN} </span>
+          <span>{DICTIONARY[language].LINKEDIN} </span>
           <a target="_blank" href={contact.linkedin} rel="noopener noreferrer">{contact.linkedin}</a>
       </p>    
       <p>
-          <span>{HIRE_ME} </span>
+          <span>{DICTIONARY[language].HIRE_ME} </span>
       </p>                  
     </div>
   )

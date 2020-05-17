@@ -8,7 +8,10 @@ import Info                  from './Info';
 import Board                 from './Board';
 import Computer              from './Computer';
 import { GameContext }       from '../contexts/GameContext';
-import * as constants        from './Constants';
+import { LanguageContext }   from '../contexts/LanguageContext';
+import DICTIONARY            from './Dictionary';
+import * as constants        from './Dictionary';
+const { LOST, WON, DRAW } = constants;
 
 class Game extends Component {
   static contextType = GameContext;
@@ -21,7 +24,8 @@ class Game extends Component {
     this.computer = new Computer(this.board);    
     this.level  = 0;
     this.timeout = 1;    
-    this.message = '';
+    this.result = 0;
+    this.language = 0;
     this.state = {
       categoryId: -1,
       imageUser: 0,      
@@ -38,25 +42,36 @@ class Game extends Component {
   render(){
     const {disabled, categoryId, board, winners, gameOver, showStartButton, imageUser, imageComputer} = this.state;
     return(
-      <div className="game">
-        <Category onCategoryChange = {this.setCategory}/>
-        {categoryId >= 0 && ( <Images categoryId={categoryId} onImageChange = { this.setImages}/> )}
-        <div className="settings">
-          <StartGame disabled={!disabled} onPlayerChange = {this.setFirst} />
-          <Level     disabled={!disabled} onLevelChange  = {this.setLevel } />
-        </div>
-        {showStartButton &&  ( <div className="start-playing"><button onClick={this.gameInit}>{constants.PLAY}</button></div>)}
-        {categoryId >= 0 && (
-          <BoardUI categoryId     = {categoryId} 
-                   imageUser      = {imageUser}
-                   imageComputer  = {imageComputer}
-                   disabled       = {disabled}
-                   board          = {board}
-                   onUserPlayed   = {this.gamePlay}
-                   winners        = {winners}
-                   gameOver       = {gameOver} />)}
-        {gameOver && ( <Info message = {this.message} startOver = {this.gameInit}/>)}                  
-      </div>
+      <LanguageContext.Consumer>{(languageContext) => {
+        const { getLanguage } = languageContext;
+        const language = getLanguage();
+        this.language = language;
+        return (
+        <div className="game">
+          <Category onCategoryChange = {this.setCategory}/>
+          {categoryId >= 0 && ( <Images categoryId={categoryId} onImageChange = { this.setImages}/> )}
+          <div className="settings">
+            <StartGame disabled={!disabled} onPlayerChange = {this.setFirst} />
+            <Level     disabled={!disabled} onLevelChange  = {this.setLevel } />
+          </div>
+          {showStartButton &&  ( <div className="start-playing"><button onClick={this.gameInit}>{DICTIONARY[language].PLAY}</button></div>)}
+          {categoryId >= 0 && (
+            <BoardUI categoryId     = {categoryId} 
+                    imageUser      = {imageUser}
+                    imageComputer  = {imageComputer}
+                    disabled       = {disabled}
+                    board          = {board}
+                    onUserPlayed   = {this.gamePlay}
+                    winners        = {winners}
+                    gameOver       = {gameOver} />)}
+          {gameOver && ( 
+            <div className="info">  
+              <Info result = {this.result}/>
+              <input className="play-again" type="button" value={DICTIONARY[language].PLAY_AGAIN} onClick={this.gameInit} />
+            </div>
+          )}   
+        </div>        
+      )}}</LanguageContext.Consumer>
     )
   }
 
@@ -66,7 +81,7 @@ class Game extends Component {
       showStartButton: false
     }
     if (!this.board.isEmpty){
-      this.message = '';
+      this.result = 0;
       this.board.reset();
       state = {
         ...state,
@@ -100,9 +115,9 @@ class Game extends Component {
       this.setState(() => ({board : this.board.players}));
       let winners = this.board.isAWinner(this.player);
       if (winners){
-        this.gameOver(this.player === computer ? constants.LOST : constants.WON, winners);
+        this.gameOver(this.player === computer ? LOST : WON, winners);
       }else if (this.board.isFull){
-        this.gameOver(constants.DRAW);
+        this.gameOver(DRAW);
       }else{
         this.player = this.player === computer ? user : computer;
         if (this.player === computer){
@@ -112,18 +127,18 @@ class Game extends Component {
     }  
   }
 
-  gameOver = (message, winners = []) => {
-    this.message = message;
+  gameOver = (result, winners = []) => {
+    this.result = result;
     this.setState(() => ({ gameOver : true, disabled: true, showStartButton: false, winners }));
-    this.gameSave(message, winners);
+    this.gameSave(result, winners);
   }
 
-  gameSave = (message, winners) => {
+  gameSave = (result, winners) => {
     const { dispatch } = this.context;
     dispatch({type: 'ADD_GAME', game : {
       board          : [...this.board.players],
       winners        : [...winners],
-      message,
+      result,
       first          : this.first,
       level          : this.level,
       categoryId     : this.state.categoryId,

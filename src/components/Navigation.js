@@ -1,22 +1,11 @@
-import { NavLink }         from 'react-router-dom';
-import React, { useState } from 'react';
-import * as constants      from './Constants';
-const { HOME, HISTORY, ABOUT, CONTACT } = constants;
+import { NavLink }            from 'react-router-dom';
+import React, { useContext }  from 'react';
+import { LanguageContext }    from '../contexts/LanguageContext';
+import DICTIONARY             from './Dictionary';
 
 const Navigation = () => {
-
-  const [routes] = useState([
-    { name: HOME,    url: '/'        },
-    { name: HISTORY, url: '/history' },
-    { name: ABOUT,   url: '/about'   },
-    { name: CONTACT, url: '/contact' }
-  ]);
-
-  const lis = routes.map((route, key) => {
-    return  (
-      <li key={key}><NavLink exact to={route.url}>{route.name}</NavLink></li>
-    )  
-  });
+  const { getLanguage } = useContext(LanguageContext);
+  const language = getLanguage();
 
   return (
     <nav>
@@ -31,7 +20,10 @@ const Navigation = () => {
           </div>
       </label>      
       <ul className='nav'>
-        {lis}                  
+        <li key='0'><NavLink exact to={'/'}       >{DICTIONARY[language].GAME}   </NavLink></li>
+        <li key='1'><NavLink exact to={'/history'}>{DICTIONARY[language].HISTORY}</NavLink></li>
+        <li key='2'><NavLink exact to={'/about'}  >{DICTIONARY[language].ABOUT}  </NavLink></li>
+        <li key='3'><NavLink exact to={'/contact'}>{DICTIONARY[language].CONTACT}</NavLink></li>
       </ul>
     </nav>
   )

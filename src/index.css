@@ -8,13 +8,22 @@ body{
   margin: 1px auto 0;
 }
 
+.flags img {
+  cursor: pointer;
+  margin: 0 2%;
+}
+
 header, nav{ 
   display:inline-block;
-  width: 50%;
+}
+
+header{
+  width: 30%;
 }
 
 nav{
   vertical-align: super;
+  width: 70%;
 }
 
 .header, .about, .contact{

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Square                from './Square';
 import { CategoryContext }   from '../contexts/CategoryContext';
 import { HistoryContext }    from '../contexts/HistoryContext';
-import * as constants        from './Constants';
+import * as constants        from './Dictionary';
 
 const empty    = constants.EMPTY;
 const computer = constants.COMPUTER;

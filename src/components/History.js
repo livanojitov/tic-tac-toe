@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { GameContext }       from '../contexts/GameContext';
+import { LanguageContext }   from '../contexts/LanguageContext';
 import GamesHistory          from './GamesHistory';
-import * as constants        from './Constants';
-
-const { NO_HISTORY_YET} = constants;
+import DICTIONARY            from './Dictionary';
 
 const History = () => {
+  const { getLanguage } = useContext(LanguageContext);
+  const language = getLanguage();
+
   const { games } = useContext(GameContext);
   let historyGames;
 
@@ -26,7 +28,7 @@ const History = () => {
   }else{
     historyGames = (
       <div className="info"> 
-        {NO_HISTORY_YET}
+        {DICTIONARY[language].NO_HISTORY_YET}
       </div>  
     )    
   }
