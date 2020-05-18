@@ -5,7 +5,7 @@ body{
 
 .wrapper{
   max-width: 400px;
-  margin: 1px auto 0;
+  margin: 10px auto 0;
 }
 
 .flags img {
@@ -22,7 +22,6 @@ header{
 }
 
 nav{
-  vertical-align: super;
   width: 70%;
 }
 
@@ -71,7 +70,7 @@ nav li a:hover{
 .game{
   width: 100%;
   text-align: center;
-  margin: 0 auto;
+  margin: 10px auto;
 }
 
 .board button{
@@ -136,20 +135,13 @@ nav li a:hover{
   top: 12px;
 }
 
-.levels {
-  margin-left: 5px;
+.settings select{
+  margin-left: 2%;
 }
 
 .level, .question{
   display: inline-block;
-}
-
-.question{
-  width: 60%
-}
-
-.level{
-  width: 40%;
+  width: 50%;
 }
 
 .level span, .question span{
@@ -225,10 +217,6 @@ label.mylabel{
 
 @media screen and (max-width: 400px) {
 
-  .header{
-    margin-top: 10px;
-  }
-
   header{
     vertical-align: top;
     width: 40%;
@@ -273,10 +261,6 @@ label.mylabel{
     transform: rotate(-45deg);
     top: 9px;
   }  
-
-  #burger{
-    margin-top: 10px;
-  }
   
   ul.nav{
     margin: 0;
@@ -285,5 +269,9 @@ label.mylabel{
     max-height: 0;
     overflow: hidden;
     text-align: left;
+  }
+
+  .game{
+    margin: 0 auto;
   }
 }

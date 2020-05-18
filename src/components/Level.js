@@ -23,7 +23,7 @@ class Level extends Component {
 
             <span title = {DICTIONARY[language].LEVEL_TOOLTIP}>{DICTIONARY[language].LEVEL}?</span>
 
-            <select className="levels" onChange={this.setLevel} disabled = {disabled} >
+            <select onChange={this.setLevel} disabled = {disabled} >
               <option key={EASY}   value={EASY}>{DICTIONARY[language].LEVEL_EASY}</option>  
               <option key={HARD}   value={HARD}>{DICTIONARY[language].LEVEL_HARD}</option>  
               <option key={NORMAL} value={NORMAL}>{DICTIONARY[language].LEVEL_NORMAL}</option>  
