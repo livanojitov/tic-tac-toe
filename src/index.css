@@ -124,8 +124,15 @@ nav li a:hover{
 
 .user-image, .computer-image{
   display: inline-block;
-  width: 50%;
 }
+
+.user-image{
+  width: 45%;
+}
+
+.computer-image{
+  width: 55%
+} 
 
 .refresh{
   width: 30px;
