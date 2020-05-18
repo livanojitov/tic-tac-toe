@@ -3,11 +3,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header                           from './components/Header';
 import Navigation                       from './components/Navigation';
 import GameContextProvider              from './contexts/GameContext';
-import CategoryContextProvider          from './contexts/CategoryContext';
 import HistoryContextProvider           from './contexts/HistoryContext';
 import LanguageContextProvider          from './contexts/LanguageContext';
 import Game                             from './components/Game';
-import History1                         from './components/History1';
+import History                          from './components/History';
 import About                            from './components/About';
 import Contact                          from './components/Contact';
 import GameHistory                      from './components/GameHistory';
@@ -24,20 +23,18 @@ function App() {
     <GameContextProvider>
       <HistoryContextProvider>
         <LanguageContextProvider>
-          <BrowserRouter  basename="/tic-tac-toe">
+          <BrowserRouter basename="/tic-tac-toe">
             <div className='header'>
               <Header/>
               <Navigation/>
             </div>
-            <CategoryContextProvider>
-              <Switch>
-                <Route path="/"        exact render={(props)=>{closeMobileMenu();return (<Game        {...props}/>)}}  />
-                <Route path="/history" exact render={(props)=>{closeMobileMenu();return (<History1    {...props}/>)}}  />
-                <Route path="/about"   exact render={(props)=>{closeMobileMenu();return (<About       {...props}/>)}}  />
-                <Route path="/contact" exact render={(props)=>{closeMobileMenu();return (<Contact     {...props}/>)}}  /> 
-                <Route path="/:id"     exact render={(props)=>{closeMobileMenu();return (<GameHistory {...props}/>)}}  /> 
-              </Switch>
-            </CategoryContextProvider>
+            <Switch>
+              <Route path="/"        exact render={(props)=>{closeMobileMenu();return (<Game        {...props}/>)}}  />
+              <Route path="/history" exact render={(props)=>{closeMobileMenu();return (<History     {...props}/>)}}  />
+              <Route path="/about"   exact render={(props)=>{closeMobileMenu();return (<About       {...props}/>)}}  />
+              <Route path="/contact" exact render={(props)=>{closeMobileMenu();return (<Contact     {...props}/>)}}  /> 
+              <Route path="/:id"     exact render={(props)=>{closeMobileMenu();return (<GameHistory {...props}/>)}}  /> 
+            </Switch>
           </BrowserRouter>
         </LanguageContextProvider>
       </HistoryContextProvider>

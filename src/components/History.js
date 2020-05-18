@@ -1,13 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { GameContext }       from '../contexts/GameContext';
 import { LanguageContext }   from '../contexts/LanguageContext';
+import { HistoryContext }    from '../contexts/HistoryContext';
 import GamesHistory          from './GamesHistory';
 import DICTIONARY            from './Dictionary';
 
-const History = () => {
+const History = (props) => {
   const { getLanguage } = useContext(LanguageContext);
   const language = getLanguage();
-
+  const { changeHistory } = useContext(HistoryContext);
+  
   const { games } = useContext(GameContext);
   let historyGames;
 
@@ -32,6 +34,14 @@ const History = () => {
       </div>  
     )    
   }
+
+  useEffect(() => {
+    return () => {
+      if (props.history.location.pathname !== '/history'){
+        changeHistory(0);
+      }  
+    }
+  })
 
   return (
     <div className="history">

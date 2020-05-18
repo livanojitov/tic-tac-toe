@@ -1,10 +1,12 @@
-import React, { useState, useContext } from 'react';
-import DICTIONARY from './Dictionary';
+import React, { useState, useContext, useEffect } from 'react';
 import { LanguageContext } from '../contexts/LanguageContext';
+import { HistoryContext }  from '../contexts/HistoryContext';
+import DICTIONARY          from './Dictionary';
 
-const About = () => {
+const About = (props) => {
   const { getLanguage } = useContext(LanguageContext);
   const language = getLanguage();
+  const { changeHistory } = useContext(HistoryContext);
 
   const [skills] = useState([
     { name: 'React.js',       url: 'https://reactjs.org/'                                                  },
@@ -29,6 +31,16 @@ const About = () => {
       name: 'Matching pairs ( built with Vue.js )', 
       url: 'https://lojito.github.io/matching-pairs'
     });
+
+  useEffect(() => {
+    return () => {
+      if (props.history.location.pathname === '/history'){
+        changeHistory(1);
+      }else{
+        changeHistory(0);
+      }  
+    }
+  })
 
   return (
 

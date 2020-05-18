@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import Square                from './Square';
-import { CategoryContext }   from '../contexts/CategoryContext';
 import { HistoryContext }    from '../contexts/HistoryContext';
 import * as constants        from './Dictionary';
 
@@ -9,10 +8,9 @@ const computer = constants.COMPUTER;
 const user     = constants.USER;
 
 const BoardUI = (props) => {
-    const { categories } = useContext(CategoryContext);
     const { history    } = useContext(HistoryContext);
-    const { winners, gameOver, categoryId, imageUser, imageComputer} = props;
-    const folder = categories[categoryId].folder;
+    const { winners, gameOver, imageUser, imageComputer} = props;
+    const folder = props.folder;
     
     const board = props.board.map((square, ind) => {
       const player = (square === computer) ? `${folder}/${imageComputer}` : ((square === user) ? `${folder}/${imageUser}` : 'default'); 

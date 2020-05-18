@@ -74,14 +74,14 @@ nav li a:hover{
   margin: 0 auto;
 }
 
-.board button, .game-history button{
+.board button{
   width: 33%;
   border: 1px solid black;
   display: inline-block;
   background-size: 100% 100%;
 }
 
-.board button:after, .game-history button:after{
+.board button:after{
   content: "";
   display: block;
   padding-bottom: 100%;

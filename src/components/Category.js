@@ -1,18 +1,29 @@
 import React, { Component} from 'react';
-import { CategoryContext }  from '../contexts/CategoryContext';
-import { HistoryContext }   from '../contexts/HistoryContext';
-import { LanguageContext }  from '../contexts/LanguageContext';
-import DICTIONARY from './Dictionary';
+import { HistoryContext }  from '../contexts/HistoryContext';
+import { LanguageContext } from '../contexts/LanguageContext';
+import DICTIONARY          from './Dictionary';
 
-class Category extends Component{ 
-  static contextType = CategoryContext;
+class Category extends Component{
 
   constructor(props){
     super(props);
 
+    this.categories = [
+      { folder: "habana"   , count : 20} ,
+      { folder: "vancouver", count : 20} , 
+      { folder: "soccer"   , count : 20} , 
+      { folder: "fruits"   , count : 20} ,
+      { folder: "animals"  , count : 20} , 
+      { folder: "alphabet" , count : 26} , 
+      { folder: "puppies"  , count : 20} , 
+      { folder: "seinfeld" , count : 20} ,
+      { folder: "spain"    , count : 20} ,
+      { folder: "germany"  , count : 20}
+    ];
+
     let categoryId = this.props.categoryId;
-    if (!(typeof(categoryId) != undefined && categoryId >=0 && categoryId < 8)){
-      categoryId = Math.floor(Math.random() * 8);
+    if (!(typeof(categoryId) != undefined && categoryId >=0 && categoryId < this.categories.length)){
+      categoryId = Math.floor(Math.random() * this.categories.length);
     }
  
     this.state = {
@@ -22,22 +33,20 @@ class Category extends Component{
   }
   
   render(){
-    const { categories } = this.context;
-    const { categoryId } = this.state;
-    const { name } = categories[categoryId];
-    let categoryJSX;
-
     return (
       <LanguageContext.Consumer>{(languageContext) => (
         <HistoryContext.Consumer>{(historyContext) => {
+          const { categoryId } = this.state;
           const { history } = historyContext;
           const { getLanguage } = languageContext;
           const language = getLanguage();
+          const name  = DICTIONARY[language].CATEGORIES[categoryId].name;
+          let categoryJSX;
 
           if (!history){  
             categoryJSX =  (
               <select value={categoryId} onChange={this.onChange}>
-                {categories.map(
+                {DICTIONARY[language].CATEGORIES.map(
                   (category, index) => {
                     return (
                       <option key={index} value={index}>{category.name}</option>  
@@ -77,7 +86,8 @@ class Category extends Component{
     if (this.props.onCategoryChange){
       const categoryId = this.state.categoryId;
       this.props.onCategoryChange({
-        categoryId
+        categoryId ,
+        ...this.categories[categoryId]
       });
     }
   }

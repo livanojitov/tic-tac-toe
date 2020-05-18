@@ -1,18 +1,16 @@
-import React, { useContext, useEffect } from 'react';
-import { GameContext }                  from '../contexts/GameContext';
-import { HistoryContext }               from '../contexts/HistoryContext';
-import { LanguageContext }              from '../contexts/LanguageContext';
-import Category                         from './Category';
-import Images                           from './Images';
-import StartGame                        from './StartGame';
-import Level                            from './Level';
-import BoardUI                          from './BoardUI';
-import Info                             from './Info';
-import DICTIONARY                       from './Dictionary';
+import React, { useContext, useState }            from 'react';
+import { GameContext }                            from '../contexts/GameContext';
+import { LanguageContext }                        from '../contexts/LanguageContext';
+import Category                                   from './Category';
+import Images                                     from './Images';
+import StartGame                                  from './StartGame';
+import Level                                      from './Level';
+import BoardUI                                    from './BoardUI';
+import Info                                       from './Info';
+import DICTIONARY                                 from './Dictionary';
 
 const GameHistory = (props) => {
   const { getGame, dispatch } = useContext(GameContext);
-  const { changeHistory }     = useContext(HistoryContext);
   const { getLanguage } = useContext(LanguageContext);
   const language = getLanguage();  
   const gameId = props.match.params.id;
@@ -24,21 +22,20 @@ const GameHistory = (props) => {
   if (game){
     ({categoryId, imageComputer, imageUser, first, level, board, winners, result } = game);
   }
-  
-  useEffect(() => {
-    return () => {
-      changeHistory(0);
-    }
-  })
+
+  const [ folder, setFolder ] = useState(""); 
+  const updateFolder = (category) => {
+    setFolder(category.folder);
+  };
 
   return (
     <div>
       { game && (
       <div className="game-history">
 
-          <Category categoryId = {categoryId}/>
+          <Category categoryId = {categoryId} onCategoryChange = {updateFolder}/>
 
-          <Images categoryId={categoryId}/>
+          <Images categoryId={categoryId} imageUser={imageUser} imageComputer={imageComputer} folder={folder}/>
 
           <div className="settings">
             <StartGame first = {first} /> 
@@ -50,6 +47,7 @@ const GameHistory = (props) => {
                    imageComputer  = {imageComputer}                   
                    board          = {board}
                    winners        = {winners}
+                   folder         = {folder}
           />
           
           <div className="info">

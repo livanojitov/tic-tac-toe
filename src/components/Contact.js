@@ -1,10 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { LanguageContext } from '../contexts/LanguageContext';
-import DICTIONARY from './Dictionary';
+import { HistoryContext }  from '../contexts/HistoryContext';
+import DICTIONARY          from './Dictionary';
 
-const Contact = () => {
+const Contact = (props) => {
   const { getLanguage } = useContext(LanguageContext);
   const language = getLanguage();
+  const { changeHistory } = useContext(HistoryContext);
 
   const [contact] = useState({
     author:   'Livan Ojito Villanueva',
@@ -12,6 +14,16 @@ const Contact = () => {
     github:   'https://github.com/lojito',
     linkedin: 'https://ca.linkedin.com/in/livan-ojito-villanueva'
   });
+
+  useEffect(() => {
+    return () => {
+      if (props.history.location.pathname === '/history'){
+        changeHistory(1);
+      }else{
+        changeHistory(0);
+      }  
+    }
+  })
 
   return (
     <div className="contact">
