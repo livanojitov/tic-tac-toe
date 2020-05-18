@@ -37,9 +37,10 @@ const History = (props) => {
 
   useEffect(() => {
     return () => {
-      if (props.history.location.pathname !== '/history'){
+      const pathname = props.history.location.pathname;
+      if (( pathname !== '/history') && ('0123456789'.indexOf(pathname[1]) === -1 )) {
         changeHistory(0);
-      }  
+      }
     }
   })
 
