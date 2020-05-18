@@ -4,7 +4,7 @@ body{
 }
 
 .wrapper{
-  max-width: 500px;
+  max-width: 400px;
   margin: 1px auto 0;
 }
 
@@ -112,7 +112,7 @@ nav li a:hover{
   margin-bottom: 5px;
 }
 
-.images img{
+.imageToken{
   width: 40px;
   height: 40px;
   vertical-align: middle;
@@ -124,15 +124,16 @@ nav li a:hover{
 }
 
 .user-image, .computer-image{
-  display: inline;
-}
-
-.history .user-image{
-  margin-right: 20px;
+  display: inline-block;
+  width: 50%;
 }
 
 .refresh{
-  margin: 0 2px;
+  width: 30px;
+  height: 30px;  
+  margin: 0 5px;
+  position: relative;
+  top: 12px;
 }
 
 .levels {

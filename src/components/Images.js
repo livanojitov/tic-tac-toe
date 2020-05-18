@@ -42,26 +42,21 @@ const Images = ({folder, count, imageUser:imageUser1, imageComputer:imageCompute
 
           <span>{DICTIONARY[language].YOU}: </span>
 
-          <img src={`./images/${folder}/${imageUser}.jpg`} alt="user" />
-
-          { !history && ( <button  className='refresh' 
-                                   onClick={() => refreshUser(USER)} 
-                                   title={DICTIONARY[language].REFRESH_TOOLTIP}>
-                                   {DICTIONARY[language].REFRESH}
-                          </button> )}
+          <img className="imageToken" src={`./images/${folder}/${imageUser}.jpg`} alt="user" />
+          
+          { !history && ( 
+            <img className='refresh' src={`./images/refresh.png`} alt="refresh" onClick={()=>refreshUser(USER)} />)}
         </div> 
-
+        
         <div className='computer-image' title={ !history ? DICTIONARY[language].COMPUTER_IMAGE_TOOLTIP : "" }>
 
           <span>{DICTIONARY[language].OPPONENT}: </span>
 
-          <img src={`./images/${folder}/${imageComputer}.jpg`} alt="computer"/>
+          <img className="imageToken" src={`./images/${folder}/${imageComputer}.jpg`} alt="computer"/>
 
-          { !history && ( <button className='refresh' 
-                                  onClick={() => refreshComputer(COMPUTER)}  
-                                  title={DICTIONARY[language].REFRESH_TOOLTIP}>
-                                  {DICTIONARY[language].REFRESH}
-                          </button> )}
+          { !history && ( 
+            <img className='refresh' src={`./images/refresh.png`} alt="refresh" onClick={()=>refreshComputer(COMPUTER)}/>)}
+
         </div>
         
       </div>
