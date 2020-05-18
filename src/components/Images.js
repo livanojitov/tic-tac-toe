@@ -38,24 +38,38 @@ const Images = ({folder, count, imageUser:imageUser1, imageComputer:imageCompute
   return (
       <div className={ history ? "images history" : "images"}>
 
-        <div className='user-image' title={ !history ? DICTIONARY[language].USER_IMAGE_TOOLTIP : "" }>
+        <div className='user-image'>
 
           <span>{DICTIONARY[language].YOU}: </span>
 
-          <img className="imageToken" src={`./images/${folder}/${imageUser}.jpg`} alt="user" />
+          <img className="imageToken" 
+               src={`./images/${folder}/${imageUser}.jpg`} 
+               alt="user" 
+               title={ !history ? DICTIONARY[language].USER_IMAGE_TOOLTIP : "" }/>
           
           { !history && ( 
-            <img className='refresh' src={`./images/refresh.png`} alt="refresh" onClick={()=>refreshUser(USER)} />)}
+            <img className='refresh' 
+                 src={`./images/refresh.png`} 
+                 alt="refresh" 
+                 onClick={()=>refreshUser(USER)}
+                 title={DICTIONARY[language].REFRESH_TOOLTIP} />)}
         </div> 
         
-        <div className='computer-image' title={ !history ? DICTIONARY[language].COMPUTER_IMAGE_TOOLTIP : "" }>
+        <div className='computer-image'>
 
           <span>{DICTIONARY[language].OPPONENT}: </span>
 
-          <img className="imageToken" src={`./images/${folder}/${imageComputer}.jpg`} alt="computer"/>
+          <img className="imageToken"
+               src={`./images/${folder}/${imageComputer}.jpg`}
+               alt="computer"
+               title={ !history ? DICTIONARY[language].COMPUTER_IMAGE_TOOLTIP : "" }/>
 
           { !history && ( 
-            <img className='refresh' src={`./images/refresh.png`} alt="refresh" onClick={()=>refreshComputer(COMPUTER)}/>)}
+            <img className='refresh'
+                 src={`./images/refresh.png`} 
+                 alt="refresh" 
+                 onClick={()=>refreshComputer(COMPUTER)}
+                 title={DICTIONARY[language].REFRESH_TOOLTIP} />)}
 
         </div>
         

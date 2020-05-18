@@ -30,7 +30,7 @@ const DICTIONARY = [
   REFRESH: 'New',
   USER_IMAGE_TOOLTIP: 'You will play with this image.',
   COMPUTER_IMAGE_TOOLTIP: 'The computer will play with this image.',
-  REFRESH_TOOLTIP: 'Click to refresh the image.',
+  REFRESH_TOOLTIP: 'Click to play with a different image.',
   
   START: 'Start',
   START_TOOLTIP: 'Who starts playing the game: You or the computer?',
@@ -97,7 +97,7 @@ const DICTIONARY = [
   REFRESH: 'Nouvelle',
   USER_IMAGE_TOOLTIP: 'Vous allez jouer avec cetter image.',
   COMPUTER_IMAGE_TOOLTIP: 'L\'ordinateur va jouer avec cetter image.',
-  REFRESH_TOOLTIP: 'Cliquez pour rafraîchir cette image.',
+  REFRESH_TOOLTIP: 'Cliquez pour jouer avec une autre image.',
 
   START: 'Commencer',
   START_TOOLTIP: 'Qui commence le jeu: Vous ou L\'ordinateur?',
@@ -164,7 +164,7 @@ const DICTIONARY = [
   REFRESH: 'Nueva',
   USER_IMAGE_TOOLTIP: 'Usted jugará con esta imagen.',
   COMPUTER_IMAGE_TOOLTIP: 'El ordenador jugará con esta imagen.',
-  REFRESH_TOOLTIP: 'Haga click para refrescar la imagen.',
+  REFRESH_TOOLTIP: 'Haga click para jugar con una imagen diferente.',
   
   START: 'Comenzar',
   START_TOOLTIP: 'Quién comienza la partida: Usted o el ordenador?',
