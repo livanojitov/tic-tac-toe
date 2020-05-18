@@ -91,7 +91,7 @@ nav li a:hover{
 }
 
 .win{
-  animation: win 1s infinite;
+  animation: win 1s 3;
 }    
 
 @keyframes win{
