@@ -32,7 +32,7 @@ const DICTIONARY = [
   COMPUTER_IMAGE_TOOLTIP: 'The computer will play with this image.',
   REFRESH_TOOLTIP: 'Click to play with a different image.',
   
-  START: 'Start',
+  START: 'You Start',
   START_TOOLTIP: 'Who starts playing the game: You or the computer?',
   START_HISTORY: 'Started by:',
   YES: 'Yes',
@@ -56,7 +56,7 @@ const DICTIONARY = [
   MESSAGE_WON: 'You won!',
   MESSAGE_DRAW: 'It\'s a draw!',
   
-  GAME_WRITTEN_WITH: 'This game is written with:',
+  GAME_WRITTEN_WITH: 'This game has been developed with:',
   SOURCE_CODE: 'Source Code:',
   OTHER_GAMES: 'Other games:',
   
@@ -64,7 +64,7 @@ const DICTIONARY = [
   EMAIL: 'E-mail:',
   GITHUB: 'Github:',
   LINKEDIN: 'LinkedIn:',
-  HIRE_ME: 'Hire me!',
+  HIRE_ME: 'For hire!',
   
   NO_HISTORY_YET: 'No history yet. Play some games and comeback.',
   START_OVER: 'Play again',
@@ -73,7 +73,7 @@ const DICTIONARY = [
   BACK: 'Back',
 
   GAME: 'Game',
-  HISTORY: 'History',
+  HISTORY: 'Historical',
   ABOUT: 'About',
   CONTACT: 'Contact',  
 },
@@ -93,13 +93,13 @@ const DICTIONARY = [
     {name: 'Allemagne'}],
 
   YOU: 'Vous',
-  OPPONENT: 'L\'Ordi',
+  OPPONENT: 'Ordinateur',
   REFRESH: 'Nouvelle',
   USER_IMAGE_TOOLTIP: 'Vous allez jouer avec cetter image.',
   COMPUTER_IMAGE_TOOLTIP: 'L\'ordinateur va jouer avec cetter image.',
   REFRESH_TOOLTIP: 'Cliquez pour jouer avec une autre image.',
 
-  START: 'Commencer',
+  START: 'Tu commences',
   START_TOOLTIP: 'Qui commence le jeu: Vous ou L\'ordinateur?',
   START_HISTORY: 'Commencé par:',
   YES: 'Oui',
@@ -116,27 +116,27 @@ const DICTIONARY = [
   LEVEL_HARD_HISTORY: 'Niveau: Difficile',
   LEVEL_NORMAL_HISTORY: 'Niveau: Normal',
 
-  PLAY: 'Commencez le jeu',
+  PLAY: 'Commencer le jeu',
   GAME_OVER: 'Jeu terminé',
   PLAY_AGAIN: 'Rejouer',
   MESSAGE_LOST: 'Vous avez perdu!',
   MESSAGE_WON: 'Vous avez gagné!',
   MESSAGE_DRAW: 'Partie nulle!',
 
-  GAME_WRITTEN_WITH: 'Ce jeu a été écrit avec:',
+  GAME_WRITTEN_WITH: 'Ce jeu a été développé avec:',
   SOURCE_CODE: 'Code source:',
   OTHER_GAMES: 'D\'autres jeux:',
 
   AUTHOR: 'Auteur:',
-  EMAIL: 'Adresse électronique:',
+  EMAIL: 'Courrier électronique:',
   GITHUB: 'Github:',
   LINKEDIN: 'LinkedIn:',
-  HIRE_ME: 'Engagez-moi!',
+  HIRE_ME: 'Disponible immédiatement!',
 
   NO_HISTORY_YET: 'Pas encore d\'historique. Jouez à quelques jeux et revenez.',
   START_OVER: 'Reprendre le jeu',
   SEE_GAME: 'Voir le jeu',
-  DELETE_GAME: 'Effacer le jeu',
+  DELETE_GAME: 'Retirer le jeu',
   BACK: 'Retour',
 
   GAME: 'Jeu',
@@ -159,20 +159,20 @@ const DICTIONARY = [
     {name: 'España'},
     {name: 'Alemania'}],
     
-  YOU: 'Usted',
+  YOU: 'Tú',
   OPPONENT: 'Ordenador',
   REFRESH: 'Nueva',
-  USER_IMAGE_TOOLTIP: 'Usted jugará con esta imagen.',
+  USER_IMAGE_TOOLTIP: 'Tú jugaras con esta imagen.',
   COMPUTER_IMAGE_TOOLTIP: 'El ordenador jugará con esta imagen.',
   REFRESH_TOOLTIP: 'Haga click para jugar con una imagen diferente.',
   
-  START: 'Comenzar',
-  START_TOOLTIP: 'Quién comienza la partida: Usted o el ordenador?',
-  START_HISTORY: 'Comenzado por:',
+  START: 'Tú empiezas',
+  START_TOOLTIP: 'Quién empieza la partida: Tú o el ordenador?',
+  START_HISTORY: 'Comenzada por:',
   YES: 'Sí',
-  YES_TOOLTIP: 'Usted comienza la partida.',
+  YES_TOOLTIP: 'Tú empiezas la partida.',
   NO: 'No',
-  NO_TOOLTIP: 'El ordenador comienza la partida.',
+  NO_TOOLTIP: 'El ordenador empieza la partida.',
   
   LEVEL: 'Nivel',
   LEVEL_TOOLTIP: 'Cuánto tiempo el ordenador piensa antes de jugar.',
@@ -183,14 +183,14 @@ const DICTIONARY = [
   LEVEL_HARD_HISTORY: 'Nivel: Difícil',
   LEVEL_NORMAL_HISTORY: 'Nivel: Normal',
   
-  PLAY: 'Comience el juego',
+  PLAY: 'Empezar el juego',
   GAME_OVER: 'Juego acabado',
   PLAY_AGAIN: 'Jugar de nuevo',
-  MESSAGE_LOST: 'Usted perdió!',
-  MESSAGE_WON: 'Usted ganó!',
+  MESSAGE_LOST: ' perdió!',
+  MESSAGE_WON: 'Tú ganaste!',
   MESSAGE_DRAW: 'Empate!',
   
-  GAME_WRITTEN_WITH: 'Este juego fue escrito con:',
+  GAME_WRITTEN_WITH: 'Este juego ha sido desarrollado con:',
   OTHER_GAMES: 'Otros juegos:',
   SOURCE_CODE: 'Código fuente:',
   
@@ -198,13 +198,13 @@ const DICTIONARY = [
   EMAIL: 'Correo electrónico:',
   GITHUB: 'Github:',
   LINKEDIN: 'LinkedIn:',
-  HIRE_ME: 'Contráteme!',
+  HIRE_ME: 'Disponible inmediatamente!',
   
   
   NO_HISTORY_YET: 'No hay historial aún. Juegue algunas partidas y regrese luego.',
   START_OVER: 'Jugar de nuevo',
   SEE_GAME: 'Ver juego',
-  DELETE_GAME: 'Borrar juego',
+  DELETE_GAME: 'Eliminar juego',
   BACK: 'Regresar',
 
   GAME: 'Juego',
