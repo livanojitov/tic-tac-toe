@@ -9,16 +9,16 @@ class Category extends Component{
     super(props);
 
     this.categories = [
-      { folder: "habana"   , count : 20} ,
-      { folder: "vancouver", count : 20} , 
-      { folder: "soccer"   , count : 20} , 
-      { folder: "fruits"   , count : 20} ,
-      { folder: "animals"  , count : 20} , 
-      { folder: "alphabet" , count : 26} , 
-      { folder: "puppies"  , count : 20} , 
-      { folder: "seinfeld" , count : 20} ,
-      { folder: "spain"    , count : 20} ,
-      { folder: "germany"  , count : 20}
+      { name: 'HAVANA_LANDMARKS',      folder: "habana"   , count : 20} ,
+      { name: 'VANCOUVER_LANDMARKS',   folder: "vancouver", count : 20} ,
+      { name: 'SPAIN_LANDMARKS',       folder: "spain"    , count : 20} ,
+      { name: 'GERMANY_LANDMARKS',     folder: "germany"  , count : 20} ,      
+      { name: 'SOCCER_PLAYERS',        folder: "soccer"   , count : 20} , 
+      { name: 'FRUITS_AND_VEGETABLES', folder: "fruits"   , count : 20} ,
+      { name: 'ANIMALS',               folder: "animals"  , count : 20} , 
+      { name: 'PUPPIES',               folder: "puppies"  , count : 20} ,       
+      { name: 'ALPHABET',              folder: "alphabet" , count : 26} ,
+      { name: 'SEINFELD',              folder: "seinfeld" , count : 20}
     ];
 
     let categoryId = this.props.categoryId;
@@ -40,16 +40,16 @@ class Category extends Component{
           const { history } = historyContext;
           const { getLanguage } = languageContext;
           const language = getLanguage();
-          const name  = DICTIONARY[language].CATEGORIES[categoryId].name;
+          const name  = DICTIONARY[language][this.categories[categoryId].name];
           let categoryJSX;
 
           if (!history){  
             categoryJSX =  (
               <select value={categoryId} onChange={this.onChange}>
-                {DICTIONARY[language].CATEGORIES.map(
+                {this.categories.map(
                   (category, index) => {
                     return (
-                      <option key={index} value={index}>{category.name}</option>  
+                      <option key={index} value={index}>{DICTIONARY[language][category.name]}</option>  
                     )
                   })}
               </select>);
