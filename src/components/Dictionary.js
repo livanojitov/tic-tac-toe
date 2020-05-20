@@ -86,16 +86,16 @@ const DICTIONARY = [
 
   CATEGORY: 'Catégorie',
 
-  HAVANA_LANDMARKS: 'La Havane monuments',
-  VANCOUVER_LANDMARKS: 'Vancouver monuments',
+  HAVANA_LANDMARKS: 'Monuments de La Havane',
+  VANCOUVER_LANDMARKS: 'Monuments de Vancouver',
   SOCCER_PLAYERS: 'Joueurs du soccer',
   FRUITS_AND_VEGETABLES: 'Fruits et légumes',
   ANIMALS: 'Des animaux',
   ALPHABET: 'L\'alphabet',
   PUPPIES: 'Des chiots',
   SEINFELD: 'Seinfeld',
-  SPAIN_LANDMARKS: 'L\'Espagne monuments',
-  GERMANY_LANDMARKS: 'L\'Allemagne monuments',
+  SPAIN_LANDMARKS: 'Monuments L\'Espagne',
+  GERMANY_LANDMARKS: 'Monuments L\'Allemagne',
 
   YOU: 'Toi',
   OPPONENT: 'Ordinateur',
@@ -155,16 +155,16 @@ const DICTIONARY = [
 
   CATEGORY: 'Categoría',
 
-  HAVANA_LANDMARKS: 'La Habana monumentos',
-  VANCOUVER_LANDMARKS: 'Vancouver monumentos',
+  HAVANA_LANDMARKS: 'Monumentos La Habana',
+  VANCOUVER_LANDMARKS: 'Monumentos de Vancouver',
   SOCCER_PLAYERS: 'Jugadores de fútbol',
   FRUITS_AND_VEGETABLES: 'Frutas y vegetales',
   ANIMALS: 'Animales',
   ALPHABET: 'El Alfabeto',
   PUPPIES: 'Cachorros',
   SEINFELD: 'Seinfeld',
-  SPAIN_LANDMARKS: 'España monumentos',
-  GERMANY_LANDMARKS: 'Alemania monumentos',
+  SPAIN_LANDMARKS: 'Monumentos de España',
+  GERMANY_LANDMARKS: 'Monumentos de Alemania',
    
   YOU: 'Tú',
   OPPONENT: 'Ordenador',
@@ -208,7 +208,7 @@ const DICTIONARY = [
   AVAILABILITY: 'Disponibilidad:',
   AVAILABILITY_STATUS: 'Inmediatamente',
     
-  NO_HISTORY_YET: 'No hay historial aún. Juegue algunas partidas y regrese luego.',
+  NO_HISTORY_YET: 'No hay historial aún. Juega algunas partidas y regresa más tarde.',
 
   START_OVER: 'Jugar de nuevo',
   SEE_GAME: 'Ver la partida',
