@@ -22,7 +22,7 @@ const Info = (props) => {
 
   if (!history ){
     return (
-      <span>{DICTIONARY[language].GAME_OVER} : {message}</span>
+      <span>{DICTIONARY[language].GAME_OVER}: {message}</span>
     )
   }else{
     return (

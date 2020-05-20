@@ -31,7 +31,7 @@ class StartGame extends Component {
                 </div>
               ) : (
                 <div className="question">
-                  {DICTIONARY[language].START_HISTORY} {first === COMPUTER ? DICTIONARY[language].OPPONENT : DICTIONARY[language].YOU}
+                  {DICTIONARY[language].STARTED_BY} {first === COMPUTER ? DICTIONARY[language].OPPONENT : DICTIONARY[language].STARTED_BY_PLAYER}
                 </div>
               );
       }}</LanguageContext.Consumer>
