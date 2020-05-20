@@ -9,9 +9,13 @@ const LOST = 0;
 const WON =  1;
 const DRAW = 2;
 
-
 const DICTIONARY = [
 {
+  GAME: 'Game',
+  HISTORY: 'Historical',
+  ABOUT: 'About',
+  CONTACT: 'Contact', 
+  
   CATEGORY: 'Category',
   CATEGORIES: [
     {name: 'La Havana landmarks'},
@@ -27,7 +31,6 @@ const DICTIONARY = [
 
   YOU: 'You',
   OPPONENT: 'Computer',
-  REFRESH: 'New',
   USER_IMAGE_TOOLTIP: 'You will play with this image.',
   COMPUTER_IMAGE_TOOLTIP: 'The computer will play with this image.',
   REFRESH_TOOLTIP: 'Click to play with a different image.',
@@ -65,21 +68,22 @@ const DICTIONARY = [
   EMAIL: 'E-mail:',
   GITHUB: 'Github:',
   LINKEDIN: 'LinkedIn:',
-  HIRE_ME: 'For hire!',
+  AVAILABILITY: 'Availability:',
+  AVAILABILITY_STATUS: 'Right away',
   
-  NO_HISTORY_YET: 'No historical data yet. Play some games and comeback.',
+  NO_HISTORY_YET: 'There is no historical data yet. Play some games and comeback.',
   START_OVER: 'Play again',
   SEE_GAME: 'See Game',
   DELETE_GAME: 'Delete Game',
-  BACK: 'Back',
-
-  GAME: 'Game',
-  HISTORY: 'Historical',
-  ABOUT: 'About',
-  CONTACT: 'Contact',  
+  BACK: 'Back', 
 },
 
 {
+  GAME: 'Jeu',
+  HISTORY: 'Historique',
+  ABOUT: 'À propos de',
+  CONTACT: 'Contact',  
+
   CATEGORY: 'Catégorie',
   CATEGORIES: [
     {name: 'La Havane monuments'},
@@ -93,9 +97,8 @@ const DICTIONARY = [
     {name: 'L\'Espagne monuments'},
     {name: 'L\'Allemagne monuments'}],
 
-  YOU: 'Tu',
+  YOU: 'Toi',
   OPPONENT: 'Ordinateur',
-  REFRESH: 'Nouvelle',
   USER_IMAGE_TOOLTIP: 'Tu vas jouer avec cette image.',
   COMPUTER_IMAGE_TOOLTIP: 'L\'ordinateur va jouer avec cette image.',
   REFRESH_TOOLTIP: 'Fais clic à fin de jouer avec une autre image.',
@@ -120,7 +123,7 @@ const DICTIONARY = [
 
   PLAY: 'Commencer la partie',
   GAME_OVER: 'La partie est finie',
-  PLAY_AGAIN: 'Rejouer',
+  PLAY_AGAIN: 'Jouer à nouveau',
   MESSAGE_LOST: 'Tu as perdu!',
   MESSAGE_WON: 'Tu as gagné!',
   MESSAGE_DRAW: 'Match nul!',
@@ -133,21 +136,23 @@ const DICTIONARY = [
   EMAIL: 'Courrier électronique:',
   GITHUB: 'Github:',
   LINKEDIN: 'LinkedIn:',
-  HIRE_ME: 'Disponible immédiatement!',
-  NO_HISTORY_YET: 'Pas encore d\'historique. Reviens un peu plus tard après avoir joué quelques parties.',
+  AVAILABILITY: 'Disponibilité:',
+  AVAILABILITY_STATUS: 'Immédiatement',
+
+  NO_HISTORY_YET: 'Il n\'y a pas encore d\'historique. Reviens un peu plus tard après avoir joué quelques parties.',
 
   START_OVER: 'Reprendre le jeu',
   SEE_GAME: 'Voir la partie',
   DELETE_GAME: 'Retirer la partie',
-  BACK: 'Retour',
-
-  GAME: 'Jeu',
-  HISTORY: 'Historique',
-  ABOUT: 'À propos de',
-  CONTACT: 'Contact',  
+  BACK: 'Retour'
 },
 
 {
+  GAME: 'Juego',
+  HISTORY: 'Histórico',  
+  ABOUT: 'Acerca de',
+  CONTACT: 'Contacto',
+
   CATEGORY: 'Categoría',
   CATEGORIES: [
     {name: 'La Habana monumentos'},
@@ -163,7 +168,6 @@ const DICTIONARY = [
     
   YOU: 'Tú',
   OPPONENT: 'Ordenador',
-  REFRESH: 'Nueva',
   USER_IMAGE_TOOLTIP: 'Tú jugaras con esta imagen.',
   COMPUTER_IMAGE_TOOLTIP: 'El ordenador jugará con esta imagen.',
   REFRESH_TOOLTIP: 'Haga click para jugar con una imagen diferente.',
@@ -186,11 +190,11 @@ const DICTIONARY = [
   LEVEL_HARD_HISTORY: 'Nivel: Difícil',
   LEVEL_NORMAL_HISTORY: 'Nivel: Normal',
   
-  PLAY: 'Empezar el juego',
-  GAME_OVER: 'Juego acabado',
+  PLAY: 'Empezar la partida',
+  GAME_OVER: 'Partida acabada',
   PLAY_AGAIN: 'Jugar de nuevo',
-  MESSAGE_LOST: ' perdió!',
-  MESSAGE_WON: 'Tú ganaste!',
+  MESSAGE_LOST: 'Perdiste!',
+  MESSAGE_WON: 'Ganaste!',
   MESSAGE_DRAW: 'Empate!',
   
   GAME_WRITTEN_WITH: 'Este juego ha sido desarrollado con:',
@@ -201,19 +205,15 @@ const DICTIONARY = [
   EMAIL: 'Correo electrónico:',
   GITHUB: 'Github:',
   LINKEDIN: 'LinkedIn:',
-  HIRE_ME: 'Disponible inmediatamente!',
-  
-  
+  AVAILABILITY: 'Disponibilidad:',
+  AVAILABILITY_STATUS: 'Inmediatamente',
+    
   NO_HISTORY_YET: 'No hay historial aún. Juegue algunas partidas y regrese luego.',
+
   START_OVER: 'Jugar de nuevo',
   SEE_GAME: 'Ver la partida',
   DELETE_GAME: 'Eliminar la partida',
-  BACK: 'Regresar',
-
-  GAME: 'Juego',
-  HISTORY: 'Histórico',  
-  ABOUT: 'Acerca de',
-  CONTACT: 'Contacto',
+  BACK: 'Regresar'
 }
 
 ];

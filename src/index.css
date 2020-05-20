@@ -58,7 +58,7 @@ nav li a:hover{
   margin-top: 10px;
 }
 
-.contact .me{
+.contact .me, .contact .availability{
   color: green;
   font-weight: normal;
 }

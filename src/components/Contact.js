@@ -42,7 +42,8 @@ const Contact = (props) => {
           <a target="_blank" href={contact.linkedin} rel="noopener noreferrer">{contact.linkedin}</a>
       </p>    
       <p>
-          <span>{DICTIONARY[language].HIRE_ME} </span>
+          <span>{DICTIONARY[language].AVAILABILITY} </span>
+          <span class="availability">{DICTIONARY[language].AVAILABILITY_STATUS} </span>
       </p>                  
     </div>
   )
