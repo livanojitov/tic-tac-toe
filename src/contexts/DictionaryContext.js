@@ -7,7 +7,7 @@ const DictionaryContextProvider = (props) => {
   const [DICTIONARY, setDictionary] = useState('');
 
   useEffect(() => {
-    if (DICTIONARY.length === 0){
+    if (DICTIONARY === ''){
       axios.get('dictionary.json')
         .then(res => {
           setDictionary(res.data);
