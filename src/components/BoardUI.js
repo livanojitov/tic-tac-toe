@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Square                from './Square';
 import { HistoryContext }    from '../contexts/HistoryContext';
-import * as constants        from './Dictionary';
+import * as constants        from './Constants';
 
 const empty    = constants.EMPTY;
 const computer = constants.COMPUTER;

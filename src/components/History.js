@@ -3,13 +3,14 @@ import { GameContext }       from '../contexts/GameContext';
 import { LanguageContext }   from '../contexts/LanguageContext';
 import { HistoryContext }    from '../contexts/HistoryContext';
 import GamesHistory          from './GamesHistory';
-import DICTIONARY            from './Dictionary';
+import { DictionaryContext } from '../contexts/DictionaryContext';
 
 const History = (props) => {
   const { getLanguage } = useContext(LanguageContext);
   const language = getLanguage();
   const { changeHistory } = useContext(HistoryContext);
-  
+  const { DICTIONARY } = useContext(DictionaryContext);
+
   const { games } = useContext(GameContext);
   let historyGames;
 
@@ -30,7 +31,7 @@ const History = (props) => {
   }else{
     historyGames = (
       <div className="info"> 
-        {DICTIONARY[language].NO_HISTORY_YET}
+        {DICTIONARY && DICTIONARY[language].NO_HISTORY_YET}
       </div>  
     )    
   }

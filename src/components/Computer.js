@@ -1,4 +1,4 @@
-import * as constants from './Dictionary';
+import * as constants from './Constants';
 
 const { EMPTY, USER, COMPUTER, EASY, HARD, NORMAL } = constants;
 

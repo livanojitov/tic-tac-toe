@@ -1,28 +1,29 @@
-import React, { useContext} from 'react';
-import { LanguageContext }  from '../contexts/LanguageContext';
-import { HistoryContext }   from '../contexts/HistoryContext';
-import DICTIONARY           from './Dictionary';
-import * as constants       from './Dictionary';
+import React, { useContext}  from 'react';
+import { LanguageContext }   from '../contexts/LanguageContext';
+import { HistoryContext }    from '../contexts/HistoryContext';
+import { DictionaryContext } from '../contexts/DictionaryContext';
+import * as constants        from './Constants';
 const { LOST, WON } = constants;
 
 const Info = (props) => {
   const { getLanguage } = useContext(LanguageContext);
   const language = getLanguage();
   const { history } = useContext(HistoryContext);
+  const { DICTIONARY } = useContext(DictionaryContext);  
   let message, result;
 
   result = props.result;
   if (result === LOST){
-    message = DICTIONARY[language].MESSAGE_LOST;
+    message = DICTIONARY && DICTIONARY[language].MESSAGE_LOST;
   }else if (result === WON){
-    message = DICTIONARY[language].MESSAGE_WON;
+    message = DICTIONARY && DICTIONARY[language].MESSAGE_WON;
   }else{
-    message = DICTIONARY[language].MESSAGE_DRAW;
+    message = DICTIONARY && DICTIONARY[language].MESSAGE_DRAW;
   }
 
   if (!history ){
     return (
-      <span>{DICTIONARY[language].GAME_OVER}: {message}</span>
+      <span>{DICTIONARY && DICTIONARY[language].GAME_OVER}: {message}</span>
     )
   }else{
     return (

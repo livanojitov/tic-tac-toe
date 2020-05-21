@@ -1,13 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { LanguageContext } from '../contexts/LanguageContext';
-import { HistoryContext }  from '../contexts/HistoryContext';
-import DICTIONARY          from './Dictionary';
+import { LanguageContext }   from '../contexts/LanguageContext';
+import { HistoryContext }    from '../contexts/HistoryContext';
+import { DictionaryContext } from '../contexts/DictionaryContext';
 
 const About = (props) => {
   const { getLanguage } = useContext(LanguageContext);
   const language = getLanguage();
   const { changeHistory } = useContext(HistoryContext);
-
+  const { DICTIONARY } = useContext(DictionaryContext);
+  
   const [skills] = useState([
     { name: 'React.js',       url: 'https://reactjs.org/'                                                  },
     { name: 'React Hooks',    url: 'https://reactjs.org/docs/hooks-intro.html'                             },
@@ -47,18 +48,18 @@ const About = (props) => {
     <div className="about">
 
       <div>
-        <span>{DICTIONARY[language].GAME_WRITTEN_WITH} </span>
+        <span>{DICTIONARY && DICTIONARY[language].GAME_WRITTEN_WITH} </span>
         <ul>
           {lis}
         </ul>  
       </div> 
 
       <p>
-          <span>{DICTIONARY[language].SOURCE_CODE} </span>
+          <span>{DICTIONARY &&  DICTIONARY[language].SOURCE_CODE} </span>
           <a target="_blank" href={source} rel="noopener noreferrer">{source}</a>
       </p>
       
-      <span>{DICTIONARY[language].OTHER_GAMES} </span>            
+      <span>{DICTIONARY &&  DICTIONARY[language].OTHER_GAMES} </span>            
       <ul>
         <li>
           <a target="_blank" href={games.url} rel="noopener noreferrer">{games.name}</a>

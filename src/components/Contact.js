@@ -1,12 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { LanguageContext } from '../contexts/LanguageContext';
-import { HistoryContext }  from '../contexts/HistoryContext';
-import DICTIONARY          from './Dictionary';
+import { LanguageContext }   from '../contexts/LanguageContext';
+import { HistoryContext }    from '../contexts/HistoryContext';
+import { DictionaryContext } from '../contexts/DictionaryContext';
 
 const Contact = (props) => {
   const { getLanguage } = useContext(LanguageContext);
   const language = getLanguage();
   const { changeHistory } = useContext(HistoryContext);
+  const { DICTIONARY } = useContext(DictionaryContext);
 
   const [contact] = useState({
     author:   'Livan Ojito Villanueva',
@@ -28,22 +29,22 @@ const Contact = (props) => {
   return (
     <div className="contact">
       <p>
-          <span>{DICTIONARY[language].AUTHOR} </span><span className="me">{contact.author}</span>
+          <span>{DICTIONARY && DICTIONARY[language].AUTHOR} </span><span className="me">{contact.author}</span>
       </p>
       <p>
-          <span>{DICTIONARY[language].EMAIL} </span><span className="me">{contact.email}</span>
+          <span>{DICTIONARY && DICTIONARY[language].EMAIL} </span><span className="me">{contact.email}</span>
       </p>                  
       <p>
-          <span>{DICTIONARY[language].GITHUB} </span>
+          <span>{DICTIONARY && DICTIONARY[language].GITHUB} </span>
           <a target="_blank" href={contact.github} rel="noopener noreferrer">{contact.github}</a>
       </p>        
       <p>
-          <span>{DICTIONARY[language].LINKEDIN} </span>
+          <span>{DICTIONARY && DICTIONARY[language].LINKEDIN} </span>
           <a target="_blank" href={contact.linkedin} rel="noopener noreferrer">{contact.linkedin}</a>
       </p>    
       <p>
-          <span>{DICTIONARY[language].AVAILABILITY} </span>
-          <span class="availability">{DICTIONARY[language].AVAILABILITY_STATUS} </span>
+          <span>{DICTIONARY && DICTIONARY[language].AVAILABILITY} </span>
+          <span className="availability">{DICTIONARY && DICTIONARY[language].AVAILABILITY_STATUS} </span>
       </p>                  
     </div>
   )

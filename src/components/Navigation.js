@@ -1,11 +1,12 @@
 import { NavLink }            from 'react-router-dom';
 import React, { useContext }  from 'react';
 import { LanguageContext }    from '../contexts/LanguageContext';
-import DICTIONARY             from './Dictionary';
+import { DictionaryContext }  from '../contexts/DictionaryContext';
 
 const Navigation = () => {
   const { getLanguage } = useContext(LanguageContext);
   const language = getLanguage();
+  const { DICTIONARY } = useContext(DictionaryContext);
 
   return (
     <nav>
@@ -20,10 +21,10 @@ const Navigation = () => {
           </div>
       </label>      
       <ul className='nav'>
-        <li key='0'><NavLink exact to={'/'}       >{DICTIONARY[language].GAME}   </NavLink></li>
-        <li key='1'><NavLink exact to={'/history'}>{DICTIONARY[language].HISTORY}</NavLink></li>
-        <li key='2'><NavLink exact to={'/about'}  >{DICTIONARY[language].ABOUT}  </NavLink></li>
-        <li key='3'><NavLink exact to={'/contact'}>{DICTIONARY[language].CONTACT}</NavLink></li>
+        <li key='0'><NavLink exact to={'/'}       >{DICTIONARY && DICTIONARY[language].GAME}   </NavLink></li>
+        <li key='1'><NavLink exact to={'/history'}>{DICTIONARY && DICTIONARY[language].HISTORY}</NavLink></li>
+        <li key='2'><NavLink exact to={'/about'}  >{DICTIONARY && DICTIONARY[language].ABOUT}  </NavLink></li>
+        <li key='3'><NavLink exact to={'/contact'}>{DICTIONARY && DICTIONARY[language].CONTACT}</NavLink></li>
       </ul>
     </nav>
   )

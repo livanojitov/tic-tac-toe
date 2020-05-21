@@ -10,8 +10,8 @@ import Computer              from './Computer';
 import { GameContext }       from '../contexts/GameContext';
 import { LanguageContext }   from '../contexts/LanguageContext';
 import { HistoryContext }    from '../contexts/HistoryContext';
-import DICTIONARY            from './Dictionary';
-import * as constants        from './Dictionary';
+import { DictionaryContext } from '../contexts/DictionaryContext';
+import * as constants        from './Constants';
 
 const { LOST, WON, DRAW } = constants;
 
@@ -47,46 +47,49 @@ class Game extends Component {
   render(){
     const {disabled, categoryId, folder, count, board, winners, gameOver, showStartButton, imageUser, imageComputer} = this.state;
     return(
-      <HistoryContext.Consumer>{(HistoryContext) => {
-        const { changeHistory } = HistoryContext;
-        this.changeHistory = changeHistory;
-        return (
-        <LanguageContext.Consumer>{(languageContext) => {
-          const { getLanguage } = languageContext;
-          const language = getLanguage();
-          this.language = language;
+      <DictionaryContext.Consumer>{(dictionaryContext) => (
+        <HistoryContext.Consumer>{(HistoryContext) => {
+          const { changeHistory } = HistoryContext;
+          this.changeHistory = changeHistory;
+          let { DICTIONARY } = dictionaryContext;
           return (
-          <div className="game">
+          <LanguageContext.Consumer>{(languageContext) => {
+            const { getLanguage } = languageContext;
+            const language = getLanguage();
+            this.language = language;
+            return (
+            <div className="game">
 
-            <Category onCategoryChange = {this.setCategory}/>
+              <Category onCategoryChange = {this.setCategory}/>
 
-            {categoryId >= 0 && ( <Images folder={folder} count={count}  imageUser={0} imageComputer={1} onImageChange={this.setImages}/> )}
+              {categoryId >= 0 && ( <Images folder={folder} count={count}  imageUser={0} imageComputer={1} onImageChange={this.setImages}/> )}
 
-            <div className="settings">
-              <StartGame disabled={!disabled} onPlayerChange = {this.setFirst} />
-              <Level     disabled={!disabled} onLevelChange  = {this.setLevel } />
-            </div>
-
-            {showStartButton &&  ( <div className="start-playing"><button onClick={this.gameInit}>{DICTIONARY[language].PLAY}</button></div>)}
-
-            {categoryId >= 0 && (
-              <BoardUI folder         = {folder} 
-                       imageUser      = {imageUser}
-                       imageComputer  = {imageComputer}
-                       disabled       = {disabled}
-                       board          = {board}
-                       onUserPlayed   = {this.gamePlay}
-                       winners        = {winners}
-                       gameOver       = {gameOver} />)}
-            {gameOver && ( 
-              <div className="info">  
-                <Info result = {this.result}/>
-                <input className="play-again" type="button" value={DICTIONARY[language].PLAY_AGAIN} onClick={this.gameInit} />
+              <div className="settings">
+                <StartGame disabled={!disabled} onPlayerChange = {this.setFirst} />
+                <Level     disabled={!disabled} onLevelChange  = {this.setLevel } />
               </div>
-            )}   
-          </div>        
-        )}}</LanguageContext.Consumer>)
-      }}</HistoryContext.Consumer>
+
+              {showStartButton &&  ( <div className="start-playing"><button onClick={this.gameInit}>{DICTIONARY && DICTIONARY[language].PLAY}</button></div>)}
+
+              {categoryId >= 0 && (
+                <BoardUI folder         = {folder} 
+                        imageUser      = {imageUser}
+                        imageComputer  = {imageComputer}
+                        disabled       = {disabled}
+                        board          = {board}
+                        onUserPlayed   = {this.gamePlay}
+                        winners        = {winners}
+                        gameOver       = {gameOver} />)}
+              {gameOver && ( 
+                <div className="info">  
+                  <Info result = {this.result}/>
+                  <input className="play-again" type="button" value={DICTIONARY && DICTIONARY[language].PLAY_AGAIN} onClick={this.gameInit} />
+                </div>
+              )}   
+            </div>        
+          )}}</LanguageContext.Consumer>)
+        }}</HistoryContext.Consumer>
+      )}</DictionaryContext.Consumer>
     )
   }
 

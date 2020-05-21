@@ -8,13 +8,14 @@ import StartGame                                  from './StartGame';
 import Level                                      from './Level';
 import BoardUI                                    from './BoardUI';
 import Info                                       from './Info';
-import DICTIONARY                                 from './Dictionary';
+import { DictionaryContext }                      from '../contexts/DictionaryContext';
 
 const GameHistory = (props) => {
   const { getGame, dispatch } = useContext(GameContext);
   const { getLanguage } = useContext(LanguageContext);
   const language = getLanguage();  
   const { changeHistory } = useContext(HistoryContext);
+  const { DICTIONARY } = useContext(DictionaryContext);
   const gameId = props.match.params.id;
 
   let categoryId, imageComputer, imageUser, first, level, board, winners, result;
@@ -64,14 +65,14 @@ const GameHistory = (props) => {
           <div className="info">
             <Info result = {result}/>
             <input type="button"
-                   value={DICTIONARY[language].DELETE_GAME} 
+                   value={DICTIONARY && DICTIONARY[language].DELETE_GAME} 
                    onClick={(e) => { 
                      dispatch({type: 'REMOVE_GAME', id: gameId}); 
                      props.history.push('/history')
                    }} 
                    className="delete-game"/>
             <input type="button" 
-                   value={DICTIONARY[language].BACK}
+                   value={DICTIONARY && DICTIONARY[language].BACK}
                    onClick={(e) => {
                      props.history.push('/history')
                    }}

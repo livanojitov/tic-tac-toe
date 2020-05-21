@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { HistoryContext }   from '../contexts/HistoryContext';
-import { LanguageContext }  from '../contexts/LanguageContext';
-import { USER, COMPUTER }   from './Dictionary';
-import DICTIONARY           from './Dictionary';
+import React, { Component }  from 'react';
+import { HistoryContext }    from '../contexts/HistoryContext';
+import { LanguageContext }   from '../contexts/LanguageContext';
+import { USER, COMPUTER }    from './Constants';
+import { DictionaryContext } from '../contexts/DictionaryContext';
 
 class StartGame extends Component {
   static contextType = HistoryContext;
@@ -15,26 +15,29 @@ class StartGame extends Component {
     const { disabled, first } = this.props;
 
     return (
-      <LanguageContext.Consumer>{(languageContext) => {
-        const { getLanguage } = languageContext;
-        const language = getLanguage();
-        return (!history) ? ( 
-                <div className="question">
+      <DictionaryContext.Consumer>{(dictionaryContext) => ( 
+        <LanguageContext.Consumer>{(languageContext) => {
+          const { getLanguage } = languageContext;
+          const language = getLanguage();
+          let { DICTIONARY } = dictionaryContext;
+          return (!history) ? ( 
+                  <div className="question">
 
-                  <span title = {DICTIONARY[language].START_TOOLTIP}>{DICTIONARY[language].START}?</span>
+                    <span title = {DICTIONARY && DICTIONARY[language].START_TOOLTIP}>{DICTIONARY && DICTIONARY[language].START}?</span>
 
-                  <select className="" onChange={this.setPlayer} disabled = {disabled} >
-                    <option key="0"  value={USER}>{DICTIONARY[language].YES}</option>  
-                    <option key="1"  value={COMPUTER}>{DICTIONARY[language].NO}</option>  
-                  </select> 
+                    <select className="" onChange={this.setPlayer} disabled = {disabled} >
+                      <option key="0"  value={USER}>{DICTIONARY && DICTIONARY[language].YES}</option>  
+                      <option key="1"  value={COMPUTER}>{DICTIONARY && DICTIONARY[language].NO}</option>  
+                    </select> 
 
-                </div>
-              ) : (
-                <div className="question">
-                  {DICTIONARY[language].STARTED_BY} {first === COMPUTER ? DICTIONARY[language].OPPONENT : DICTIONARY[language].STARTED_BY_PLAYER}
-                </div>
-              );
-      }}</LanguageContext.Consumer>
+                  </div>
+                ) : (
+                  <div className="question">
+                    {DICTIONARY && DICTIONARY[language].STARTED_BY} {first === COMPUTER ? DICTIONARY && DICTIONARY[language].OPPONENT : DICTIONARY && DICTIONARY[language].STARTED_BY_PLAYER}
+                  </div>
+                );
+        }}</LanguageContext.Consumer>
+      )}</DictionaryContext.Consumer> 
     )  
   }
 

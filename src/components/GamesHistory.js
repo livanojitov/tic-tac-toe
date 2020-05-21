@@ -7,12 +7,13 @@ import Images                          from './Images';
 import StartGame                       from './StartGame';
 import Level                           from './Level';
 import Info                            from './Info';
-import DICTIONARY                      from './Dictionary';
+import { DictionaryContext }           from '../contexts/DictionaryContext';
 
 const GamesHistory = ({categoryId, imageUser, imageComputer, result, id, first, level}) => {
   const {dispatch}  = useContext(GameContext);
   const { getLanguage } = useContext(LanguageContext);
   const language = getLanguage();
+  const { DICTIONARY } = useContext(DictionaryContext);
 
   const [ folder, setFolder ] = useState(""); 
   const updateFolder = (category) => {
@@ -34,10 +35,10 @@ const GamesHistory = ({categoryId, imageUser, imageComputer, result, id, first, 
       <div className="info">
         <Info result = {result}/>
         <button className="see-game">
-          <Link to={`/${id}`}>{DICTIONARY[language].SEE_GAME}</Link>
+          <Link to={`/${id}`}>{DICTIONARY && DICTIONARY[language].SEE_GAME}</Link>
         </button>
         <input type="button" 
-               value={DICTIONARY[language].DELETE_GAME}
+               value={DICTIONARY && DICTIONARY[language].DELETE_GAME}
                onClick={(e) => { 
                  dispatch({type: 'REMOVE_GAME', id });
                }} 

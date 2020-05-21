@@ -1,7 +1,7 @@
-import React, { Component} from 'react';
-import { HistoryContext }  from '../contexts/HistoryContext';
-import { LanguageContext } from '../contexts/LanguageContext';
-import DICTIONARY          from './Dictionary';
+import React, { Component}   from 'react';
+import { HistoryContext }    from '../contexts/HistoryContext';
+import { LanguageContext }   from '../contexts/LanguageContext';
+import { DictionaryContext } from '../contexts/DictionaryContext';
 
 class Category extends Component{
 
@@ -34,37 +34,44 @@ class Category extends Component{
   
   render(){
     return (
-      <LanguageContext.Consumer>{(languageContext) => (
-        <HistoryContext.Consumer>{(historyContext) => {
-          const { categoryId } = this.state;
-          const { history } = historyContext;
-          const { getLanguage } = languageContext;
-          const language = getLanguage();
-          const name  = DICTIONARY[language][this.categories[categoryId].name];
-          let categoryJSX;
+      <DictionaryContext.Consumer>{(dictionaryContext) => (
+        <LanguageContext.Consumer>{(languageContext) => (
+          <HistoryContext.Consumer>{(historyContext) => {
+            const { categoryId } = this.state;
+            const { history } = historyContext;
+            const { getLanguage } = languageContext;
+          
+            let { DICTIONARY } = dictionaryContext;
+            if (DICTIONARY){
+              const language = getLanguage();
+              const name  = DICTIONARY[language][this.categories[categoryId].name];
+              let categoryJSX;
 
-          if (!history){  
-            categoryJSX =  (
-              <select value={categoryId} onChange={this.onChange}>
-                {this.categories.map(
-                  (category, index) => {
-                    return (
-                      <option key={index} value={index}>{DICTIONARY[language][category.name]}</option>  
-                    )
-                  })}
-              </select>);
-          }else{
-            categoryJSX = <span>{name}</span>;
-          }
+              if (!history){  
+                categoryJSX =  (
+                  <select value={categoryId} onChange={this.onChange}>
+                    {this.categories.map(
+                      (category, index) => {
+                        return (
+                          <option key={index} value={index}>{DICTIONARY[language][category.name]}</option>  
+                        )
+                      })}
+                  </select>);
+              }else{
+                categoryJSX = <span>{name}</span>;
+              }
 
-          return (
-            <div className = "categories">
-              <span>{DICTIONARY[language].CATEGORY}: </span>
-              {categoryJSX}
-            </div>
-          )
-        }}</HistoryContext.Consumer>
-      )}</LanguageContext.Consumer>
+              return (
+                <div className = "categories">
+                  <span>{DICTIONARY[language].CATEGORY}: </span>
+                  {categoryJSX}
+                </div>
+              )
+            }
+          }}</HistoryContext.Consumer>
+        )}</LanguageContext.Consumer>
+      )}</DictionaryContext.Consumer>
+      
     )
   }
 
