@@ -1,0 +1,51 @@
+[{
+  "name": "HAVANA_LANDMARKS",
+  "folder": "habana",
+  "count": "20"
+},
+{
+  "name": "VANCOUVER_LANDMARKS",
+  "folder": "vancouver",
+  "count": "20"
+},
+{
+  "name": "SPAIN_LANDMARKS",
+  "folder": "spain",
+  "count": "20"
+},
+{
+  "name": "GERMANY_LANDMARKS",
+  "folder": "germany",
+  "count": "20"
+},
+{
+  "name": "SOCCER_PLAYERS",
+  "folder": "soccer",
+  "count": "20"
+},
+{
+  "name": "FRUITS_AND_VEGETABLES",
+  "folder": "fruits",
+  "count": "20"
+},
+{
+  "name": "ANIMALS",
+  "folder": "animals",
+  "count": "20"
+},
+{
+  "name": "PUPPIES",
+  "folder": "puppies",
+  "count": "20"
+},
+{
+  "name": "ALPHABET",
+  "folder": "alphabet",
+  "count": "26"
+},
+{
+  "name": "SEINFELD",
+  "folder": "seinfeld",
+  "count": "20"
+}
+]

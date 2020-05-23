@@ -11,6 +11,7 @@ import { GameContext }       from '../contexts/GameContext';
 import { LanguageContext }   from '../contexts/LanguageContext';
 import { HistoryContext }    from '../contexts/HistoryContext';
 import { DictionaryContext } from '../contexts/DictionaryContext';
+import { CategoryContext }   from '../contexts/CategoryContext';
 import * as constants        from './Constants';
 
 const { LOST, WON, DRAW } = constants;
@@ -47,20 +48,21 @@ class Game extends Component {
   render(){
     const {disabled, categoryId, folder, count, board, winners, gameOver, showStartButton, imageUser, imageComputer} = this.state;
     return(
+     <CategoryContext.Consumer>{(categoryContext) => ( 
       <DictionaryContext.Consumer>{(dictionaryContext) => (
-        <HistoryContext.Consumer>{(HistoryContext) => {
+        <HistoryContext.Consumer>{(HistoryContext) => (
+          <LanguageContext.Consumer>{(languageContext) => {
           const { changeHistory } = HistoryContext;
+          const { getLanguage } = languageContext;
+          const language = getLanguage();
+          this.language = language;
           this.changeHistory = changeHistory;
           let { DICTIONARY } = dictionaryContext;
+          let { CATEGORIES } = categoryContext;
           return (
-          <LanguageContext.Consumer>{(languageContext) => {
-            const { getLanguage } = languageContext;
-            const language = getLanguage();
-            this.language = language;
-            return (
             <div className="game">
 
-              <Category onCategoryChange = {this.setCategory}/>
+             { DICTIONARY && CATEGORIES && ( <Category onCategoryChange = {this.setCategory}/> )}
 
               {categoryId >= 0 && ( <Images folder={folder} count={count}  imageUser={0} imageComputer={1} onImageChange={this.setImages}/> )}
 
@@ -86,10 +88,12 @@ class Game extends Component {
                   <input className="play-again" type="button" value={DICTIONARY && DICTIONARY[language].PLAY_AGAIN} onClick={this.gameInit} />
                 </div>
               )}   
-            </div>        
-          )}}</LanguageContext.Consumer>)
-        }}</HistoryContext.Consumer>
+            </div>  )      
+          }}</LanguageContext.Consumer>
+        )}</HistoryContext.Consumer>
       )}</DictionaryContext.Consumer>
+     )}</CategoryContext.Consumer>
+    
     )
   }
 
