@@ -46,7 +46,7 @@ class Computer{
 
     const playHard = () =>{
       if (this.board.first === USER){
-        if (this.board.playsCounter === 1){
+        if (this.board.moves === 1){
           if (players[4] === USER){
             this.board.play(COMPUTER, [0,2,6,8][Math.floor(Math.random() * 4)]);
           }else{
@@ -59,7 +59,7 @@ class Computer{
           this.board.play(COMPUTER, [0,2,6,8,4][Math.floor(Math.random() * 5)]);
           return;
         }
-        if (this.board.playsCounter === 2){
+        if (this.board.moves === 2){
           if (this.playFromTwo()){ 
               return;
           }else{

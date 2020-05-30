@@ -2,7 +2,7 @@ import React,{ Component }    from 'react';
 import { HistoryContext  }    from '../contexts/HistoryContext';
 import { LanguageContext }    from '../contexts/LanguageContext';
 import { EASY, HARD, NORMAL } from './Constants';
-import { DictionaryContext } from '../contexts/DictionaryContext';
+import { DictionaryContext }  from '../contexts/DictionaryContext';
 
 class Level extends Component {
   static contextType = HistoryContext;
@@ -27,8 +27,8 @@ class Level extends Component {
 
               <select onChange={this.setLevel} disabled = {disabled} >
                 <option key={EASY}   value={EASY}>{DICTIONARY && DICTIONARY[language].LEVEL_EASY}</option>  
-                <option key={HARD}   value={HARD}>{DICTIONARY && DICTIONARY[language].LEVEL_HARD}</option>  
                 <option key={NORMAL} value={NORMAL}>{DICTIONARY && DICTIONARY[language].LEVEL_NORMAL}</option>  
+                <option key={HARD}   value={HARD}>{DICTIONARY && DICTIONARY[language].LEVEL_HARD}</option>  
               </select>
 
             </div>

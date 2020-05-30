@@ -3,33 +3,13 @@ const { EMPTY, USER, COMPUTER, EASY, HARD, NORMAL, TOTAL_SQUARES } = constants;
 let   board = null;
 let   _first = USER;
 let   _level = EASY;
-let   playsCounter = 0;
+let   _moves = 0;
 
 class Board {
   constructor(first = USER, level = EASY){
     board = Array(TOTAL_SQUARES).fill(EMPTY);
-    this.level = level;
-    this.first = first;
-  }
-
-  get empty(){
-    return EMPTY;
-  }
-
-  get computer(){
-    return COMPUTER;
-  }
-
-  get user(){
-    return USER;
-  }
-
-  get easy(){
-    return EASY;
-  }
-
-  get hard(){
-    return HARD;
+    _first = first;
+    _level = level;
   }
 
   get level(){
@@ -56,8 +36,8 @@ class Board {
     }  
   }
 
-  get playsCounter(){
-    return playsCounter;
+  get moves(){
+    return _moves;
   } 
 
   get isFull(){
@@ -83,16 +63,16 @@ class Board {
 
   reset(){
     board = Array(TOTAL_SQUARES).fill(EMPTY);
-    playsCounter = 0;
+    _moves = 0;
   }
 
   play(player, square){
     if (square >= 0 && square < board.length && (player === COMPUTER || player === USER || player === EMPTY)){
       board[square] = player;
       if (player !== EMPTY){
-        playsCounter++;
+        _moves++;
       }else{
-        playsCounter--;
+        _moves--;
       }  
       return true;
     }else{

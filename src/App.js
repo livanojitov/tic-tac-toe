@@ -20,14 +20,14 @@ const closeMobileMenu = () => {
   }
 }
 
-function App() {
+function App() { // basename="/tic-tac-toe"
   return (
     <DictionaryContextProvider>
       <GameContextProvider>
         <HistoryContextProvider>
           <LanguageContextProvider>
             <CategoryContextProvider>
-              <BrowserRouter basename="/tic-tac-toe">
+              <BrowserRouter>
                 <div className='header'>
                   <Header/>
                   <Navigation/>

@@ -14,7 +14,7 @@ import { DictionaryContext } from '../contexts/DictionaryContext';
 import { CategoryContext }   from '../contexts/CategoryContext';
 import * as constants        from './Constants';
 
-const { LOST, WON, DRAW } = constants;
+const { USER, COMPUTER, LOST, WON, DRAW } = constants;
 
 class Game extends Component {
   static contextType = GameContext;
@@ -22,13 +22,12 @@ class Game extends Component {
   constructor(props){
     super(props);
     this.board = new Board();
-    this.first = this.board.user; 
+    this.first = USER; 
     this.player = this.first;   
     this.computer = new Computer(this.board);    
     this.level  = 0;
     this.timeout = 1;    
     this.result = 0;
-    this.language = 0;
     this.changeHistory = null;
     this.state = {
       categoryId : -1,
@@ -55,7 +54,6 @@ class Game extends Component {
           const { changeHistory } = HistoryContext;
           const { getLanguage } = languageContext;
           const language = getLanguage();
-          this.language = language;
           this.changeHistory = changeHistory;
           let { DICTIONARY } = dictionaryContext;
           let { CATEGORIES } = categoryContext;
@@ -118,7 +116,7 @@ class Game extends Component {
         this.board.level = this.level;
         this.board.first =  this.first;
         this.player = this.first;
-        if (this.first === this.board.computer){
+        if (this.first === COMPUTER){
           this.gamePlay();
         }  
       }
@@ -126,23 +124,21 @@ class Game extends Component {
   }
 
   gamePlay = (e) => {
-    const user = this.board.user;
-    const computer = this.board.computer;
     if (!this.state.gameOver){
-      if (this.player === computer){
+      if (this.player === COMPUTER){
         this.computer.play();
       }else{
-          this.board.play(user, e.target.id); 
+          this.board.play(USER, e.target.id); 
       }
       this.setState(() => ({board : this.board.players}));
       let winners = this.board.isAWinner(this.player);
       if (winners){
-        this.gameOver(this.player === computer ? LOST : WON, winners);
+        this.gameOver(this.player === COMPUTER ? LOST : WON, winners);
       }else if (this.board.isFull){
         this.gameOver(DRAW);
       }else{
-        this.player = this.player === computer ? user : computer;
-        if (this.player === computer){
+        this.player = this.player === COMPUTER ? USER : COMPUTER;
+        if (this.player === COMPUTER){
           window.setTimeout(this.gamePlay, this.timeout);
         }  
       } 
