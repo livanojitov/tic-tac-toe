@@ -183,7 +183,9 @@ class Game extends Component {
   }
 
   componentWillUnmount() {
-    this.changeHistory(1); 
+    if (this.props.history.location.pathname === '/history') {
+      this.changeHistory(1);
+    }
   }
 }
 

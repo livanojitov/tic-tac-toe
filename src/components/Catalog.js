@@ -8,6 +8,7 @@ class Catalog extends Component {
   constructor(props){
     super(props);
 
+
     this.state = {
       categoryId : -1,
       count : 0,
@@ -15,7 +16,7 @@ class Catalog extends Component {
       name: ''
      };
   }
-
+  
   render(){
     return (
      <CategoryContext.Consumer>{(categoryContext) => ( 
@@ -31,8 +32,8 @@ class Catalog extends Component {
               {Array(~~this.state.count).fill(1).map(
                   (value, index) => {
                     return (
-                      <div>
-                        <img key={index} src={`images/${this.state.folder}/${index}.jpg`} alt="user"/>
+                      <div key={index}>
+                        <img src={`images/${this.state.folder}/${index}.jpg`} alt="user"/>
                       </div>  
                     )
                   })}
