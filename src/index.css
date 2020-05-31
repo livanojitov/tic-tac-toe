@@ -307,5 +307,14 @@ label.mylabel{
 
   .catalog-images div:nth-child(2n+1){
     margin-left: 1%;
+  }
+
+  input#menu ~ ul a.active{
+    position: absolute;
+    top: 5px;
+  }
+  input#menu:checked ~ ul a.active{
+    position: relative;
+    top: 0px;
   }  
 }
