@@ -145,17 +145,17 @@ nav li a:hover{
 }
 
 .user-image{
-  width: 45%;
+  width: 40%;
 }
 
 .computer-image{
-  width: 55%
+  width: 60%
 } 
 
 .refresh{
   width: 30px;
   height: 30px;  
-  margin: 0 5px;
+  margin-left: 5px;
   position: relative;
   top: 12px;
   cursor: pointer;
