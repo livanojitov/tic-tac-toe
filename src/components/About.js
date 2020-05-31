@@ -20,18 +20,24 @@ const About = (props) => {
     { name: 'CSS3',           url: 'https://www.w3.org/TR/selectors-3/'                                    }
   ]);
    
-  const lis = skills.map((skill, key) => {
+  const skillsLi = skills.map((skill, key) => {
     return (
       <li key={key}><a target="_blank" href={skill.url} rel="noopener noreferrer">{skill.name}</a></li>
     )
   });
 
   const [source] = useState('https://github.com/lojito/tic-tac-toe');
-  const [games]  = useState(
-    { 
-      name: 'Matching pairs ( built with Vue.js )', 
-      url: 'https://lojito.github.io/matching-pairs'
-    });
+
+  const [games]  = useState([
+    { name: 'Matching pairs (Vue.js)', url: 'https://lojito.github.io/matching-pairs' },
+    { name: 'Puzzle (Angular)',        url: 'https://lojito.github.io/puzzle'         }
+  ]);  
+
+  const gamesLi = games.map((game, key) => {
+    return (
+      <li key={key}><a target="_blank" href={game.url} rel="noopener noreferrer">{game.name}</a></li>
+    )
+  });
 
   useEffect(() => {
     return () => {
@@ -50,7 +56,7 @@ const About = (props) => {
       <div>
         <span>{DICTIONARY && DICTIONARY[language].GAME_WRITTEN_WITH} </span>
         <ul>
-          {lis}
+          {skillsLi}
         </ul>  
       </div> 
 
@@ -59,11 +65,9 @@ const About = (props) => {
           <a target="_blank" href={source} rel="noopener noreferrer">{source}</a>
       </p>
       
-      <span>{DICTIONARY &&  DICTIONARY[language].OTHER_GAMES} </span>            
+      <span>{DICTIONARY &&  DICTIONARY[language].OTHER_GAMES} </span>
       <ul>
-        <li>
-          <a target="_blank" href={games.url} rel="noopener noreferrer">{games.name}</a>
-        </li>
+        {gamesLi}     
       </ul>    
                   
     </div>
