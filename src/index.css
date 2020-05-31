@@ -4,7 +4,7 @@ body{
 }
 
 .wrapper{
-  max-width: 400px;
+  max-width: 540px;
   margin: 10px auto 0;
 }
 
@@ -52,6 +52,24 @@ a{
 
 nav li a:hover{
   color: #19A57E
+}
+
+.catalog-images div{
+  width: 23.75%;
+  display: inline-block;
+  margin-right: 1%;
+}
+
+.catalog-images div:nth-child(4n+1){
+  margin-left: 1%;
+}
+
+.catalog-images div img{
+  max-width: 100%;
+} 
+
+.catalog select{
+  margin: 20px 0;
 }
 
 .about{
@@ -251,7 +269,7 @@ label.mylabel{
   }
   
   input#menu:checked ~ ul{
-    max-height: 150px;
+    max-height: 160px;
     transition: all ease 1s;
   }
   
@@ -282,4 +300,12 @@ label.mylabel{
   .game{
     margin: 0 auto;
   }
+
+  .catalog-images div{
+    width: 48.50%;
+  }
+
+  .catalog-images div:nth-child(2n+1){
+    margin-left: 1%;
+  }  
 }

@@ -9,6 +9,7 @@ import DictionaryContextProvider        from './contexts/DictionaryContext';
 import CategoryContextProvider          from './contexts/CategoryContext';
 import Game                             from './components/Game';
 import History                          from './components/History';
+import Catalog                          from './components/Catalog';
 import About                            from './components/About';
 import Contact                          from './components/Contact';
 import GameHistory                      from './components/GameHistory';
@@ -35,6 +36,7 @@ function App() {
                 <Switch>
                   <Route path="/"        exact render={(props)=>{closeMobileMenu();return (<Game        {...props}/>)}}  />
                   <Route path="/history" exact render={(props)=>{closeMobileMenu();return (<History     {...props}/>)}}  />
+                  <Route path="/catalog" exact render={(props)=>{closeMobileMenu();return (<Catalog     {...props}/>)}}  />                  
                   <Route path="/about"   exact render={(props)=>{closeMobileMenu();return (<About       {...props}/>)}}  />
                   <Route path="/contact" exact render={(props)=>{closeMobileMenu();return (<Contact     {...props}/>)}}  /> 
                   <Route path="/:id"     exact render={(props)=>{closeMobileMenu();return (<GameHistory {...props}/>)}}  /> 

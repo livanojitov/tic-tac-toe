@@ -2,6 +2,7 @@
   {
     "GAME": "Game",
     "HISTORY": "Historical",
+    "CATALOG": "Catalog",    
     "ABOUT": "About",
     "CONTACT": "Contact", 
     
@@ -70,6 +71,7 @@
   {
     "GAME": "Jeu",
     "HISTORY": "Historique",
+    "CATALOG": "Catalogue",    
     "ABOUT": "À propos de",
     "CONTACT": "Contact",  
   
@@ -139,6 +141,7 @@
   {
     "GAME": "Juego",
     "HISTORY": "Histórico",
+    "CATALOG": "Catálogo",      
     "ABOUT": "Acerca de",
     "CONTACT": "Contacto",
   

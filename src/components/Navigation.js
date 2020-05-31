@@ -23,8 +23,9 @@ const Navigation = () => {
       <ul className='nav'>
         <li key='0'><NavLink exact to={'/'}       >{DICTIONARY && DICTIONARY[language].GAME}   </NavLink></li>
         <li key='1'><NavLink exact to={'/history'}>{DICTIONARY && DICTIONARY[language].HISTORY}</NavLink></li>
-        <li key='2'><NavLink exact to={'/about'}  >{DICTIONARY && DICTIONARY[language].ABOUT}  </NavLink></li>
-        <li key='3'><NavLink exact to={'/contact'}>{DICTIONARY && DICTIONARY[language].CONTACT}</NavLink></li>
+        <li key='2'><NavLink exact to={'/catalog'}>{DICTIONARY && DICTIONARY[language].CATALOG}</NavLink></li>        
+        <li key='3'><NavLink exact to={'/about'}  >{DICTIONARY && DICTIONARY[language].ABOUT}  </NavLink></li>
+        <li key='4'><NavLink exact to={'/contact'}>{DICTIONARY && DICTIONARY[language].CONTACT}</NavLink></li>
       </ul>
     </nav>
   )
