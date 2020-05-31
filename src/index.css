@@ -138,6 +138,7 @@ nav li a:hover{
 .images, .settings{
   margin: 10px 0;
   font-weight: bold;
+  font-size: 0;
 }
 
 .user-image, .computer-image{
@@ -149,7 +150,7 @@ nav li a:hover{
 }
 
 .computer-image{
-  width: 60%
+  width: 60%;
 } 
 
 .refresh{
@@ -167,7 +168,14 @@ nav li a:hover{
 
 .level, .question{
   display: inline-block;
-  width: 50%;
+}
+
+.question{
+  width: 60%;
+}
+
+.level{
+  width: 40%;
 }
 
 .level span, .question span{
