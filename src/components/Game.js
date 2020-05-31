@@ -24,7 +24,7 @@ class Game extends Component {
     this.board = new Board();
     this.first = USER; 
     this.player = this.first;   
-    this.computer = new Computer(this.board);    
+    this.computer = new Computer(this.board);
     this.level  = 0;
     this.timeout = 1;    
     this.result = 0;
@@ -128,7 +128,7 @@ class Game extends Component {
       if (this.player === COMPUTER){
         this.computer.play();
       }else{
-          this.board.play(USER, e.target.id); 
+          this.board.place(USER, e.target.id); 
       }
       this.setState(() => ({board : this.board.players}));
       let winners = this.board.isAWinner(this.player);
