@@ -13,7 +13,7 @@ const Contact = (props) => {
     author:   'Livan Ojito Villanueva',
     email :   'livanojito@gmail.com',
     github:   'https://github.com/lojito',
-    linkedin: 'https://ca.linkedin.com/in/livan-ojito-villanueva'
+    linkedin: 'https://ca.linkedin.com/in/lov'
   });
 
   useEffect(() => {
