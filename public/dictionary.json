@@ -9,6 +9,7 @@
     "CATEGORY": "Category",
   
     "HAVANA_LANDMARKS": "La Havana landmarks",
+    "MONTREAL_LANDMARKS": "Montreal landmarks",    
     "VANCOUVER_LANDMARKS": "Vancouver landmarks",
     "SOCCER_PLAYERS": "Soccer players",
     "FRUITS_AND_VEGETABLES": "Fruits & Vegetables",
@@ -78,6 +79,7 @@
     "CATEGORY": "Catégorie",
   
     "HAVANA_LANDMARKS": "Monuments de La Havane",
+    "MONTREAL_LANDMARKS": "Monuments de Montréal",    
     "VANCOUVER_LANDMARKS": "Monuments de Vancouver",
     "SOCCER_PLAYERS": "Joueurs du soccer",
     "FRUITS_AND_VEGETABLES": "Fruits et légumes",
@@ -147,7 +149,8 @@
   
     "CATEGORY": "Categoría",
   
-    "HAVANA_LANDMARKS": "Monumentos La Habana",
+    "HAVANA_LANDMARKS": "Monumentos de La Habana",
+    "MONTREAL_LANDMARKS": "Monumentos de Montreal",     
     "VANCOUVER_LANDMARKS": "Monumentos de Vancouver",
     "SOCCER_PLAYERS": "Jugadores de fútbol",
     "FRUITS_AND_VEGETABLES": "Frutas y vegetales",

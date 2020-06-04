@@ -4,6 +4,11 @@
   "count": "20"
 },
 {
+  "name": "MONTREAL_LANDMARKS",
+  "folder": "montreal",
+  "count": "20"
+},
+{
   "name": "VANCOUVER_LANDMARKS",
   "folder": "vancouver",
   "count": "20"
