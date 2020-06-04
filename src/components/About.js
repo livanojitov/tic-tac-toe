@@ -29,8 +29,9 @@ const About = (props) => {
   const [source] = useState('https://github.com/lojito/tic-tac-toe');
 
   const [games]  = useState([
-    { name: 'Matching pairs (Vue.js)', url: 'https://lojito.github.io/matching-pairs' },
-    { name: 'Puzzle (Angular)',        url: 'https://lojito.github.io/puzzle'         }
+    { name: 'Matching pairs (Vue.js)', url: 'https://lojito.github.io/matching-pairs'      },
+    { name: 'Puzzle (Angular)',        url: 'https://lojito.github.io/puzzle'              },
+    { name: 'Tic-tac-toe (Python)',    url: 'https://github.com/lojito/python-tic-tac-toe' }
   ]);  
 
   const gamesLi = games.map((game, key) => {

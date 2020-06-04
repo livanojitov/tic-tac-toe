@@ -197,6 +197,10 @@ hr{
   margin-top: 0;
 }
 
+.about li {
+  margin-top: 5px;
+}
+
 .start-playing{
   margin-bottom: 10px;
 }
