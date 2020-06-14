@@ -1,0 +1,337 @@
+body{
+  background-color:darkseagreen;
+  margin: 0;
+}
+
+.wrapper{
+  max-width: 540px;
+  margin: 10px auto 0;
+}
+
+.flags img {
+  cursor: pointer;
+  margin: 0 2%;
+}
+
+header, nav{ 
+  display:inline-block;
+}
+
+header{
+  width: 30%;
+}
+
+nav{
+  width: 70%;
+}
+
+.header, .about, .contact{
+  width: 95%;
+  margin: 0 auto
+}
+
+nav ul{
+  list-style: none;
+  padding-left: 0;
+}
+
+nav li{
+  display: inline-block;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+nav a.active{
+  font-weight: 1000;
+}
+
+a{
+  color: green;
+  text-decoration: none;  
+}
+
+nav li a:hover{
+  color: #19A57E
+}
+
+.about{
+  margin-top: 10px;
+}
+
+.game{
+  width: 100%;
+  text-align: center;
+  margin: 10px auto;
+}
+
+.categories{
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.image-token{
+  width: 120px;
+  height: 120px;
+  vertical-align: middle;
+}
+
+.images, .settings{
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.user-image, .computer-image{
+  display: inline-block;
+}
+
+.user-image{
+  width: 40%;
+}
+
+.computer-image{
+  width: 60%;
+} 
+
+.refresh{
+  width: 30px;
+  height: 30px;  
+  margin-left: 5px;
+  position: relative;
+  top: 12px;
+  cursor: pointer;
+}
+
+.settings select{
+  margin-left: 2%;
+}
+
+.level, .question{
+  display: inline-block;
+}
+
+.question{
+  width: 55%;
+}
+
+.level{
+  width: 45%;
+}
+
+.level span, .question span{
+  cursor: default;
+}
+
+input[type=radio]:not([disabled]), .yes:not([disabled]), .no:not([disabled]){
+  cursor: pointer;
+}
+
+.start-playing{
+  margin-bottom: 10px;
+}
+
+
+.board button{
+  width: 33%;
+  border: 1px solid black;
+  display: inline-block;
+  background-size: 100% 100%;
+}
+
+.board button:after{
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+.board button:not([disabled]){
+  cursor: pointer;
+}
+
+.win{
+  animation: win 1s 3;
+}    
+
+@keyframes win{
+  from{opacity: 1}
+  to{opacity: 0.5}
+}
+
+.info{
+  text-align: center;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.history, .game-history{
+  text-align: center;
+}
+
+.see-game, .delete-game{
+  margin: 0 5px;
+}
+
+.delete-game, .back{
+  cursor: pointer;
+}
+
+.see-game a{
+  color: black;
+}
+
+hr{
+  margin: 15px;
+}
+
+.catalog-images div{
+  width: 23.75%;
+  display: inline-block;
+  margin-right: 1%;
+}
+
+.catalog-images div:nth-child(4n+1){
+  margin-left: 1%;
+}
+
+.catalog-images div img{
+  max-width: 100%;
+} 
+
+.catalog select{
+  margin: 20px 0;
+}
+
+.about ul{
+  margin-top: 0;
+}
+
+.about li {
+  margin-top: 5px;
+}
+
+.contact .me, .contact .availability{
+  color: green;
+  font-weight: normal;
+}
+
+.contact span, .about span{
+  font-weight: bold;
+}
+
+.play-again{
+  margin-left: 5px;
+}
+
+input#menu{
+  display: none;
+}
+
+label.mylabel{
+  display: none;
+  cursor: pointer;
+} 
+
+#burger-container{
+  position: relative;
+  width: 100%;
+}
+
+#burger{
+  display: block;
+}
+
+#burger span{
+  background: green;
+  display: block;
+  left: 80%;
+  width: 30px;
+  height: 3px;
+  margin-bottom: 6px;
+  position: relative;
+  top: 0;
+  transition: all ease-in-out 0.4s;
+}
+
+@media screen and (max-width: 400px) {
+
+  header{
+    vertical-align: top;
+    width: 40%;
+  }
+
+  nav{
+    width: 60%;
+  }
+
+  nav li{
+    display: block;
+  }
+  
+  nav a{
+    display: block;
+    text-decoration: none;
+    padding: 5px;
+    background-color: #8fbc8f;
+  }
+
+  ul.nav{
+    margin: 0;
+    display: block;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    text-align: left;
+  }
+
+  .game{
+    margin: 0 auto;
+  }
+
+  .image-token{
+    width: 40px;
+    height: 40px;
+  }
+
+  .catalog-images div{
+    width: 48.50%;
+  }
+
+  .catalog-images div:nth-child(2n+1){
+    margin-left: 1%;
+  }
+
+  label.mylabel{
+    display: inline-block;
+    width: 100%;
+    cursor: default;
+  }
+  
+  input#menu:checked ~ ul{
+    max-height: 160px;
+    transition: all ease 1s;
+  }
+  
+  input#menu:checked + label > #burger-container span:nth-child(2){
+    width: 0;
+    opacity: 0;
+  }
+  
+  input#menu:checked + label > #burger-container span:nth-child(3){
+    transform: rotate(45deg);
+    top: -9px;
+  }
+  
+  input#menu:checked + label > #burger-container span:nth-child(1){
+    transform: rotate(-45deg);
+    top: 9px;
+  }
+
+  input#menu ~ ul a.active{
+    position: absolute;
+    top: 5px;
+  }
+  input#menu:checked ~ ul a.active{
+    position: relative;
+    top: 0px;
+  }  
+}
