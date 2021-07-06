@@ -1,0 +1,6 @@
+export const CHANGE_CATEGORY = "CHANGE_CATEGORY";
+export const CHANGE_DISABLED = "CHANGE_DISABLED";
+export const CHANGE_FIRST = "CHANGE_FIRST";
+export const CHANGE_IMAGES = "CHANGE_IMAGES";
+export const CHANGE_LEVEL = "CHANGE_LEVEL";
+export const CHANGE_OVER = "CHANGE_OVER";

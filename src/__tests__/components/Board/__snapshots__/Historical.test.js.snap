@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Historical should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="board"
+  >
+    <button
+      class=""
+      data-testid="square"
+      disabled=""
+      id="0"
+      style="background-image: url(https://firebasestorage.googleapis.com/v0/b/puzzle-ebd10.appspot.com/o/images%2Fdefault.jpg?alt=media);"
+    />
+    <button
+      class=""
+      data-testid="square"
+      disabled=""
+      id="1"
+      style="background-image: url(https://firebasestorage.googleapis.com/v0/b/puzzle-ebd10.appspot.com/o/images%2Fdefault.jpg?alt=media);"
+    />
+    <button
+      class=""
+      data-testid="square"
+      disabled=""
+      id="2"
+      style="background-image: url(https://firebasestorage.googleapis.com/v0/b/puzzle-ebd10.appspot.com/o/images%2Fsoccer%2F1.jpg?alt=media);"
+    />
+    <button
+      class=""
+      data-testid="square"
+      disabled=""
+      id="3"
+      style="background-image: url(https://firebasestorage.googleapis.com/v0/b/puzzle-ebd10.appspot.com/o/images%2Fsoccer%2F0.jpg?alt=media);"
+    />
+    <button
+      class=""
+      data-testid="square"
+      disabled=""
+      id="4"
+      style="background-image: url(https://firebasestorage.googleapis.com/v0/b/puzzle-ebd10.appspot.com/o/images%2Fdefault.jpg?alt=media);"
+    />
+    <button
+      class=""
+      data-testid="square"
+      disabled=""
+      id="5"
+      style="background-image: url(https://firebasestorage.googleapis.com/v0/b/puzzle-ebd10.appspot.com/o/images%2Fdefault.jpg?alt=media);"
+    />
+    <button
+      class=""
+      data-testid="square"
+      disabled=""
+      id="6"
+      style="background-image: url(https://firebasestorage.googleapis.com/v0/b/puzzle-ebd10.appspot.com/o/images%2Fdefault.jpg?alt=media);"
+    />
+    <button
+      class=""
+      data-testid="square"
+      disabled=""
+      id="7"
+      style="background-image: url(https://firebasestorage.googleapis.com/v0/b/puzzle-ebd10.appspot.com/o/images%2Fdefault.jpg?alt=media);"
+    />
+    <button
+      class=""
+      data-testid="square"
+      disabled=""
+      id="8"
+      style="background-image: url(https://firebasestorage.googleapis.com/v0/b/puzzle-ebd10.appspot.com/o/images%2Fdefault.jpg?alt=media);"
+    />
+  </div>
+</DocumentFragment>
+`;

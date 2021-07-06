@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Images renders the Image component correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="images"
+    data-testid="images"
+  >
+    <div
+      class="user-image"
+    >
+      <span>
+        You: 
+      </span>
+      <img
+        alt="user"
+        class="image-token"
+        src="https://firebasestorage.googleapis.com/v0/b/puzzle-ebd10.appspot.com/o/images%2Fhabana%2F0.jpg?alt=media"
+        title="You will play with this image."
+      />
+      <img
+        alt="refresh"
+        class="refresh"
+        data-testid="user-image"
+        id="user"
+        src="https://firebasestorage.googleapis.com/v0/b/puzzle-ebd10.appspot.com/o/images%2Frefresh.png?alt=media"
+        title="Click to play with a different image."
+      />
+    </div>
+    <div
+      class="computer-image"
+    >
+      <span>
+        PC: 
+      </span>
+      <img
+        alt="computer"
+        class="image-token"
+        src="https://firebasestorage.googleapis.com/v0/b/puzzle-ebd10.appspot.com/o/images%2Fhabana%2F1.jpg?alt=media"
+        title="The computer will play with this image."
+      />
+      <img
+        alt="refresh"
+        class="refresh"
+        data-testid="computer-image"
+        id="computer"
+        src="https://firebasestorage.googleapis.com/v0/b/puzzle-ebd10.appspot.com/o/images%2Frefresh.png?alt=media"
+        title="Click to play with a different image."
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

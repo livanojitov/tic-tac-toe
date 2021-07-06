@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Square should render correctly 1`] = `
+<DocumentFragment>
+  <button
+    data-testid="square"
+    style="background-image: url(https://firebasestorage.googleapis.com/v0/b/puzzle-ebd10.appspot.com/o/images%2Fundefined.jpg?alt=media);"
+  />
+</DocumentFragment>
+`;
